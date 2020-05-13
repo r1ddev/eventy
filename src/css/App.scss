@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.r1-inp {
+	border: 2px solid #f4004d;
+	padding: 5px 20px;
+	border-radius: 10px;
+}
