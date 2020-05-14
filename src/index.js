@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Registration from './Registration';
 
 ReactDOM.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<Router>
 			<Switch>
 				<Route exact path="/">
@@ -20,7 +20,7 @@ ReactDOM.render(
 					<Registration />
 				</Route>
 			</Switch>
-		</Router>
-	</React.StrictMode>,
+		</Router>,
+	// </React.StrictMode>,
 	document.getElementById('root')
 );
