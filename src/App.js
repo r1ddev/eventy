@@ -10,13 +10,8 @@ import {
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
-				<img src="" className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-        </p>
-				<Link to="/dashboard">Dashboard</Link>
-			</header>
+			<p>asdasd</p>
+			<Link to="/profile/edit">Registration</Link>
 		</div>
 	);
 }

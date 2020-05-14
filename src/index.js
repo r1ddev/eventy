@@ -8,19 +8,16 @@ import Registration from './Registration';
 
 ReactDOM.render(
 	// <React.StrictMode>
-		<Router>
-			<Switch>
-				<Route exact path="/">
-					<App />
-				</Route>
-				<Route path="/about">
-					<App />
-				</Route>
-				<Route path="/dashboard">
-					<Registration />
-				</Route>
-			</Switch>
-		</Router>,
+	<Router basename={'/front/app'}>
+		<Switch>
+			<Route exact path="/">
+				<App />
+			</Route>
+			<Route path="/profile/edit">
+				<Registration />
+			</Route>
+		</Switch>
+	</Router>,
 	// </React.StrictMode>,
 	document.getElementById('root')
 );
