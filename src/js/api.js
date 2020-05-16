@@ -28,18 +28,22 @@ const api = {
 			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
 			return response.data
 		},
-		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact) => {
-			let response = await axios.post(api.proxy + api.host + "/users/get", api.toFormData({
-				name: name,
-				lastName: lastName,
+		getUploadAvatarUrl() {
+			return "/users/avatar/upload"
+		},
+		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact, tags) => {
+			let response = await axios.post(api.proxy + api.host + "/users/edit", api.toFormData({
+				first_name: name,
+				last_name: lastName,
 				company: company,
 				position: position,
 				phone: phone,
-				email: email,
-				soc: soc,
-				whatSearch: whatSearch,
-				whatOffer: whatOffer,
-				shareContact: shareContact
+				mail: email,
+				social_site: soc,
+				what_looking: whatSearch,
+				what_offer: whatOffer,
+				view_contact: (shareContact - 0),
+				tags: tags
 			}), api.useAuth())
 
 			return response.data
@@ -50,12 +54,8 @@ const api = {
 		if (!e.response) {
 			console.log("Ошибка ынтырнета");
 		} else {
-			console.log(errors);
-			console.log(e.response);
-
 			Object.keys(errors).map(function (key) {
 				e.response.data.error = String(e.response.data.error)
-				console.log(e.response.data.error, key);
 
 				if (e.response.data.error === key) {
 					errors[key]()
