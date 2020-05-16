@@ -2,6 +2,9 @@ import React from "react";
 import AvatarUploader from "react-avatar-uploader";
 import Select from "react-select";
 import LoadingOverlay from 'react-loading-overlay';
+import withApiService from '../../components/hoc/with-api-service';
+import { connect } from 'react-redux';
+import { compose } from '../../utils';
 
 import "./registration.scss";
 import api from "../../js/api";
@@ -169,6 +172,8 @@ class Registration extends React.Component {
 			isEditProfile,
 			tags
 		} = this.state;
+
+		console.log(this.props.user.isLogin)
 
 		return (
 			<LoadingOverlay
@@ -413,4 +418,18 @@ class Registration extends React.Component {
 	}
 }
 
-export default Registration;
+const mapStateToProps = ({ user }) => {
+	return {
+		user
+	}
+};
+
+const mapDispatchToProps = (dispatch, { apiService }) => {
+	return {
+
+	}
+};
+
+export default compose(
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps))(Registration);
