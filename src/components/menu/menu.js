@@ -9,38 +9,40 @@ class Menu extends React.Component {
     }
 
     render() {
+
+        const logo = require("../../images/icons/logo.svg")
+        const desk = require("../../images/icons/desk.svg")
+        const scenes = require("../../images/icons/scenes.svg")
+        const program = require("../../images/icons/program.svg")
+        const spikers = require("../../images/icons/spikers.svg")
+        const presentations = require("../../images/icons/presentations.svg")
+        const networking = require("../../images/icons/networking.svg")
+        const messages = require("../../images/icons/messages.svg")
+        const exposure = require("../../images/icons/exposure.svg")
+        const conversations = require("../../images/icons/conversations.svg")
+        const party = require("../../images/icons/party.svg")
+        const quest = require("../../images/icons/quest.svg")
+        const vipassistent = require("../../images/icons/vipassistent.svg")
+
         return (
             <div id="menu">
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="scenes" label="Сцены" link="/scenes"></MenuItem>
-                <MenuItem icon="program" label="Программа" link="/"></MenuItem>
-                <MenuItem icon="spikers" label="Спикеры" link="/spikers"></MenuItem>
-                <MenuItem icon="presentations" label="Презентации" link="/presentations"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                <MenuItem icon="lobby" label="Лобби" link="/lobby"></MenuItem>
-                {/* <ul>
-                    <li><Link to="/lobby">Лобби</Link></li>
-                    <li><Link to="/presentations">Презентации</Link></li>
-                    <li><Link to="/scenes">Сцены</Link></li>
-                    <li><Link to="/spikers">Спикеры</Link></li>
-                    <li><Link to="/members">Участники</Link></li>
-                    <li><Link to="/messages">Мои сообщения</Link></li>
-                    <li><Link to="/exposure">экспозона</Link></li>
-                    <li><Link to="/conversations">Переговорки</Link></li>
-                    <li><Link to="/party">Вечеринки</Link></li>
-                    <li><Link to="/vip-assistent">Вип ассистент</Link></li>
-                </ul> */}
-
+                <img alt="" src={logo} />
+                <MenuItem icon={desk} label="Infodesk" link="/desk"></MenuItem>
+                <MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
+                <MenuItem icon={program} label="Программа" link="/"></MenuItem>
+                <MenuItem icon={spikers} label="Спикеры" link="/spikers"></MenuItem>
+                <MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
+                <MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
+                <MenuItem icon={messages} label="Мои сообщения" link="/messages"></MenuItem>
+                <MenuItem icon={exposure} label="Экспозона" link="/exposure"></MenuItem>
+                <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>
+                <MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
+                <MenuItem icon={party} label="Вечеринка" link="/party"></MenuItem>
+                <MenuItem icon={vipassistent} label="Ассистент для вип" link="vip-assistent"></MenuItem>
             </div>
         )
     }
 }
-
-
 
 class MenuItem extends React.Component {
     render() {
@@ -50,8 +52,8 @@ class MenuItem extends React.Component {
         return (
             <div className="menu-item">
                 <Link to={link}>
-                    <img alt="" className="menu-item-icon" />
-                    <div className="menu-item-label" ><p>{label}</p></div>
+                    <img alt="" src={icon} className="menu-item-icon" />
+                    <div className="menu-item-label" >{label}</div>
                 </Link>
             </div>
         )
