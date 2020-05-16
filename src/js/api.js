@@ -2,12 +2,12 @@ import axios from 'axios';
 
 const api = {
 	proxy: "https://cors-anywhere.herokuapp.com/",
-	host: "https://asdasd.sdasd/",
+	host: "http://116.203.213.27/api",
 
 	useAuth: () => {
 		return {
 			headers: {
-				Authorization: 'Bearer ' + window.localStorage.token
+				Authorization: window.localStorage.token
 			}
 		}
 	},
@@ -24,18 +24,26 @@ const api = {
 	},
 
 	auth: {
-		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact) => {
-			let response = await axios.post(api.proxy + api.host + "/users", api.toFormData({
-				name: name,
-				lastName: lastName,
+		async getUserData() {
+			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
+			return response.data
+		},
+		getUploadAvatarUrl() {
+			return "/users/avatar/upload"
+		},
+		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact, tags) => {
+			let response = await axios.post(api.proxy + api.host + "/users/edit", api.toFormData({
+				first_name: name,
+				last_name: lastName,
 				company: company,
 				position: position,
 				phone: phone,
-				email: email,
-				soc: soc,
-				whatSearch: whatSearch,
-				whatOffer: whatOffer,
-				shareContact: shareContact
+				mail: email,
+				social_site: soc,
+				what_looking: whatSearch,
+				what_offer: whatOffer,
+				view_contact: (shareContact - 0),
+				tags: tags
 			}), api.useAuth())
 
 			return response.data
@@ -47,8 +55,9 @@ const api = {
 			console.log("Ошибка ынтырнета");
 		} else {
 			Object.keys(errors).map(function (key) {
-				e.response.status = String(e.response.status)
-				if (e.response.status === key) {
+				e.response.data.error = String(e.response.data.error)
+
+				if (e.response.data.error === key) {
 					errors[key]()
 				}
 			})

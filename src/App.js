@@ -1,5 +1,5 @@
-import React from 'react';
-import './css/App.scss'
+import React from "react";
+import "./css/App.scss";
 import { Switch, Route } from "react-router-dom";
 
 import Presentations from './pages/presentations';
@@ -14,6 +14,7 @@ import Frame from './components/frame';
 import Desk from './pages/desk/desk';
 import Networking from './pages/networking';
 import Quest from './pages/quest/quest';
+import Frame from "./components/frame";
 
 
 function App() {
