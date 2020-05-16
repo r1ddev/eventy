@@ -1,26 +1,26 @@
 import React from 'react';
-import './lobby.css'
+import './quest.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 
-class Lobby extends React.Component {
+class Quest extends React.Component {
 
     render() {
         return (
             <div>
-                Лобби
+                Квест
             </div>
         )
     }
 
 }
-class LobbyContainer extends React.Component {
+class QuestContainer extends React.Component {
 
     render() {
 
         return (
-            <Lobby />
+            <Quest />
         )
     }
 
@@ -39,4 +39,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 
 export default compose(
     withApiService(),
-    connect(mapStateToProps, mapDispatchToProps))(LobbyContainer);
+    connect(mapStateToProps, mapDispatchToProps))(QuestContainer);

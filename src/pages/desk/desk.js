@@ -1,26 +1,26 @@
 import React from 'react';
-import './members.css'
+import './desk.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 
-class Members extends React.Component {
+class Desk extends React.Component {
 
     render() {
         return (
             <div>
-                Участники
+                Лобби
             </div>
         )
     }
 
 }
-class MembersContainer extends React.Component {
+class DeskContainer extends React.Component {
 
     render() {
 
         return (
-            <Members />
+            <Desk />
         )
     }
 
@@ -39,4 +39,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 
 export default compose(
     withApiService(),
-    connect(mapStateToProps, mapDispatchToProps))(MembersContainer);
+    connect(mapStateToProps, mapDispatchToProps))(DeskContainer);
