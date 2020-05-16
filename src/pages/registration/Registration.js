@@ -66,7 +66,7 @@ class Registration extends React.Component {
 
 				api.errorHandler(e, {
 					"user_not_found": () => {
-						this.props.history.push("/404");
+						this.props.history.push("/error");
 					}
 				});
 			});
@@ -134,14 +134,13 @@ class Registration extends React.Component {
 			this.setLoading(false);
 		}).catch(e => {
 			api.errorHandler(e, {
-				"user_not_found": () => {
+				"400-user_not_found": () => {
 					this.setLoading(false);
 					alert("Пользователь не найден")
-					this.props.history.push("/404");
+					this.props.history.push("/error");
 				}
 			})
 		})
-		// }
 	}
 
 	setLoading = (status) => {

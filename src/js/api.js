@@ -42,7 +42,7 @@ const api = {
 				social_site: soc,
 				what_looking: whatSearch,
 				what_offer: whatOffer,
-				view_contact: (shareContact + 0),
+				view_contact: (shareContact - 0),
 				tags: tags
 			}), api.useAuth())
 
@@ -54,12 +54,8 @@ const api = {
 		if (!e.response) {
 			console.log("Ошибка ынтырнета");
 		} else {
-			console.log(errors);
-			console.log(e.response);
-
 			Object.keys(errors).map(function (key) {
 				e.response.data.error = String(e.response.data.error)
-				console.log(e.response.data.error, key);
 
 				if (e.response.data.error === key) {
 					errors[key]()
