@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
-import panels from './panels';
+import user from './user';
 
 export default combineReducers({
-    panels,
-   
+    user
 })

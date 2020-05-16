@@ -50,8 +50,8 @@ class MenuItem extends React.Component {
         const { label, link, icon } = this.props
 
         return (
-            <div className="menu-item">
-                <Link to={link}>
+            <div className="menu-item ">
+                <Link to={link} className="flex-center">
                     <img alt="" src={icon} className="menu-item-icon" />
                     <div className="menu-item-label" >{label}</div>
                 </Link>
