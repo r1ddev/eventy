@@ -7,6 +7,17 @@ import OverlayLoader from 'react-overlay-loading/lib/OverlayLoader'
 import "./registration.scss";
 import api from "../../js/api";
 
+const defaultTags = [
+	{
+		value: "creator",
+		label: "Креатор",
+	},
+	{
+		value: "necreator",
+		label: "Не креатор",
+	},
+]
+
 class Registration extends React.Component {
 	state = {
 		avatar: "",
@@ -27,7 +38,7 @@ class Registration extends React.Component {
 	};
 
 	submit = (e) => {
-		const { name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact } = this.state;
+		const { name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact, tags } = this.state;
 
 		this.setLoading(true)
 
@@ -42,19 +53,20 @@ class Registration extends React.Component {
 				soc,
 				whatSearch,
 				whatOffer,
-				shareContact
+				shareContact,
+				JSON.stringify(tags.map(v => v.label.toLowerCase()))
 			)
 			.then((res) => {
+				this.setLoading(false)
 				console.log(res);
+				this.props.history.push("/lobby");
 			})
 			.catch((e) => {
-				console.log(e);
-
 				this.setLoading(false);
 
 				api.errorHandler(e, {
 					"user_not_found": () => {
-						this.context.router.history.push(`/404`)
+						this.props.history.push("/404");
 					}
 				});
 			});
@@ -90,6 +102,20 @@ class Registration extends React.Component {
 		api.auth.getUserData().then(res => {
 			console.log(res);
 
+			let userTags = JSON.parse(res.user.tags)
+			console.log("userTags", userTags);
+
+			userTags = userTags.map(v => {
+				return defaultTags.find(t => {
+					console.log("t.label.toLowerCase", t.label.toLowerCase());
+					console.log("v.toLowerCase", v.toLowerCase());
+
+					return t.label.toLowerCase() == v.toLowerCase()
+				})
+			})
+			console.log("userTags", userTags);
+
+
 			this.setState({
 				avatar: "http://116.203.213.27/images/avatar/" + res.user.avatar,
 				name: res.user.first_name,
@@ -102,7 +128,7 @@ class Registration extends React.Component {
 				whatSearch: res.user.what_looking,
 				whatOffer: res.user.what_offer,
 				shareContact: !!res.user.view_contact,
-				tags: res.user.view_contact,
+				tags: userTags
 			})
 
 			this.setLoading(false);
@@ -139,7 +165,9 @@ class Registration extends React.Component {
 			shareContact,
 			isLoading,
 			isEditProfile,
+			tags
 		} = this.state;
+
 		return (
 			<LoadingOverlay
 				active={isLoading}
@@ -155,10 +183,11 @@ class Registration extends React.Component {
 									<div className="col-md-5 left p-5">
 										<div className="ava p-3 flex-center">
 											<AvatarUploader
+												customHeaders={api.useAuth().headers}
 												defaultImg={avatar}
 												name="avatar"
 												size={100}
-												uploadURL="http://localhost:3000"
+												uploadURL={api.proxy + api.host + api.auth.getUploadAvatarUrl()}
 												fileType={"image/png"}
 											/>
 										</div>
@@ -311,17 +340,9 @@ class Registration extends React.Component {
 										<div className="field mt-4">
 											<Select
 												placeholder="Выберите теги"
-												options={[
-													{
-														value: "creator",
-														label: "Креатор",
-													},
-													{
-														value: "necreator",
-														label: "Не креатор",
-													},
-												]}
 												isMulti
+												options={defaultTags}
+												value={tags}
 												theme={(theme) => ({
 													...theme,
 													borderRadius: 10,

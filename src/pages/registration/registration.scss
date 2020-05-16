@@ -1,6 +1,7 @@
 #registration {
 	.registration-wrap,
 	.edit-wrap {
+		transition: 0.2s;
 		background-color: #fff;
 		border-radius: 20px;
 		box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
@@ -32,6 +33,8 @@
 
 		.right {
 			.radio {
+				user-select: none;
+				transition: 0.2s;
 				cursor: pointer;
 				color: #000;
 				border: 2px solid #f4004d;
@@ -42,6 +45,10 @@
 				&-selected {
 					color: #fff;
 					background: #f4004d;
+				}
+
+				&:hover {
+					background: #fafafa;
 				}
 			}
 
