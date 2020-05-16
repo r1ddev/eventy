@@ -161,9 +161,7 @@ class Registration extends React.Component {
 											type="submit"
 											className="btn mt-3"
 											disabled={disabled}>
-											<img
-												src={require("../../images/registration-btn.png")}
-											/>
+											<img alt="" src={require("../../images/registration-btn.png")} />
 										</button>
 									</div>
 								</div>
