@@ -23,8 +23,8 @@ ReactDOM.render(
 
 					<Route path="/" component={App} />
 				</Switch>
-			</Router>,
-	</ApiServiceProvider>
+			</Router>
+		</ApiServiceProvider>
 	</Provider>
 	, document.getElementById('root')
 );
