@@ -9,7 +9,7 @@ import { ApiServiceProvider } from './components/api-service-context';
 import store from './store';
 import { Provider } from 'react-redux';
 
-import Registration from './Registration';
+import Registration from './pages/registration';
 
 const apiService = new IdeaFirstApiService();
 

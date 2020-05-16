@@ -1,13 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import axios from "axios";
-import styledComponents from "styled-components";
 import AvatarUploader from "react-avatar-uploader";
 import Select from "react-select";
 
-import "./css/App.scss";
-import "./css/registration.scss";
-import api from "./js/api";
+import "./registration.scss";
+import api from "../../js/api";
 
 class Registration extends React.Component {
 	state = {
@@ -166,7 +162,7 @@ class Registration extends React.Component {
 											className="btn mt-3"
 											disabled={disabled}>
 											<img
-												src={require("./images/registration-btn.png")}
+												src={require("../../images/registration-btn.png")}
 											/>
 										</button>
 									</div>
