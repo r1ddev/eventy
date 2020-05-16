@@ -20,27 +20,15 @@ function App() {
 				<Switch>
 					{/* Готово/не готово*/}
 					<Route exact path="/lobby" component={Lobby} />
-					<Route
-						exact
-						path="/presentations"
-						component={Presentations}
-					/>
+					<Route exact path="/presentations" component={Presentations} />
 					<Route exact path="/scenes" component={Scenes} />
 					<Route exact path="/spikers" component={Spikers} />
 					<Route exact path="/members" component={Members} />
 					<Route exact path="/messages" component={Messages} />
 					<Route exact path="/exposure" component={Exposure} />
-					<Route
-						exact
-						path="/conversations"
-						component={Conversations}
-					/>
+					<Route exact path="/conversations" component={Conversations} />
 					<Route exact path="/party" component={Party} />
-					<Route
-						exact
-						path="/vip-assistent"
-						component={VipAssistent}
-					/>
+					<Route exact path="/vip-assistent" component={VipAssistent} />
 				</Switch>
 			</Frame>
 		</div>
