@@ -2,11 +2,9 @@ import React from "react";
 import AvatarUploader from "react-avatar-uploader";
 import Select from "react-select";
 import LoadingOverlay from 'react-loading-overlay';
-import OverlayLoader from 'react-overlay-loading/lib/OverlayLoader';
 import withApiService from '../../components/hoc/with-api-service';
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
-
 
 import "./registration.scss";
 import api from "../../js/api";
@@ -93,12 +91,16 @@ class Registration extends React.Component {
 		// } else {
 		const params = new URLSearchParams(this.props.location.search);
 		const token = params.get('token');
-		console.log(token);
+		console.log("token", token);
 
 		if (token != null) {
 			window.localStorage.token = token
 		} else {
-			this.setState({ isEditProfile: true })
+			if (this.isLogin()) {
+				this.setState({ isEditProfile: true })
+			} else {
+				this.props.history.push("/error");
+			}
 		}
 
 		this.setLoading(true);
@@ -138,7 +140,7 @@ class Registration extends React.Component {
 			this.setLoading(false);
 		}).catch(e => {
 			api.errorHandler(e, {
-				"400-user_not_found": () => {
+				"user_not_found": () => {
 					this.setLoading(false);
 					alert("Пользователь не найден")
 					this.props.history.push("/error");
@@ -190,7 +192,7 @@ class Registration extends React.Component {
 											<AvatarUploader
 												customHeaders={api.useAuth().headers}
 												defaultImg={avatar}
-												name="avatar"
+												name="file"
 												size={100}
 												uploadURL={api.proxy + api.host + api.auth.getUploadAvatarUrl()}
 												fileType={"image/png"}
