@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = {
 	proxy: "https://cors-anywhere.herokuapp.com/",
+	// proxy: "",
 	host: "http://116.203.213.27/api",
 
 	useAuth: () => {
