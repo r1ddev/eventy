@@ -2,12 +2,12 @@ import axios from 'axios';
 
 const api = {
 	proxy: "https://cors-anywhere.herokuapp.com/",
-	host: "https://asdasd.sdasd/",
+	host: "http://116.203.213.27/api",
 
 	useAuth: () => {
 		return {
 			headers: {
-				Authorization: 'Bearer ' + window.localStorage.token
+				Authorization: window.localStorage.token
 			}
 		}
 	},
@@ -24,8 +24,12 @@ const api = {
 	},
 
 	auth: {
+		async getUserData() {
+			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
+			return response.data
+		},
 		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact) => {
-			let response = await axios.post(api.proxy + api.host + "/users", api.toFormData({
+			let response = await axios.post(api.proxy + api.host + "/users/get", api.toFormData({
 				name: name,
 				lastName: lastName,
 				company: company,
@@ -46,9 +50,14 @@ const api = {
 		if (!e.response) {
 			console.log("Ошибка ынтырнета");
 		} else {
+			console.log(errors);
+			console.log(e.response);
+
 			Object.keys(errors).map(function (key) {
-				e.response.status = String(e.response.status)
-				if (e.response.status === key) {
+				e.response.data.error = String(e.response.data.error)
+				console.log(e.response.data.error, key);
+
+				if (e.response.data.error === key) {
 					errors[key]()
 				}
 			})

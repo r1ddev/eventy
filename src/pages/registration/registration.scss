@@ -1,5 +1,6 @@
 #registration {
-	.registration-wrap {
+	.registration-wrap,
+	.edit-wrap {
 		background-color: #fff;
 		border-radius: 20px;
 		box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
@@ -57,6 +58,29 @@
 			// .css-1laao21-a11yText {
 			// 	// border: 3px solid #f4004d;
 			// }
+		}
+	}
+	.edit-wrap {
+		.left {
+			background-color: #1dd673;
+		}
+
+		.r1-inp {
+			border: 2px solid #1dd673;
+		}
+
+		.right {
+			.radio {
+				border: 2px solid #1dd673;
+
+				&-selected {
+					background: #1dd673;
+				}
+			}
+			.css-vndh9s-control {
+				border: 1px solid #1dd673;
+				box-shadow: 0 0 0px 1px #1dd673;
+			}
 		}
 	}
 }
