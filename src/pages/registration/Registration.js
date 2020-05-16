@@ -2,7 +2,6 @@ import React from "react";
 import AvatarUploader from "react-avatar-uploader";
 import Select from "react-select";
 import LoadingOverlay from 'react-loading-overlay';
-import OverlayLoader from 'react-overlay-loading/lib/OverlayLoader';
 import withApiService from '../../components/hoc/with-api-service';
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
