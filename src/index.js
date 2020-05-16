@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import { IdeaFirstApiService } from './services';
+import { ApiServiceProvider } from './components/api-service-context';
+
+import store from './store';
+import { Provider } from 'react-redux';
+
 import Registration from './Registration';
 
 ReactDOM.render(
