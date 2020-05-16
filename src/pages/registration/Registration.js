@@ -9,7 +9,7 @@ import { compose } from '../../utils';
 
 
 import "./registration.scss";
-import api from "../../js/api"; git
+import api from "../../js/api";
 
 const defaultTags = [
 	{
