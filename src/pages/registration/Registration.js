@@ -17,6 +17,9 @@ const defaultTags = [
 	{
 		value: "necreator",
 		label: "Не креатор",
+	}, {
+		value: "alsonecreator",
+		label: "Тоже не креатор",
 	},
 ]
 
@@ -180,10 +183,10 @@ class Registration extends React.Component {
 				active={isLoading}
 				spinner
 				text='Загрузка'
-				className="h-100"
+				className=""
 			>
-				<div className="bg-light h-100">
-					<div className="container h-100 flex-center" id="registration">
+				<div className="bg-light flex-center min-vh-100">
+					<div className="container" id="registration">
 						<div className={isEditProfile ? "edit-wrap" : "registration-wrap"}>
 							<form action="" method="post" onSubmit={this.submit}>
 								<div className="row m-0">
@@ -195,7 +198,7 @@ class Registration extends React.Component {
 												name="file"
 												size={100}
 												uploadURL={api.proxy + api.host + api.auth.getUploadAvatarUrl()}
-												fileType={"image/png"}
+												fileType={"image/png,image/jpeg"}
 											/>
 										</div>
 										<div className="field mt-3">
@@ -348,7 +351,7 @@ class Registration extends React.Component {
 											<Select
 												placeholder="Выберите теги"
 												isMulti
-												options={defaultTags}
+												options={tags.length >= 2 ? [] : defaultTags}
 												value={tags}
 												theme={(theme) => ({
 													...theme,
@@ -358,8 +361,9 @@ class Registration extends React.Component {
 														primary: "#f4004d",
 													},
 												})}
+												noOptionsMessage={() => 'Нет данных для отображения'}
 												onChange={(e) => {
-													this.setState({ tags: e });
+													this.setState({ tags: e || [] });
 												}}
 											/>
 										</div>
