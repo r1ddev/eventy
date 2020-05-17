@@ -8,8 +8,9 @@ class Scenes extends React.Component {
 
     render() {
         return (
-            <div>
-                Сцены
+            <div id="scenes">
+                <div className="scenes-translation">Трансляция</div>
+                <div className="scenes-chat">Чат</div>
             </div>
         )
     }

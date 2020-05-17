@@ -9,9 +9,11 @@ class Frame extends React.Component {
         return (
             <div id="frame">
                 <Menu />
-                {
-                    this.props.children
-                }
+                <div className="frame-container">
+                    {
+                        this.props.children
+                    }
+                </div>
             </div>
         )
     }
