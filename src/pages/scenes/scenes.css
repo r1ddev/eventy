@@ -3,22 +3,20 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    border: 1px solid red;
 }
 
 #scenes .scenes-translation{
     width: 70%;
     max-width: 70%;
     height: 100%;
-    border: 1px solid rgb(20, 24, 255);
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 #scenes .translation-header{
     height: 10%;
     min-height: 70px;
-    border:1px solid rgb(20, 24, 255);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -27,23 +25,22 @@
 
 #scenes .translation-content{
     width: 100%;
-    border: 1px solid rgb(20, 24, 255);
 }
                 
 #scenes .translation-footer{
     flex-grow: 1;
     min-height: 70px;
-    border: 1px solid rgb(20, 24, 255);
 }
 
 #scenes .scenes-chat{
     width: 30%;
-     border: 5px solid rgb(20, 255, 98);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .translation-header>.scene-item{
     width: 100%;
-    border: 1px solid green;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -61,6 +58,8 @@
 
 .scene-item .scene-btn{
     font-family: "Gilroy";
+    font-weight:bold;
+    color: white;
     width: 40%;
     height: 100%;
     background-color: #80BC26;
@@ -104,5 +103,42 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
 
+.scenes-chat .chat-header{
+    height: 10%;
+    min-height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.scenes-chat .chat-content{
+    flex-grow: 1;
+    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid red;
+}
+
+.scenes-chat .chat-footer{
+    height: 10%;
+    min-height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid red;
+}
+.scenes-chat .chat-header div{
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+    margin-right: 20px;
+    background-position:center ;
+    border-radius: 50%;
 }

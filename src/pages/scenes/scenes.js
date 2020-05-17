@@ -29,7 +29,13 @@ class Scenes extends React.Component {
                         Стикеры
                     </div>
                 </div>
-                <div className="scenes-chat">Чат</div>
+                <div className="scenes-chat">
+                    <div className="chat-header">
+                        <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
+                    </div>
+                    <div className="chat-content"></div>
+                    <div className="chat-footer"></div>
+                </div>
             </div >
         )
     }

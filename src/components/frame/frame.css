@@ -10,7 +10,6 @@
 .frame-container{
     flex-grow: 1;
     overflow: hidden;
-    min-width: 500px;
     background-image: url(../../images/background.svg);
     background-repeat: no-repeat;
     background-size: cover;
