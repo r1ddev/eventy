@@ -3,18 +3,107 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    border: 5px solid red;
-   
+    border: 1px solid red;
 }
 
 #scenes .scenes-translation{
     width: 70%;
-    border: 5px solid rgb(20, 24, 255);
+    max-width: 70%;
+    height: 100%;
+    border: 1px solid rgb(20, 24, 255);
+    display: flex;
+    flex-direction: column;
+}
 
+#scenes .translation-header{
+    height: 10%;
+    min-height: 70px;
+    border:1px solid rgb(20, 24, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#scenes .translation-content{
+    width: 100%;
+    border: 1px solid rgb(20, 24, 255);
+}
+                
+#scenes .translation-footer{
+    flex-grow: 1;
+    min-height: 70px;
+    border: 1px solid rgb(20, 24, 255);
 }
 
 #scenes .scenes-chat{
     width: 30%;
-    border: 5px solid rgb(20, 255, 98);
+     border: 5px solid rgb(20, 255, 98);
+}
+
+.translation-header>.scene-item{
+    width: 100%;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.translation-header>.scene-item>div{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.scene-item .scene-btn{
+    font-family: "Gilroy";
+    width: 40%;
+    height: 100%;
+    max-height: ;
+    background-color: #80BC26;
+    font-size: 1.3vw;
+    line-height: 1.3vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.scene-item .scene-status{
+    font-family: "Gilroy";
+    width: 40%;
+    height: 50%;
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 2vw;
+    line-height: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.video-container {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+
+}
+.video-container iframe, 
+.video-container object, 
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
 }
