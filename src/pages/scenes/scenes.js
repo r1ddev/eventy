@@ -21,7 +21,6 @@ class Scenes extends React.Component {
                                 frameborder="0"
                                 webkitallowfullscreen="1"
                                 mozallowfullscreen="1"
-                                allowtransparency="0"
                                 allowfullscreen="1">
                             </iframe>
                         </div>
