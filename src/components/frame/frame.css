@@ -6,3 +6,12 @@
     display: flex;
     flex-direction: row;
 }
+
+.frame-container{
+    flex-grow: 1;
+    overflow: hidden;
+    min-width: 1000px;
+    background-image: url(../../images/background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
