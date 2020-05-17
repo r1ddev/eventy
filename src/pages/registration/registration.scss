@@ -12,11 +12,10 @@
 			border-top-left-radius: 20px;
 			border-bottom-left-radius: 20px;
 
-			.upload {
-				border-radius: 50%;
-				width: 100px;
-				height: 100px;
-				background: #ccc;
+			.ava {
+				img {
+					object-fit: cover;
+				}
 			}
 
 			.btn {
