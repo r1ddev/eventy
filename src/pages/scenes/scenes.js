@@ -21,7 +21,6 @@ class Scenes extends React.Component {
                                 frameborder="0"
                                 webkitallowfullscreen="1"
                                 mozallowfullscreen="1"
-                                allowtransparency="0"
                                 allowfullscreen="1">
                             </iframe>
                         </div>
@@ -30,7 +29,13 @@ class Scenes extends React.Component {
                         Стикеры
                     </div>
                 </div>
-                <div className="scenes-chat">Чат</div>
+                <div className="scenes-chat">
+                    <div className="chat-header">
+                        <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
+                    </div>
+                    <div className="chat-content"></div>
+                    <div className="chat-footer"></div>
+                </div>
             </div >
         )
     }
