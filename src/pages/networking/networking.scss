@@ -1,0 +1,106 @@
+#networking {
+	.header {
+		border-bottom: 1px solid #c4c4c4;
+
+		.search {
+			width: 75%;
+			border: 1px solid #000000;
+
+			@media screen and (max-width: 767px) {
+				margin-top: 15px !important;
+				width: 100%;
+			}
+
+			.inp-search {
+				height: 35px;
+				vertical-align: top;
+			}
+
+			.btn-search {
+				border: none;
+				background: url(../../images/search.svg) center center no-repeat;
+				background-color: #f4004d;
+				height: 35px;
+				width: 35px;
+				vertical-align: top;
+			}
+		}
+		.profile {
+			.action-link {
+				border: 1px solid #f4004d;
+				color: #f4004d;
+				border-radius: 10px;
+				padding: 6px 10px;
+				text-align: center;
+				font-size: 12px;
+				font-family: Roboto;
+			}
+
+			.ava {
+				padding: 10px;
+				img {
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+	.card-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+		.card {
+			background: #ffffff;
+			box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+			border-radius: 10px;
+			margin: 20px;
+			padding: 15px 25px;
+
+			.ava {
+				img {
+					border-radius: 10px;
+				}
+			}
+
+			.name {
+				font-family: "IBM Plex Mono";
+				font-style: normal;
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 23px;
+
+				color: #000000;
+			}
+
+			.desc {
+				font-family: "FuturaBookC";
+				font-style: normal;
+				font-weight: normal;
+				font-size: 18px;
+				line-height: 20px;
+
+				color: #000000;
+			}
+
+			.title {
+				margin-top: 20px;
+				font-family: "FuturaDemiC";
+				font-style: normal;
+				font-weight: 600;
+				font-size: 28px;
+				line-height: 33px;
+
+				color: #f4004d;
+			}
+
+			.text {
+				font-family: "FuturaBookC";
+				font-style: normal;
+				font-weight: normal;
+				font-size: 18px;
+				line-height: 20px;
+
+				color: #000000;
+			}
+		}
+	}
+}
