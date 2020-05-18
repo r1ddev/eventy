@@ -10,8 +10,8 @@ import store from './store';
 import { Provider } from 'react-redux';
 
 import Registration from './pages/registration';
-import ErrorPage from './pages/ErrorPage/errorPage';
 import Profile from './pages/profile';
+import ErrorPage from './pages/error';
 
 const apiService = new IdeaFirstApiService();
 
