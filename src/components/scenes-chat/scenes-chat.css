@@ -122,6 +122,7 @@
 
 #scenes-chat .chat-input{
 	height: 100%;
+	width: 100%;
 	flex-grow: 1;
 	border: 0px;
 	outline: none;
