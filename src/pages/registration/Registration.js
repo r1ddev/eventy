@@ -83,11 +83,6 @@ class Registration extends React.Component {
 		this.fetchData()
 	}
 
-	// TODO: наверно это надо засунуть в редукс, оставлю эту задачу настоящему профи редукса
-	isLogin = () => {
-		return window.localStorage.token !== undefined
-	}
-
 	fetchData = async () => {
 		// if (this.isLogin()) {
 		// 	// this.props.history.push("/desc");
@@ -99,7 +94,7 @@ class Registration extends React.Component {
 		if (token != null) {
 			window.localStorage.token = token
 		} else {
-			if (this.isLogin()) {
+			if (this.props.user.isLogin) {
 				this.setState({ isEditProfile: true })
 			} else {
 				this.props.history.push("/error");
@@ -126,7 +121,7 @@ class Registration extends React.Component {
 
 
 			this.setState({
-				avatar: "http://116.203.213.27/images/avatar/" + res.user.avatar,
+				avatar: api.auth.getAvatarLocation() + res.user.avatar,
 				name: res.user.first_name,
 				lastName: res.user.last_name,
 				company: res.user.company,
@@ -176,7 +171,6 @@ class Registration extends React.Component {
 			tags
 		} = this.state;
 
-		console.log(this.props.user.isLogin)
 
 		return (
 			<LoadingOverlay
