@@ -3,12 +3,13 @@ import "./networking.scss";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
+import { Link } from 'react-router-dom';
 
 class Networking extends React.Component {
 	render() {
 		return (
 			<div id="networking">
-				<div className="header">
+				<div className="header profile-header">
 					<div className="container">
 						<div className="row">
 							<div className="col d-flex align-items-center">
@@ -29,10 +30,12 @@ class Networking extends React.Component {
 									</a>
 								</div>
 								<div className="col-auto ava">
-									<img
-										src={require("../../images/networking-card-image-placeholder.png")}
-										alt=""
-									/>
+									<Link to="/profile">
+										<img
+											src={require("../../images/networking-card-image-placeholder.png")}
+											alt=""
+										/>
+									</Link>
 								</div>
 							</div>
 						</div>
