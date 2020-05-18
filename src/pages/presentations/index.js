@@ -1,3 +1,3 @@
-import Presentations from "./Presentations";
+import Presentations from "./presentations";
 
 export default Presentations;
