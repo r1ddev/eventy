@@ -40,8 +40,7 @@ const folders = [
 ];
 
 class PresentationsList extends React.Component {
-	componentDidMount() {
-	}
+	componentDidMount() {}
 
 	render() {
 		return (
