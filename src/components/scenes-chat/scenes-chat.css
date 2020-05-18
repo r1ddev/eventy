@@ -1,0 +1,187 @@
+#scenes-chat{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#scenes-chat .chat-tabs{
+    height: 10%;
+    min-height: 70px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+#scenes-chat .chat-message-container{
+    display: flex;
+    flex-grow: 1;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+    height: 100vh;
+}
+
+#scenes-chat .chat-input-container{
+    height: 10%;
+    min-height: 70px;
+	border-top: 1px solid #C4C4C4;
+	
+}
+
+#scenes-chat .chat-tabs .chat-tab-item{
+    flex-grow: 1;
+    background-color: #F1F2F5;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+    cursor: pointer;
+
+}
+#scenes-chat .chat-tabs .chat-tab-item-active{
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+	
+}
+
+#scenes-chat .chat-tabs>div:nth-child(1){
+    border-top: 4px solid #C3D600;
+}
+
+#scenes-chat .chat-tabs>div:nth-child(2){
+    border-top: 4px solid #F4004D;
+}
+
+#scenes-chat .chat-tabs>div:nth-child(3){
+    border-top: 4px solid #FFE800;
+}
+
+#scenes-chat .tab-label{
+    text-align: center;
+    font-family: "FuturaBookC";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+}
+
+#scenes-chat .button.send-mes-btn{
+	align-self: center;
+	color: white;
+	padding:0px;
+	width: 100%;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: unset;
+	border: 0px;
+}
+
+#scenes-chat button.send-mes-btn:active, button:focus {
+	outline: none;
+	border: 0;
+}
+  
+#scenes-chat button.send-mes-btn::-moz-focus-inner {
+	border: 0;
+}
+#scenes-chat .send-mes-btn{
+	padding:0px;
+	background-color: white;
+	font-size: 23px;
+	border: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background-image: url(../../images/send.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+#scenes-chat .chat-form{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+#scenes-chat .send-mes-btn-icon{
+	width: 70px;
+	height: 100%;
+	background-image: url(../../images/send.svg);
+}
+
+#scenes-chat .chat-input{
+	height: 100%;
+	flex-grow: 1;
+	border: 0px;
+	outline: none;
+	font-size: 25px;
+    line-height: 21px;
+    padding: 15px;
+}
+
+
+
+.message-item{
+	display: flex;
+	flex-direction: row;
+}
+
+.mes-photo{
+	flex-grow: 1;
+	height: 40px;
+	width: 40px;
+	background-image: url(../../images/fry.jpg);
+	background-position: center;
+	background-size: cover;
+	border-radius: 15px;
+	margin: 10px 10px 0px 24px;
+}
+
+.mes-box{
+	display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+    justify-content: flex-end; 
+    align-items: flex-start;
+    width: 100%;
+}
+.mes-info{
+	margin: 10px 0px;
+}
+.mes-info-name{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+.mes-info-content{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 19px;
+	line-height: 20px;
+}
+
+.mes-info-status{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 16px;
+	color: #000000;
+	opacity: 0.3;
+	margin-left: 10px;
+}

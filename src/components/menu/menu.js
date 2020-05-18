@@ -26,7 +26,7 @@ class Menu extends React.Component {
 
         return (
             <div id="menu">
-                <img alt="" src={logo} />
+                <div style={{ height: '150px', display: 'flex' }}><img alt="" src={logo} /></div>
                 <MenuItem icon={desk} label="Infodesk" link="/desk"></MenuItem>
                 <MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
                 <MenuItem icon={program} label="Программа" link="/"></MenuItem>
