@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 
 import Registration from './pages/registration';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import Profile from './pages/profile';
 
 const apiService = new IdeaFirstApiService();
 
@@ -20,6 +21,7 @@ ReactDOM.render(
 			<Router basename={'/front/app'}>
 				<Switch>
 					<Route path="/profile/edit" component={Registration} />
+					<Route path="/profile" component={Profile} />
 					<Route path="/error" component={ErrorPage} />
 
 					<Route path="/" component={App} />

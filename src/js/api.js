@@ -3,6 +3,7 @@ import axios from 'axios';
 const api = {
 	proxy: "https://cors-anywhere.herokuapp.com/",
 	// proxy: "",
+	origin: "http://116.203.213.27",
 	host: "http://116.203.213.27/api",
 
 	useAuth: () => {
@@ -31,6 +32,9 @@ const api = {
 		},
 		getUploadAvatarUrl() {
 			return "/users/avatar/upload"
+		},
+		getAvatarLocation() {
+			return api.origin + "/images/avatar/"
 		},
 		registration: async (name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact, tags) => {
 			let response = await axios.post(api.proxy + api.host + "/users/edit", api.toFormData({
