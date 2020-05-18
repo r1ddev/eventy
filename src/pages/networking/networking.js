@@ -16,16 +16,16 @@ class Networking extends React.Component {
 								<div className="search row m-0">
 									<input
 										type="text"
-										class="inp-search col"
+										className="inp-search col"
 										placeholder="Search"
 									/>
-									<input type="submit" value="" class="btn-search" />
+									<input type="submit" value="" className="btn-search" />
 								</div>
 							</div>
 
 							<div className="col-md-auto profile row m-0">
 								<div className="col d-flex align-items-center p-0">
-									<a href="#" class="action-link">
+									<a href="#" className="action-link">
 										Связь с организаторами
 									</a>
 								</div>
@@ -51,7 +51,6 @@ class Networking extends React.Component {
 											<img
 												src={require("../../images/networking-card-image-placeholder.png")}
 												alt=""
-												srcset=""
 											/>
 										</div>
 									</div>
