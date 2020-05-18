@@ -41,7 +41,6 @@ const folders = [
 
 class PresentationsList extends React.Component {
 	componentDidMount() {
-		console.log(this.props.match.params.folder);
 	}
 
 	render() {

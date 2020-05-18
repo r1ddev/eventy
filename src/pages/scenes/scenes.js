@@ -13,16 +13,16 @@ class Scenes extends React.Component {
                 <div className="scenes-translation">
                     <TranslationHeader />
                     <div className="translation-content">
-                        <div class="video-container">
+                        <div className="video-container">
                             <iframe
                                 title="translation"
                                 src="https://player.vimeo.com/video/186022053"
                                 width="800"
                                 height="600"
-                                frameborder="0"
+                                frameBorder="0"
                                 webkitallowfullscreen="1"
                                 mozallowfullscreen="1"
-                                allowfullscreen="1">
+                                allowFullScreen="1">
                             </iframe>
                         </div>
                     </div>
