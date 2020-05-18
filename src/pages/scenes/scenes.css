@@ -142,3 +142,21 @@
     background-position:center ;
     border-radius: 50%;
 }
+
+@media screen and (max-width: 900px) {
+    #scenes{
+        flex-direction: column;
+    }
+    #scenes .scenes-translation{
+        max-width: unset;
+        width: 100%;
+        height: unset;
+        overflow: unset;
+    }
+
+    #scenes .scenes-chat{
+        width: unset;
+        flex-grow: 1;
+    }
+
+  }
