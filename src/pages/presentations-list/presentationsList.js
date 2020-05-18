@@ -40,7 +40,7 @@ const folders = [
 ];
 
 class PresentationsList extends React.Component {
-	componentDidMount() {}
+	componentDidMount() { }
 
 	render() {
 		return (
@@ -67,9 +67,9 @@ class PresentationsList extends React.Component {
 					).map((file, index) => {
 						return (
 							<div className="file row" key={index}>
-								<div className="col">{file.name}</div>
-								<div className="col-auto">{file.weight}</div>
-								<div className="col-auto">
+								<div className="col-md">{file.name}</div>
+								<div className="col-md-auto">{file.weight}</div>
+								<div className="col-md-auto">
 									<a href={file.link} target="_blank">
 										<img
 											src={require("../../images/presentations-download.svg")}
