@@ -1,3 +1,3 @@
-import Networking from "./Networking";
+import Networking from "./networking";
 
 export default Networking;
