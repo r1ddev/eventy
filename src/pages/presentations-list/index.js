@@ -1,3 +1,3 @@
-import PresentationsList from "./presentationsList";
+import PresentationsList from "./presentationsList1";
 
 export default PresentationsList;
