@@ -3,6 +3,7 @@ import './scenes.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
+import ScenesChat from '../../components/scenes-chat';
 
 class Scenes extends React.Component {
 
@@ -33,8 +34,9 @@ class Scenes extends React.Component {
                     <div className="chat-header">
                         <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
                     </div>
-                    <div className="chat-content"></div>
-                    <div className="chat-footer"></div>
+                    <div className="chat-content">
+                        <ScenesChat />
+                    </div>
                 </div>
             </div >
         )
