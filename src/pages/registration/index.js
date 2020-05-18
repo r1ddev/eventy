@@ -1,3 +1,3 @@
-import Registration from "./registration11";
+import Registration from "./registration";
 
 export default Registration;
