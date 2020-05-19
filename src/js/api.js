@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = {
-	proxy: "https://cors-anywhere.herokuapp.com/",
-	// proxy: "",
+	// proxy: "https://cors-anywhere.herokuapp.com/",
+	proxy: "",
 	origin: "http://116.203.213.27",
 	host: "http://116.203.213.27/api",
 
@@ -17,8 +17,6 @@ const api = {
 		let fd = new FormData()
 
 		Object.keys(obj).map(key => {
-			console.log("obj[key]", obj[key]);
-
 			fd.append(key, obj[key])
 		})
 
