@@ -184,6 +184,7 @@ class ScenesChatContainer extends React.Component {
             this.props.updateMessages(1, this.props.chat.lastApiMessageId);
             this.updateMessages();
         }, 2000)
+
     }
 
 
@@ -215,6 +216,7 @@ const mapStateToProps = ({ chat }) => {
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
+
 
         fetchMessages: (idChat) => fetchMessages(apiService, dispatch)(idChat),
         updateMessages: (idChat, id) => updateMessages(apiService, dispatch)(idChat, id),
