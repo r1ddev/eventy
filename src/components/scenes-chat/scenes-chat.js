@@ -144,7 +144,7 @@ class ScenesChatContainer extends React.Component {
         ]
 
         return (
-            <ScenesChat />
+            <ScenesChat messages={messages} />
         )
     }
 
