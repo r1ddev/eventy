@@ -11,14 +11,16 @@ class Stikers extends React.Component {
                     <div className="stikers-caption">
                         ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
                     </div>
-                    <div className="stiker-list">
-                        <img className="stiker-list-item" src={require("../../images/stikers/heart.svg")} />
-                        <img className="stiker-list-item" src={require("../../images/stikers/fire.svg")} />
-                        <img className="stiker-list-item" src={require("../../images/stikers/happy.svg")} />
-                        <img className="stiker-list-item" src={require("../../images/stikers/normal.svg")} />
-                        <img className="stiker-list-item" src={require("../../images/stikers/sad.svg")} />
+                    <div className="stiker-list row">
+                        <img className="stiker-list-item col" src={require("../../images/stikers/heart.svg")} />
+                        <img className="stiker-list-item col" src={require("../../images/stikers/fire.svg")} />
+                        <img className="stiker-list-item col" src={require("../../images/stikers/happy.svg")} />
+                        <img className="stiker-list-item col" src={require("../../images/stikers/normal.svg")} />
+                        <img className="stiker-list-item col" src={require("../../images/stikers/sad.svg")} />
                     </div>
                 </div>
+
+
 
             </div>
         )

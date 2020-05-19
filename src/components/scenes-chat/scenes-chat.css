@@ -136,6 +136,7 @@
 .message-item{
 	display: flex;
 	flex-direction: row;
+	width: 100%;
 }
 
 .mes-photo{
@@ -183,6 +184,5 @@
 	font-size: 15px;
 	line-height: 16px;
 	color: #000000;
-	opacity: 0.3;
 	margin-left: 10px;
 }
