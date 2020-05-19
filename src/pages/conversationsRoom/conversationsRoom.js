@@ -28,6 +28,7 @@ class СonversationsRoom extends React.Component {
 	}
 
 	componentDidMount() {
+
 		let currentRoom = rooms.find(r => r.room == this.props.match.params.room)
 
 		if (currentRoom) {

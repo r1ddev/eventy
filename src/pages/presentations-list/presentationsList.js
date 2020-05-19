@@ -57,7 +57,7 @@ class PresentationsList extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div className="container">
+				<div className="container pt-3">
 					{(
 						(
 							folders.find(
