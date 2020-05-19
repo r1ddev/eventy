@@ -48,9 +48,18 @@ class ScenesChat extends React.Component {
 
         console.log(message)
 
+        const messageList = messages.map((mes) => {
+            return (
+                <MessageItem
+                    name={mes.first_name + ' ' + mes.last_name}
+                    ad={mes.id == 3553535 ? true : false}
+                />
+            )
+        })
+
 
         return (
-            <div id="scenes-chat">
+            <div id="scenes-chat" >
                 <div className="chat-tabs row m-0">
                     <div className="chat-tab-item col">
                         <div className="tab-label">Общий чат</div>
@@ -64,15 +73,9 @@ class ScenesChat extends React.Component {
                 </div>
                 <div className="chat-message-container">
                     <div className="mes-box">
-                        <MessageItem text="1" />
-                        <MessageItem text="2" />
-                        <MessageItem text="3" />
-                        <MessageItem text="4" />
-                        <MessageItem text="5" />
-                        <MessageItem text="6" />
-                        <MessageItem text="7" />
-                        <MessageItem text="8" />
-                        <MessageItem text="9" />
+                        {
+                            messageList
+                        }
                     </div>
 
                 </div>
@@ -95,6 +98,7 @@ class MessageItem extends React.Component {
 
     render() {
 
+        const { name } = this.props;
         return (
             <div className="message-item">
                 <div className="mes-photo-wrapper">
@@ -103,7 +107,7 @@ class MessageItem extends React.Component {
                 </div>
 
                 <div className="mes-info">
-                    <div className="mes-info-name">Евгений Дубенюк<span className="mes-info-status">Организатор</span></div>
+                    <div className="mes-info-name">{name}<span className="mes-info-status">Организатор</span></div>
                     <div className="mes-info-content">
                         {this.props.text}Привет всем участникам, рады приветствовать вас на обзоре платформы Smit.events
                     </div>
@@ -132,7 +136,7 @@ class ScenesChatContainer extends React.Component {
                 message: "Аньен хасае"
             },
             {
-                user_id: 2,
+                user_id: 355,
                 first_name: "Александр",
                 last_name: "Александрович",
                 avatar: "123.png",
