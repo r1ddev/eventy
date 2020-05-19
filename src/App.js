@@ -15,6 +15,7 @@ import Desk from "./pages/desk/desk";
 import Networking from "./pages/networking";
 import Quest from "./pages/quest/quest";
 import PresentationsList from './pages/presentations-list/index';
+import ConversationsRoom from "./pages/conversationsRoom";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 					<Route exact path="/messages" component={Messages} />
 					<Route exact path="/exposure" component={Exposure} />
 					<Route exact path="/conversations" component={Conversations} />
+					<Route exact path="/conversations/:room" component={ConversationsRoom} />
 					<Route exact path="/party" component={Party} />
 					<Route exact path="/quest" component={Quest} />
 					<Route exact path="/vip-assistent" component={VipAssistent} />

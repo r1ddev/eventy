@@ -1,42 +1,91 @@
-import React from 'react';
-import './conversations.css'
-import withApiService from '../../components/hoc/with-api-service'
-import { connect } from 'react-redux';
-import { compose } from '../../utils';
+import React from "react";
+import "./conversations.scss";
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+import { Link } from "react-router-dom";
+
+const rooms = [
+	{
+		name: "Креатив в условиях кризиса",
+		ava: "https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg",
+		places: 25,
+		fill: 25,
+		link: "room1",
+	},
+	{
+		name: "Проведение мероприятий для крупного бизнеса в кризис",
+		ava: "https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg",
+		places: 25,
+		fill: 10,
+		link: "room2",
+	},
+];
 
 class Сonversations extends React.Component {
+	render() {
+		return (
+			<div id="conversations">
+				<div className="profile-header">
+					<div className="container">
+						<div className="ava text-right">
+							<Link to="/profile">
+								<img
+									src={require("../../images/networking-card-image-placeholder.png")}
+									alt=""
+								/>
+							</Link>
+						</div>
+					</div>
+				</div>
+				<div className="container">
+					<div className="title">Открытые комнаты:</div>
 
-    render() {
-        return (
-            <div>
-                Переговорки
-            </div>
-        )
-    }
-
+					<div className="room-list">
+						{rooms.map((room) => {
+							return (
+								<Link to={"/conversations/" + room.link} className="link">
+									<div className="row room">
+										<div className="col-auto">
+											<div className="ava">
+												<img src={room.ava} alt="" />
+											</div>
+										</div>
+										<div className="col-lg name">{room.name}</div>
+										<div className="col-auto">
+											<div
+												className={
+													"space" +
+													(room.fill == room.places ? " full" : "")
+												}>
+												{room.fill + "/" + room.places} человек
+											</div>
+										</div>
+									</div>
+								</Link>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 class СonversationsContainer extends React.Component {
-
-    render() {
-
-        return (
-            <Сonversations />
-        )
-    }
-
+	render() {
+		return <Сonversations />;
+	}
 }
 
 const mapStateToProps = () => {
-    return {
-    }
+	return {};
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-    return {
-
-    }
+	return {};
 };
 
 export default compose(
-    withApiService(),
-    connect(mapStateToProps, mapDispatchToProps))(СonversationsContainer);
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps)
+)(СonversationsContainer);

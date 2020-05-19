@@ -11,6 +11,7 @@
 # production
 /build
 deploy.js
+package-lock.json
 
 # misc
 .DS_Store
