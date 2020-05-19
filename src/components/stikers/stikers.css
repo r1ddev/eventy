@@ -7,12 +7,13 @@
 	position: relative;
 	top: 30px;
 	left: 40px;
-	width: 50%;
+	width: 45%;
 	background: #C3D600;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	min-width: 300px;
 }
 
 #stikers .stikers-caption{
@@ -27,14 +28,12 @@
 }
 
 #stikers .stiker-list{
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 }
 
 #stikers .stiker-list-item{
-	width: 9%;
 	cursor: pointer;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -46,22 +45,3 @@
 #stikers .stiker-list-item:hover{
 }
 
-/* .stiker-1{
-	background-image: url(../../images/stikers/stiker-1.svg);
-}
-
-.stiker-2{
-	background-image: url(../../images/stikers/stiker-2.svg);
-}
-
-.stiker-3{
-	background-image: url(../../images/stikers/stiker-3.svg);
-}
-
-.stiker-4{
-	background-image: url(../../images/stikers/stiker-4.svg);
-}
-
-.stiker-5{
-	background-image: url(../../images/stikers/stiker-5.svg);
-} */
