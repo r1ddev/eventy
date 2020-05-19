@@ -4,6 +4,7 @@ import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import ScenesChat from '../../components/scenes-chat';
+import Stikers from '../../components/stikers';
 
 class Scenes extends React.Component {
 
@@ -27,7 +28,7 @@ class Scenes extends React.Component {
                         </div>
                     </div>
                     <div className="translation-footer">
-                        Стикеры
+                        <Stikers />
                     </div>
                 </div>
                 <div className="scenes-chat">

@@ -6,7 +6,49 @@ import { compose } from '../../utils';
 
 class ScenesChat extends React.Component {
 
+    state = {
+        message: ''
+    }
+
+    onSubmit = (e) => {
+        const { message } = this.state;
+        e.preventDefault();
+        if (message !== '') {
+            console.log(message);
+            this.clearInput();
+        }
+
+    }
+
+    onChangeMessageValue = (e) => {
+        this.setState({
+            message: e.target.value
+        })
+    }
+
+    clearInput = () => {
+        console.log('clear')
+        this.setState({
+            message: ''
+        })
+    }
+
     render() {
+
+        const {
+            messages,
+            activeChat,
+            setActiveChat,
+            sendMessage
+        } = this.props;
+
+        const {
+            message
+        } = this.state;
+
+        console.log(message)
+
+
         return (
             <div id="scenes-chat">
                 <div className="chat-tabs row m-0">
@@ -35,8 +77,8 @@ class ScenesChat extends React.Component {
 
                 </div>
                 <div className="chat-input-container">
-                    <form className="chat-form">
-                        <input className="chat-input"></input>
+                    <form className="chat-form" onSubmit={this.onSubmit}>
+                        <input className="chat-input" value={message} onChange={this.onChangeMessageValue}></input>
                         <button className="send-mes-btn">
                             <div className="send-mes-btn-icon"></div>
                         </button>
@@ -76,6 +118,30 @@ class MessageItem extends React.Component {
 class ScenesChatContainer extends React.Component {
 
     render() {
+
+
+
+        let messages = [
+            {
+                user_id: 1,
+                first_name: "Евгений",
+                last_name: "Дубенюк",
+                avatar: "123.png",
+                range: 1,
+                messages_id: 79,
+                message: "Аньен хасае"
+            },
+            {
+                user_id: 2,
+                first_name: "Александр",
+                last_name: "Александрович",
+                avatar: "123.png",
+                range: 1,
+                messages_id: 32,
+                message: "Камса хам нии да"
+            },
+
+        ]
 
         return (
             <ScenesChat />
