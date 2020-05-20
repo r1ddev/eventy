@@ -21,6 +21,7 @@ ReactDOM.render(
 			<Router basename={'/front/app'}>
 				<Switch>
 					<Route path="/profile/edit" component={Registration} />
+					<Route path="/profile/:id" component={Profile} />
 					<Route path="/profile" component={Profile} />
 					<Route path="/error" component={ErrorPage} />
 
