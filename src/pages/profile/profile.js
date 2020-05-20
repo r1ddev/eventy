@@ -53,7 +53,7 @@ class Registration extends React.Component {
 					})
 					.catch((e) => {
 						api.errorHandler(e, {
-							user_not_found: () => {
+							public_user_not_found: () => {
 								this.setLoading(false);
 								alert("Пользователь не найден");
 								this.props.history.push("/error");
