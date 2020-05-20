@@ -28,6 +28,10 @@ const api = {
 			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
 			return response.data
 		},
+		async getUserDataById(user_id) {
+			let response = await axios.get(api.proxy + api.host + "/users/public/get/" + user_id, api.useAuth())
+			return response.data
+		},
 		getUploadAvatarUrl() {
 			return "/users/avatar/upload"
 		},

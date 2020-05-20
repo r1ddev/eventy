@@ -21,6 +21,7 @@ class Registration extends React.Component {
 		whatSearch: "",
 		whatOffer: "",
 		isLoading: false,
+		isEditable: false
 	};
 
 	componentDidMount() {
@@ -29,35 +30,69 @@ class Registration extends React.Component {
 
 	fetchData = async () => {
 		if (this.props.user.isLogin) {
-			this.setLoading(true);
+			if (this.props.match.params.id) {
 
-			api.auth
-				.getUserData()
-				.then((res) => {
-					this.setState({
-						avatar: api.auth.getAvatarLocation() + res.user.avatar,
-						name: res.user.first_name,
-						lastName: res.user.last_name,
-						company: res.user.company,
-						position: res.user.position,
-						phone: res.user.phone,
-						email: res.user.mail,
-						soc: res.user.social_site,
-						whatSearch: res.user.what_looking,
-						whatOffer: res.user.what_offer,
-					});
+				this.setLoading(true);
+				api.auth
+					.getUserDataById(this.props.match.params.id)
+					.then((res) => {
+						this.setState({
+							avatar: api.auth.getAvatarLocation() + res.user.avatar,
+							name: res.user.first_name,
+							lastName: res.user.last_name,
+							company: res.user.company,
+							position: res.user.position,
+							phone: res.user.phone,
+							email: res.user.mail,
+							soc: res.user.social_site,
+							whatSearch: res.user.what_looking,
+							whatOffer: res.user.what_offer,
+						});
 
-					this.setLoading(false);
-				})
-				.catch((e) => {
-					api.errorHandler(e, {
-						user_not_found: () => {
-							this.setLoading(false);
-							alert("Пользователь не найден");
-							this.props.history.push("/error");
-						},
+						this.setLoading(false);
+					})
+					.catch((e) => {
+						api.errorHandler(e, {
+							user_not_found: () => {
+								this.setLoading(false);
+								alert("Пользователь не найден");
+								this.props.history.push("/error");
+							},
+						});
 					});
-				});
+			} else {
+				this.setLoading(true);
+				api.auth
+					.getUserData()
+					.then((res) => {
+						this.setState({
+							avatar: api.auth.getAvatarLocation() + res.user.avatar,
+							name: res.user.first_name,
+							lastName: res.user.last_name,
+							company: res.user.company,
+							position: res.user.position,
+							phone: res.user.phone,
+							email: res.user.mail,
+							soc: res.user.social_site,
+							whatSearch: res.user.what_looking,
+							whatOffer: res.user.what_offer,
+							isEditable: true
+						});
+
+						this.setLoading(false);
+					})
+					.catch((e) => {
+						api.errorHandler(e, {
+							user_not_found: () => {
+								this.setLoading(false);
+								alert("Пользователь не найден");
+								this.props.history.push("/error");
+							},
+						});
+					});
+			}
+		} else {
+			this.props.history.push("/error")
 		}
 	};
 
@@ -80,6 +115,7 @@ class Registration extends React.Component {
 			soc,
 			whatSearch,
 			whatOffer,
+			isEditable
 		} = this.state;
 
 		return (
@@ -96,19 +132,20 @@ class Registration extends React.Component {
 
 									<div className="field mt-3">{name}</div>
 									<div className="field mt-3">{lastName}</div>
-
-									<div className="btn-wrap">
-										<Link to="/profile/edit" className="flex-center">
-											<button
-												type="submit"
-												className="btn mt-3"
-												disabled={isLoading}>
-												<img
-													src={require("../../images/profile-btn.png")}
-												/>
-											</button>
-										</Link>
-									</div>
+									{isEditable &&
+										<div className="btn-wrap">
+											<Link to="/profile/edit" className="flex-center">
+												<button
+													type="submit"
+													className="btn mt-3"
+													disabled={isLoading}>
+													<img
+														src={require("../../images/profile-btn.png")}
+													/>
+												</button>
+											</Link>
+										</div>
+									}
 								</div>
 
 								{!isLoading && (
