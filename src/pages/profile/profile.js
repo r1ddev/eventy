@@ -33,7 +33,7 @@ class Registration extends React.Component {
 			if (this.props.match.params.id) {
 
 				this.setLoading(true);
-				api.auth
+				api.account
 					.getUserDataById(this.props.match.params.id)
 					.then((res) => {
 						this.setState({
@@ -62,7 +62,7 @@ class Registration extends React.Component {
 					});
 			} else {
 				this.setLoading(true);
-				api.auth
+				api.account
 					.getUserData()
 					.then((res) => {
 						this.setState({

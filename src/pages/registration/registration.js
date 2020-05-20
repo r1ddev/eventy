@@ -103,22 +103,16 @@ class Registration extends React.Component {
 
 		this.setLoading(true);
 
-		api.auth.getUserData().then(res => {
+		api.account.getUserData().then(res => {
 			console.log(res);
 
 			let userTags = JSON.parse(res.user.tags)
-			console.log("userTags", userTags);
 
 			userTags = userTags.map(v => {
 				return defaultTags.find(t => {
-					console.log("t.label.toLowerCase", t.label.toLowerCase());
-					console.log("v.toLowerCase", v.toLowerCase());
-
 					return t.label.toLowerCase() == v.toLowerCase()
 				})
 			})
-			console.log("userTags", userTags);
-
 
 			this.setState({
 				avatar: api.auth.getAvatarLocation() + res.user.avatar,

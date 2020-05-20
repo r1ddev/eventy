@@ -24,14 +24,6 @@ const api = {
 	},
 
 	auth: {
-		async getUserData() {
-			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
-			return response.data
-		},
-		async getUserDataById(user_id) {
-			let response = await axios.get(api.proxy + api.host + "/users/public/get/" + user_id, api.useAuth())
-			return response.data
-		},
 		getUploadAvatarUrl() {
 			return "/users/avatar/upload"
 		},
@@ -53,6 +45,20 @@ const api = {
 				tags: tags
 			}), api.useAuth())
 
+			return response.data
+		}
+	},
+	account: {
+		async getUserData() {
+			let response = await axios.get(api.proxy + api.host + "/users/get", api.useAuth())
+			return response.data
+		},
+		async getUserDataById(user_id) {
+			let response = await axios.get(api.proxy + api.host + "/users/public/get/" + user_id, api.useAuth())
+			return response.data
+		},
+		async getNetworking() {
+			let response = await axios.get(api.proxy + api.host + "/users/public/all", api.useAuth())
 			return response.data
 		}
 	},
