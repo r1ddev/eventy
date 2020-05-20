@@ -36,7 +36,11 @@ class Scenes extends React.Component {
                         <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
                     </div>
                     <div className="chat-content">
-                        <ScenesChat />
+                        <ScenesChat
+                            sponsorChatId={1}
+                            generalChatId={2}
+                            spikerChatId={3}
+                        />
                     </div>
                 </div>
             </div >
