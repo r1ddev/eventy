@@ -100,7 +100,7 @@
 	align-items: center;
 	cursor: pointer;
 	background-image: url(../../images/send.svg);
-	background-position: 0 bottom;
+	background-position: center bottom;
 	margin-bottom: 3px;
 	background-repeat: no-repeat;
 
