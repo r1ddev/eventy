@@ -4,6 +4,12 @@ const chatRequested = () => {
     }
 };
 
+const chatUpdateRequested = () => {
+    return {
+        type: 'FETCH_UPDATE_MESSAGES_LOADING'
+    }
+};
+
 const chatLoaded = (messages) => {
     return {
         type: 'FETCH_GET_MESSAGES_SUCCESS',
@@ -13,7 +19,7 @@ const chatLoaded = (messages) => {
 
 const chatError = (error) => {
     return {
-        type: 'FETCH_GET_MESSAGES_ERROR',
+        type: 'FETCH_GET_MESSAGES_FAILURE',
         payload: error
     };
 };
@@ -43,9 +49,10 @@ const fetchMessages = (apiService, dispatch) => (chatId) => {
 };
 
 const updateMessages = (apiService, dispatch) => (chatId, id) => {
+    dispatch(chatUpdateRequested())
     apiService.updateMessages(chatId, id)
-        .then((data) => dispatch(chatUpdated(data.messages)))
-        .catch((err) => dispatch(chatError(err)));
+        .then((data) => { console.log(data); dispatch(chatUpdated(data.messages)) })
+        .catch((err) => { console.log(err); dispatch(chatError(err)) });
 };
 
 const fetchAddMessage = (apiService, dispatch) => (chatId, message) => {
