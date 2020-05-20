@@ -18,10 +18,7 @@ class Networking extends React.Component {
 	};
 
 	componentDidMount() {
-
 		this.fetchData()
-
-
 	}
 
 	fetchData = async () => {
