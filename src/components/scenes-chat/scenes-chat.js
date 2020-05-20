@@ -4,6 +4,7 @@ import withApiService from '../hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
+import InputEmoji from 'react-input-emoji';
 
 class ScenesChat extends React.Component {
 
@@ -13,7 +14,7 @@ class ScenesChat extends React.Component {
 
     onSubmit = (e) => {
         const { message } = this.state;
-        e.preventDefault();
+        // e.preventDefault();
         if (message !== '') {
             this.props.sendMessage(message)
             this.clearInput();
@@ -21,9 +22,10 @@ class ScenesChat extends React.Component {
 
     }
 
-    onChangeMessageValue = (e) => {
+    onChangeMessageValue = (message) => {
+        console.log('f', message)
         this.setState({
-            message: e.target.value
+            message: message
         })
     }
 
@@ -31,7 +33,10 @@ class ScenesChat extends React.Component {
         console.log('clear')
         this.setState({
             message: ''
-        })
+        },
+            () => this.refs.chatInput.updateHTML()
+
+        )
     }
 
     render() {
@@ -42,11 +47,9 @@ class ScenesChat extends React.Component {
             setChat
         } = this.props;
 
-        const {
-            message
-        } = this.state;
+        const { message } = this.state;
 
-        console.log(messages)
+        console.log('dd', message)
 
         const messageList = messages.map((mes) => {
             return (
@@ -64,13 +67,13 @@ class ScenesChat extends React.Component {
         return (
             <div id="scenes-chat" >
                 <div className="chat-tabs row m-0">
-                    <div onClick={() => setChat('general')} className={(activeChat == 'general') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('general')} className={(activeChat === 'general') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Общий чат</div>
                     </div>
-                    <div onClick={() => setChat('sponsor')} className={(activeChat == 'sponsor') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('sponsor')} className={(activeChat === 'sponsor') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Чат с организаторами</div>
                     </div>
-                    <div onClick={() => setChat('spiker')} className={(activeChat == 'spiker') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('spiker')} className={(activeChat === 'spiker') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Вопрос спикеру</div>
                     </div>
                 </div>
@@ -82,12 +85,24 @@ class ScenesChat extends React.Component {
                     </div>
                 </div>
                 <div className="chat-input-container">
-                    <form className="chat-form" onSubmit={this.onSubmit}>
-                        <input className="chat-input" value={message} onChange={this.onChangeMessageValue}></input>
-                        <button className="send-mes-btn">
-                            <div className="send-mes-btn-icon"></div>
-                        </button>
-                    </form>
+                    {/* <form className="chat-form" onSubmit={this.onSubmit}> */}
+                    {/* <input className="chat-input" value={message} onChange={this.onChangeMessageValue}></input> */}
+                    <div className="chat-input-wrapper">
+                        <InputEmoji
+                            value={message}
+                            onChange={this.onChangeMessageValue}
+                            cleanOnEnter
+                            className="chat-input"
+                            placeholder="Введите ваше сообщение"
+                            onEnter={this.onSubmit}
+                            borderRadius='10px'
+                            ref="chatInput"
+                        />
+                    </div>
+                    <button className="send-mes-btn" onClick={this.onSubmit}>
+                        <div className="send-mes-btn-icon" onClick={this.onSubmit}></div>
+                    </button>
+                    {/* </form> */}
                 </div>
             </div>
         )

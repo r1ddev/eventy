@@ -3,13 +3,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: auto;
 }
 
 #scenes-chat .chat-tabs{
     height: 10%;
     min-height: 70px;
-
     display: flex;
     flex-direction: row;
 }
@@ -23,10 +21,9 @@
 }
 
 #scenes-chat .chat-input-container{
-    height: 10%;
-    min-height: 70px;
 	border-top: 1px solid #C4C4C4;
-	
+    flex-direction: row;
+    display: flex;
 }
 
 #scenes-chat .chat-tabs .chat-tab-item{
@@ -93,6 +90,7 @@
 	border: 0;
 }
 #scenes-chat .send-mes-btn{
+	width: 20%;
 	padding:0px;
 	background-color: white;
 	font-size: 23px;
@@ -102,7 +100,8 @@
 	align-items: center;
 	cursor: pointer;
 	background-image: url(../../images/send.svg);
-	background-position: center;
+	background-position: 0 bottom;
+	margin-bottom: 3px;
 	background-repeat: no-repeat;
 
 }
@@ -116,8 +115,6 @@
 
 #scenes-chat .send-mes-btn-icon{
 	width: 70px;
-	height: 100%;
-	background-image: url(../../images/send.svg);
 }
 
 #scenes-chat .chat-input{
@@ -159,7 +156,9 @@
     width: 100%;
 }
 .mes-info{
-	margin: 10px 0px;
+	width: calc(100% - 100px);
+    overflow-wrap: break-word;
+    margin: 10px 0px;
 }
 .mes-info-name{
 	font-family: "FuturaBookC";
@@ -185,4 +184,12 @@
 	line-height: 16px;
 	color: #000000;
 	margin-left: 10px;
+}
+
+.chat-input-wrapper{
+	width: 80%;
+}
+
+.react-emoji-picker--wrapper {
+    width: 350px;
 }
