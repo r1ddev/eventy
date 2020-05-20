@@ -1,6 +1,6 @@
 export const initialState = {
     messages: [],
-    lastApiMessageId: null,
+    lastApiMessageId: 0,
     error: null,
     loading: true
 

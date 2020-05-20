@@ -64,13 +64,13 @@ class ScenesChat extends React.Component {
         return (
             <div id="scenes-chat" >
                 <div className="chat-tabs row m-0">
-                    <div onClick={() => setChat('general')} className={(activeChat == 'general') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('general')} className={(activeChat === 'general') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Общий чат</div>
                     </div>
-                    <div onClick={() => setChat('sponsor')} className={(activeChat == 'sponsor') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('sponsor')} className={(activeChat === 'sponsor') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Чат с организаторами</div>
                     </div>
-                    <div onClick={() => setChat('spiker')} className={(activeChat == 'spiker') ? "chat-tab-item-active col" : "chat-tab-item col"}>
+                    <div onClick={() => setChat('spiker')} className={(activeChat === 'spiker') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Вопрос спикеру</div>
                     </div>
                 </div>
