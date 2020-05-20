@@ -8,7 +8,7 @@ export const initialState = {
 
 function updateMessage(messages, lastId, newmes) {
     return [
-        ...messages.slice(0, messages.findIndex(m => m.id == lastId) + 1),
+        ...messages.slice(0, messages.findIndex(m => m.messages_id === lastId) + 1),
         ...newmes
     ]
 }
@@ -27,7 +27,7 @@ const chat = (state, action) => {
                 error: null,
                 loading: false,
                 messages: action.payload,
-                lastApiMessageId: action.payload[action.payload.length - 1].user_id
+                lastApiMessageId: action.payload[action.payload.length - 1].messages_id
             };
 
         case 'FETCH_GET_MESSAGES_FAILURE':
@@ -50,7 +50,7 @@ const chat = (state, action) => {
             return {
                 ...state,
                 messages: updateMessage(state.messages, lastId, action.payload),
-                lastApiMessageId: action.payload[action.payload.length - 1].user_id
+                lastApiMessageId: action.payload[action.payload.length - 1].messages_id
             };
 
         case 'ADD_LOCAL_MESSAGE':
