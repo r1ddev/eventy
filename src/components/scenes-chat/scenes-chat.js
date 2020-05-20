@@ -44,7 +44,8 @@ class ScenesChat extends React.Component {
         const {
             messages,
             activeChat,
-            setChat
+            setChat,
+            loading
         } = this.props;
 
         const { message } = this.state;
@@ -78,11 +79,23 @@ class ScenesChat extends React.Component {
                     </div>
                 </div>
                 <div className="chat-message-container">
-                    <div className="mes-box">
-                        {
-                            messageList
-                        }
-                    </div>
+
+                    {!loading &&
+                        <div className="mes-box">
+                            {
+                                messageList
+                            }
+                        </div>
+                    }
+
+                    {loading &&
+                        <div class="d-flex justify-content-center chat-spinner">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 <div className="chat-input-container">
                     {/* <form className="chat-form" onSubmit={this.onSubmit}> */}
@@ -151,29 +164,23 @@ class ScenesChatContainer extends React.Component {
 
     state = {
         activeChat: 'sponsor',
-        messages: [
-            {
-                user_id: 1,
-                first_name: "Евгений",
-                last_name: "Дубенюк",
-                avatar: require("../../images/fry.jpg"),
-                range: 4,
-                messages_id: 79,
-                message: "Аньен хасае"
-            }
-        ]
+        currentChatId: this.props.sponsorChatId,
+        sponsorChatId: this.props.sponsorChatId,
+        generalChatId: this.props.generalChatId,
+        spikerChatId: this.props.spikerChatId
     }
 
     setChat = (chat) => {
         console.log(chat)
         this.setState({
-            activeChat: chat
+            activeChat: chat,
+            currentChatId: (chat === 'general' ? this.state.generalChatId : (chat === 'sponsor' ? this.state.sponsorChatId : this.state.spikerChatId))
+        }, () => {
+            this.props.fetchMessages(this.state.currentChatId)
         })
     }
 
     sendMessage = (message) => {
-
-
 
         const mes = {
             user_id: 1,
@@ -185,18 +192,29 @@ class ScenesChatContainer extends React.Component {
             message: message
         }
 
-        this.props.fetchAddMessage(1, mes)
+        this.props.fetchAddMessage(this.state.currentChatId, mes)
 
     }
 
     componentDidMount() {
-        this.props.fetchMessages(1);
-        this.updateMessages();
+        this.setState({
+            activeChat: 'sponsor',
+            currentChatId: this.props.generalChatId,
+            sponsorChatId: this.props.sponsorChatId,
+            generalChatId: this.props.generalChatId,
+            spikerChatId: this.props.spikerChatId
+        },
+            () => {
+
+                this.props.fetchMessages(this.state.currentChatId);
+                this.updateMessages();
+            }
+        )
     }
 
     updateMessages = () => {
         setTimeout(() => {
-            this.props.updateMessages(1, this.props.chat.lastApiMessageId);
+            this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
             this.updateMessages();
         }, 2000)
 
@@ -207,12 +225,14 @@ class ScenesChatContainer extends React.Component {
     render() {
         const {
             messages,
-            lastApiMessageId
+            lastApiMessageId,
+            loading
         } = this.props.chat
 
         console.log(lastApiMessageId)
         return (
             <ScenesChat
+                loading={loading}
                 messages={messages}
                 activeChat={this.state.activeChat}
                 setChat={this.setChat}
