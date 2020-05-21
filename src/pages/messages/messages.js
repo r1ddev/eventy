@@ -55,36 +55,54 @@ class Messages extends React.Component {
 	};
 
 	setUser = (userId) => {
-		let activeUser = this.state.users.find((u) => u.id == activeUser);
+		let activeUser = this.state.users.find((u) => u.id == userId);
+
 		if (activeUser !== undefined) {
 			this.setState({
 				activeUser: activeUser,
 			});
 		} else {
-			this.setState({
-				activeUser: {
-					name: "asasd",
-					avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-					id: 123,
-					company: "Ideas.First",
-					position: "Маркетинг директор",
-				},
-			});
+			api.account
+				.getUserDataById(userId)
+				.then((res) => {
+					this.setState({
+						activeUser: {
+							name: res.user.first_name + " " + res.user.last_name,
+							avatar: res.user.avatar,
+							id: userId,
+							company: res.user.company,
+							position: res.user.position,
+						},
+					});
+				})
+				.catch((e) => console.log(e));
 		}
+	};
+
+	sendMessage = (message) => {
+		let m = this.state.messages;
+		m.push({
+			first_name: "qwe-2",
+			last_name: "123-2",
+			range: 4,
+			message: message,
+			avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
+		});
+
+		this.setState(
+			{
+				messages: m,
+			},
+			() => {
+				this.refs.scenesChat.onUpdate(true);
+			}
+		);
 	};
 
 	render() {
 		const { users, activeUser, messages } = this.state;
 
-		var activeUserData = false;
-		if (activeUser > 0) {
-			activeUserData = users.find((u) => u.id == activeUser);
-		}
-
-		const isChatAvailable = activeUserData !== false;
-
-		console.log("activeUserData", activeUserData);
-		console.log("isChatAvailable", isChatAvailable);
+		var isChatAvailable = Object.entries(activeUser).length > 0;
 
 		return (
 			<div id="messages">
@@ -139,7 +157,7 @@ class Messages extends React.Component {
 									<ScenesChat
 										loading={false}
 										messages={messages}
-										sendMessage={() => {}}
+										sendMessage={this.sendMessage}
 										isPrivate={true}
 										ref="scenesChat"
 									/>
@@ -158,16 +176,13 @@ class Messages extends React.Component {
 										<div className="ava">
 											<img
 												src={
-													api.auth.getAvatarLocation() +
-													activeUserData.avatar
+													api.auth.getAvatarLocation() + activeUser.avatar
 												}
 											/>
 										</div>
-										<div className="title">{activeUserData.name}</div>
+										<div className="title">{activeUser.name}</div>
 										<div className="desc">
-											{activeUserData.position +
-												" в " +
-												activeUserData.company}
+											{activeUser.position + " в " + activeUser.company}
 										</div>
 									</div>
 								)}
