@@ -1,7 +1,6 @@
 #stikers{
 	width: 100%;
 	height: 100%;
-	border: 1px solid red;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -9,19 +8,16 @@
 }
 
 .emoji-stikers-wrapper{
-	height: 100%;
-	width: 60%;
-	border: 1px solid red;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    width: 50%;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 20px;
 }
 
 .language-stikers-wrapper{
 	height: 100%;
 	width: 40%;
-	border: 1px solid red;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,8 +25,6 @@
 }
 
 .emoji-stikers{
-	height: 80%;
-	width: 80%;
 	background: #C3D600;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
@@ -53,7 +47,6 @@
 
 .emoji-stikers-list{
 	flex-grow: 1;
-	border: 1px solid blue;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -62,16 +55,12 @@
 }
 
 .emoji-stikers-item{
-	flex-grow: 1;
 	height: 100%;
-	border: 1px solid blue;
 }
 
 
 .emoji-stikers-item > img{
-	border: 1px solid red;
-	width: 10px;
-
+	height: 100%;
 }
 
 

@@ -17,16 +17,16 @@ class Stikers extends React.Component {
                                 <img alt="" src={require("../../images/stikers/heart.svg")} />
                             </div>
                             <div className="emoji-stikers-item">
-                                <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                <img alt="" src={require("../../images/stikers/fire.svg")} />
                             </div>
                             <div className="emoji-stikers-item">
-                                <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                <img alt="" src={require("../../images/stikers/happy.svg")} />
                             </div>
                             <div className="emoji-stikers-item">
-                                <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                <img alt="" src={require("../../images/stikers/normal.svg")} />
                             </div>
                             <div className="emoji-stikers-item">
-                                <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                <img alt="" src={require("../../images/stikers/sad.svg")} />
                             </div>
                         </div>
                     </div>
@@ -37,18 +37,5 @@ class Stikers extends React.Component {
     }
 }
 
-
-// <div className="stikers-wrapper">
-//                     <div className="stikers-caption">
-//                         ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
-//                     </div>
-//                     <div className="stiker-list row">
-//                         <img className="stiker-list-item col" src={require("../../images/stikers/heart.svg")} />
-//                         <img className="stiker-list-item col" src={require("../../images/stikers/fire.svg")} />
-//                         <img className="stiker-list-item col" src={require("../../images/stikers/happy.svg")} />
-//                         <img className="stiker-list-item col" src={require("../../images/stikers/normal.svg")} />
-//                         <img className="stiker-list-item col" src={require("../../images/stikers/sad.svg")} />
-//                     </div>
-//                 </div>
 
 export default Stikers;

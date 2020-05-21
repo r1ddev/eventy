@@ -28,7 +28,6 @@
                 
 #scenes .translation-footer{
     flex-grow: 1;
-    min-height: 150px;
 }
 
 #scenes .scenes-chat{
@@ -62,6 +61,7 @@
     font-weight:bold;
     color: white;
     width: 40%;
+    min-width: 100px;
     height: 100%;
     background-color: #80BC26;
     font-size: 20px;
