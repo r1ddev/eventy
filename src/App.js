@@ -29,6 +29,7 @@ function App() {
 					<Route exact path="/scenes" component={Scenes} />
 					<Route exact path="/spikers" component={Spikers} />
 					<Route exact path="/messages" component={Messages} />
+					<Route exact path="/messages/:id" component={Messages} />
 					<Route exact path="/exposure" component={Exposure} />
 					<Route exact path="/conversations" component={Conversations} />
 					<Route exact path="/conversations/:room" component={ConversationsRoom} />
