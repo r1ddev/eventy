@@ -184,7 +184,21 @@ button:focus {
 }
 
 .react-emoji-picker--wrapper {
-	width: 350px;
+	width: 350px !important;
+}
+
+.react-input-emoji--container {
+	height: 100% !important;
+	margin: unset;
+}
+
+.react-input-emoji--wrapper{
+	height: 100%;
+}
+
+.react-emoji{
+	height: 100% !important;
+	padding: 5px 10px !important;
 }
 
 .chat-spinner {
