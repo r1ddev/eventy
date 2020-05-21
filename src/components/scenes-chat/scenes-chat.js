@@ -40,7 +40,7 @@ class ScenesChat extends React.Component {
     }
 
     onChangeMessageValue = (message) => {
-        console.log('f', message)
+        this.onUpdate();
         this.setState({
             message: message
         })
