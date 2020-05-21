@@ -4,7 +4,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
 }
 
 .emoji-stikers-wrapper{
@@ -56,12 +55,21 @@
 
 .emoji-stikers-item{
 	height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 
 .emoji-stikers-item > img{
-	height: 100%;
+	cursor: pointer;
+	width: 60%;
+	transition: 0.2s;
 }
+.emoji-stikers-item > img:hover{
+	transform:scale(1.2);
+	transition: 0.2s;
+}
+
 
 
 /* #stikers .stikers-wrapper{
