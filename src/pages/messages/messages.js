@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
+import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 
 class Messages extends React.Component {
 	state = {
@@ -24,8 +25,23 @@ class Messages extends React.Component {
 				position: "Маркетинг директор 222",
 			},
 		],
-		activeUser: 0,
-		massages: [],
+		activeUser: {},
+		messages: [
+			{
+				first_name: "qwe",
+				last_name: "123",
+				range: 4,
+				message: "Привет",
+				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
+			},
+			{
+				first_name: "qwe-2",
+				last_name: "123-2",
+				range: 4,
+				message: "Привет 2",
+				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
+			},
+		],
 	};
 
 	componentDidMount() {
@@ -34,25 +50,41 @@ class Messages extends React.Component {
 
 	fetchData = () => {
 		if (this.props.match.params.id) {
+			this.setUser(this.props.match.params.id);
+		}
+	};
+
+	setUser = (userId) => {
+		let activeUser = this.state.users.find((u) => u.id == activeUser);
+		if (activeUser !== undefined) {
 			this.setState({
-				activeUser: parseInt(this.props.match.params.id),
+				activeUser: activeUser,
+			});
+		} else {
+			this.setState({
+				activeUser: {
+					name: "asasd",
+					avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
+					id: 123,
+					company: "Ideas.First",
+					position: "Маркетинг директор",
+				},
 			});
 		}
 	};
 
 	render() {
-		const { users, activeUser, massages } = this.state;
-
-		console.log(this.state);
+		const { users, activeUser, messages } = this.state;
 
 		var activeUserData = false;
 		if (activeUser > 0) {
-			activeUserData = users.find((u) => {
-				return u.id == activeUser;
-			});
+			activeUserData = users.find((u) => u.id == activeUser);
 		}
 
+		const isChatAvailable = activeUserData !== false;
+
 		console.log("activeUserData", activeUserData);
+		console.log("isChatAvailable", isChatAvailable);
 
 		return (
 			<div id="messages">
@@ -79,9 +111,7 @@ class Messages extends React.Component {
 											className="user"
 											key={index}
 											onClick={() => {
-												this.setState({
-													activeUser: user.id,
-												});
+												this.setUser(user.id);
 											}}>
 											<div>
 												<div className="row align-items-center">
@@ -105,8 +135,16 @@ class Messages extends React.Component {
 						</div>
 						<div className="col-md-5 p-0">
 							<div className="dialog">
-								{activeUserData && <div className="">сообщение</div>}
-								{!activeUserData && (
+								{isChatAvailable && (
+									<ScenesChat
+										loading={false}
+										messages={messages}
+										sendMessage={() => {}}
+										isPrivate={true}
+										ref="scenesChat"
+									/>
+								)}
+								{!isChatAvailable && (
 									<div className="flex-center h-100 text-black-50">
 										Пожалуйста, выберите беседу
 									</div>
@@ -115,7 +153,7 @@ class Messages extends React.Component {
 						</div>
 						<div className="col-md-4">
 							<div className="info p-3">
-								{activeUserData && (
+								{isChatAvailable && (
 									<div className="card flex-center p-4">
 										<div className="ava">
 											<img
