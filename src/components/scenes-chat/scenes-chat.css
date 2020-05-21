@@ -189,11 +189,11 @@ button:focus {
 
 .react-input-emoji--container {
 	height: 100% !important;
-	margin: unset;
+	margin: unset !important;
 }
 
 .react-input-emoji--wrapper{
-	height: 100%;
+	height: 100% !important;
 }
 
 .react-emoji{
