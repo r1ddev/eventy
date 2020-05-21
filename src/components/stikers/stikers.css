@@ -1,9 +1,81 @@
 #stikers{
 	width: 100%;
 	height: 100%;
+	border: 1px solid red;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
-#stikers .stikers-wrapper{
+.emoji-stikers-wrapper{
+	height: 100%;
+	width: 60%;
+	border: 1px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.language-stikers-wrapper{
+	height: 100%;
+	width: 40%;
+	border: 1px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.emoji-stikers{
+	height: 80%;
+	width: 80%;
+	background: #C3D600;
+	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.emoji-stikers-caption{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 22px;
+	padding: 10px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.emoji-stikers-list{
+	flex-grow: 1;
+	border: 1px solid blue;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.emoji-stikers-item{
+	flex-grow: 1;
+	height: 100%;
+	border: 1px solid blue;
+}
+
+
+.emoji-stikers-item > img{
+	border: 1px solid red;
+	width: 10px;
+
+}
+
+
+/* #stikers .stikers-wrapper{
 	position: relative;
 	top: 30px;
 	left: 40px;
@@ -44,4 +116,4 @@
 
 #stikers .stiker-list-item:hover{
 }
-
+ */
