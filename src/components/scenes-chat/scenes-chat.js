@@ -56,12 +56,11 @@ class ScenesChat extends React.Component {
             messages,
             activeChat,
             setChat,
-            loading
+            loading,
+            isPrivate
         } = this.props;
 
         const { message } = this.state;
-
-        console.log('dd', message)
 
         const messageList = messages.map((mes) => {
             return (
@@ -78,7 +77,7 @@ class ScenesChat extends React.Component {
 
         return (
             <div id="scenes-chat" >
-                <div className="chat-tabs row m-0">
+                {!isPrivate && <div className="chat-tabs row m-0">
                     <div onClick={() => setChat('general')} className={(activeChat === 'general') ? "chat-tab-item-active col" : "chat-tab-item col"}>
                         <div className="tab-label">Общий чат</div>
                     </div>
@@ -89,6 +88,7 @@ class ScenesChat extends React.Component {
                         <div className="tab-label">Вопрос спикеру</div>
                     </div>
                 </div>
+                }
                 <div className="chat-message-container">
 
                     {!loading &&
