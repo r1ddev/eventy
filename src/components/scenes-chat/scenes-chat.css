@@ -1,6 +1,5 @@
 #scenes-chat {
 	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -14,10 +13,8 @@
 
 #scenes-chat .chat-message-container {
 	display: flex;
-	flex-grow: 1;
-	overflow-y: hidden;
 	flex-direction: column-reverse;
-	height: 100vh;
+	height: 100%;
 }
 
 #scenes-chat .chat-input-container {
