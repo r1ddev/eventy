@@ -9,6 +9,7 @@
 
 .frame-container {
 	flex-grow: 1;
+	flex-basis: 0;
 	overflow: auto;
 	background-image: url(../../images/background.svg);
 	background-repeat: no-repeat;

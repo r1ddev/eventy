@@ -1,0 +1,33 @@
+#desc {
+	background-color: #ccd3d9;
+
+	.first-section {
+		position: relative;
+		width: 100%;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.first-svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		path {
+			fill: rgba(255, 255, 255, 0);
+		}
+	}
+	.first-svg a path {
+		-webkit-transition: fill 0.4s;
+		-o-transition: fill 0.4s;
+		transition: fill 0.4s;
+	}
+	.first-svg a:hover path {
+		fill: rgba(255, 255, 255, 0.3);
+	}
+}
