@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
 import InputEmoji from 'react-input-emoji';
-import { Scrollbars } from 'react-custom-scrollbars';
 import RSC from "react-scrollbars-custom";
 
 class ScenesChat extends React.Component {
@@ -28,15 +27,12 @@ class ScenesChat extends React.Component {
         if (this.refs.scrollbar) {
             let scrollPosition = this.refs.scrollbar.scrollTop + this.refs.scrollbar.clientHeight
             let delta = this.refs.scrollbar.scrollHeight - scrollPosition
-            console.log(delta);
 
             if (delta < 200 || force) {
                 this.refs.scrollbar.scrollToBottom()
             }
         }
 
-
-        // this.refs.scrollbar.scrollToBottom()
     }
 
     onChangeMessageValue = (message) => {
@@ -47,7 +43,6 @@ class ScenesChat extends React.Component {
     }
 
     clearInput = () => {
-        console.log('clear')
         this.setState({
             message: ''
         },
@@ -114,8 +109,6 @@ class ScenesChat extends React.Component {
 
                 </div>
                 <div className="chat-input-container">
-                    {/* <form className="chat-form" onSubmit={this.onSubmit}> */}
-                    {/* <input className="chat-input" value={message} onChange={this.onChangeMessageValue}></input> */}
                     <div className="chat-input-wrapper">
                         <InputEmoji
                             value={message}
@@ -131,7 +124,6 @@ class ScenesChat extends React.Component {
                     <button className="send-mes-btn" onClick={this.onSubmit}>
                         <div className="send-mes-btn-icon" onClick={this.onSubmit}></div>
                     </button>
-                    {/* </form> */}
                 </div>
             </div>
         )
@@ -175,126 +167,4 @@ class MessageItem extends React.Component {
 
 }
 
-
-class ScenesChatContainer extends React.Component {
-
-    state = {
-        activeChat: 'sponsor',
-        currentChatId: this.props.sponsorChatId,
-        sponsorChatId: this.props.sponsorChatId,
-        generalChatId: this.props.generalChatId,
-        spikerChatId: this.props.spikerChatId
-    }
-
-    setChat = (chat) => {
-        console.log(chat)
-        this.setState({
-            activeChat: chat,
-            currentChatId: (chat === 'general' ? this.state.generalChatId : (chat === 'sponsor' ? this.state.sponsorChatId : this.state.spikerChatId))
-        }, () => {
-            this.props.fetchMessages(this.state.currentChatId)
-        })
-    }
-
-    sendMessage = (message) => {
-
-        const mes = {
-            user_id: 1,
-            first_name: "Софья",
-            last_name: "Сергеевна",
-            avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-            range: 1,
-            messages_id: 1,
-            message: message
-        }
-
-        this.props.fetchAddMessage(this.state.currentChatId, mes)
-        this.refs.scenesChat.onUpdate(true)
-    }
-
-    componentDidMount() {
-        this.setState({
-            activeChat: 'sponsor',
-            currentChatId: this.props.sponsorChatId,
-            sponsorChatId: this.props.sponsorChatId,
-            generalChatId: this.props.generalChatId,
-            spikerChatId: this.props.spikerChatId
-        },
-            () => {
-
-                this.props.fetchMessages(this.state.currentChatId);
-                this.updateMessages();
-            }
-        )
-    }
-
-    updateMessages = () => {
-        setTimeout(() => {
-            this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
-            this.updateMessages();
-        }, 2000)
-
-    }
-
-    componentDidUpdate(prevProps) {
-        console.log("componentDidUpdate", prevProps, this.props);
-
-        if (prevProps.chat.updateLoading != this.props.chat.updateLoading && !this.props.chat.updateLoading) {
-            this.refs.scenesChat.onUpdate()
-        }
-
-        if (prevProps.chat.loading != this.props.chat.loading && !this.props.chat.loading) {
-            console.log("prevProps.chat.loading", prevProps.chat.loading);
-
-            this.refs.scenesChat.onUpdate(true)
-        }
-
-
-        // console.log(prevProps.chat.updateLoading);
-        // console.log(this.props.chat.updateLoading);
-
-    }
-
-    render() {
-        const {
-            messages,
-            lastApiMessageId,
-            loading
-        } = this.props.chat
-
-        console.log("this.props.chat.updateLoading", this.props.chat);
-
-
-        console.log(lastApiMessageId)
-        return (
-
-            <ScenesChat
-                loading={loading}
-                messages={messages}
-                activeChat={this.state.activeChat}
-                setChat={this.setChat}
-                sendMessage={this.sendMessage}
-                ref="scenesChat"
-            />
-        )
-    }
-
-}
-
-const mapStateToProps = ({ chat }) => {
-    return {
-        chat
-    }
-};
-
-const mapDispatchToProps = (dispatch, { apiService }) => {
-    return {
-        fetchMessages: (idChat) => fetchMessages(apiService, dispatch)(idChat),
-        updateMessages: (idChat, id) => updateMessages(apiService, dispatch)(idChat, id),
-        fetchAddMessage: (idChat, message) => fetchAddMessage(apiService, dispatch)(idChat, message),
-    }
-};
-
-export default compose(
-    withApiService(),
-    connect(mapStateToProps, mapDispatchToProps))(ScenesChatContainer);
+export default ScenesChat;

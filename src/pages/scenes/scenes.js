@@ -3,7 +3,7 @@ import './scenes.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
-import ScenesChat from '../../components/scenes-chat';
+import ScenesChat from './scenes-chat-container';
 import Stikers from '../../components/stikers';
 
 class Scenes extends React.Component {
