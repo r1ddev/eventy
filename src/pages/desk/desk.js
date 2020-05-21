@@ -10,7 +10,7 @@ class Desk extends React.Component {
         return (
             <div id="desc" className="h-100">
                 <section className="first-section">
-                    <img src={require('../../images/first-section.png')} alt="img" />
+                    <img src={require('../../images/first-section.jpg')} alt="img" />
 
                     <div className="first-svg">
                         <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
