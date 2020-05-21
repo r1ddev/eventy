@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
 import InputEmoji from 'react-input-emoji';
+import { Scrollbars } from 'react-custom-scrollbars';
+import RSC from "react-scrollbars-custom";
 
 class ScenesChat extends React.Component {
 
@@ -19,7 +21,22 @@ class ScenesChat extends React.Component {
             this.props.sendMessage(message)
             this.clearInput();
         }
+    }
 
+    onUpdate = (force = false) => {
+
+        if (this.refs.scrollbar) {
+            let scrollPosition = this.refs.scrollbar.scrollTop + this.refs.scrollbar.clientHeight
+            let delta = this.refs.scrollbar.scrollHeight - scrollPosition
+            console.log(delta);
+
+            if (delta < 200 || force) {
+                this.refs.scrollbar.scrollToBottom()
+            }
+        }
+
+
+        // this.refs.scrollbar.scrollToBottom()
     }
 
     onChangeMessageValue = (message) => {
@@ -35,7 +52,6 @@ class ScenesChat extends React.Component {
             message: ''
         },
             () => this.refs.chatInput.updateHTML()
-
         )
     }
 
@@ -81,11 +97,11 @@ class ScenesChat extends React.Component {
                 <div className="chat-message-container">
 
                     {!loading &&
-                        <div className="mes-box">
+                        <RSC ref="scrollbar" className="mes-box">
                             {
                                 messageList
                             }
-                        </div>
+                        </RSC>
                     }
 
                     {loading &&
@@ -193,7 +209,7 @@ class ScenesChatContainer extends React.Component {
         }
 
         this.props.fetchAddMessage(this.state.currentChatId, mes)
-
+        this.refs.scenesChat.onUpdate(true)
     }
 
     componentDidMount() {
@@ -220,7 +236,24 @@ class ScenesChatContainer extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        console.log("componentDidUpdate", prevProps, this.props);
 
+        if (prevProps.chat.updateLoading != this.props.chat.updateLoading && !this.props.chat.updateLoading) {
+            this.refs.scenesChat.onUpdate()
+        }
+
+        if (prevProps.chat.loading != this.props.chat.loading && !this.props.chat.loading) {
+            console.log("prevProps.chat.loading", prevProps.chat.loading);
+
+            this.refs.scenesChat.onUpdate(true)
+        }
+
+
+        // console.log(prevProps.chat.updateLoading);
+        // console.log(this.props.chat.updateLoading);
+
+    }
 
     render() {
         const {
@@ -229,14 +262,19 @@ class ScenesChatContainer extends React.Component {
             loading
         } = this.props.chat
 
+        console.log("this.props.chat.updateLoading", this.props.chat);
+
+
         console.log(lastApiMessageId)
         return (
+
             <ScenesChat
                 loading={loading}
                 messages={messages}
                 activeChat={this.state.activeChat}
                 setChat={this.setChat}
                 sendMessage={this.sendMessage}
+                ref="scenesChat"
             />
         )
     }
@@ -251,12 +289,9 @@ const mapStateToProps = ({ chat }) => {
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
-
-
         fetchMessages: (idChat) => fetchMessages(apiService, dispatch)(idChat),
         updateMessages: (idChat, id) => updateMessages(apiService, dispatch)(idChat, id),
         fetchAddMessage: (idChat, message) => fetchAddMessage(apiService, dispatch)(idChat, message),
-
     }
 };
 
