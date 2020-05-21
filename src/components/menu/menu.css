@@ -14,12 +14,12 @@
 	width: 100%;
 	overflow: hidden;
 	background-color: #c3d600;
-	transition: background-color 100ms;
+	transition: background-color 200ms;
 	flex-grow: 1;
 }
 
 .menu-item:hover {
-	background-color: rgb(168, 184, 0);
+	background-color: #D5DB00;
 	transition: background-color 200ms;
 }
 
