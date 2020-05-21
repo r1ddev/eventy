@@ -95,6 +95,7 @@ class ScenesChatContainer extends React.Component {
                 activeChat={this.state.activeChat}
                 setChat={this.setChat}
                 sendMessage={this.sendMessage}
+                isPrivate={false}
                 ref="scenesChat"
             />
         )
