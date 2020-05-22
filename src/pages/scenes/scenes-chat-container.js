@@ -36,8 +36,8 @@ class ScenesChatContainer extends React.Component {
 
         const mes = {
             user_id: 1,
-            first_name: "Софья",
-            last_name: "Сергеевна",
+            first_name: "Маша",
+            last_name: "Иванова",
             avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
             range: 1,
             messages_id: 1,
