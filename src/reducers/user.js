@@ -9,8 +9,6 @@ const user = (state, action) => {
     }
     switch (action.type) {
         case 'SET_DATA':
-            console.log("SET_DATA");
-
             return {
                 ...state,
                 data: action.payload
