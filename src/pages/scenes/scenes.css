@@ -56,7 +56,8 @@
     align-items: flex-start;
 }
 
-.scene-item .scene-btn{
+.scene-item .scene-btn,
+.scene-item .scene-btn-active{
     font-family: "Gilroy";
     font-weight:bold;
     color: white;
@@ -71,6 +72,11 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.scene-item .scene-btn-active{
+    background-color: #F4004D;
 }
 
 .scene-item .scene-status{
@@ -156,5 +162,13 @@
 
     .scene-item .scene-btn{
         width: 80%;
+    }
+
+    #scenes .chat-header{
+        display: none;
+    }
+
+    .scenes-chat .chat-content {
+        min-height: 500px;
     }
   }

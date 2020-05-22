@@ -41,7 +41,6 @@ const addMessage = (message) => {
 
 
 const fetchMessages = (apiService, dispatch) => (chatId) => {
-    console.log(chatId, 'ffffff')
     dispatch(chatRequested());
     apiService.getMessages(chatId)
         .then((data) => dispatch(chatLoaded(data.messages)))
@@ -51,8 +50,8 @@ const fetchMessages = (apiService, dispatch) => (chatId) => {
 const updateMessages = (apiService, dispatch) => (chatId, id) => {
     dispatch(chatUpdateRequested())
     apiService.updateMessages(chatId, id)
-        .then((data) => { console.log(data); dispatch(chatUpdated(data.messages)) })
-        .catch((err) => { console.log(err); dispatch(chatError(err)) });
+        .then((data) => { dispatch(chatUpdated(data.messages)) })
+        .catch((err) => { dispatch(chatError(err)) });
 };
 
 const fetchAddMessage = (apiService, dispatch) => (chatId, message) => {

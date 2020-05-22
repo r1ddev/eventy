@@ -63,7 +63,6 @@ class Registration extends React.Component {
 			)
 			.then((res) => {
 				this.setLoading(false)
-				console.log(res);
 				this.props.history.push("/desc");
 			})
 			.catch((e) => {
@@ -89,7 +88,6 @@ class Registration extends React.Component {
 		// } else {
 		const params = new URLSearchParams(this.props.location.search);
 		const token = params.get('token');
-		console.log("token", token);
 
 		if (token != null) {
 			window.localStorage.token = token
@@ -104,7 +102,6 @@ class Registration extends React.Component {
 		this.setLoading(true);
 
 		api.account.getUserData().then(res => {
-			console.log(res);
 
 			let userTags = JSON.parse(res.user.tags)
 

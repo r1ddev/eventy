@@ -1,6 +1,6 @@
 #stikers{
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -8,26 +8,28 @@
 
 .emoji-stikers-wrapper{
 	display: flex;
-    width: 50%;
+	width: 50%;
     flex-direction: column;
     align-content: flex-start;
     margin: 20px;
 }
 
 .language-stikers-wrapper{
-	height: 100%;
-	width: 40%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    width: 20%;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 20px;
 }
+
 
 .emoji-stikers{
 	background: #C3D600;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	display: flex;
+	height: 100%;
+	border: 1px solid #C3D600;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -55,62 +57,83 @@
 
 .emoji-stikers-item{
 	height: 100%;
+	width: 100%;
     display: flex;
     justify-content: center;
 }
 
-
 .emoji-stikers-item > img{
 	cursor: pointer;
 	width: 60%;
-	transition: 0.2s;
+	transition: 0.1s;
 }
 .emoji-stikers-item > img:hover{
-	transform:scale(1.2);
-	transition: 0.2s;
+	transform:scale(1.1);
+	transition: 0.1s;
 }
 
 
-
-/* #stikers .stikers-wrapper{
-	position: relative;
-	top: 30px;
-	left: 40px;
-	width: 45%;
+.language-stikers{
 	background: #C3D600;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	display: flex;
+	border: 1px solid #C3D600;
+	height: 100%;
 	flex-direction: column;
-	min-width: 300px;
+	justify-content: center;
+	align-items: center;
 }
 
-#stikers .stikers-caption{
+.language-stikers-caption{
 	font-family: "FuturaBookC";
 	font-style: normal;
-	font-weight: bold;
-	font-size: 22px;
-	line-height: 22px;
-	margin-top: 10px;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 25px;
+	padding: 10px;
 	text-align: center;
 	color: #FFFFFF;
 }
 
-#stikers .stiker-list{
+.language-stikers-list{
+	flex-grow: 1;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
 }
 
-#stikers .stiker-list-item{
+.language-stikers-item{
+	height: 80%;
+	width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.language-stikers-item > img{
 	cursor: pointer;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	margin: 5px;
-	margin-bottom: 10px;
+	max-height: 80%;
+	max-width: 100%;
+	transition: 0.s;
+}
+.language-stikers-item > img:hover{
+	transition: 0.1s;
 }
 
-#stikers .stiker-list-item:hover{
+
+@media screen and (max-width: 700px) {
+	#stikers{
+		flex-direction: column;
+	}
+
+	.emoji-stikers-wrapper{
+		width: calc(100% - 40px);
+	}
+
+	.language-stikers-wrapper{
+		width:50%;
+		height: 80px;
+	}
 }
- */

@@ -24,10 +24,8 @@ const chat = (state, action) => {
     if (state === undefined) {
         return initialState
     }
-    console.log("state", state);
     switch (action.type) {
         case 'FETCH_GET_MESSAGES_SUCCESS':
-            console.log("action.payload[action.payload.length - 1] || [].messages_id || 0", ((action.payload[action.payload.length - 1] || {}).messages_id) || 0);
 
             return {
                 ...state,
@@ -52,7 +50,6 @@ const chat = (state, action) => {
             };
 
         case 'FETCH_UPDATE_MESSAGES_LOADING':
-            console.log("FETCH_UPDATE_MESSAGES_LOADING");
             return {
                 ...state,
                 error: null,
@@ -60,7 +57,6 @@ const chat = (state, action) => {
             };
 
         case 'FETCH_UPDATE_MESSAGES_SUCCESS':
-            console.log("FETCH_UPDATE_MESSAGES_SUCCESS", action.payload);
 
             let lastId = state.lastApiMessageId
             return {

@@ -15,7 +15,6 @@ export default class IdeaFirstApiService {
     }
 
     toFormData = (obj) => {
-        console.log(obj)
         let fd = new FormData()
         Object.keys(obj).map(key => {
             fd.append(key, obj[key])
@@ -72,5 +71,38 @@ export default class IdeaFirstApiService {
                 )
         })
     }
+
+    //--Заглушки--//
+
+    _ScenesResponse() {
+        const scenes = [
+            {
+                scene_id: 1,
+                rus: 'https://player.vimeo.com/video/124024544',
+                eng: 'https://player.vimeo.com/video/123538098'
+            },
+            {
+                scene_id: 2,
+                rus: 'https://player.vimeo.com/video/116582567',
+                eng: 'https://player.vimeo.com/video/187037469'
+            },
+            {
+                scene_id: 3,
+                rus: 'https://player.vimeo.com/video/188284379',
+                eng: null
+            }
+        ]
+
+        return scenes;
+    }
+
+    getScenes() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(this._ScenesResponse());
+            }, 700);
+        });
+    }
+
 
 }
