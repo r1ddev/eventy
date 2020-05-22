@@ -1,5 +1,6 @@
 #desc {
 	background-color: #ccd3d9;
+	position: relative;
 
 	.first-section {
 		position: relative;
@@ -29,5 +30,14 @@
 	}
 	.first-svg a:hover path {
 		fill: rgba(255, 255, 255, 0.3);
+	}
+
+	.fidex {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		z-index: 1;
+		border: none;
 	}
 }

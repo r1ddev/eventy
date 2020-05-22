@@ -3,12 +3,14 @@ import './desk.scss'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
+import Header from '../../components/header';
 
 class Desk extends React.Component {
 
     render() {
         return (
             <div id="desc" className="h-100">
+                <Header className="fidex" data={this.props.user.data} />
                 <section className="first-section">
                     <img src={require('../../images/first-section.jpg')} alt="img" />
 
@@ -106,14 +108,15 @@ class DeskContainer extends React.Component {
     render() {
 
         return (
-            <Desk />
+            <Desk {...this.props} />
         )
     }
 
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ user }) => {
     return {
+        user
     }
 };
 

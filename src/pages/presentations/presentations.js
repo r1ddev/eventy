@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from './../../js/api';
+import Header from "../../components/header";
 
 class Presentations extends React.Component {
 	state = {}
@@ -14,21 +15,8 @@ class Presentations extends React.Component {
 
 		return (
 			<div id="presentations">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								{
-									data &&
-									<img
-										src={api.auth.getAvatarLocation() + data.avatar}
-										alt=""
-									/>
-								}
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
+
 				<div className="container">
 					<div className="row">
 						<div className="col-lg-6 px-5 mt-5">

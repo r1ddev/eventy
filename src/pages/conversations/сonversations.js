@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from './../../js/api';
+import Header from "../../components/header";
 
 const rooms = [
 	{
@@ -29,21 +30,7 @@ class Сonversations extends React.Component {
 		const { data } = this.props.user;
 		return (
 			<div id="conversations">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								{
-									data &&
-									<img
-										src={api.auth.getAvatarLocation() + data.avatar}
-										alt=""
-									/>
-								}
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container">
 					<div className="title">Открытые комнаты:</div>
 

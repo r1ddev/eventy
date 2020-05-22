@@ -6,6 +6,7 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
+import Header from "../../components/header";
 
 class Messages extends React.Component {
 	state = {
@@ -107,17 +108,7 @@ class Messages extends React.Component {
 
 		return (
 			<div id="messages">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								{data && (
-									<img src={api.auth.getAvatarLocation() + data.avatar} alt="" />
-								)}
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container-fluid">
 					<div className="row h-100">
 						<div className="col-md-3 p-0">
