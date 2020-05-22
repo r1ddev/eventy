@@ -101,6 +101,7 @@ class Messages extends React.Component {
 
 	render() {
 		const { users, activeUser, messages } = this.state;
+		const { data } = this.props.user;
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
 
@@ -110,10 +111,9 @@ class Messages extends React.Component {
 					<div className="container">
 						<div className="ava text-right">
 							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
+								{data && (
+									<img src={api.auth.getAvatarLocation() + data.avatar} alt="" />
+								)}
 							</Link>
 						</div>
 					</div>
@@ -200,8 +200,8 @@ class MessagesContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {

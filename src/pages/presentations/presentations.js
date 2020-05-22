@@ -4,21 +4,27 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
+import api from './../../js/api';
 
 class Presentations extends React.Component {
 	state = {}
 
 	render() {
+		const { data } = this.props.user
+
 		return (
 			<div id="presentations">
 				<div className="profile-header">
 					<div className="container">
 						<div className="ava text-right">
 							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
+								{
+									data &&
+									<img
+										src={api.auth.getAvatarLocation() + data.avatar}
+										alt=""
+									/>
+								}
 							</Link>
 						</div>
 					</div>
@@ -50,12 +56,12 @@ class Presentations extends React.Component {
 }
 class PresentationsContainer extends React.Component {
 	render() {
-		return <Presentations />;
+		return <Presentations {...this.props} />;
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {

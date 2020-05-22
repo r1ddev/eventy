@@ -1,16 +1,19 @@
 export const initialState = {
-    isLogin: window.localStorage.token !== undefined
+    isLogin: window.localStorage.token !== undefined,
+    data: undefined
 }
 
 const user = (state, action) => {
     if (state === undefined) {
         return initialState
     }
-
     switch (action.type) {
-        case 'GO':
+        case 'SET_DATA':
+            console.log("SET_DATA");
+
             return {
                 ...state,
+                data: action.payload
             };
 
         default:

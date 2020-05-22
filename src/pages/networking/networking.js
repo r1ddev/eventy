@@ -22,21 +22,17 @@ class Networking extends React.Component {
 	}
 
 	fetchData = async () => {
-		console.log(this.props.user);
-
-		if (this.props.user.isLogin) {
-			api.account.getNetworking().then(res => {
-				this.setState({
-					users: res.user
-				})
-			}).catch(e => console.log(e))
-		} else {
-			this.props.history.push("/error")
-		}
+		api.account.getNetworking().then(res => {
+			this.setState({
+				users: res.user
+			})
+		}).catch(e => console.log(e))
 	}
 
 	render() {
 		const { users, searchText } = this.state;
+		const { data } = this.props.user
+
 		return (
 			<div id="networking">
 				<div className="header profile-header">
@@ -69,10 +65,13 @@ class Networking extends React.Component {
 								</div>
 								<div className="col-auto ava">
 									<Link to="/profile">
-										<img
-											src={require("../../images/networking-card-image-placeholder.png")}
-											alt=""
-										/>
+										{
+											data &&
+											<img
+												src={api.auth.getAvatarLocation() + data.avatar}
+												alt=""
+											/>
+										}
 									</Link>
 								</div>
 							</div>

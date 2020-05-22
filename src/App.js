@@ -16,31 +16,66 @@ import Networking from "./pages/networking";
 import Quest from "./pages/quest/quest";
 import PresentationsList from './pages/presentations-list/index';
 import ConversationsRoom from "./pages/conversationsRoom";
+import { connect } from 'react-redux';
+import { compose } from './utils';
+import api from './js/api';
+import { setUserData } from './actions/user-actions';
 
-function App() {
-	return (
-		<div className="App">
-			<Frame>
-				<Switch>
-					{/* Готово/не готово*/}
-					<Route exact path="/desk" component={Desk} />
-					<Route exact path="/presentations" component={Presentations} />
-					<Route exact path="/presentations/:folder" component={PresentationsList} />
-					<Route exact path="/scenes" component={Scenes} />
-					<Route exact path="/spikers" component={Spikers} />
-					<Route exact path="/messages" component={Messages} />
-					<Route exact path="/messages/:id" component={Messages} />
-					<Route exact path="/exposure" component={Exposure} />
-					<Route exact path="/conversations" component={Conversations} />
-					<Route exact path="/conversations/:room" component={ConversationsRoom} />
-					<Route exact path="/party" component={Party} />
-					<Route exact path="/quest" component={Quest} />
-					<Route exact path="/vip-assistent" component={VipAssistent} />
-					<Route exact path="/networking" component={Networking} />
-				</Switch>
-			</Frame>
-		</div>
-	);
+class App extends React.Component {
+
+	componentDidMount() {
+		if (!this.props.user.isLogin) {
+			this.props.history.push("/error")
+		}
+
+
+		if (this.props.user.data === undefined) {
+			api.account.getUserData().then(res => {
+				this.props.setUser(res.user)
+			}).catch(e => console.log(e))
+		}
+
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<Frame>
+					{this.props.user.isLogin &&
+						<Switch>
+							{/* Готово/не готово*/}
+							<Route exact path="/desk" component={Desk} />
+							<Route exact path="/presentations" component={Presentations} />
+							<Route exact path="/presentations/:folder" component={PresentationsList} />
+							<Route exact path="/scenes" component={Scenes} />
+							<Route exact path="/spikers" component={Spikers} />
+							<Route exact path="/messages" component={Messages} />
+							<Route exact path="/messages/:id" component={Messages} />
+							<Route exact path="/exposure" component={Exposure} />
+							<Route exact path="/conversations" component={Conversations} />
+							<Route exact path="/conversations/:room" component={ConversationsRoom} />
+							<Route exact path="/party" component={Party} />
+							<Route exact path="/quest" component={Quest} />
+							<Route exact path="/vip-assistent" component={VipAssistent} />
+							<Route exact path="/networking" component={Networking} />
+						</Switch>
+					}
+				</Frame>
+			</div>
+		);
+	}
 }
 
-export default App;
+const mapStateToProps = ({ user }) => {
+	return {
+		user
+	}
+};
+
+const mapDispatchToProps = (dispatch, { }) => {
+	return {
+		setUser: (userData) => setUserData(userData, dispatch),
+	}
+};
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(App);
