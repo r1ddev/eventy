@@ -38,6 +38,21 @@ export default class IdeaFirstApiService {
         })
     }
 
+    // getScenes() {
+    //     return new Promise((resolve, reject) => {
+    //         axios.get(this.host + `/stream/all`, this.useAuth())
+    //             .then(res => {
+    //                 if (res.data.status) {
+    //                     resolve(res.data);
+    //                 } else {
+    //                     reject(res.data.error)
+    //                 }
+    //             })
+    //             .catch(error => { reject(error) }
+    //             )
+    //     })
+    // }
+
     updateMessages(chatId, id) {
         return new Promise((resolve, reject) => {
             axios.get(this.host + `/group/messages/from/${id}?chat_id=${chatId}`, this.useAuth())
@@ -72,10 +87,29 @@ export default class IdeaFirstApiService {
         })
     }
 
+
+    postReaction(scene_id, reaction_id) {
+        return new Promise((resolve, reject) => {
+            axios.post(this.host + "/stream/reaction", this.toFormData({
+                scene_id: scene_id,
+                reaction_id: reaction_id
+            }), this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     //--Заглушки--//
 
     _ScenesResponse() {
-        const scenes = [
+        const streams = [
             {
                 scene_id: 1,
                 rus: 'https://player.vimeo.com/video/124024544',
@@ -93,7 +127,11 @@ export default class IdeaFirstApiService {
             }
         ]
 
-        return scenes;
+        const data = {
+            streams: streams
+        }
+
+        return data;
     }
 
     getScenes() {

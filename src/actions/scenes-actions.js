@@ -23,7 +23,7 @@ const fetchScenes = (apiService, dispatch) => (chatId) => {
     apiService.getScenes()
         .then((data) => {
 
-            data = data.map((item, index) => {
+            data = data.streams.map((item, index) => {
 
                 const chatId = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 

@@ -1,7 +1,14 @@
 import React from 'react';
 import "./stikers.css"
+import IdeaFirstApiService from '../../services/idea-first-api-service';
+
 
 class Stikers extends React.Component {
+
+    postReaction = (id) => {
+        let api = new IdeaFirstApiService();
+        api.postReaction(this.props.scene, id)
+    }
 
     render() {
 
@@ -18,19 +25,19 @@ class Stikers extends React.Component {
                             ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
                         </div>
                         <div className="emoji-stikers-list">
-                            <div className="emoji-stikers-item">
+                            <div className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
                                 <img alt="" src={require("../../images/stikers/heart.svg")} />
                             </div>
-                            <div className="emoji-stikers-item">
+                            <div className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
                                 <img alt="" src={require("../../images/stikers/fire.svg")} />
                             </div>
-                            <div className="emoji-stikers-item">
+                            <div className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
                                 <img alt="" src={require("../../images/stikers/happy.svg")} />
                             </div>
-                            <div className="emoji-stikers-item">
+                            <div className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
                                 <img alt="" src={require("../../images/stikers/normal.svg")} />
                             </div>
-                            <div className="emoji-stikers-item">
+                            <div className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
                                 <img alt="" src={require("../../images/stikers/sad.svg")} />
                             </div>
                         </div>
@@ -45,13 +52,13 @@ class Stikers extends React.Component {
                         </div>
                         <div className="language-stikers-list">
                             <div className="language-stikers-item" onClick={() => setLang('rus')}>
-                                {(lang == 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
-                                {(lang == 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
+                                {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
+                                {(lang === 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
 
                             </div>
                             <div className="language-stikers-item" onClick={() => setLang('eng')}>
-                                {(lang == 'eng') && <img alt="" src={require("../../images/stikers/ENG-active.svg")} />}
-                                {(lang == 'rus') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
+                                {(lang === 'eng') && <img alt="" src={require("../../images/stikers/ENG-active.svg")} />}
+                                {(lang === 'rus') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
                             </div>
                         </div>
                     </div>
