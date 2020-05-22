@@ -22,7 +22,6 @@ class Networking extends React.Component {
 	}
 
 	fetchData = async () => {
-		console.log(this.props.user);
 
 		if (this.props.user.isLogin) {
 			api.account.getNetworking().then(res => {

@@ -65,7 +65,7 @@ const api = {
 
 	errorHandler: (e, errors) => {
 		if (!e.response) {
-			console.log("Ошибка ынтырнета");
+			console.log("Ошибка Интернета");
 		} else {
 			Object.keys(errors).map(function (key) {
 				e.response.data.error = String(e.response.data.error)

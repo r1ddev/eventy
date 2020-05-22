@@ -17,13 +17,19 @@ class ScenesChatContainer extends React.Component {
     }
 
     setChat = (chat) => {
-        console.log(chat)
         this.setState({
             activeChat: chat,
             currentChatId: (chat === 'general' ? this.state.generalChatId : (chat === 'sponsor' ? this.state.sponsorChatId : this.state.spikerChatId))
         }, () => {
             this.props.fetchMessages(this.state.currentChatId)
         })
+    }
+
+
+    getCurrentChatId = (sponsor, general, spiker) => {
+        if (this.state.activeChat == 'general') return general;
+        if (this.state.activeChat == 'spiker') return spiker;
+        return sponsor;
     }
 
     sendMessage = (message) => {
@@ -62,7 +68,7 @@ class ScenesChatContainer extends React.Component {
         let id = setTimeout(() => {
             this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
             this.updateMessages();
-        }, 2000)
+        }, 5000)
 
         this.setState({
             timerId: id
@@ -75,17 +81,35 @@ class ScenesChatContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("componentDidUpdate", prevProps, this.props);
-
         if (prevProps.chat.updateLoading != this.props.chat.updateLoading && !this.props.chat.updateLoading) {
             this.refs.scenesChat.onUpdate()
         }
 
         if (prevProps.chat.loading != this.props.chat.loading && !this.props.chat.loading) {
-            console.log("prevProps.chat.loading", prevProps.chat.loading);
-
             this.refs.scenesChat.onUpdate(true)
         }
+
+        if (prevProps.sponsorChatId !== this.props.sponsorChatId) {
+
+            const {
+                sponsorChatId,
+                generalChatId,
+                spikerChatId,
+            } = this.props
+
+            this.setState({
+                sponsorChatId: sponsorChatId,
+                generalChatId: generalChatId,
+                spikerChatId: spikerChatId,
+                currentChatId: this.getCurrentChatId(sponsorChatId, generalChatId, spikerChatId)
+            },
+                () => {
+                    this.props.fetchMessages(this.state.currentChatId);
+
+                }
+            )
+        }
+
 
     }
 
