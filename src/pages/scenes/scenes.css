@@ -157,4 +157,12 @@
     .scene-item .scene-btn{
         width: 80%;
     }
+
+    #scenes .chat-header{
+        display: none;
+    }
+
+    .scenes-chat .chat-content {
+        min-height: 500px;
+    }
   }

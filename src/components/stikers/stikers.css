@@ -121,3 +121,19 @@
 .language-stikers-item > img:hover{
 	transition: 0.1s;
 }
+
+
+@media screen and (max-width: 700px) {
+	#stikers{
+		flex-direction: column;
+	}
+
+	.emoji-stikers-wrapper{
+		width: calc(100% - 40px);
+	}
+
+	.language-stikers-wrapper{
+		width:50%;
+		height: 80px;
+	}
+}
