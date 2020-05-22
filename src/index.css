@@ -71,14 +71,3 @@ body {
 ::-webkit-scrollbar-corner {
 	background: transparent;
 }
-.profile-header {
-	border-bottom: 1px solid #c4c4c4;
-}
-.profile-header .ava {
-	padding: 10px;
-}
-.profile-header .ava img {
-	border-radius: 50%;
-	width: 66px;
-	height: 66px;
-}

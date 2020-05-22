@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
+import Header from './../../components/header/index';
 
 
 class Networking extends React.Component {
@@ -22,71 +23,53 @@ class Networking extends React.Component {
 	}
 
 	fetchData = async () => {
-		console.log(this.props.user);
-
-		if (this.props.user.isLogin) {
-			api.account.getNetworking().then(res => {
-				this.setState({
-					users: res.user
-				})
-			}).catch(e => console.log(e))
-		} else {
-			this.props.history.push("/error")
-		}
+		api.account.getNetworking().then(res => {
+			this.setState({
+				users: res.user
+			})
+		}).catch(e => console.log(e))
 	}
 
 	render() {
 		const { users, searchText } = this.state;
+		const { data } = this.props.user
+
 		return (
 			<div id="networking">
-				<div className="header profile-header">
-					<div className="container">
-						<div className="row">
-							<div className="col d-flex align-items-center">
-								<div className="search">
-									<form
-										method="post"
-										className="row m-0"
-										onSubmit={this.searchSubmit}>
-										<input
-											type="text"
-											className="inp-search col"
-											placeholder="Search"
-											onChange={(e) => {
-												this.setState({ searchText: e.target.value });
-											}}
-										/>
-										<input type="submit" value="" className="btn-search" />
-									</form>
-								</div>
-							</div>
 
-							<div className="col-md-auto profile row m-0">
-								<div className="col d-flex align-items-center p-0">
-									<a href="#" className="action-link">
-										Связь с организаторами
-									</a>
-								</div>
-								<div className="col-auto ava">
-									<Link to="/profile">
-										<img
-											src={require("../../images/networking-card-image-placeholder.png")}
-											alt=""
-										/>
-									</Link>
-								</div>
-							</div>
-						</div>
+				<Header data={data}>
+					<div className="search">
+						<form
+							method="post"
+							className="row m-0"
+							onSubmit={this.searchSubmit}>
+							<input
+								type="text"
+								className="inp-search col"
+								placeholder="Search"
+								onChange={(e) => {
+									this.setState({ searchText: e.target.value });
+								}}
+							/>
+							<input type="submit" value="" className="btn-search" />
+						</form>
 					</div>
-				</div>
+
+					<div className="col d-flex align-items-center p-0">
+						<a href="#" className="action-link">
+							Связь с организаторами
+						</a>
+					</div>
+				</Header>
+
 				<div className="container">
 					<div className="card-list">
 						{users.filter(user => {
-							return ~user.first_name.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) ||
-								~user.position.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) ||
-								~user.company.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) ||
-								~user.what_offer.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) ||
-								~user.what_looking.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase())
+							return ~user.first_name.toLowerCase().indexOf(searchText.toLowerCase()) ||
+								~user.position.toLowerCase().indexOf(searchText.toLowerCase()) ||
+								~user.company.toLowerCase().indexOf(searchText.toLowerCase()) ||
+								~(user.what_offer || "").toLowerCase().indexOf(searchText.toLowerCase()) ||
+								~(user.what_looking || "").toLowerCase().indexOf(searchText.toLowerCase())
 						})
 							.map((user, index) => {
 								return (

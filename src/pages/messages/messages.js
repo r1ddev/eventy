@@ -6,6 +6,7 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
+import Header from "../../components/header";
 
 class Messages extends React.Component {
 	state = {
@@ -101,23 +102,13 @@ class Messages extends React.Component {
 
 	render() {
 		const { users, activeUser, messages } = this.state;
+		const { data } = this.props.user;
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
 
 		return (
 			<div id="messages">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container-fluid">
 					<div className="row h-100">
 						<div className="col-md-3 p-0">
@@ -200,8 +191,8 @@ class MessagesContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
