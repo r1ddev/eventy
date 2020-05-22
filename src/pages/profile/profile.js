@@ -29,7 +29,7 @@ class Registration extends React.Component {
 	}
 
 	fetchData = async () => {
-		if (this.props.user.isLogin) {
+		if (window.localStorage.token !== undefined) {
 			if (this.props.match.params.id) {
 
 				this.setLoading(true);

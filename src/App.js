@@ -24,17 +24,19 @@ import { setUserData } from './actions/user-actions';
 class App extends React.Component {
 
 	componentDidMount() {
-		if (!this.props.user.isLogin) {
+
+		console.log("isLogin", window.localStorage.token);
+		console.log("App", this.props.user);
+
+		if (window.localStorage.token !== undefined) {
+			if (this.props.user.data === undefined) {
+				api.account.getUserData().then(res => {
+					this.props.setUser(res.user)
+				}).catch(e => console.log(e))
+			}
+		} else {
 			this.props.history.push("/error")
 		}
-
-
-		if (this.props.user.data === undefined) {
-			api.account.getUserData().then(res => {
-				this.props.setUser(res.user)
-			}).catch(e => console.log(e))
-		}
-
 	}
 
 	render() {

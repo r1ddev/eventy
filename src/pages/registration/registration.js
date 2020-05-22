@@ -92,7 +92,7 @@ class Registration extends React.Component {
 		if (token != null) {
 			window.localStorage.token = token
 		} else {
-			if (this.props.user.isLogin) {
+			if (window.localStorage.token !== undefined) {
 				this.setState({ isEditProfile: true })
 			} else {
 				this.props.history.push("/error");
