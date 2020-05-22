@@ -4,6 +4,8 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
+import api from './../../js/api';
+import Header from "../../components/header";
 
 const rooms = [
 	{
@@ -23,28 +25,19 @@ const rooms = [
 ];
 
 class Сonversations extends React.Component {
+
 	render() {
+		const { data } = this.props.user;
 		return (
 			<div id="conversations">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container">
 					<div className="title">Открытые комнаты:</div>
 
 					<div className="room-list">
-						{rooms.map((room) => {
+						{rooms.map((room, index) => {
 							return (
-								<Link to={"/conversations/" + room.link} className="link">
+								<Link to={"/conversations/" + room.link} className="link" key={index}>
 									<div className="row room">
 										<div className="col-auto">
 											<div className="ava">
@@ -73,12 +66,12 @@ class Сonversations extends React.Component {
 }
 class СonversationsContainer extends React.Component {
 	render() {
-		return <Сonversations />;
+		return <Сonversations {...this.props} />;
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {

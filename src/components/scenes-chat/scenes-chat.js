@@ -62,9 +62,10 @@ class ScenesChat extends React.Component {
 
         const { message } = this.state;
 
-        const messageList = messages.map((mes) => {
+        const messageList = messages.map((mes, index) => {
             return (
                 <MessageItem
+                    key={index}
                     name={mes.first_name + ' ' + mes.last_name}
                     ad={mes.range === 4}
                     sponsor={mes.range === 5}
@@ -117,7 +118,7 @@ class ScenesChat extends React.Component {
                             className="chat-input"
                             placeholder="Введите ваше сообщение"
                             onEnter={this.onSubmit}
-                            borderRadius='10px'
+                            borderRadius={10}
                             ref="chatInput"
                         />
                     </div>
