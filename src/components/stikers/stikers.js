@@ -31,7 +31,21 @@ class Stikers extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="language-stikers-wrapper"></div>
+                <div className="language-stikers-wrapper">
+                    <div className="language-stikers">
+                        <div className="language-stikers-caption">
+                            язык трансляции
+                        </div>
+                        <div className="language-stikers-list">
+                            <div className="language-stikers-item">
+                                <img alt="" src={require("../../images/stikers/RU.svg")} />
+                            </div>
+                            <div className="language-stikers-item">
+                                <img alt="" src={require("../../images/stikers/ENG-active.svg")} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
