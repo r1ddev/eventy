@@ -12,7 +12,8 @@ class ScenesChatContainer extends React.Component {
         currentChatId: this.props.sponsorChatId,
         sponsorChatId: this.props.sponsorChatId,
         generalChatId: this.props.generalChatId,
-        spikerChatId: this.props.spikerChatId
+        spikerChatId: this.props.spikerChatId,
+        timerId: null
     }
 
     setChat = (chat) => {
@@ -58,11 +59,19 @@ class ScenesChatContainer extends React.Component {
     }
 
     updateMessages = () => {
-        setTimeout(() => {
+        let id = setTimeout(() => {
             this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
             this.updateMessages();
         }, 2000)
 
+        this.setState({
+            timerId: id
+        })
+    }
+
+    componentWillUnmount() {
+
+        clearTimeout(this.state.timerId);
     }
 
     componentDidUpdate(prevProps) {
