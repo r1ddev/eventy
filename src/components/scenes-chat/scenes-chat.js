@@ -138,7 +138,7 @@ class MessageItem extends React.Component {
             avatar
         } = this.props;
 
-        let origin = "http://116.203.213.27";
+        let origin = "https://eventy.riddev.com";
 
         let newAvatar = origin + "/images/avatar/" + avatar;
 
