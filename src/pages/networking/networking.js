@@ -76,13 +76,13 @@ class Networking extends React.Component {
 									<div className="" key={index}>
 										<div className="card">
 											<div className="row">
-												<div className="col-auto">
+												<div className="col-4">
 													<div className="ava">
 														<img src={api.auth.getAvatarLocation() + user.avatar} alt="" />
 													</div>
 												</div>
 
-												<div className="col">
+												<div className="col d-flex justify-content-center flex-column">
 													<div className="name">{user.first_name}</div>
 													<div className="desc">{user.position + " в " + user.company}</div>
 												</div>
