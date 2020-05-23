@@ -8,6 +8,7 @@ import Stikers from '../../components/stikers';
 import { fetchScenes } from '../../actions/scenes-actions';
 import { fetchUser } from '../../actions/user-actions';
 import Spinner from '../../components/spinner';
+import { Link } from 'react-router-dom';
 
 
 
@@ -60,7 +61,7 @@ class Scenes extends React.Component {
                 </div>
                 <div className="scenes-chat">
                     <div className="chat-header">
-                        <div style={{ backgroundImage: `url(${newAvatar})` }}></div>
+                        <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link>
                     </div>
                     <div className="chat-content">
                         <ScenesChat
