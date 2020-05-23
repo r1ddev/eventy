@@ -53,20 +53,20 @@ export default class IdeaFirstApiService {
         })
     }
 
-    // getScenes() {
-    //     return new Promise((resolve, reject) => {
-    //         axios.get(this.host + `/stream/all`, this.useAuth())
-    //             .then(res => {
-    //                 if (res.data.status) {
-    //                     resolve(res.data);
-    //                 } else {
-    //                     reject(res.data.error)
-    //                 }
-    //             })
-    //             .catch(error => { reject(error) }
-    //             )
-    //     })
-    // }
+    getScenes() {
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/stream/all`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
 
     updateMessages(chatId, id) {
         return new Promise((resolve, reject) => {
@@ -149,13 +149,13 @@ export default class IdeaFirstApiService {
         return data;
     }
 
-    getScenes() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(this._ScenesResponse());
-            }, 700);
-        });
-    }
+    // getScenes() {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             resolve(this._ScenesResponse());
+    //         }, 700);
+    //     });
+    // }
 
 
 }

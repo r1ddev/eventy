@@ -1,7 +1,7 @@
 import React from 'react';
 import "./stikers.css"
 import IdeaFirstApiService from '../../services/idea-first-api-service';
-
+import posed from 'react-pose';
 
 class Stikers extends React.Component {
 
@@ -17,6 +17,21 @@ class Stikers extends React.Component {
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
 
+        const Stiker = posed.div({
+            draggable: true,
+            init: { scale: 1 },
+            drag: {
+                scale: 1.3,
+            },
+
+            dragEnd: {
+                x: 0,
+                y: 0,
+                transition: { type: 'spring' }
+            }
+        });
+
+
         return (
             <div id="stikers">
                 <div className="emoji-stikers-wrapper">
@@ -25,21 +40,22 @@ class Stikers extends React.Component {
                             ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
                         </div>
                         <div className="emoji-stikers-list">
-                            <div className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
+
+                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
                                 <img alt="" src={require("../../images/stikers/heart.svg")} />
-                            </div>
-                            <div className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
+                            </Stiker>
+                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
                                 <img alt="" src={require("../../images/stikers/fire.svg")} />
-                            </div>
-                            <div className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
+                            </Stiker>
+                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
                                 <img alt="" src={require("../../images/stikers/happy.svg")} />
-                            </div>
-                            <div className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
+                            </Stiker>
+                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
                                 <img alt="" src={require("../../images/stikers/normal.svg")} />
-                            </div>
-                            <div className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
+                            </Stiker>
+                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
                                 <img alt="" src={require("../../images/stikers/sad.svg")} />
-                            </div>
+                            </Stiker>
                         </div>
                     </div>
                 </div>
