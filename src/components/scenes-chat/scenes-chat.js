@@ -1,11 +1,8 @@
 import React from 'react';
 import './scenes-chat.css'
-import withApiService from '../hoc/with-api-service'
-import { connect } from 'react-redux';
-import { compose } from '../../utils';
-import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
 import InputEmoji from 'react-input-emoji';
 import RSC from "react-scrollbars-custom";
+import Spinner from '../spinner';
 
 class ScenesChat extends React.Component {
 
@@ -101,11 +98,7 @@ class ScenesChat extends React.Component {
                     }
 
                     {loading &&
-                        <div class="d-flex justify-content-center chat-spinner">
-                            <div class="spinner-border text-success" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
+                        <Spinner />
                     }
 
                 </div>

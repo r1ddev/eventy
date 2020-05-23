@@ -18,7 +18,7 @@ const scenesLoaded = (messages) => {
     };
 };
 
-const fetchScenes = (apiService, dispatch) => (chatId) => {
+const fetchScenes = (apiService, dispatch) => () => {
     dispatch(scenesRequested());
     apiService.getScenes()
         .then((data) => {

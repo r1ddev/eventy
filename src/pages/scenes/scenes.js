@@ -6,11 +6,12 @@ import { compose } from '../../utils';
 import ScenesChat from './scenes-chat-container';
 import Stikers from '../../components/stikers';
 import { fetchScenes } from '../../actions/scenes-actions';
+import { fetchUser } from '../../actions/user-actions';
+import Spinner from '../../components/spinner';
+
 
 
 class Scenes extends React.Component {
-
-
 
     render() {
 
@@ -28,12 +29,6 @@ class Scenes extends React.Component {
             sponsorChatId: 0,
             spikerChatId: 0
         }
-
-        console.log(
-            'gen', generalChatId,
-            'spo', sponsorChatId,
-            'spi', spikerChatId
-        )
 
         return (
             <div id="scenes">
@@ -86,21 +81,21 @@ class TranslationHeader extends React.Component {
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
+                        <div className={(scene === 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
+                        <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
+                        <div className={(scene === 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
@@ -139,43 +134,50 @@ class ScenesContainer extends React.Component {
 
     componentDidMount() {
         this.props.fetchScenes();
+        this.props.fetchUser();
     }
 
     render() {
         const { scenes } = this.props.scenes
         const { scene, lang } = this.state;
+        const scenesLoading = this.props.scenes.loading;
+        const userLoading = this.props.user.loading;
+        console.log(this.props)
 
-        let sceneUrl = null;
 
-        if (scenes[scene]) {
-            sceneUrl = scenes[scene][lang];
-        }
-
-        console.log('ЭМ', scenes)
-
+        const loading = scenesLoading || userLoading
         return (
-            <Scenes
-                sceneUrl={sceneUrl}
-                scenes={scenes}
-                scene={scene}
-                lang={lang}
-                setLang={this.setLang}
-                setScene={this.setScene}
-            />
+            <div style={{ height: '100%', width: '100%' }}>
+                {
+                    (!loading) && <Scenes
+                        sceneUrl={scenes[scene][lang]}
+                        scenes={scenes}
+                        scene={scene}
+                        lang={lang}
+                        setLang={this.setLang}
+                        setScene={this.setScene}
+                    />
+                }
+                {
+                    (loading) && <Spinner big={1} />
+                }
+            </div>
         )
     }
 
 }
 
-const mapStateToProps = ({ scenes }) => {
+const mapStateToProps = ({ scenes, user }) => {
     return {
-        scenes: scenes
+        scenes: scenes,
+        user: user
     }
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchScenes: fetchScenes(apiService, dispatch),
+        fetchUser: fetchUser(apiService, dispatch)
     }
 };
 

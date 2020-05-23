@@ -27,8 +27,8 @@ class ScenesChatContainer extends React.Component {
 
 
     getCurrentChatId = (sponsor, general, spiker) => {
-        if (this.state.activeChat == 'general') return general;
-        if (this.state.activeChat == 'spiker') return spiker;
+        if (this.state.activeChat === 'general') return general;
+        if (this.state.activeChat === 'spiker') return spiker;
         return sponsor;
     }
 
