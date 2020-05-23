@@ -11,10 +11,14 @@ import Header from './../../components/header/index';
 class Networking extends React.Component {
 	state = {
 		searchText: "",
+		searchFilter: "",
 		users: []
 	};
 
 	searchSubmit = async (e) => {
+		this.setState({
+			searchFilter: this.state.searchText
+		})
 		e.preventDefault();
 	};
 
@@ -31,7 +35,7 @@ class Networking extends React.Component {
 	}
 
 	render() {
-		const { users, searchText } = this.state;
+		const { users, searchText, searchFilter } = this.state;
 		const { data } = this.props.user
 
 		return (
@@ -65,11 +69,11 @@ class Networking extends React.Component {
 				<div className="container">
 					<div className="card-list">
 						{users.filter(user => {
-							return ~user.first_name.toLowerCase().indexOf(searchText.toLowerCase()) ||
-								~user.position.toLowerCase().indexOf(searchText.toLowerCase()) ||
-								~user.company.toLowerCase().indexOf(searchText.toLowerCase()) ||
-								~(user.what_offer || "").toLowerCase().indexOf(searchText.toLowerCase()) ||
-								~(user.what_looking || "").toLowerCase().indexOf(searchText.toLowerCase())
+							return ~user.first_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+								~user.position.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+								~user.company.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+								~(user.what_offer || "").toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+								~(user.what_looking || "").toLowerCase().indexOf(searchFilter.toLowerCase())
 						})
 							.map((user, index) => {
 								return (
