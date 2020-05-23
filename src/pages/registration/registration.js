@@ -63,7 +63,7 @@ class Registration extends React.Component {
 			)
 			.then((res) => {
 				this.setLoading(false)
-				this.props.history.push("/desc");
+				this.props.history.push("/desk");
 			})
 			.catch((e) => {
 				this.setLoading(false);
@@ -84,7 +84,7 @@ class Registration extends React.Component {
 
 	fetchData = async () => {
 		// if (this.isLogin()) {
-		// 	// this.props.history.push("/desc");
+		// 	// this.props.history.push("/desk");
 		// } else {
 		const params = new URLSearchParams(this.props.location.search);
 		const token = params.get('token');
