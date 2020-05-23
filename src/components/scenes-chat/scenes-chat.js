@@ -146,7 +146,7 @@ class MessageItem extends React.Component {
         return (
             <div className="message-item" style={{ backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>
                 <div className="mes-photo-wrapper">
-                    <div className="mes-photo" style={{ backgroundImage: `url(${newAvatar})` }}></div>
+                    <div className="mes-photo" style={avatar ? { backgroundImage: `url(${newAvatar})` } : {}}></div>
                 </div>
 
                 <div className="mes-info">
