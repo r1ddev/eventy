@@ -29,7 +29,7 @@ class Networking extends React.Component {
 	fetchData = async () => {
 		api.account.getNetworking().then(res => {
 			this.setState({
-				users: res.user
+				users: res.users
 			})
 		}).catch(e => console.log(e))
 	}
