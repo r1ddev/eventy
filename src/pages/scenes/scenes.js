@@ -6,11 +6,12 @@ import { compose } from '../../utils';
 import ScenesChat from './scenes-chat-container';
 import Stikers from '../../components/stikers';
 import { fetchScenes } from '../../actions/scenes-actions';
+import { fetchUser } from '../../actions/user-actions';
+import Spinner from '../../components/spinner';
+
 
 
 class Scenes extends React.Component {
-
-
 
     render() {
 
@@ -20,7 +21,8 @@ class Scenes extends React.Component {
             lang,
             setLang,
             setScene,
-            scenes
+            scenes,
+            user
         } = this.props;
 
         const { generalChatId, sponsorChatId, spikerChatId } = scenes[scene] || {
@@ -29,11 +31,10 @@ class Scenes extends React.Component {
             spikerChatId: 0
         }
 
-        console.log(
-            'gen', generalChatId,
-            'spo', sponsorChatId,
-            'spi', spikerChatId
-        )
+        let origin = "http://116.203.213.27";
+        let newAvatar = origin + "/images/avatar/" + user.avatar;
+
+        console.log(newAvatar)
 
         return (
             <div id="scenes">
@@ -59,13 +60,14 @@ class Scenes extends React.Component {
                 </div>
                 <div className="scenes-chat">
                     <div className="chat-header">
-                        <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
+                        <div style={{ backgroundImage: `url(${newAvatar})` }}></div>
                     </div>
                     <div className="chat-content">
                         <ScenesChat
                             sponsorChatId={sponsorChatId}
                             generalChatId={generalChatId}
                             spikerChatId={spikerChatId}
+                            user={user}
                         />
                     </div>
                 </div>
@@ -86,21 +88,21 @@ class TranslationHeader extends React.Component {
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
+                        <div className={(scene === 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
+                        <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
-                        <div className={(scene == 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
+                        <div className={(scene === 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
                         <div className="scene-status">идет</div>
                     </div>
                 </div>
@@ -139,43 +141,53 @@ class ScenesContainer extends React.Component {
 
     componentDidMount() {
         this.props.fetchScenes();
+        this.props.fetchUser();
     }
 
     render() {
         const { scenes } = this.props.scenes
         const { scene, lang } = this.state;
+        const { user } = this.props.user
+        const scenesLoading = this.props.scenes.loading;
+        const userLoading = this.props.user.loading;
 
-        let sceneUrl = null;
+        const loading = scenesLoading || userLoading
 
-        if (scenes[scene]) {
-            sceneUrl = scenes[scene][lang];
-        }
 
-        console.log('ЭМ', scenes)
-
+        console.log(user)
         return (
-            <Scenes
-                sceneUrl={sceneUrl}
-                scenes={scenes}
-                scene={scene}
-                lang={lang}
-                setLang={this.setLang}
-                setScene={this.setScene}
-            />
+            <div style={{ height: '100%', width: '100%' }}>
+                {
+                    (!loading) && <Scenes
+                        sceneUrl={scenes[scene][lang]}
+                        scenes={scenes}
+                        scene={scene}
+                        lang={lang}
+                        setLang={this.setLang}
+                        setScene={this.setScene}
+                        user={user}
+                    />
+                }
+                {
+                    (loading) && <Spinner big={1} />
+                }
+            </div>
         )
     }
 
 }
 
-const mapStateToProps = ({ scenes }) => {
+const mapStateToProps = ({ scenes, user }) => {
     return {
-        scenes: scenes
+        scenes: scenes,
+        user: user
     }
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchScenes: fetchScenes(apiService, dispatch),
+        fetchUser: fetchUser(apiService, dispatch)
     }
 };
 

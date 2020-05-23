@@ -38,6 +38,21 @@ export default class IdeaFirstApiService {
         })
     }
 
+    getUser() {
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/users/get`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     // getScenes() {
     //     return new Promise((resolve, reject) => {
     //         axios.get(this.host + `/stream/all`, this.useAuth())

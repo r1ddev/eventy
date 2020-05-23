@@ -27,19 +27,22 @@ class ScenesChatContainer extends React.Component {
 
 
     getCurrentChatId = (sponsor, general, spiker) => {
-        if (this.state.activeChat == 'general') return general;
-        if (this.state.activeChat == 'spiker') return spiker;
+        if (this.state.activeChat === 'general') return general;
+        if (this.state.activeChat === 'spiker') return spiker;
         return sponsor;
     }
 
     sendMessage = (message) => {
 
+
+        const { first_name, last_name, avatar, range } = this.props.user;
+
         const mes = {
             user_id: 1,
-            first_name: "Маша",
-            last_name: "Иванова",
-            avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-            range: 1,
+            first_name: first_name,
+            last_name: last_name,
+            avatar: avatar,
+            range: range,
             messages_id: 1,
             message: message
         }
