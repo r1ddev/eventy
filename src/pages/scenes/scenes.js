@@ -21,7 +21,8 @@ class Scenes extends React.Component {
             lang,
             setLang,
             setScene,
-            scenes
+            scenes,
+            user
         } = this.props;
 
         const { generalChatId, sponsorChatId, spikerChatId } = scenes[scene] || {
@@ -29,6 +30,11 @@ class Scenes extends React.Component {
             sponsorChatId: 0,
             spikerChatId: 0
         }
+
+        let origin = "http://116.203.213.27";
+        let newAvatar = origin + "/images/avatar/" + user.avatar;
+
+        console.log(newAvatar)
 
         return (
             <div id="scenes">
@@ -54,13 +60,14 @@ class Scenes extends React.Component {
                 </div>
                 <div className="scenes-chat">
                     <div className="chat-header">
-                        <div style={{ backgroundImage: 'url(https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg)' }}></div>
+                        <div style={{ backgroundImage: `url(${newAvatar})` }}></div>
                     </div>
                     <div className="chat-content">
                         <ScenesChat
                             sponsorChatId={sponsorChatId}
                             generalChatId={generalChatId}
                             spikerChatId={spikerChatId}
+                            user={user}
                         />
                     </div>
                 </div>
@@ -140,12 +147,14 @@ class ScenesContainer extends React.Component {
     render() {
         const { scenes } = this.props.scenes
         const { scene, lang } = this.state;
+        const { user } = this.props.user
         const scenesLoading = this.props.scenes.loading;
         const userLoading = this.props.user.loading;
-        console.log(this.props)
-
 
         const loading = scenesLoading || userLoading
+
+
+        console.log(user)
         return (
             <div style={{ height: '100%', width: '100%' }}>
                 {
@@ -156,6 +165,7 @@ class ScenesContainer extends React.Component {
                         lang={lang}
                         setLang={this.setLang}
                         setScene={this.setScene}
+                        user={user}
                     />
                 }
                 {
