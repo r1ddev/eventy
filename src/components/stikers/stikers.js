@@ -4,15 +4,53 @@ import IdeaFirstApiService from '../../services/idea-first-api-service';
 import posed from 'react-pose';
 
 class Stikers extends React.Component {
+    state = {
+        banner: null,
+        bannerurl: null,
+        timerId: 0
+    }
 
     postReaction = (id) => {
         let api = new IdeaFirstApiService();
         api.postReaction(this.props.scene, id)
     }
 
+    componentDidMount() {
+        const api = new IdeaFirstApiService();
+
+        api.getBanner()
+            .then((res) => {
+                console.log(res)
+                this.setState({ banner: res.data.image, bannerurl: res.data.url })
+                this.getBanner();
+            }
+            )
+        this.getBanner();
+    }
+
+    getBanner = () => {
+        const api = new IdeaFirstApiService();
+
+        let timerId = setTimeout(() => {
+            api.getBanner()
+                .then((res) => {
+                    console.log(res)
+                    this.setState({ banner: res.data.image, bannerurl: res.data.url, timerId: timerId })
+                    this.getBanner();
+                }
+                )
+        }, 60000)
+
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.timerId)
+    }
+
     render() {
 
         const { lang, setLang, scenes, scene } = this.props;
+        const { banner, bannerurl } = this.state;
 
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
@@ -31,55 +69,65 @@ class Stikers extends React.Component {
             }
         });
 
+        console.log(banner, bannerurl)
+
 
         return (
             <div id="stikers">
-                <div className="emoji-stikers-wrapper">
-                    <div className="emoji-stikers">
-                        <div className="emoji-stikers-caption">
-                            ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
-                        </div>
-                        <div className="emoji-stikers-list">
+                <div className="wrapper-of-wrappers">
 
-                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
-                                <img alt="" src={require("../../images/stikers/heart.svg")} />
-                            </Stiker>
-                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
-                                <img alt="" src={require("../../images/stikers/fire.svg")} />
-                            </Stiker>
-                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
-                                <img alt="" src={require("../../images/stikers/happy.svg")} />
-                            </Stiker>
-                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
-                                <img alt="" src={require("../../images/stikers/normal.svg")} />
-                            </Stiker>
-                            <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
-                                <img alt="" src={require("../../images/stikers/sad.svg")} />
-                            </Stiker>
+                    <div className="emoji-stikers-wrapper">
+                        <div className="emoji-stikers">
+                            <div className="emoji-stikers-caption">
+                                ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
+                        </div>
+                            <div className="emoji-stikers-list">
+
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
+                                    <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
+                                    <img alt="" src={require("../../images/stikers/fire.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
+                                    <img alt="" src={require("../../images/stikers/happy.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
+                                    <img alt="" src={require("../../images/stikers/normal.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
+                                    <img alt="" src={require("../../images/stikers/sad.svg")} />
+                                </Stiker>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
+                        <div className="language-stikers">
+                            <div className="language-stikers-caption">
+                                язык трансляции
+                        </div>
+                            <div className="language-stikers-list">
+                                <div className="language-stikers-item" onClick={() => setLang('rus')}>
+                                    {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
+                                    {(lang === 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
+
+                                </div>
+                                <div className="language-stikers-item" onClick={() => setLang('eng')}>
+                                    {(lang === 'eng') && <img alt="" src={require("../../images/stikers/ENG-active.svg")} />}
+                                    {(lang === 'rus') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-                <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
-                    <div className="language-stikers">
-                        <div className="language-stikers-caption">
-                            язык трансляции
-                        </div>
-                        <div className="language-stikers-list">
-                            <div className="language-stikers-item" onClick={() => setLang('rus')}>
-                                {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
-                                {(lang === 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
-
-                            </div>
-                            <div className="language-stikers-item" onClick={() => setLang('eng')}>
-                                {(lang === 'eng') && <img alt="" src={require("../../images/stikers/ENG-active.svg")} />}
-                                {(lang === 'rus') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
-                            </div>
-                        </div>
-                    </div>
+                <div className="timetable-wrapper">
+                    <a style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
                 </div>
-
+                <div className="banner-wrapper">
+                    <a href={bannerurl} style={{ display: 'block', width: '100%' }}><img className="banner" alt='' src={(banner ? banner : '')}></img></a>
+                </div>
             </div>
         )
     }

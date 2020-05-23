@@ -6,7 +6,7 @@ import { compose } from "../../utils";
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
 import Header from './../../components/header/index';
-
+import posed from 'react-pose';
 
 class Networking extends React.Component {
 	state = {
@@ -38,8 +38,23 @@ class Networking extends React.Component {
 		const { users, searchText, searchFilter } = this.state;
 		const { data } = this.props.user
 
+		const Card = posed.div({
+			draggable: true,
+			init: { scale: 1 },
+			drag: {
+				scale: 1.1,
+				zIndex: 55
+			},
+
+			dragEnd: {
+				x: 0,
+				y: 0,
+				transition: { type: 'spring' }
+			}
+		});
+
 		return (
-			<div id="networking">
+			<div id="networking" >
 
 				<Header data={data}>
 					<div className="search">
@@ -77,7 +92,7 @@ class Networking extends React.Component {
 						})
 							.map((user, index) => {
 								return (
-									<div className="" key={index}>
+									<Card className="" key={index}>
 										<div className="card">
 											<div className="row">
 												<div className="col-4">
@@ -98,7 +113,7 @@ class Networking extends React.Component {
 											<div className="title mt-5">Что ищу:</div>
 											<div className="text">{user.what_looking}</div>
 										</div>
-									</div>
+									</Card>
 								);
 							})}
 					</div>

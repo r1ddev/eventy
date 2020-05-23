@@ -68,6 +68,21 @@ export default class IdeaFirstApiService {
         })
     }
 
+    getBanner() {
+        return new Promise((resolve, reject) => {
+            axios.get(this.origin + `/static-api/banners`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     updateMessages(chatId, id) {
         return new Promise((resolve, reject) => {
             axios.get(this.host + `/group/messages/from/${id}?chat_id=${chatId}`, this.useAuth())

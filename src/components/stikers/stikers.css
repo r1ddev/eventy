@@ -2,6 +2,13 @@
 	width: 100%;
 	/* height: 100%; */
 	display: flex;
+	flex-direction: column;
+}
+
+.wrapper-of-wrappers{
+	width: 100%;
+	/* height: 100%; */
+	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
@@ -22,6 +29,25 @@
     margin: 20px;
 }
 
+
+
+.timetable-wrapper{
+	margin: 10px 20px;
+	width: 50%;
+	min-height: 70px;
+}
+.timetable {
+	width: 100%;
+}
+
+.banner-wrapper{
+	margin: 10px 20px;
+}
+
+.banner{
+	width: 100%;
+	cursor: pointer;
+}
 
 .emoji-stikers{
 	background: #C3D600;
