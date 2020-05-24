@@ -9,7 +9,14 @@ class Header extends React.Component {
 
 	render() {
 
-		const { data, className } = this.props
+		const { data, className } = this.props;
+
+		let userAvatar = require("../../images/default-avatar.svg")
+		if (data) {
+			if (data.avatar) {
+				userAvatar = api.auth.getAvatarLocation() + data.avatar
+			}
+		}
 
 		return (
 			<div className={className + " header profile-header"}>
@@ -26,7 +33,7 @@ class Header extends React.Component {
 									{
 										data &&
 										<img
-											src={api.auth.getAvatarLocation() + data.avatar}
+											src={userAvatar}
 											alt=""
 										/>
 									}

@@ -8,6 +8,8 @@ import "./profile.scss";
 import api from "../../js/api";
 import { Link } from "react-router-dom";
 
+import ErrorIndicator from '../../components/error-indicator'
+
 class Registration extends React.Component {
 	state = {
 		name: "",
@@ -55,7 +57,7 @@ class Registration extends React.Component {
 						api.errorHandler(e, {
 							public_user_not_found: () => {
 								this.setLoading(false);
-								alert("Пользователь не найден");
+								ErrorIndicator("Пользователь не найден");
 								this.props.history.push("/error");
 							},
 						});
@@ -66,7 +68,7 @@ class Registration extends React.Component {
 					.getUserData()
 					.then((res) => {
 						this.setState({
-							avatar: api.auth.getAvatarLocation() + res.user.avatar,
+							avatar: res.user.avatar,
 							name: res.user.first_name,
 							lastName: res.user.last_name,
 							company: res.user.company,
@@ -85,7 +87,7 @@ class Registration extends React.Component {
 						api.errorHandler(e, {
 							user_not_found: () => {
 								this.setLoading(false);
-								alert("Пользователь не найден");
+								ErrorIndicator("Пользователь не найден");
 								this.props.history.push("/error");
 							},
 						});
@@ -118,6 +120,14 @@ class Registration extends React.Component {
 			isEditable
 		} = this.state;
 
+		console.log("avatar", avatar);
+
+
+		let userAvatar = require("../../images/default-avatar.svg")
+		if (avatar) {
+			userAvatar = api.auth.getAvatarLocation() + avatar
+		}
+
 		return (
 			<LoadingOverlay active={isLoading} spinner text="Загрузка" className="">
 				<div className="bg-light flex-center min-vh-100">
@@ -127,7 +137,7 @@ class Registration extends React.Component {
 							<div className="row m-0">
 								<div className="col-md-5 left p-5">
 									<div className="ava p-3 flex-center">
-										<img src={avatar} alt="" />
+										<img src={userAvatar} alt="" />
 									</div>
 
 									<div className="field mt-3">{name}</div>
