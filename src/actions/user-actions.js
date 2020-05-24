@@ -2,7 +2,7 @@
 //-------------------------------
 const setData = (data) => {
 	return {
-		type: 'SET_DATA',
+		type: 'SET_USER_DATA',
 		payload: data
 	}
 };
