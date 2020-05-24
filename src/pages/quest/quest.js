@@ -3,6 +3,7 @@ import './quest.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
+import ErrorIndicator from '../../components/error-indicator'
 
 class Quest extends React.Component {
 
@@ -17,6 +18,10 @@ class Quest extends React.Component {
 }
 class QuestContainer extends React.Component {
 
+
+    componentDidMount() {
+
+    }
     render() {
 
         return (
