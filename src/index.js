@@ -13,11 +13,16 @@ import Registration from './pages/registration';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const apiService = new IdeaFirstApiService();
 
 ReactDOM.render(
+
 	<Provider store={store}>
 		<ApiServiceProvider value={apiService}>
+			<ToastContainer />
 			<Router basename={'/front/app'}>
 				<Switch>
 					<Route path="/profile/edit" component={Registration} />
@@ -28,7 +33,9 @@ ReactDOM.render(
 					<Route path="/" component={App} />
 				</Switch>
 			</Router>
+
 		</ApiServiceProvider>
 	</Provider>
+
 	, document.getElementById('root')
 );
