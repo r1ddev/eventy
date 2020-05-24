@@ -4,6 +4,7 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
+import Header from "../../components/header";
 
 const folders = [
 	{
@@ -43,20 +44,11 @@ class PresentationsList extends React.Component {
 	componentDidMount() { }
 
 	render() {
+		const { data } = this.props.user;
+
 		return (
 			<div id="presentations-list">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container pt-3">
 					{(
 						(
@@ -91,8 +83,8 @@ class PresentationsListContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {

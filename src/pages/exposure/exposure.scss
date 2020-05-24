@@ -1,0 +1,41 @@
+#exposure {
+	.card-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+		.card {
+			background: #ffffff;
+			border-radius: 10px;
+			margin: 20px;
+			overflow: hidden;
+			border: none;
+
+			.head {
+				padding: 20px;
+			}
+
+			.name {
+				background-color: #e7044c;
+				border-radius: 10px;
+				font-family: "Gabriela";
+				font-size: 28px;
+				color: #ffffff;
+			}
+
+			.logo {
+				img {
+					width: 100%;
+				}
+			}
+
+			.desc {
+				background-color: #e7044c;
+				padding: 15px 25px;
+
+				font-family: "FuturaBookC";
+				font-size: 24px;
+				color: #ffffff;
+			}
+		}
+	}
+}

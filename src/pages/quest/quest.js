@@ -12,18 +12,18 @@ class Quest extends React.Component {
         return (
             <div id="quest">
                 <div className="quest-item">
-                    <a href="#"><img src={require("../../images/quests/1.svg")}></img></a>
+                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/1.svg")})` }}></a>
                 </div>
                 <div className="quest-item">
-                    <a href="#"><img src={require("../../images/quests/2.svg")}></img></a>
+                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/2.svg")})` }}></a>
 
                 </div>
                 <div className="quest-item">
-                    <a href="#"><img src={require("../../images/quests/3.svg")}></img></a>
+                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/3.svg")})` }}></a>
 
                 </div>
                 <div className="quest-item">
-                    <a href="#"><img src={require("../../images/quests/4.svg")}></img></a>
+                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/4.svg")})` }}></a>
 
                 </div>
             </div>

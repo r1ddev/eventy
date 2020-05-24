@@ -9,6 +9,8 @@ import { compose } from '../../utils';
 import "./registration.scss";
 import api from "../../js/api";
 
+import ErrorIndicator from '../../components/error-indicator'
+
 const defaultTags = [
 	{
 		value: "creator",
@@ -131,7 +133,7 @@ class Registration extends React.Component {
 			api.errorHandler(e, {
 				"user_not_found": () => {
 					this.setLoading(false);
-					alert("Пользователь не найден")
+					ErrorIndicator("Пользователь не найден")
 					this.props.history.push("/error");
 				}
 			})

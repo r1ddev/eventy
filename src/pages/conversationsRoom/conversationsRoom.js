@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import DailyIframe from '@daily-co/daily-js';
+import Header from "../../components/header";
 
 const rooms = [
 	{
@@ -44,20 +45,11 @@ class СonversationsRoom extends React.Component {
 	}
 
 	render() {
+		const { data } = this.props.user;
+
 		return (
 			<div id="conversations-room">
-				<div className="profile-header">
-					<div className="container">
-						<div className="ava text-right">
-							<Link to="/profile">
-								<img
-									src={require("../../images/networking-card-image-placeholder.png")}
-									alt=""
-								/>
-							</Link>
-						</div>
-					</div>
-				</div>
+				<Header data={data} />
 				<div className="container">
 					{this.state.room &&
 						<iframe className="video"
@@ -77,8 +69,8 @@ class СonversationsRoomContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return {};
+const mapStateToProps = ({ user }) => {
+	return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
