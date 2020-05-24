@@ -10,8 +10,22 @@ class Quest extends React.Component {
 
     render() {
         return (
-            <div>
-                Квест
+            <div id="quest">
+                <div className="quest-item">
+                    <a href="#"><img src={require("../../images/quests/1.svg")}></img></a>
+                </div>
+                <div className="quest-item">
+                    <a href="#"><img src={require("../../images/quests/2.svg")}></img></a>
+
+                </div>
+                <div className="quest-item">
+                    <a href="#"><img src={require("../../images/quests/3.svg")}></img></a>
+
+                </div>
+                <div className="quest-item">
+                    <a href="#"><img src={require("../../images/quests/4.svg")}></img></a>
+
+                </div>
             </div>
         )
     }
@@ -25,8 +39,7 @@ class QuestContainer extends React.Component {
     render() {
 
         return (
-            <NoPermissions />
-
+            <Quest />
         )
     }
 
