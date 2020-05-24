@@ -6,6 +6,9 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from './../../js/api';
 import Header from "../../components/header";
+import Spinner from '../../components/spinner';
+import NoPermissions from '../../components/no-permissions';
+import { fetchUser } from '../../actions/user-actions';
 
 const rooms = [
 	{
@@ -65,17 +68,48 @@ class Сonversations extends React.Component {
 	}
 }
 class СonversationsContainer extends React.Component {
-	render() {
-		return <Сonversations {...this.props} />;
+
+
+	componentDidMount() {
+		this.props.fetchUser()
 	}
+	render() {
+
+		const { loading, user, error } = this.props.user;
+
+		let errorUserPermissions = false;
+		if (user) errorUserPermissions = error || user.range === 1 || user.range === 2
+		console.log(loading)
+
+		return (
+
+			<div style={{ height: '100%', width: '100%' }}>
+				{
+					(!loading && !errorUserPermissions) &&
+					<Сonversations {...this.props} />
+				}
+				{
+					(loading) && <Spinner big={1} />
+				}
+				{
+					(!loading && errorUserPermissions) && <NoPermissions />
+				}
+			</div>
+		)
+	}
+
 }
 
 const mapStateToProps = ({ user }) => {
-	return { user };
+	return {
+		user: user
+	}
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		fetchUser: fetchUser(apiService, dispatch)
+	}
 };
 
 export default compose(

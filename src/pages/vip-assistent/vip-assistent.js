@@ -3,8 +3,10 @@ import './vip-assistent.css'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
-import Spinner from '../../components/spinner'
-import NoPermissions from '../../components/no-permissions'
+import Spinner from '../../components/spinner';
+import NoPermissions from '../../components/no-permissions';
+import { fetchUser } from '../../actions/user-actions';
+
 
 class VipAssistent extends React.Component {
 
@@ -27,23 +29,22 @@ class VipAssistentContainer extends React.Component {
 
         const { loading, user, error } = this.props.user;
 
-        const errorUserPermissions = error || user.range !== 3
+        let errorUserPermissions = false;
+        if (user) errorUserPermissions = error || user.range === 1 || user.range === 2
 
 
         return (
 
             <div style={{ height: '100%', width: '100%' }}>
                 {
-                    (!loading && !error) &&
+                    (!loading && !errorUserPermissions) &&
                     <VipAssistent />
-
                 }
                 {
                     (loading) && <Spinner big={1} />
                 }
                 {
                     (!loading && errorUserPermissions) && <NoPermissions />
-
                 }
             </div>
         )
@@ -51,14 +52,15 @@ class VipAssistentContainer extends React.Component {
 
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ user }) => {
     return {
+        user: user
     }
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
-
+        fetchUser: fetchUser(apiService, dispatch)
     }
 };
 
