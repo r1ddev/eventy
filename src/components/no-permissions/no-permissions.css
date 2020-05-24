@@ -1,0 +1,33 @@
+.my-spinner {
+	height: 100%;
+	align-items: center;
+}
+
+.text-success {
+	color: #c3d600 !important;
+}
+
+.my-spinner .spinner-border {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	vertical-align: text-bottom;
+	border: 0.2em solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+}
+
+.my-spinner-big {
+	height: 100%;
+	align-items: center;
+}
+
+.my-spinner-big .spinner-border {
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+	vertical-align: text-bottom;
+	border: 0.4em solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+}

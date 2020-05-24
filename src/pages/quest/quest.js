@@ -4,6 +4,7 @@ import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import ErrorIndicator from '../../components/error-indicator'
+import NoPermissions from '../../components/no-permissions';
 
 class Quest extends React.Component {
 
@@ -20,12 +21,12 @@ class QuestContainer extends React.Component {
 
 
     componentDidMount() {
-
     }
     render() {
 
         return (
-            <Quest />
+            <NoPermissions />
+
         )
     }
 
