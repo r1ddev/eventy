@@ -27,6 +27,9 @@ class Messages extends React.Component {
 
 	fetchData = () => {
 		api.account.messages.getDialogs().then(res => {
+			res.dialogs = res.dialogs.filter(dialog => {
+				return dialog.range != 6
+			})
 			this.setState({
 				users: res.dialogs
 			}, () => {
