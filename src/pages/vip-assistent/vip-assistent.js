@@ -4,7 +4,7 @@ import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import Header from '../../components/header/header';
-import ScenesChat from '../../components/scenes-chat/scenes-chat';
+import ScenesChat from './vip-chat-container';
 import Spinner from '../../components/spinner';
 import NoPermissions from '../../components/no-permissions';
 import { fetchUser } from '../../actions/user-actions';
@@ -12,10 +12,14 @@ import { fetchUser } from '../../actions/user-actions';
 class VipAssistent extends React.Component {
 
     render() {
+
+        const {
+            user
+        } = this.props
         return (
             <div id="vip-assistent">
 
-                <div className="ass-header"><Header /></div>
+                <div className="ass-header"><Header data={user} /></div>
 
                 <div className="ass-info">
                     <div className="ass-photo"></div>
@@ -23,13 +27,7 @@ class VipAssistent extends React.Component {
                 </div>
 
                 <div className="ass-chat">
-                    <ScenesChat
-                        loading={false}
-                        messages={[]}
-                        sendMessage={this.sendMessage}
-                        isPrivate={true}
-                        ref="scenesChat"
-                    />
+                    <ScenesChat user={user} />
                 </div>
             </div>
         )
@@ -37,6 +35,7 @@ class VipAssistent extends React.Component {
 
 }
 class VipAssistentContainer extends React.Component {
+
 
     componentDidMount() {
         this.props.fetchUser()
@@ -55,7 +54,7 @@ class VipAssistentContainer extends React.Component {
             <div style={{ height: '100%', width: '100%' }}>
                 {
                     (!loading && !errorUserPermissions) &&
-                    <VipAssistent />
+                    <VipAssistent user={user} />
                 }
                 {
                     (loading) && <Spinner big={1} />

@@ -38,6 +38,22 @@ export default class IdeaFirstApiService {
         })
     }
 
+    getVipMessages(userId) {
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/personal/messages/from/${userId}`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+
     getUser() {
         return new Promise((resolve, reject) => {
             axios.get(this.host + `/users/get`, this.useAuth())
@@ -103,6 +119,24 @@ export default class IdeaFirstApiService {
         return new Promise((resolve, reject) => {
             axios.post(this.host + "/group/messages", this.toFormData({
                 chat_id: chatId,
+                text: text
+            }), this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+    postVipMessage(userId, text) {
+        return new Promise((resolve, reject) => {
+            axios.post(this.host + "/personal/messages", this.toFormData({
+                user_id: userId,
                 text: text
             }), this.useAuth())
                 .then(res => {
