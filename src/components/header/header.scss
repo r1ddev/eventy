@@ -1,13 +1,17 @@
 .profile-header {
 	border-bottom: 1px solid #c4c4c4;
 
-	.ava {
-		padding: 10px;
+	.profile {
+		justify-content: flex-end;
 
-		img {
-			border-radius: 50%;
-			width: 54px;
-			height: 54px;
+		.ava {
+			padding: 10px;
+
+			img {
+				border-radius: 50%;
+				width: 54px;
+				height: 54px;
+			}
 		}
 	}
 }
