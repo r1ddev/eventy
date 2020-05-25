@@ -5,6 +5,7 @@
 
 	.container-fluid {
 		height: 100%;
+		overflow: hidden;
 
 		.users-list {
 			height: 100%;
@@ -49,6 +50,11 @@
 			#scenes-chat {
 				height: 100%;
 			}
+		}
+
+		.cards {
+			height: 100%;
+			overflow: auto;
 		}
 
 		.card {

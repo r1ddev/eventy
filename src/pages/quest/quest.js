@@ -47,6 +47,7 @@ class QuestContainer extends React.Component {
 
 const mapStateToProps = () => {
     return {
+
     }
 };
 

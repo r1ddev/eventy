@@ -30,13 +30,10 @@ class Header extends React.Component {
 							{this.props.children && this.props.children[1]}
 							<div className="col-auto ava">
 								<Link to="/profile">
-									{
-										data &&
-										<img
-											src={userAvatar}
-											alt=""
-										/>
-									}
+									<img
+										src={userAvatar}
+										alt=""
+									/>
 								</Link>
 							</div>
 						</div>
