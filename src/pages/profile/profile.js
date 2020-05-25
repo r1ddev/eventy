@@ -34,12 +34,18 @@ class Registration extends React.Component {
 		if (window.localStorage.token !== undefined) {
 			if (this.props.match.params.id) {
 
+				if (this.props.match.params.id === this.props.user.id) {
+					this.setState({
+						isEditable: true
+					})
+				}
+
 				this.setLoading(true);
 				api.account
 					.getUserDataById(this.props.match.params.id)
 					.then((res) => {
 						this.setState({
-							avatar: api.auth.getAvatarLocation() + res.user.avatar,
+							avatar: res.user.avatar,
 							name: res.user.first_name,
 							lastName: res.user.last_name,
 							company: res.user.company,

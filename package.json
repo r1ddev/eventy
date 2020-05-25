@@ -10,6 +10,7 @@
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^0.19.2",
 		"bootstrap": "^4.5.0",
+		"crypto-js": "^4.0.0",
 		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-avatar-uploader": "^1.0.3",
@@ -24,10 +25,10 @@
 		"react-scripts": "3.4.1",
 		"react-scrollbars-custom": "^4.0.22",
 		"react-select": "^3.1.0",
+		"react-toastify": "^5.4.1",
 		"redux": "^4.0.1",
 		"ssh-deploy-release": "^3.0.4",
-		"styled-components": "^5.1.0",
-		"react-toastify": "^5.4.1"
+		"styled-components": "^5.1.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
