@@ -18,7 +18,7 @@ class Messages extends React.Component {
 		activeUser: {},
 		messages: [],
 		updateTimeout: undefined,
-		updateTimer: 5
+		updateTimer: 5000
 	};
 
 	componentDidMount() {
