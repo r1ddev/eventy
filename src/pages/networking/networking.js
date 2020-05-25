@@ -75,9 +75,9 @@ class Networking extends React.Component {
 					</div>
 
 					<div className="col d-flex align-items-center p-0">
-						<a href="#" className="action-link">
+						<Link to="/vip-assistent" className="action-link">
 							Связь с организаторами
-						</a>
+						</Link>
 					</div>
 				</Header>
 
@@ -92,28 +92,30 @@ class Networking extends React.Component {
 						})
 							.map((user, index) => {
 								return (
-									<Card className="" key={index}>
-										<div className="card">
-											<div className="row">
-												<div className="col-4">
-													<div className="ava">
+									// <Card className="" key={index}>
+									<div className="card" key={index}>
+										<div className="row">
+											<div className="col-4">
+												<div className="ava">
+													<Link className="card-link2" to={"/messages/" + user.id}>
 														<img src={api.auth.getAvatarLocation() + user.avatar} alt="" />
-													</div>
-												</div>
-
-												<div className="col d-flex justify-content-center flex-column">
-													<div className="name">{user.first_name}</div>
-													<div className="desc">{user.position + " в " + user.company}</div>
+													</Link>
 												</div>
 											</div>
 
-											<div className="title">Что предлагаю:</div>
-											<div className="text">{user.what_offer}</div>
-
-											<div className="title mt-5">Что ищу:</div>
-											<div className="text">{user.what_looking}</div>
+											<div className="col d-flex justify-content-center flex-column">
+												<div className="name">{user.first_name}</div>
+												<div className="desc">{user.position + " в " + user.company}</div>
+											</div>
 										</div>
-									</Card>
+
+										<div className="title">Что предлагаю:</div>
+										<div className="text">{user.what_offer}</div>
+
+										<div className="title mt-5">Что ищу:</div>
+										<div className="text">{user.what_looking}</div>
+									</div>
+									// </Card>
 								);
 							})}
 					</div>

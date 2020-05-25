@@ -8,41 +8,14 @@ import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
 
+import AES from 'crypto-js/aes'
+import CryptoJS from 'crypto-js'
+
 class Messages extends React.Component {
 	state = {
-		users: [
-			{
-				name: "asasd",
-				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-				id: 123,
-				company: "Ideas.First",
-				position: "Маркетинг директор",
-			},
-			{
-				name: "Руслан Федоров Федоров ФедоровФедоровФедоровФедоров Федоров Федоров",
-				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-				id: 234,
-				company: "Ideas.First 222",
-				position: "Маркетинг директор 222",
-			},
-		],
+		users: [],
 		activeUser: {},
-		messages: [
-			{
-				first_name: "qwe",
-				last_name: "123",
-				range: 4,
-				message: "Привет",
-				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-			},
-			{
-				first_name: "qwe-2",
-				last_name: "123-2",
-				range: 4,
-				message: "Привет 2",
-				avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
-			},
-		],
+		messages: [],
 	};
 
 	componentDidMount() {
@@ -50,13 +23,21 @@ class Messages extends React.Component {
 	}
 
 	fetchData = () => {
-		if (this.props.match.params.id) {
-			this.setUser(this.props.match.params.id);
-		}
+		api.account.messages.getDialogs().then(res => {
+			this.setState({
+				users: res.dialogs
+			}, () => {
+				if (this.props.match.params.id) {
+					this.setUser(this.props.match.params.id);
+				}
+			})
+		}).catch(e => console.log(e))
+
 	};
 
 	setUser = (userId) => {
-		let activeUser = this.state.users.find((u) => u.id == userId);
+
+		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		if (activeUser !== undefined) {
 			this.setState({
@@ -66,28 +47,64 @@ class Messages extends React.Component {
 			api.account
 				.getUserDataById(userId)
 				.then((res) => {
+
 					this.setState({
 						activeUser: {
-							name: res.user.first_name + " " + res.user.last_name,
+							first_name: res.user.first_name,
+							last_name: res.user.last_name,
 							avatar: res.user.avatar,
-							id: userId,
+							user_id: userId,
 							company: res.user.company,
 							position: res.user.position,
+							mail: res.user.mail || "",
+							phone: res.user.phone || "",
+							social_site: res.user.social_site || "",
+							what_looking: res.user.what_looking || "",
+							what_offer: res.user.what_offer || "",
 						},
 					});
 				})
 				.catch((e) => console.log(e));
 		}
+
+		api.account.messages.getMessages(userId).then(res => {
+			res.messages = res.messages.map(message => {
+				if ((this.props.user.data.id == 8 && userId == 7) ||
+					(this.props.user.data.id == 7 && userId == 8)) {
+
+					let dec = AES.decrypt(message.text, "мандаринка");
+					message.text = dec.toString(CryptoJS.enc.Utf8)
+				}
+				return { ...message, message: message.text }
+			})
+			this.setState({
+				messages: res.messages
+			})
+		}).catch(e => console.log(e))
 	};
 
 	sendMessage = (message) => {
+
+		let encMessage = ""
+
+		if ((this.props.user.data.id == 7 && this.state.activeUser.user_id == 8) ||
+			(this.props.user.data.id == 8 && this.state.activeUser.user_id == 7)) {
+			let enc = AES.encrypt(message, "мандаринка");
+			encMessage = enc.toString();
+		}
+
+		api.account.messages.sendMessages(this.state.activeUser.user_id, encMessage || message).then(res => {
+
+		}).catch(e => console.log(e))
+
+
 		let m = this.state.messages;
 		m.push({
-			first_name: "qwe-2",
-			last_name: "123-2",
-			range: 4,
+			first_name: this.props.user.data.first_name,
+			last_name: this.props.user.data.last_name,
+			range: this.props.user.data.range,
 			message: message,
-			avatar: "ab70bd0a37b1153c1109a198f3d4c386.png",
+			avatar: this.props.user.data.avatar,
 		});
 
 		this.setState(
@@ -106,6 +123,7 @@ class Messages extends React.Component {
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
 
+
 		return (
 			<div id="messages">
 				<Header data={data} />
@@ -116,11 +134,11 @@ class Messages extends React.Component {
 								{users.map((user, index) => {
 									return (
 										<Link
-											to={"/messages/" + user.id}
+											to={"/messages/" + user.user_id}
 											className="user"
 											key={index}
 											onClick={() => {
-												this.setUser(user.id);
+												this.setUser(user.user_id);
 											}}>
 											<div>
 												<div className="row align-items-center">
@@ -134,7 +152,7 @@ class Messages extends React.Component {
 															/>
 														</div>
 													</div>
-													<div className="col p-0 name">{user.name}</div>
+													<div className="col p-0 name">{user.first_name + " " + user.last_name}</div>
 												</div>
 											</div>
 										</Link>
@@ -163,19 +181,34 @@ class Messages extends React.Component {
 						<div className="col-md-4">
 							<div className="info p-3">
 								{isChatAvailable && (
-									<div className="card flex-center p-4">
-										<div className="ava">
-											<img
-												src={
-													api.auth.getAvatarLocation() + activeUser.avatar
-												}
-											/>
+									<>
+										<div className="card flex-center p-4">
+											<div className="ava">
+												<Link to={"/profile/" + activeUser.user_id}>
+													<img
+														src={
+															api.auth.getAvatarLocation() + activeUser.avatar
+														}
+													/>
+												</Link>
+											</div>
+											<div className="title">{activeUser.first_name + " " + activeUser.last_name}</div>
+											<div className="desc">
+												{activeUser.position + " в " + activeUser.company}
+											</div>
 										</div>
-										<div className="title">{activeUser.name}</div>
-										<div className="desc">
-											{activeUser.position + " в " + activeUser.company}
+
+										<div className="card card-contacts flex-center p-4 px-5 mt-3">
+											<div className="title">Контакты:</div>
+											<div className="desc">{activeUser.mail}</div>
+											<div className="desc">{activeUser.phone}</div>
+											<div className="desc">{activeUser.social_site}</div>
+											<div className="title">Что предлагаю:</div>
+											<div className="desc">{activeUser.what_offer}</div>
+											<div className="title">Что ищу:</div>
+											<div className="desc">{activeUser.what_looking}</div>
 										</div>
-									</div>
+									</>
 								)}
 							</div>
 						</div>

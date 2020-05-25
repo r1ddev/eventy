@@ -60,6 +60,23 @@ const api = {
 		async getNetworking() {
 			let response = await axios.get(api.proxy + api.host + "/users/public/all", api.useAuth())
 			return response.data
+		},
+		messages: {
+			async getDialogs() {
+				let response = await axios.get(api.proxy + api.host + "/personal/messages", api.useAuth())
+				return response.data
+			},
+			async getMessages(user_id) {
+				let response = await axios.get(api.proxy + api.host + "/personal/messages/from/" + user_id, api.useAuth())
+				return response.data
+			},
+			async sendMessages(user_id, text) {
+				let response = await axios.post(api.proxy + api.host + "/personal/messages", api.toFormData({
+					user_id: user_id,
+					text: text
+				}), api.useAuth())
+				return response.data
+			},
 		}
 	},
 
