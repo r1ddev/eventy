@@ -126,9 +126,6 @@ class Registration extends React.Component {
 			isEditable
 		} = this.state;
 
-		console.log("avatar", avatar);
-
-
 		let userAvatar = require("../../images/default-avatar.svg")
 		if (avatar) {
 			userAvatar = api.auth.getAvatarLocation() + avatar

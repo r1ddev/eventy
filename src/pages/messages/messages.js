@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
+import IdleTimer from 'react-idle-timer'
 
 import AES from 'crypto-js/aes'
 import CryptoJS from 'crypto-js'
@@ -16,6 +17,8 @@ class Messages extends React.Component {
 		users: [],
 		activeUser: {},
 		messages: [],
+		updateTimeout: undefined,
+		updateTimer: 5000
 	};
 
 	componentDidMount() {
@@ -32,41 +35,49 @@ class Messages extends React.Component {
 				}
 			})
 		}).catch(e => console.log(e))
-
 	};
 
-	setUser = (userId) => {
+	asetState = (newState) => {
+		return new Promise((resolve, reject) => {
+			this.setState(newState, () => resolve())
+		});
+	}
+
+	setUser = async (userId) => {
 
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		if (activeUser !== undefined) {
-			this.setState({
+			await this.asetState({
 				activeUser: activeUser,
 			});
-		} else {
-			api.account
-				.getUserDataById(userId)
-				.then((res) => {
 
-					this.setState({
-						activeUser: {
-							first_name: res.user.first_name,
-							last_name: res.user.last_name,
-							avatar: res.user.avatar,
-							user_id: userId,
-							company: res.user.company,
-							position: res.user.position,
-							mail: res.user.mail || "",
-							phone: res.user.phone || "",
-							social_site: res.user.social_site || "",
-							what_looking: res.user.what_looking || "",
-							what_offer: res.user.what_offer || "",
-						},
-					});
-				})
-				.catch((e) => console.log(e));
+		} else {
+			let userData = await api.account.getUserDataById(userId)
+
+			await this.asetState({
+				activeUser: {
+					first_name: userData.user.first_name,
+					last_name: userData.user.last_name,
+					avatar: userData.user.avatar,
+					user_id: userId,
+					company: userData.user.company,
+					position: userData.user.position,
+					mail: userData.user.mail || "",
+					phone: userData.user.phone || "",
+					social_site: userData.user.social_site || "",
+					what_looking: userData.user.what_looking || "",
+					what_offer: userData.user.what_offer || "",
+				},
+			});
+
 		}
 
+		clearTimeout(this.state.updateTimeout)
+		this.fetchMessages(userId)
+	};
+
+	fetchMessages = (userId) => {
 		api.account.messages.getMessages(userId).then(res => {
 			res.messages = res.messages.map(message => {
 				if ((this.props.user.data.id == 8 && userId == 7) ||
@@ -79,9 +90,21 @@ class Messages extends React.Component {
 			})
 			this.setState({
 				messages: res.messages
+			}, () => {
+				this.refs.scenesChat.onUpdate(true);
 			})
+
+			let timeout = setTimeout(() => {
+				this.fetchMessages(userId)
+			}, this.state.updateTimer);
+
+			this.setState({
+				updateTimeout: timeout
+			})
+
 		}).catch(e => console.log(e))
-	};
+
+	}
 
 	sendMessage = (message) => {
 
@@ -117,6 +140,27 @@ class Messages extends React.Component {
 		);
 	};
 
+	componentWillUnmount() {
+		clearTimeout(this.state.updateTimeout)
+	}
+
+	onActive = async (e) => {
+		await this.asetState({
+			updateTimer: 5000
+		})
+
+		if (Object.entries(this.state.activeUser).length > 0) {
+			this.setUser(this.state.activeUser.user_id)
+		}
+
+	}
+
+	onIdle = (e) => {
+		this.setState({
+			updateTimer: 30000
+		})
+	}
+
 	render() {
 		const { users, activeUser, messages } = this.state;
 		const { data } = this.props.user;
@@ -126,7 +170,12 @@ class Messages extends React.Component {
 
 		return (
 			<div id="messages">
-				<Header data={data} />
+				<IdleTimer
+					element={document}
+					onActive={this.onActive}
+					onIdle={this.onIdle}
+					timeout={1000 * 60} />
+				<Header />
 				<div className="container-fluid">
 					<div className="row h-100">
 						<div className="col-md-3 p-0">
@@ -178,7 +227,7 @@ class Messages extends React.Component {
 								)}
 							</div>
 						</div>
-						<div className="col-md-4">
+						<div className="col-md-4 cards">
 							<div className="info p-3">
 								{isChatAvailable && (
 									<>
