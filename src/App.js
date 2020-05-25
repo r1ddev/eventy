@@ -40,25 +40,23 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<Frame>
-					{this.props.user.isLogin &&
-						<Switch>
-							{/* Готово/не готово*/}
-							<Route exact path="/desk" component={Desk} />
-							<Route exact path="/presentations" component={Presentations} />
-							<Route exact path="/presentations/:folder" component={PresentationsList} />
-							<Route exact path="/scenes" component={Scenes} />
-							<Route exact path="/spikers" component={Spikers} />
-							<Route exact path="/messages" component={Messages} />
-							<Route exact path="/messages/:id" component={Messages} />
-							<Route exact path="/exposure" component={Exposure} />
-							<Route exact path="/conversations" component={Conversations} />
-							<Route exact path="/conversations/:room" component={ConversationsRoom} />
-							<Route exact path="/party" component={Party} />
-							<Route exact path="/quest" component={Quest} />
-							<Route exact path="/vip-assistent" component={VipAssistent} />
-							<Route exact path="/networking" component={Networking} />
-						</Switch>
-					}
+					<Switch>
+						{/* Готово/не готово*/}
+						<Route exact path="/desk" component={Desk} />
+						<Route exact path="/presentations" component={Presentations} />
+						<Route exact path="/presentations/:folder" component={PresentationsList} />
+						<Route exact path="/scenes" component={Scenes} />
+						<Route exact path="/spikers" component={Spikers} />
+						<Route exact path="/messages" component={Messages} />
+						<Route exact path="/messages/:id" component={Messages} />
+						<Route exact path="/exposure" component={Exposure} />
+						<Route exact path="/conversations" component={Conversations} />
+						<Route exact path="/conversations/:room" component={ConversationsRoom} />
+						<Route exact path="/party" component={Party} />
+						<Route exact path="/quest" component={Quest} />
+						<Route exact path="/vip-assistent" component={VipAssistent} />
+						<Route exact path="/networking" component={Networking} />
+					</Switch>
 				</Frame>
 			</div>
 		);
