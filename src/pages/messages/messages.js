@@ -74,35 +74,38 @@ class Messages extends React.Component {
 		}
 
 		clearTimeout(this.state.updateTimeout)
-		this.fetchMessages(userId)
+		await this.fetchMessages(userId)
+
+		this.refs.scenesChat.onUpdate(true);
 	};
 
-	fetchMessages = (userId) => {
-		api.account.messages.getMessages(userId).then(res => {
-			res.messages = res.messages.map(message => {
-				if ((this.props.user.data.id == 8 && userId == 7) ||
-					(this.props.user.data.id == 7 && userId == 8)) {
+	fetchMessages = async (userId) => {
+		let messages = await api.account.messages.getMessages(userId)
 
-					let dec = AES.decrypt(message.text, "мандаринка");
+		messages.messages = messages.messages.map(message => {
+			if ((this.props.user.data.id == 8 && userId == 7) ||
+				(this.props.user.data.id == 7 && userId == 8)) {
+
+				try {
+					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
 					message.text = dec.toString(CryptoJS.enc.Utf8)
-				}
-				return { ...message, message: message.text }
-			})
-			this.setState({
-				messages: res.messages
-			}, () => {
-				this.refs.scenesChat.onUpdate(true);
-			})
+				} catch (error) { }
 
-			let timeout = setTimeout(() => {
-				this.fetchMessages(userId)
-			}, this.state.updateTimer);
+			}
+			return { ...message, message: message.text }
+		})
 
-			this.setState({
-				updateTimeout: timeout
-			})
+		await this.asetState({
+			messages: messages.messages
+		})
 
-		}).catch(e => console.log(e))
+		let timeout = setTimeout(() => {
+			this.fetchMessages(userId)
+		}, this.state.updateTimer);
+
+		await this.asetState({
+			updateTimeout: timeout
+		})
 
 	}
 
@@ -112,7 +115,7 @@ class Messages extends React.Component {
 
 		if ((this.props.user.data.id == 7 && this.state.activeUser.user_id == 8) ||
 			(this.props.user.data.id == 8 && this.state.activeUser.user_id == 7)) {
-			let enc = AES.encrypt(message, "мандаринка");
+			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
 		}
 
