@@ -1,7 +1,6 @@
 #vip-assistent{
     min-height: 100vh;
     width: 100%;
-    border: 2px solid green;
     display: grid;
     grid-template-columns: 75px 1fr 1fr;
     grid-template-rows: 75px 1fr 1fr;

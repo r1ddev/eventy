@@ -19,7 +19,7 @@ class VipAssistent extends React.Component {
         return (
             <div id="vip-assistent">
 
-                <div className="ass-header"><Header /></div>
+                <div className="ass-header"><Header data={user} /></div>
 
                 <div className="ass-info">
                     <div className="ass-photo"></div>
