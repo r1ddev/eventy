@@ -145,21 +145,19 @@ class Messages extends React.Component {
 	}
 
 	onActive = async (e) => {
-		console.log('user is active', e)
 		await this.asetState({
 			updateTimer: 5000
 		})
 
-		// if (this.state.activeUser) {
-		// 	this.setUser(this.state.activeUser.user_id)
-		// }
+		if (Object.entries(this.state.activeUser).length > 0) {
+			this.setUser(this.state.activeUser.user_id)
+		}
 
 	}
 
 	onIdle = (e) => {
-		// console.log('user is idle', e)
 		this.setState({
-			updateTimer: 20000
+			updateTimer: 30000
 		})
 	}
 
@@ -176,7 +174,7 @@ class Messages extends React.Component {
 					element={document}
 					onActive={this.onActive}
 					onIdle={this.onIdle}
-					timeout={1000 * 10} />
+					timeout={1000 * 60} />
 				<Header />
 				<div className="container-fluid">
 					<div className="row h-100">
