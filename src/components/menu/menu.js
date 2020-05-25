@@ -38,7 +38,7 @@ class Menu extends React.Component {
                 <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>
                 <MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
                 <MenuItem icon={party} label="Вечеринка" link="/party"></MenuItem>
-                <MenuItem icon={vipassistent} label="Ассистент для вип" link="vip-assistent"></MenuItem>
+                <MenuItem icon={vipassistent} label="Ассистент для вип" link="/vip-assistent"></MenuItem>
             </div>
         )
     }
