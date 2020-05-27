@@ -58,12 +58,6 @@ class MenuItem extends React.Component {
 				</div>
 				<div className="menu-item-label">{label}</div>
 			</Link>
-			// <div className="menu-item">
-			//     <Link to={link} className="flex-center">
-			//         <img alt="" src={icon} className="menu-item-icon" />
-			//         <div className="menu-item-label" >{label}</div>
-			//     </Link>
-			// </div>
 		);
 	}
 }
