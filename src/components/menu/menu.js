@@ -22,6 +22,7 @@ class Menu extends React.Component {
 		const quest = require("../../images/icons/quest.svg");
 		const vipassistent = require("../../images/icons/vipassistent.svg");
 
+
 		return (
 			<div id="menu">
 				<div className="flex-center" style={{ padding: "20px" }}>
