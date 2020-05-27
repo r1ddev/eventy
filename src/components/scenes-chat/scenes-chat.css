@@ -1,6 +1,7 @@
 #scenes-chat {
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
+	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 }
@@ -193,11 +194,11 @@ button:focus {
 	margin: unset !important;
 }
 
-.react-input-emoji--wrapper{
+.react-input-emoji--wrapper {
 	height: 100% !important;
 }
 
-.react-emoji{
+.react-emoji {
 	height: 100% !important;
 	padding: 5px 10px !important;
 }
@@ -220,5 +221,3 @@ button:focus {
 	border-right-color: transparent;
 	border-radius: 50%;
 }
-
-

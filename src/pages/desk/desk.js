@@ -11,7 +11,7 @@ class Desk extends React.Component {
     render() {
         return (
             <div id="desk" className="h-100">
-                <Header className="fidex" data={this.props.user.data} />
+                <Header className="fixed" data={this.props.user.data} />
                 <section className="first-section">
                     <img src={require('../../images/first-section.jpg')} alt="img" />
 

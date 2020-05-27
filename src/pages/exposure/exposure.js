@@ -44,7 +44,7 @@ class Exposure extends React.Component {
 
 		return (
 			<div id="exposure">
-				<Header className="fidex" data={this.props.user.data} />
+				<Header className="fixed" data={this.props.user.data} />
 
 				<div className="container">
 					<div className="card-list">{partnersList}</div>
