@@ -173,7 +173,6 @@ class Messages extends React.Component {
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
 
-
 		return (
 			<div id="messages">
 				<IdleTimer
@@ -234,8 +233,8 @@ class Messages extends React.Component {
 									/>
 								)}
 								{!isChatAvailable && (
-									<div className="flex-center h-100 text-black-50">
-										Пожалуйста, выберите беседу
+									<div className="flex-center h-100 text-black-50 text-center">
+										Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться
 									</div>
 								)}
 							</div>
