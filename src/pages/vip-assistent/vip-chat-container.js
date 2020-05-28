@@ -8,9 +8,9 @@ import replaceBadWords from '../../utils/bad-words-replacer';
 
 class VipChatContainer extends React.Component {
 
-    state = {
-        timerId: null
-    }
+
+    timerId = null;
+
 
 
     sendMessage = (message) => {
@@ -32,23 +32,22 @@ class VipChatContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchMessages(9);
         this.updateMessages();
     }
 
     updateMessages = () => {
+        this.props.fetchMessages(9);
         let id = setTimeout(() => {
-            this.props.fetchMessages(9);
             this.updateMessages();
         }, 5000)
 
-        this.setState({
-            timerId: id
-        })
+
+        this.timerId = id;
+
     }
 
     componentWillUnmount() {
-        clearTimeout(this.state.timerId);
+        clearTimeout(this.timerId);
     }
 
     componentDidUpdate(prevProps) {

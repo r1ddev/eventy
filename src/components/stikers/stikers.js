@@ -7,8 +7,9 @@ class Stikers extends React.Component {
     state = {
         banner: null,
         bannerurl: null,
-        timerId: 0
+
     }
+    timerId = null;
 
     postReaction = (id) => {
         let api = new IdeaFirstApiService();
@@ -16,35 +17,27 @@ class Stikers extends React.Component {
     }
 
     componentDidMount() {
-        const api = new IdeaFirstApiService();
-
-        api.getBanner()
-            .then((res) => {
-                console.log(res)
-                this.setState({ banner: res.data.image, bannerurl: res.data.url })
-                this.getBanner();
-            }
-            )
         this.getBanner();
     }
 
     getBanner = () => {
         const api = new IdeaFirstApiService();
 
-        let timerId = setTimeout(() => {
-            api.getBanner()
-                .then((res) => {
-                    console.log(res)
-                    this.setState({ banner: res.data.image, bannerurl: res.data.url, timerId: timerId })
-                    this.getBanner();
+        api.getBanner()
+            .then((res) => {
+                if (this.isMounted) {
+                    this.setState({ banner: res.data.image, bannerurl: res.data.url })
                 }
-                )
+            })
+
+        this.timerId = setTimeout(() => {
+            this.getBanner();
         }, 60000)
 
     }
 
     componentWillUnmount() {
-        clearTimeout(this.state.timerId)
+        clearTimeout(this.timerId)
     }
 
     render() {

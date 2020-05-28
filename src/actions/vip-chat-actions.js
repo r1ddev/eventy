@@ -1,12 +1,10 @@
 const chatRequested = () => {
-    console.log('FETCH_GET_VIP_MESSAGES_LOADING')
     return {
         type: 'FETCH_GET_VIP_MESSAGES_LOADING'
     }
 };
 
 const chatLoaded = (messages) => {
-    console.log('FETCH_GET_VIP_MESSAGES_SUCCESS')
 
     return {
         type: 'FETCH_GET_VIP_MESSAGES_SUCCESS',
