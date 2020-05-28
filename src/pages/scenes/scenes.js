@@ -121,6 +121,8 @@ class ScenesContainer extends React.Component {
         lang: 'rus'
     }
 
+    timerId = null
+
     setScene = (scene) => {
 
         const { lang } = this.state
@@ -141,8 +143,20 @@ class ScenesContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchScenes();
+        this.getScenes();
         this.props.fetchUser();
+    }
+
+    getScenes = () => {
+        this.props.fetchScenes();
+
+        this.timerId = setTimeout(() => {
+            this.getScenes()
+        }, 1000)
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timerId)
     }
 
     render() {
@@ -152,7 +166,7 @@ class ScenesContainer extends React.Component {
         const scenesLoading = this.props.scenes.loading;
         const userLoading = this.props.user.loading;
 
-        const loading = scenesLoading || userLoading
+        const loading = ((userLoading) || scenes.length === 0)
 
 
         console.log(user)

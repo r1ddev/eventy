@@ -56,7 +56,7 @@ class VipAssistentContainer extends React.Component {
         const { loading, user, error } = this.props.user;
 
         let errorUserPermissions = false;
-        if (user) errorUserPermissions = error || user.range === 1 || user.range === 2 || user.range === 6
+        if (user) errorUserPermissions = error || user.range === 1 || user.range === 2 || user.range === 6;
 
 
         return (
