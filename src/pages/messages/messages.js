@@ -181,7 +181,14 @@ class Messages extends React.Component {
 					onActive={this.onActive}
 					onIdle={this.onIdle}
 					timeout={1000 * 60} />
-				<Header />
+				<Header data={data}>
+					<></>
+					<div className="col d-flex align-items-center p-0">
+						<Link to="/messages/5" className="action-link">
+							Связь с организаторами
+						</Link>
+					</div>
+				</Header>
 				<div className="container-fluid">
 					<div className="row h-100">
 						<div className="col-md-3 p-0">

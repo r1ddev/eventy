@@ -77,6 +77,18 @@ const api = {
 				}), api.useAuth())
 				return response.data
 			},
+		},
+		conversations: {
+			async getRooms() {
+				let response = await axios.get(api.proxy + api.host + "/rooms/all", api.useAuth())
+				return response.data
+			},
+			async updateRoomStatus(roomId) {
+				let response = await axios.post(api.proxy + api.host + "/rooms/booking", api.toFormData({
+					room_id: roomId,
+				}), api.useAuth())
+				return response.data
+			}
 		}
 	},
 
