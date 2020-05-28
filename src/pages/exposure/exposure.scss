@@ -1,7 +1,7 @@
 #exposure {
 	.card-list {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 
 		.card {
 			background: #ffffff;
@@ -9,6 +9,7 @@
 			margin: 20px;
 			overflow: hidden;
 			border: none;
+			text-decoration: none;
 
 			.head {
 				padding: 20px;
@@ -16,10 +17,13 @@
 
 			.name {
 				background-color: #e7044c;
+				padding: 10px;
 				border-radius: 10px;
 				font-family: "Gabriela";
-				font-size: 28px;
+				font-size: 17px;
+				line-height: 23px;
 				color: #ffffff;
+				text-align: center;
 			}
 
 			.logo {
@@ -31,9 +35,10 @@
 			.desc {
 				background-color: #e7044c;
 				padding: 15px 25px;
-
+				height: 100%;
 				font-family: "FuturaBookC";
 				font-size: 24px;
+				line-height: 27px;
 				color: #ffffff;
 			}
 		}

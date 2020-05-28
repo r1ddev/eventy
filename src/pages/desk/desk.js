@@ -12,6 +12,13 @@ class Desk extends React.Component {
         return (
             <div id="desk" className="h-100">
                 <Header className="fixed" data={this.props.user.data} />
+                    <></>
+                    <div className="col d-flex align-items-center p-0">
+                        <Link to="/messages/5" className="action-link">
+                            Связь с организаторами
+						            </Link>
+                    </div>
+                </Header>
                 <section className="first-section">
                     <img src={require('../../images/first-section.jpg')} alt="img" />
 

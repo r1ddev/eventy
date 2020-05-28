@@ -3,11 +3,12 @@ import user from './user';
 import chat from './chat';
 import vipchat from './vipchat';
 import scenes from './scenes';
+import conversations from './conversations';
 
 export default combineReducers({
     user,
     chat,
     vipchat,
-    scenes
-
+    scenes,
+    conversations
 })
