@@ -9,23 +9,7 @@ import Header from "../../components/header";
 import Spinner from '../../components/spinner';
 import NoPermissions from '../../components/no-permissions';
 import { fetchUser } from '../../actions/user-actions';
-
-const rooms = [
-	{
-		name: "Креатив в условиях кризиса",
-		ava: "https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg",
-		places: 25,
-		fill: 25,
-		link: "room1",
-	},
-	{
-		name: "Проведение мероприятий для крупного бизнеса в кризис",
-		ava: "https://images.eksmo.ru/upload/iblock/b51/fry_720.jpg",
-		places: 25,
-		fill: 10,
-		link: "room2",
-	},
-];
+import { conversationRoomsLoading, conversationRoomsLoaded } from '../../actions/conversations-actions';
 
 class Сonversations extends React.Component {
 
@@ -33,18 +17,25 @@ class Сonversations extends React.Component {
 		const { data } = this.props.user;
 		return (
 			<div id="conversations">
-				<Header data={data} />
+				<Header data={data}>
+					<></>
+					<div className="col d-flex align-items-center p-0">
+						<Link to="/messages/5" className="action-link">
+							Связь с организаторами
+						</Link>
+					</div>
+				</Header>
 				<div className="container">
 					<div className="title">Открытые комнаты:</div>
 
 					<div className="room-list">
-						{rooms.map((room, index) => {
+						{this.props.rooms.map((room, index) => {
 							return (
-								<Link to={"/conversations/" + room.link} className="link" key={index}>
+								<Link to={"/conversations/" + room.room_id} className="link" key={index}>
 									<div className="row room">
 										<div className="col-auto">
 											<div className="ava">
-												<img src={room.ava} alt="" />
+												{/* <img src={room.ava} alt="" /> */}
 											</div>
 										</div>
 										<div className="col-lg name">{room.name}</div>
@@ -52,9 +43,9 @@ class Сonversations extends React.Component {
 											<div
 												className={
 													"space" +
-													(room.fill == room.places ? " full" : "")
+													(room.current_people == room.max_people ? " full" : "")
 												}>
-												{room.fill + "/" + room.places} человек
+												{room.current_people + "/" + room.max_people} человек
 											</div>
 										</div>
 									</div>
@@ -69,24 +60,33 @@ class Сonversations extends React.Component {
 }
 class СonversationsContainer extends React.Component {
 
+	state = {
+	}
 
 	componentDidMount() {
 		this.props.fetchUser()
+
+		api.account.conversations.getRooms().then(res => {
+			console.log(res);
+
+			this.props.conversationRoomsLoaded(res.rooms)
+		})
 	}
 	render() {
+		let loading = true
+		const { loading: userLoading, user, error } = this.props.user;
+		const { isLoaded: roomsLoaded, rooms } = this.props.conversations;
 
-		const { loading, user, error } = this.props.user;
+		loading = userLoading || !roomsLoaded
 
 		let errorUserPermissions = false;
 		if (user) errorUserPermissions = error || user.range === 1 || user.range === 2
-		console.log(loading)
 
 		return (
-
-			<div style={{ height: '100%', width: '100%' }}>
+			<>
 				{
 					(!loading && !errorUserPermissions) &&
-					<Сonversations {...this.props} />
+					<Сonversations {...this.props} rooms={rooms} />
 				}
 				{
 					(loading) && <Spinner big={1} />
@@ -94,20 +94,22 @@ class СonversationsContainer extends React.Component {
 				{
 					(!loading && errorUserPermissions) && <NoPermissions />
 				}
-			</div>
+			</>
 		)
 	}
 
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, conversations }) => {
 	return {
-		user: user
+		user, conversations
 	}
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
 	return {
+		conversationRoomsLoading: () => conversationRoomsLoading(dispatch),
+		conversationRoomsLoaded: (rooms) => conversationRoomsLoaded(dispatch)(rooms),
 		fetchUser: fetchUser(apiService, dispatch)
 	}
 };

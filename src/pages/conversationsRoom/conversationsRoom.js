@@ -9,16 +9,8 @@ import Header from "../../components/header";
 import Spinner from '../../components/spinner';
 import NoPermissions from '../../components/no-permissions';
 import { fetchUser } from '../../actions/user-actions';
-
-const rooms = [
-	{
-		room: "room1",
-		daily: "https://teeestuyjg.daily.co/hello"
-	}, {
-		room: "room2",
-		daily: "https://teeestuyjg.daily.co/test-call"
-	}
-]
+import { conversationRoomsLoading, conversationRoomsLoaded } from '../../actions/conversations-actions';
+import api from './../../js/api';
 
 class СonversationsRoom extends React.Component {
 
@@ -33,17 +25,15 @@ class СonversationsRoom extends React.Component {
 
 	componentDidMount() {
 
-		let currentRoom = rooms.find(r => r.room == this.props.match.params.room)
+		let currentRoom = this.props.rooms.find(r => r.room_id == this.props.match.params.room)
 
 		if (currentRoom) {
 			this.setState({
 				room: currentRoom
 			}, () => {
 				this.daily = DailyIframe.wrap(this.iframeRef.current);
-				this.daily.join({ url: currentRoom.daily });
+				this.daily.join({ url: currentRoom.url });
 			})
-
-
 		}
 	}
 
@@ -52,7 +42,14 @@ class СonversationsRoom extends React.Component {
 
 		return (
 			<div id="conversations-room">
-				<Header data={data} />
+				<Header data={data}>
+					<></>
+					<div className="col d-flex align-items-center p-0">
+						<Link to="/messages/5" className="action-link">
+							Связь с организаторами
+						</Link>
+					</div>
+				</Header>
 				<div className="container">
 					{this.state.room &&
 						<iframe className="video"
@@ -69,12 +66,24 @@ class СonversationsRoom extends React.Component {
 class СonversationsRoomContainer extends React.Component {
 
 	componentDidMount() {
+		console.log(this.props.conversations);
+
+		if (!this.props.conversations.isLoaded) {
+			api.account.conversations.getRooms().then(res => {
+				this.props.conversationRoomsLoaded(res.rooms)
+			})
+		}
+
+
 		this.props.fetchUser()
 	}
 
 	render() {
+		let loading = true
+		const { loading: userLoading, user, error } = this.props.user;
+		const { isLoaded: roomsLoading, rooms } = this.props.conversations;
 
-		const { loading, user, error } = this.props.user;
+		loading = userLoading || !roomsLoading
 
 		let errorUserPermissions = false;
 		if (user) errorUserPermissions = error || user.range === 1 || user.range === 2
@@ -85,7 +94,7 @@ class СonversationsRoomContainer extends React.Component {
 			<div style={{ height: '100%', width: '100%' }}>
 				{
 					(!loading && !errorUserPermissions) &&
-					<СonversationsRoom {...this.props} />
+					<СonversationsRoom {...this.props} rooms={rooms} />
 				}
 				{
 					(loading) && <Spinner big={1} />
@@ -99,14 +108,16 @@ class СonversationsRoomContainer extends React.Component {
 
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, conversations }) => {
 	return {
-		user: user
+		user, conversations
 	}
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
 	return {
+		conversationRoomsLoading: () => conversationRoomsLoading(dispatch),
+		conversationRoomsLoaded: (rooms) => conversationRoomsLoaded(dispatch)(rooms),
 		fetchUser: fetchUser(apiService, dispatch)
 	}
 };

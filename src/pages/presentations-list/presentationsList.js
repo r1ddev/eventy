@@ -48,7 +48,14 @@ class PresentationsList extends React.Component {
 
 		return (
 			<div id="presentations-list">
-				<Header data={data} />
+				<Header data={data}>
+					<></>
+					<div className="col d-flex align-items-center p-0">
+						<Link to="/messages/5" className="action-link">
+							Связь с организаторами
+						</Link>
+					</div>
+				</Header>
 				<div className="container pt-3">
 					{(
 						(

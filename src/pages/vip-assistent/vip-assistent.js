@@ -8,6 +8,7 @@ import ScenesChat from './vip-chat-container';
 import Spinner from '../../components/spinner';
 import NoPermissions from '../../components/no-permissions';
 import { fetchUser } from '../../actions/user-actions';
+import { Link } from 'react-router-dom';
 
 class VipAssistent extends React.Component {
 
@@ -19,7 +20,16 @@ class VipAssistent extends React.Component {
         return (
             <div id="vip-assistent">
 
-                <div className="ass-header"><Header data={user} /></div>
+                <div className="ass-header">
+                    <Header data={user}>
+                        <></>
+                        <div className="col d-flex align-items-center p-0">
+                            <Link to="/messages/5" className="action-link">
+                                Связь с организаторами
+                            </Link>
+                        </div>
+                    </Header>
+                </div>
 
                 <div className="ass-info">
                     <div className="ass-photo"></div>
