@@ -96,12 +96,14 @@ class Networking extends React.Component {
 									<div className="card" key={index}>
 										<div className="row">
 											<div className="col-4">
-												<div className="ava">
-													<Link className="card-link2" to={"/messages/" + user.id}>
-														{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
-														{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
-													</Link>
-												</div>
+												<Link className="card-link2" to={"/messages/" + user.id}>
+													<div className="ava">
+													  <Link className="card-link2" to={"/messages/" + user.id}>
+														  {user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
+														  {!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
+													  </Link>
+												  </div>
+												</Link>
 											</div>
 
 											<div className="col d-flex justify-content-center flex-column">

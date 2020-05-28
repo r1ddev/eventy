@@ -11,12 +11,12 @@ class Desk extends React.Component {
     render() {
         return (
             <div id="desk" className="h-100">
-                <Header className="fidex" data={this.props.user.data}>
+                <Header className="fixed" data={this.props.user.data} />
                     <></>
                     <div className="col d-flex align-items-center p-0">
                         <Link to="/messages/5" className="action-link">
                             Связь с организаторами
-						</Link>
+						            </Link>
                     </div>
                 </Header>
                 <section className="first-section">
