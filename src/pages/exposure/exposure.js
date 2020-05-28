@@ -223,7 +223,7 @@ class Exposure extends React.Component {
 
 		return (
 			<div id="exposure">
-				<Header className="fixed" data={this.props.user.data} />
+				<Header className="fixed" data={this.props.user.data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
