@@ -142,6 +142,45 @@ class MessageItem extends React.Component {
 
         let newAvatar = origin + "/images/avatar/" + avatar;
 
+        let linkMessage = (message) => {
+
+            let newMes = message;
+            newMes = newMes.split(' ');
+            newMes = newMes.map((item) => {
+
+                let newItem = item;
+
+
+                if (isValidUrl(newItem)) {
+
+
+                    newItem = (
+                        <a href={item} target="_blank">{item + ' '}</a>
+                    )
+                } else {
+                    newItem = (
+                        <span>{newItem + ' '}</span>
+                    )
+
+                }
+
+                return newItem
+            })
+
+
+            return (
+                <span> {newMes}
+                </span>
+            )
+        }
+
+        function isValidUrl(url) {
+            var objRE = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/i;
+            return objRE.test(url);
+        }
+
+
+
 
         return (
             <div className="message-item" style={{ backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>
@@ -152,7 +191,7 @@ class MessageItem extends React.Component {
                 <div className="mes-info">
                     <div className="mes-info-name">{name}<span className="mes-info-status">{(sponsor ? 'UMF' : '')}</span></div>
                     <div className="mes-info-content">
-                        {message}
+                        {linkMessage(message)}
                     </div>
                 </div>
             </div>
