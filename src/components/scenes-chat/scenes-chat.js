@@ -4,6 +4,7 @@ import InputEmoji from 'react-input-emoji';
 import RSC from "react-scrollbars-custom";
 import Spinner from '../spinner';
 import Linkify from 'react-linkify';
+import { Link } from 'react-router-dom';
 
 class ScenesChat extends React.Component {
 
@@ -64,6 +65,7 @@ class ScenesChat extends React.Component {
             return (
                 <MessageItem
                     key={index}
+                    id={mes.user_id}
                     name={mes.first_name + ' ' + mes.last_name}
                     ad={mes.range === 4}
                     sponsor={mes.range === 5}
@@ -132,6 +134,7 @@ class MessageItem extends React.Component {
     render() {
 
         const {
+            id,
             name,
             ad,
             sponsor,
@@ -146,7 +149,9 @@ class MessageItem extends React.Component {
         return (
             <div className="message-item" style={{ backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>
                 <div className="mes-photo-wrapper">
-                    <div className="mes-photo" style={avatar ? { backgroundImage: `url(${newAvatar})` } : {}}></div>
+                    <Link to={"/profile/" + id} target="_blank">
+                        <div className="mes-photo" style={avatar ? { backgroundImage: `url(${newAvatar})` } : {}}></div>
+                    </Link>
                 </div>
 
                 <div className="mes-info">
@@ -159,7 +164,7 @@ class MessageItem extends React.Component {
                         </Linkify>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 
