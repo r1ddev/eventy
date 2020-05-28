@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./menu.css";
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+import { fetchUser } from '../../actions/user-actions';
 
 class Menu extends React.Component {
-	state = {
-		itemsCount: 12,
-	};
 
 	render() {
 		const logo = require("../../images/icons/logo.svg");
@@ -22,6 +23,8 @@ class Menu extends React.Component {
 		const quest = require("../../images/icons/quest.svg");
 		const vipassistent = require("../../images/icons/vipassistent.svg");
 
+		const { range } = this.props;
+
 
 		return (
 			<div id="menu">
@@ -36,13 +39,14 @@ class Menu extends React.Component {
 				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
 				<MenuItem icon={messages} label="Мои сообщения" link="/messages"></MenuItem>
 				<MenuItem icon={exposure} label="Экспозона" link="/exposure"></MenuItem>
-				<MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>
+				{((range !== 1) && (range !== 2)) && <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>}
 				<MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
-				<MenuItem icon={party} label="Вечеринка" link="/party"></MenuItem>
-				<MenuItem
+				{(range !== 1) && <MenuItem icon={party} label="Вечеринка" link="/party"></MenuItem>}
+				{((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
 					icon={vipassistent}
 					label="Ассистент для вип"
 					link="/vip-assistent"></MenuItem>
+				}
 			</div>
 		);
 	}
@@ -63,4 +67,37 @@ class MenuItem extends React.Component {
 	}
 }
 
-export default Menu;
+class MenuContainer extends React.Component {
+
+	componentDidMount() {
+		this.props.fetchUser();
+	}
+
+	render() {
+		const { loading, user } = this.props.user;
+
+		let range = 1;
+		if (user) range = user.range
+
+		return (
+			<Menu range={range} />
+		)
+	}
+
+}
+
+const mapStateToProps = ({ user }) => {
+	return {
+		user: user
+	}
+};
+
+const mapDispatchToProps = (dispatch, { apiService }) => {
+	return {
+		fetchUser: fetchUser(apiService, dispatch)
+	}
+};
+
+export default compose(
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps))(MenuContainer);
