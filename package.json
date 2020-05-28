@@ -19,6 +19,7 @@
 		"react-dom": "^16.13.1",
 		"react-idle-timer": "^4.2.12",
 		"react-input-emoji": "^1.0.7",
+		"react-linkify": "^1.0.0-alpha",
 		"react-loading-overlay": "^1.0.1",
 		"react-pose": "^4.0.10",
 		"react-redux": "^6.0.0",
