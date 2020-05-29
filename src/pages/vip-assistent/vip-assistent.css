@@ -1,67 +1,65 @@
-#vip-assistent{
-    min-height: 100vh;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 0px 2fr 3fr;
-    grid-template-rows: 75px 1fr 1fr;
+#vip-assistent {
+	height: 100%;
+	min-height: 100vh;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 0px 2fr 3fr;
+	grid-template-rows: 75px 1fr 1fr;
 }
 
-
-.ass-header{
-    grid-column: 1 / span 3;
-    grid-row-start: 1;
-
+.ass-header {
+	grid-column: 1 / span 3;
+	grid-row-start: 1;
 }
 
-.ass-chat{
-    height: 100%;
-    background: white;
-    grid-column-start: 3;
-    grid-row: 2 / span 2;
-    border-radius: 10px 0 0 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+.ass-chat {
+	height: 100%;
+	background: white;
+	grid-column-start: 3;
+	grid-row: 2 / span 2;
+	border-radius: 10px 0 0 10px;
+	overflow: hidden;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.ass-chat>#scenes-chat{
-    height: 100%;
+.ass-chat > #scenes-chat {
+	height: 100%;
 }
 
-.ass-info{
-    grid-column-start: 2;
-    grid-row: 2 / span 1;
-    margin: 20px auto;
-    min-width: 300px;
-    min-height: 200px;
-    max-width: 400px;
-    background: #F4004D;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+.ass-info {
+	grid-column-start: 2;
+	grid-row: 2 / span 1;
+	margin: 20px auto;
+	min-width: 300px;
+	min-height: 200px;
+	max-width: 400px;
+	background: #f4004d;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
 }
 
-.ass-photo{
-    height: 100px;
-    width: 100px;
-    margin: 20px auto;
-    background-color: honeydew;
-    background-image: url(../../images/default-avatar.svg);
-    border-radius: 10px;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+.ass-photo {
+	height: 100px;
+	width: 100px;
+	margin: 20px auto;
+	background-color: honeydew;
+	background-image: url(../../images/default-avatar.svg);
+	border-radius: 10px;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
-.ass-label{
-    margin:30px auto;
-    padding: 0 20px;
-    font-family: "FuturaBookC";
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    line-height: 54px;
-    text-align: center;
-    color: #FFFFFF;
-
+.ass-label {
+	margin: 30px auto;
+	padding: 0 20px;
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 40px;
+	line-height: 54px;
+	text-align: center;
+	color: #ffffff;
 }
 
 @media screen and (max-width: 1000px) {
@@ -70,11 +68,10 @@
 		min-height: 100%;
 		width: 100%;
 		flex-direction: column;
-    }
-    
-    .ass-chat{
-        flex-grow: 1;
-        height: 1px;
-    }
-	
+	}
+
+	.ass-chat {
+		flex-grow: 1;
+		height: 1px;
+	}
 }
