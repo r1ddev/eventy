@@ -48,7 +48,7 @@ class Stikers extends React.Component {
 
         this.timerId = setTimeout(() => {
             this.getBanner();
-        }, 60000)
+        }, 1000)
 
     }
 
@@ -74,7 +74,7 @@ class Stikers extends React.Component {
             <div id="stikers">
                 <div className="wrapper-of-wrappers">
 
-                    <div className="emoji-stikers-wrapper">
+                    {(!banner) && <div className="emoji-stikers-wrapper">
                         <div className="emoji-stikers">
                             <div className="emoji-stikers-caption">
                                 ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
@@ -98,8 +98,12 @@ class Stikers extends React.Component {
                                 </Stiker>
                             </div>
                         </div>
-                    </div>
+                    </div>}
 
+                    {(banner) && <div className="banner-wrapper">
+                        <a href={bannerurl} style={{ display: 'block', width: '100%' }}><img className="banner" alt='' src={(banner ? banner : '')}></img></a>
+                    </div>
+                    }
                     <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
                         <div className="language-stikers">
                             <div className="language-stikers-caption">
@@ -122,9 +126,6 @@ class Stikers extends React.Component {
 
                 <div className="timetable-wrapper">
                     <a style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
-                </div>
-                <div className="banner-wrapper">
-                    <a href={bannerurl} style={{ display: 'block', width: '100%' }}><img className="banner" alt='' src={(banner ? banner : '')}></img></a>
                 </div>
             </div>
         )
