@@ -152,7 +152,7 @@ class ScenesContainer extends React.Component {
 
         this.timerId = setTimeout(() => {
             this.getScenes()
-        }, 1000)
+        }, 60000)
     }
 
     componentWillUnmount() {
@@ -166,10 +166,9 @@ class ScenesContainer extends React.Component {
         const scenesLoading = this.props.scenes.loading;
         const userLoading = this.props.user.loading;
 
+
         const loading = ((userLoading) || scenes.length === 0)
 
-
-        console.log(user)
         return (
             <div style={{ height: '100%', width: '100%' }}>
                 {
