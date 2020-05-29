@@ -20,6 +20,7 @@
 	padding: 10px;
 	flex-direction: row;
 	justify-content: space-between;
+	min-height: 74px;
 }
 
 #scenes .translation-content {

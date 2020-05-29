@@ -24,6 +24,7 @@ class Stikers extends React.Component {
 
     }
     timerId = null;
+    _ismounted = null;
 
     postReaction = (id) => {
         let api = new IdeaFirstApiService();
@@ -31,6 +32,7 @@ class Stikers extends React.Component {
     }
 
     componentDidMount() {
+        this._ismounted = true;
         this.getBanner();
     }
 
@@ -39,7 +41,7 @@ class Stikers extends React.Component {
 
         api.getBanner()
             .then((res) => {
-                if (this.isMounted) {
+                if (this._ismounted) {
                     this.setState({ banner: res.data.image, bannerurl: res.data.url })
                 }
             })
@@ -51,6 +53,7 @@ class Stikers extends React.Component {
     }
 
     componentWillUnmount() {
+        this._ismounted = false;
         clearTimeout(this.timerId)
     }
 
@@ -64,7 +67,7 @@ class Stikers extends React.Component {
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
 
-        console.log(banner, bannerurl)
+        console.log('banners', banner, bannerurl)
 
 
         return (
