@@ -17,6 +17,7 @@ class СonversationsRoom extends React.Component {
 	constructor() {
 		super()
 
+		this.timeout = undefined
 		this.iframeRef = React.createRef();
 		this.state = {
 			room: undefined
@@ -33,8 +34,22 @@ class СonversationsRoom extends React.Component {
 			}, () => {
 				this.daily = DailyIframe.wrap(this.iframeRef.current);
 				this.daily.join({ url: currentRoom.url });
+
+				this.updateRoomStatus()
 			})
 		}
+	}
+
+	updateRoomStatus = () => {
+		api.account.conversations.updateRoomStatus(this.state.room.room_id)
+
+		this.timeout = setTimeout(() => {
+			this.updateRoomStatus()
+		}, 6000);
+	}
+
+	componentWillUnmount() {
+		clearTimeout(this.timeout)
 	}
 
 	render() {
