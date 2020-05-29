@@ -84,12 +84,24 @@ class Registration extends React.Component {
 		this.fetchData()
 	}
 
+	getGetParams = () => {
+		var params = {};
+
+		if (window.location.search) {
+			var parts = window.location.search.substring(1).split('&');
+
+			for (var i = 0; i < parts.length; i++) {
+				var nv = parts[i].split('=');
+				if (!nv[0]) continue;
+				params[nv[0]] = nv[1] || true;
+			}
+		}
+
+		return params
+	}
+
 	fetchData = async () => {
-		// if (this.isLogin()) {
-		// 	// this.props.history.push("/desk");
-		// } else {
-		const params = new URLSearchParams(this.props.location.search);
-		const token = params.get('token');
+		const token = this.getGetParams().token || ""
 
 		if (token != null) {
 			window.localStorage.token = token

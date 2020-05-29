@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
-import IdleTimer from 'react-idle-timer'
+import IdleTimer from "react-idle-timer";
 
-import AES from 'crypto-js/aes'
-import CryptoJS from 'crypto-js'
+import AES from "crypto-js/aes";
+import CryptoJS from "crypto-js";
 
 class Messages extends React.Component {
 	state = {
@@ -18,7 +18,7 @@ class Messages extends React.Component {
 		activeUser: {},
 		messages: [],
 		updateTimeout: undefined,
-		updateTimer: 5000
+		updateTimer: 5000,
 	};
 
 	componentDidMount() {
@@ -26,37 +26,41 @@ class Messages extends React.Component {
 	}
 
 	fetchData = () => {
-		api.account.messages.getDialogs().then(res => {
-			res.dialogs = res.dialogs.filter(dialog => {
-				return dialog.range != 6
+		api.account.messages
+			.getDialogs()
+			.then((res) => {
+				res.dialogs = res.dialogs.filter((dialog) => {
+					return dialog.range != 6;
+				});
+				this.setState(
+					{
+						users: res.dialogs,
+					},
+					() => {
+						if (this.props.match.params.id) {
+							this.setUser(this.props.match.params.id);
+						}
+					}
+				);
 			})
-			this.setState({
-				users: res.dialogs
-			}, () => {
-				if (this.props.match.params.id) {
-					this.setUser(this.props.match.params.id);
-				}
-			})
-		}).catch(e => console.log(e))
+			.catch((e) => console.log(e));
 	};
 
 	asetState = (newState) => {
 		return new Promise((resolve, reject) => {
-			this.setState(newState, () => resolve())
+			this.setState(newState, () => resolve());
 		});
-	}
+	};
 
 	setUser = async (userId) => {
-
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		if (activeUser !== undefined) {
 			await this.asetState({
 				activeUser: activeUser,
 			});
-
 		} else {
-			let userData = await api.account.getUserDataById(userId)
+			let userData = await api.account.getUserDataById(userId);
 
 			await this.asetState({
 				activeUser: {
@@ -73,59 +77,58 @@ class Messages extends React.Component {
 					what_offer: userData.user.what_offer || "",
 				},
 			});
-
 		}
 
-		clearTimeout(this.state.updateTimeout)
-		await this.fetchMessages(userId)
+		clearTimeout(this.state.updateTimeout);
+		await this.fetchMessages(userId);
 
 		this.refs.scenesChat.onUpdate(true);
 	};
 
 	fetchMessages = async (userId) => {
-		let messages = await api.account.messages.getMessages(userId)
+		let messages = await api.account.messages.getMessages(userId);
 
-		messages.messages = messages.messages.map(message => {
-			if ((this.props.user.data.id == 8 && userId == 7) ||
-				(this.props.user.data.id == 7 && userId == 8)) {
-
+		messages.messages = messages.messages.map((message) => {
+			if (
+				(this.props.user.data.id == 8 && userId == 7) ||
+				(this.props.user.data.id == 7 && userId == 8)
+			) {
 				try {
 					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
-					message.text = dec.toString(CryptoJS.enc.Utf8)
-				} catch (error) { }
-
+					message.text = dec.toString(CryptoJS.enc.Utf8);
+				} catch (error) {}
 			}
-			return { ...message, message: message.text }
-		})
+			return { ...message, message: message.text };
+		});
 
 		await this.asetState({
-			messages: messages.messages
-		})
+			messages: messages.messages,
+		});
 
 		let timeout = setTimeout(() => {
-			this.fetchMessages(userId)
+			this.fetchMessages(userId);
 		}, this.state.updateTimer);
 
 		await this.asetState({
-			updateTimeout: timeout
-		})
-
-	}
+			updateTimeout: timeout,
+		});
+	};
 
 	sendMessage = (message) => {
+		let encMessage = "";
 
-		let encMessage = ""
-
-		if ((this.props.user.data.id == 7 && this.state.activeUser.user_id == 8) ||
-			(this.props.user.data.id == 8 && this.state.activeUser.user_id == 7)) {
+		if (
+			(this.props.user.data.id == 7 && this.state.activeUser.user_id == 8) ||
+			(this.props.user.data.id == 8 && this.state.activeUser.user_id == 7)
+		) {
 			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
 		}
 
-		api.account.messages.sendMessages(this.state.activeUser.user_id, encMessage || message).then(res => {
-
-		}).catch(e => console.log(e))
-
+		api.account.messages
+			.sendMessages(this.state.activeUser.user_id, encMessage || message)
+			.then((res) => {})
+			.catch((e) => console.log(e));
 
 		let m = this.state.messages;
 		m.push({
@@ -147,25 +150,24 @@ class Messages extends React.Component {
 	};
 
 	componentWillUnmount() {
-		clearTimeout(this.state.updateTimeout)
+		clearTimeout(this.state.updateTimeout);
 	}
 
 	onActive = async (e) => {
 		await this.asetState({
-			updateTimer: 5000
-		})
+			updateTimer: 5000,
+		});
 
 		if (Object.entries(this.state.activeUser).length > 0) {
-			this.setUser(this.state.activeUser.user_id)
+			this.setUser(this.state.activeUser.user_id);
 		}
-
-	}
+	};
 
 	onIdle = (e) => {
 		this.setState({
-			updateTimer: 30000
-		})
-	}
+			updateTimer: 30000,
+		});
+	};
 
 	render() {
 		const { users, activeUser, messages } = this.state;
@@ -179,7 +181,8 @@ class Messages extends React.Component {
 					element={document}
 					onActive={this.onActive}
 					onIdle={this.onIdle}
-					timeout={1000 * 60} />
+					timeout={1000 * 60}
+				/>
 				<Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
@@ -190,53 +193,63 @@ class Messages extends React.Component {
 				</Header>
 				<div className="container-fluid">
 					<div className="row h-100">
-						<div className="col-md-3 p-0">
-							<div className="users-list">
-								{users.map((user, index) => {
-									return (
-										<Link
-											to={"/messages/" + user.user_id}
-											className="user"
-											key={index}
-											onClick={() => {
-												this.setUser(user.user_id);
-											}}>
-											<div>
-												<div className="row align-items-center">
-													<div className="col-auto">
-														<div className="ava">
-															<img
-																src={
-																	api.auth.getAvatarLocation() +
-																	user.avatar
-																}
-															/>
+						<div className="col-md-8">
+							<div className="row h-100">
+								<div className="col-5 p-0">
+									<div className="users-list">
+										{users.map((user, index) => {
+											return (
+												<Link
+													to={"/messages/" + user.user_id}
+													className="user"
+													key={index}
+													onClick={() => {
+														this.setUser(user.user_id);
+													}}>
+													<div>
+														<div className="row align-items-center">
+															<div className="col-auto">
+																<div className="ava">
+																	<img
+																		src={
+																			api.auth.getAvatarLocation() +
+																			user.avatar
+																		}
+																	/>
+																</div>
+															</div>
+															<div className="col p-0 name">
+																{user.first_name +
+																	" " +
+																	user.last_name}
+															</div>
 														</div>
 													</div>
-													<div className="col p-0 name">{user.first_name + " " + user.last_name}</div>
-												</div>
-											</div>
-										</Link>
-									);
-								})}
-							</div>
-						</div>
-						<div className="col-md-5 p-0">
-							<div className="dialog">
-								{isChatAvailable && (
-									<ScenesChat
-										loading={false}
-										messages={messages}
-										sendMessage={this.sendMessage}
-										isPrivate={true}
-										ref="scenesChat"
-									/>
-								)}
-								{!isChatAvailable && (
-									<div className="flex-center h-100 text-black-50 text-center">
-										Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться
+												</Link>
+											);
+										})}
 									</div>
-								)}
+								</div>
+
+								<div className="col-7 p-0">
+									<div className="dialog">
+										{isChatAvailable && (
+											<ScenesChat
+												loading={false}
+												messages={messages}
+												sendMessage={this.sendMessage}
+												isPrivate={true}
+												ref="scenesChat"
+											/>
+										)}
+										{!isChatAvailable && (
+											<div className="flex-center h-100 text-black-50 text-center">
+												Перейдите в нетворкинг и выберите человека, чтобы
+												начать с ним общаться
+											</div>
+										)}
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className="col-md-4 cards">
@@ -248,12 +261,15 @@ class Messages extends React.Component {
 												<Link to={"/profile/" + activeUser.user_id}>
 													<img
 														src={
-															api.auth.getAvatarLocation() + activeUser.avatar
+															api.auth.getAvatarLocation() +
+															activeUser.avatar
 														}
 													/>
 												</Link>
 											</div>
-											<div className="title">{activeUser.first_name + " " + activeUser.last_name}</div>
+											<div className="title">
+												{activeUser.first_name + " " + activeUser.last_name}
+											</div>
 											<div className="desc">
 												{activeUser.position + " в " + activeUser.company}
 											</div>

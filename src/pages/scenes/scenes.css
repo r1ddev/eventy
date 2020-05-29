@@ -1,174 +1,174 @@
-#scenes{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
+#scenes {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
 }
 
-#scenes .scenes-translation{
-    /* width: 70%;
+#scenes .scenes-translation {
+	/* width: 70%;
     max-width: 70%; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    flex-grow:1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	flex-grow: 1;
 }
 
-#scenes .translation-header{
-    display: flex;
-    padding: 10px;
-    flex-direction: row;
-    justify-content: space-between;
+#scenes .translation-header {
+	display: flex;
+	padding: 10px;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
-#scenes .translation-content{
-    width: 100%;
-}
-                
-#scenes .translation-footer{
-    flex-grow: 1;
+#scenes .translation-content {
+	width: 100%;
 }
 
-#scenes .scenes-chat{
-    max-width: 30%;
-    width: 500px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
+#scenes .translation-footer {
+	flex-grow: 1;
 }
 
-.translation-header>.scene-item{
-    width: 100%;
-    height: 54px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
+#scenes .scenes-chat {
+	max-width: 30%;
+	width: 500px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
 }
-.translation-header>.scene-item>div{
-    width: 80%;
-    height: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
+
+.translation-header > .scene-item {
+	width: 100%;
+	height: 54px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.translation-header > .scene-item > div {
+	width: 80%;
+	height: 90%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 .scene-item .scene-btn,
-.scene-item .scene-btn-active{
-    font-family: "Gilroy";
-    font-weight:bold;
-    color: white;
-    width: 40%;
-    min-width: 100px;
-    height: 100%;
-    background-color: #80BC26;
-    font-size: 20px;
-    line-height: 1.3vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.2s;
+.scene-item .scene-btn-active {
+	font-family: "Gilroy";
+	font-weight: bold;
+	color: white;
+	width: 40%;
+	min-width: 100px;
+	height: 100%;
+	background-color: #80bc26;
+	font-size: 20px;
+	line-height: 1.3vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.2s;
 }
 
-.scene-item .scene-btn-active{
-    background-color: #F4004D;
+.scene-item .scene-btn-active {
+	background-color: #f4004d;
 }
 
-.scene-item .scene-status{
-    font-family: "Gilroy";
-    width: 40%;
-    height: 70%;
-    background-color: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-    margin-left: 10px;
-    font-size: 20px;
-    line-height: 2vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+.scene-item .scene-status {
+	font-family: "Gilroy";
+	width: 40%;
+	height: 70%;
+	background-color: white;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	margin-left: 10px;
+	font-size: 20px;
+	line-height: 2vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .video-container {
-    width: 100%;
-    position: relative;
-    padding-top: 56.25%;
-
+	width: 100%;
+	position: relative;
+	padding-top: 56.25%;
 }
-.video-container iframe, 
-.video-container object, 
+.video-container iframe,
+.video-container object,
 .video-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
-.scenes-chat .chat-header{
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+.scenes-chat .chat-header {
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
 }
 
-.scenes-chat .chat-content{
-    flex-grow: 1;
-    min-height: 200px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid rgb(199, 199, 199);
+.scenes-chat .chat-content {
+	flex-grow: 1;
+	min-height: 200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border: 1px solid rgb(199, 199, 199);
+	background: #fff;
 }
 
-
-.scenes-chat .chat-header div{
-    height: 54px;
-    width: 54px;
-    background-size: cover;
-    margin-right: 20px;
-    background-position:center ;
-    border-radius: 50%;
+.scenes-chat .chat-header div {
+	height: 54px;
+	width: 54px;
+	background-size: cover;
+	margin-right: 20px;
+	background-position: center;
+	border-radius: 50%;
 }
 
 @media screen and (max-width: 900px) {
-    #scenes{
-        flex-direction: column;
-    }
-    #scenes .scenes-translation{
-        max-width: unset;
-        width: 100%;
-        height: unset;
-        overflow: unset;
-    }
+	#scenes {
+		flex-direction: column;
+	}
+	#scenes .scenes-translation {
+		max-width: unset;
+		width: 100%;
+		height: unset;
+		overflow: unset;
 
-    #scenes .scenes-chat{
-        width: unset;
-        flex-grow: 1;
-        max-width: 100%;
-    }
+		display: block;
+	}
 
-    #scenes .translation-header{
-        flex-direction: column;
-    }
+	#scenes .scenes-chat {
+		width: unset;
+		flex-grow: 1;
+		max-width: 100%;
+	}
 
-    .scene-item .scene-btn{
-        width: 80%;
-    }
+	#scenes .translation-header {
+		flex-direction: column;
+	}
 
-    #scenes .chat-header{
-        display: none;
-    }
+	.scene-item .scene-btn {
+		width: 80%;
+	}
 
-    .scenes-chat .chat-content {
-        min-height: 500px;
-    }
-  }
+	#scenes .chat-header {
+		display: none;
+	}
+
+	.scenes-chat .chat-content {
+		min-height: 500px;
+	}
+}

@@ -3,6 +3,20 @@ import "./stikers.css"
 import IdeaFirstApiService from '../../services/idea-first-api-service';
 import posed from 'react-pose';
 
+const Stiker = posed.div({
+    draggable: true,
+    init: { scale: 1 },
+    drag: {
+        scale: 1.3,
+    },
+
+    dragEnd: {
+        x: 0,
+        y: 0,
+        transition: { type: 'spring' }
+    }
+});
+
 class Stikers extends React.Component {
     state = {
         banner: null,
@@ -40,6 +54,8 @@ class Stikers extends React.Component {
         clearTimeout(this.timerId)
     }
 
+
+
     render() {
 
         const { lang, setLang, scenes, scene } = this.props;
@@ -47,20 +63,6 @@ class Stikers extends React.Component {
 
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
-
-        const Stiker = posed.div({
-            draggable: true,
-            init: { scale: 1 },
-            drag: {
-                scale: 1.3,
-            },
-
-            dragEnd: {
-                x: 0,
-                y: 0,
-                transition: { type: 'spring' }
-            }
-        });
 
         console.log(banner, bannerurl)
 
