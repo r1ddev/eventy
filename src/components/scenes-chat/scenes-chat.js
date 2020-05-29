@@ -147,7 +147,7 @@ class MessageItem extends React.Component {
         let newAvatar = origin + "/images/avatar/" + avatar;
 
         return (
-            <div className="message-item" style={{ backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>
+            <div className="message-item" style={{ backgroundColor: `${(ad ? '#FFE800' : 'white')}` }}>
                 <div className="mes-photo-wrapper">
                     <Link to={"/profile/" + id} target="_blank">
                         <div className="mes-photo" style={avatar ? { backgroundImage: `url(${newAvatar})` } : {}}></div>
@@ -155,7 +155,7 @@ class MessageItem extends React.Component {
                 </div>
 
                 <div className="mes-info">
-                    <div className="mes-info-name">{name}<span className="mes-info-status">{(sponsor ? 'UMF' : '')}</span></div>
+                    <div className="mes-info-name">{name}<span className="mes-info-status" style={{ padding: `${(sponsor ? '5px' : '0px')}`, backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>{(sponsor ? 'UMF' : '')}</span></div>
                     <div className="mes-info-content">
                         <Linkify
                             properties={{ target: '_blank' }}
