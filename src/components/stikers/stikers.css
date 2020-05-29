@@ -42,6 +42,8 @@
 
 .banner-wrapper{
 	margin: 10px 20px;
+	display: flex;
+    align-items: center;
 }
 
 .banner{
