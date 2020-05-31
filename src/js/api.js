@@ -3,8 +3,8 @@ import axios from 'axios';
 const api = {
 	// proxy: "https://cors-anywhere.herokuapp.com/",
 	proxy: "",
-	origin: "https://eventy.riddev.com",
-	host: "https://eventy.riddev.com/api",
+	origin: "https://onlineshow.marketingforum.com.ua",
+	host: "https://onlineshow.marketingforum.com.ua/api",
 
 	useAuth: () => {
 		return {

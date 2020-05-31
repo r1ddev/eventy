@@ -3,8 +3,8 @@ import axios from 'axios'
 export default class IdeaFirstApiService {
 
 
-    origin = "https://eventy.riddev.com";
-    host = "https://eventy.riddev.com/api"
+    origin = "https://onlineshow.marketingforum.com.ua";
+    host = "https://onlineshow.marketingforum.com.ua/api";
 
     useAuth = () => {
         return {
@@ -84,9 +84,9 @@ export default class IdeaFirstApiService {
         })
     }
 
-    getBanner() {
+    getBanner(sceneId) {
         return new Promise((resolve, reject) => {
-            axios.get(this.origin + `/static-api/banners`, this.useAuth())
+            axios.get(this.origin + `/static-api/banners/${sceneId}`, this.useAuth())
                 .then(res => {
                     if (res.data.status) {
                         resolve(res.data);

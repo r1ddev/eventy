@@ -38,8 +38,9 @@ class Stikers extends React.Component {
 
     getBanner = () => {
         const api = new IdeaFirstApiService();
+        const idScene = this.props.scene
 
-        api.getBanner()
+        api.getBanner(idScene)
             .then((res) => {
                 if (this._ismounted) {
                     this.setState({ banner: res.data.image, bannerurl: res.data.url })
