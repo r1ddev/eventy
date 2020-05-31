@@ -155,7 +155,12 @@ class MessageItem extends React.Component {
                 </div>
 
                 <div className="mes-info">
-                    <div className="mes-info-name">{name}<span className="mes-info-status" style={{ padding: `${(sponsor ? '5px' : '0px')}`, backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>{(sponsor ? 'UMF' : '')}</span></div>
+
+                    <Link to={"/profile/" + id} target="_blank" className="mes-info-name">
+                        {name}
+
+                        <span className="mes-info-status" style={{ padding: `${(sponsor ? '5px' : '0px')}`, backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>{(sponsor ? 'UMF' : '')}</span>
+                    </Link>
                     <div className="mes-info-content">
                         <Linkify
                             properties={{ target: '_blank' }}
