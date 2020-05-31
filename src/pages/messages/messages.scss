@@ -7,6 +7,16 @@
 		height: 100%;
 		overflow: hidden;
 
+		.mes-padding {
+			padding-top: 1rem !important;
+			padding-bottom: 1rem !important;
+
+			.mes-padding-left {
+				border-radius: 19px;
+				overflow: hidden;
+			}
+		}
+
 		.users-list {
 			height: 100%;
 			background-color: #f5f5f5;

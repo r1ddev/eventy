@@ -94,30 +94,33 @@ class Networking extends React.Component {
 								return (
 									// <Card className="" key={index}>
 									<div className="card" key={index}>
-										<div className="row">
-											<div className="col-4">
-												<Link className="card-link2" to={"/messages/" + user.id}>
+										<Link className="card-link2" to={"/messages/" + user.id}>
+											<div className="row">
+												<div className="col-4">
+													{/* <Link className="card-link2" to={"/messages/" + user.id}> */}
 													<div className="ava">
-														<Link className="card-link2" to={"/messages/" + user.id}>
-															{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
-															{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
-														</Link>
+														{/* <Link className="card-link2" to={"/messages/" + user.id}> */}
+														{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
+														{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
+														{/* </Link> */}
 													</div>
-												</Link>
+													{/* </Link> */}
+												</div>
+
+												<div className="col d-flex justify-content-center flex-column">
+													<div className="name">{user.first_name}</div>
+													<div className="desc">{user.position + " в " + user.company}</div>
+												</div>
 											</div>
 
-											<div className="col d-flex justify-content-center flex-column">
-												<div className="name">{user.first_name}</div>
-												<div className="desc">{user.position + " в " + user.company}</div>
-											</div>
-										</div>
+											<div className="title">Что предлагаю:</div>
+											<div className="text">{user.what_offer}</div>
 
-										<div className="title">Что предлагаю:</div>
-										<div className="text">{user.what_offer}</div>
-
-										<div className="title mt-5">Что ищу:</div>
-										<div className="text">{user.what_looking}</div>
+											<div className="title mt-5">Что ищу:</div>
+											<div className="text">{user.what_looking}</div>
+										</Link>
 									</div>
+
 									// </Card>
 								);
 							})}
