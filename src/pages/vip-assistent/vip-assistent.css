@@ -13,7 +13,6 @@
 }
 
 .ass-chat {
-	height: 100%;
 	background: white;
 	grid-column-start: 3;
 	grid-row: 2 / span 2;
