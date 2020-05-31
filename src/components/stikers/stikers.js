@@ -49,7 +49,7 @@ class Stikers extends React.Component {
 
         this.timerId = setTimeout(() => {
             this.getBanner();
-        }, 1000)
+        }, 30000)
 
     }
 
