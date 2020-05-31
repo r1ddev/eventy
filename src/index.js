@@ -23,7 +23,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<ApiServiceProvider value={apiService}>
 			<ToastContainer />
-			<Router basename={'/front/app'}>
+			<Router>
 				<Switch>
 					<Route path="/profile/edit" component={Registration} />
 					<Route path="/profile/:id" component={Profile} />
