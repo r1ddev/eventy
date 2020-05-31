@@ -209,7 +209,7 @@ class Exposure extends React.Component {
 		let partnersList = partners.map((partner) => {
 			return (
 
-				<a href={partner.link} className="card">
+				<a target="_blank" href={partner.link} className="card" onClick={() => this.props.postUrl(partner.link)}>
 					<div className="row head m-0">
 						<div className="col-7 name flex-center">{partner.name}</div>
 						<div className="col-5 logo flex-center">
@@ -253,7 +253,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		postUrl: (url) => { apiService.postUrl(url) }
+	};
 };
 
 export default compose(
