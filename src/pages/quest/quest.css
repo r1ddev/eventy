@@ -3,7 +3,7 @@
 	min-height: 100%;
 	width: 100%;
 	grid-template-columns: 20px 1fr 10px 1fr 20px;
-	grid-template-rows: 20px 1fr 10px 1fr 20px;
+	grid-template-rows: 76px 20px 1fr 10px 1fr 20px;
 }
 
 .quest-item {
@@ -22,24 +22,29 @@
 	width: 100%;
 }
 
-.quest-item:nth-child(1) {
-	grid-column-start: 2;
-	grid-row-start: 2;
+.quest-header{
+	grid-column: 1 / span 5;
+	grid-row-start: 1;
 }
 
 .quest-item:nth-child(2) {
-	grid-column-start: 4;
-	grid-row-start: 2;
+	grid-column-start: 2;
+	grid-row-start: 3;
 }
 
 .quest-item:nth-child(3) {
-	grid-column-start: 2;
-	grid-row-start: 4;
+	grid-column-start: 4;
+	grid-row-start: 3;
 }
 
 .quest-item:nth-child(4) {
+	grid-column-start: 2;
+	grid-row-start: 5;
+}
+
+.quest-item:nth-child(5) {
 	grid-column-start: 4;
-	grid-row-start: 4;
+	grid-row-start: 5;
 }
 
 .quest-item > img {
