@@ -9,7 +9,6 @@ import Spikers from "./pages/spikers";
 import Messages from "./pages/messages";
 import Exposure from "./pages/exposure";
 import Conversations from "./pages/conversations";
-import Party from "./pages/party";
 import VipAssistent from "./pages/vip-assistent";
 import Frame from "./components/frame";
 import Desk from "./pages/desk/desk";
@@ -53,7 +52,6 @@ class App extends React.Component {
 						<Route exact path="/exposure" component={Exposure} />
 						<Route exact path="/conversations" component={Conversations} />
 						<Route exact path="/conversations/:room" component={ConversationsRoom} />
-						<Route exact path="/party" component={Party} />
 						<Route exact path="/quest" component={Quest} />
 						<Route exact path="/vip-assistent" component={VipAssistent} />
 						<Route exact path="/networking" component={Networking} />
