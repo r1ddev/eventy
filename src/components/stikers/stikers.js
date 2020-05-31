@@ -68,9 +68,6 @@ class Stikers extends React.Component {
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
 
-        console.log('banners', banner, bannerurl)
-
-
         return (
             <div id="stikers">
                 <div className="wrapper-of-wrappers">

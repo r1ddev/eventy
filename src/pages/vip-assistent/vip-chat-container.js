@@ -61,8 +61,6 @@ class VipChatContainer extends React.Component {
             messages,
         } = this.props.vipchat
 
-        console.log(this.props)
-
         return (
 
             <ScenesChat

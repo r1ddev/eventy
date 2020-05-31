@@ -102,8 +102,6 @@ class СonversationsContainer extends React.Component {
 		this.props.fetchUser();
 
 		api.account.conversations.getRooms().then((res) => {
-			// console.log(res);
-
 			this.props.conversationRoomsLoaded(res.rooms);
 		});
 	}
