@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { browserHistory } from 'react-router';
 import './index.css';
 
 import App from './App';
@@ -18,24 +19,37 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const apiService = new IdeaFirstApiService();
 
+// browserHistory.listen(location => {
+// 	console.log(location)
+// });
+
+class Index extends React.Component {
+
+	render() {
+		return (
+			<Provider store={store}>
+				<ApiServiceProvider value={apiService}>
+					<ToastContainer />
+					<Router>
+						<Switch>
+							<Route path="/profile/edit" component={Registration} />
+							<Route path="/profile/:id" component={Profile} />
+							<Route path="/profile" component={Profile} />
+							<Route path="/error" component={ErrorPage} />
+
+							<Route path="/" component={App} />
+						</Switch>
+					</Router>
+
+				</ApiServiceProvider>
+			</Provider>
+		)
+	}
+}
+
+
 ReactDOM.render(
-
-	<Provider store={store}>
-		<ApiServiceProvider value={apiService}>
-			<ToastContainer />
-			<Router>
-				<Switch>
-					<Route path="/profile/edit" component={Registration} />
-					<Route path="/profile/:id" component={Profile} />
-					<Route path="/profile" component={Profile} />
-					<Route path="/error" component={ErrorPage} />
-
-					<Route path="/" component={App} />
-				</Switch>
-			</Router>
-
-		</ApiServiceProvider>
-	</Provider>
+	<Index />
 
 	, document.getElementById('root')
 );

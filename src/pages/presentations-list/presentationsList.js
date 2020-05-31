@@ -52,7 +52,7 @@ class PresentationsList extends React.Component {
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
-							Связь с организаторами
+							Связь <br />с организаторами
 						</Link>
 					</div>
 				</Header>
