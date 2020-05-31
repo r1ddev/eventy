@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/App.scss";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 
 import Presentations from "./pages/presentations";
@@ -42,6 +42,7 @@ class App extends React.Component {
 				<Frame>
 					<Switch>
 						{/* Готово/не готово*/}
+						<Route exact path="/" component={Desk} />
 						<Route exact path="/desk" component={Desk} />
 						<Route exact path="/presentations" component={Presentations} />
 						<Route exact path="/presentations/:folder" component={PresentationsList} />
@@ -56,6 +57,7 @@ class App extends React.Component {
 						<Route exact path="/quest" component={Quest} />
 						<Route exact path="/vip-assistent" component={VipAssistent} />
 						<Route exact path="/networking" component={Networking} />
+						<Redirect to="/error" />
 					</Switch>
 				</Frame>
 			</div>
