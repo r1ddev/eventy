@@ -193,8 +193,8 @@ class Messages extends React.Component {
 				</Header>
 				<div className="container-fluid">
 					<div className="row h-100">
-						<div className="col-md-8">
-							<div className="row h-100">
+						<div className="col-md-8 mes-padding">
+							<div className="row h-100 mes-padding-left m-0">
 								<div className="col-5 p-0">
 									<div className="users-list">
 										{users.map((user, index) => {
