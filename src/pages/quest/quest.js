@@ -25,18 +25,18 @@ class Quest extends React.Component {
                     </Header>
                 </div>
                 <div className="quest-item">
-                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/1.svg")})` }}></a>
+                    <a target="_blank" href="https://us5.campaign-archive.com/?e=&u=df5d96ca282cfa5c02d25b866&id=c7b5b01fa7" style={{ backgroundImage: `url(${require("../../images/quests/1.svg")})` }}></a>
                 </div>
                 <div className="quest-item">
-                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/2.svg")})` }}></a>
+                    <a target="_blank" href="https://us02web.zoom.us/j/85361467305" style={{ backgroundImage: `url(${require("../../images/quests/2.svg")})` }}></a>
 
                 </div>
                 <div className="quest-item">
-                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/3.svg")})` }}></a>
+                    <a target="_blank" href="https://us02web.zoom.us/j/81068736989" style={{ backgroundImage: `url(${require("../../images/quests/3.svg")})` }}></a>
 
                 </div>
                 <div className="quest-item">
-                    <a href="#" style={{ backgroundImage: `url(${require("../../images/quests/4.svg")})` }}></a>
+                    <a target="_blank" href="https://us02web.zoom.us/j/87149984911?pwd=Rnc0S3RYRmk5blNvdVVxcVY0a1NBQT09" style={{ backgroundImage: `url(${require("../../images/quests/4.svg")})` }}></a>
 
                 </div>
             </div>
