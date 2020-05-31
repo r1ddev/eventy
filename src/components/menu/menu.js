@@ -41,7 +41,7 @@ class Menu extends React.Component {
 				<MenuItem icon={exposure} label="Экспозона" link="/exposure"></MenuItem>
 				{((range !== 1) && (range !== 2)) && <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>}
 				<MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
-				{(range !== 1) && <MenuItem icon={party} label="Вечеринка" link="/party"></MenuItem>}
+				{(range !== 1) && <MenuItem icon={party} label="Вечеринка" out={true} link="https://us5.campaign-archive.com/?e=&u=df5d96ca282cfa5c02d25b866&id=a9931072e8"></MenuItem>}
 				{((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
 					icon={vipassistent}
 					label="Ассистент для вип"
@@ -54,15 +54,23 @@ class Menu extends React.Component {
 
 class MenuItem extends React.Component {
 	render() {
-		const { label, link, icon } = this.props;
+		const { label, link, icon, out = false } = this.props;
 
 		return (
-			<Link to={link} className="menu-item flex-center">
-				<div className="menu-item-icon-wrap">
-					<img alt="" src={icon} className="menu-item-icon" />
-				</div>
-				<div className="menu-item-label">{label}</div>
-			</Link>
+			<>
+				{(!out) && <Link to={link} className="menu-item flex-center">
+					<div className="menu-item-icon-wrap">
+						<img alt="" src={icon} className="menu-item-icon" />
+					</div>
+					<div className="menu-item-label">{label}</div>
+				</Link>}
+				{(out) && <a target="_blank" href={link} className="menu-item flex-center">
+					<div className="menu-item-icon-wrap">
+						<img alt="" src={icon} className="menu-item-icon" />
+					</div>
+					<div className="menu-item-label">{label}</div>
+				</a>}
+			</>
 		);
 	}
 }
