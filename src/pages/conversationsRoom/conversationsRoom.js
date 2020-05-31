@@ -61,7 +61,7 @@ class СonversationsRoom extends React.Component {
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
-							Связь с организаторами
+							Связь <br />с организаторами
 						</Link>
 					</div>
 				</Header>
@@ -81,7 +81,6 @@ class СonversationsRoom extends React.Component {
 class СonversationsRoomContainer extends React.Component {
 
 	componentDidMount() {
-		console.log(this.props.conversations);
 
 		if (!this.props.conversations.isLoaded) {
 			api.account.conversations.getRooms().then(res => {
@@ -102,7 +101,6 @@ class СonversationsRoomContainer extends React.Component {
 
 		let errorUserPermissions = false;
 		if (user) errorUserPermissions = error || user.range === 1 || user.range === 2
-		console.log(loading)
 
 		return (
 

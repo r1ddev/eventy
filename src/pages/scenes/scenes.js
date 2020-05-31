@@ -35,8 +35,6 @@ class Scenes extends React.Component {
         let origin = "https://onlineshow.marketingforum.com.ua";
         let newAvatar = origin + "/images/avatar/" + user.avatar;
 
-        console.log(newAvatar)
-
         return (
             <div id="scenes">
                 <div className="scenes-translation">

@@ -76,7 +76,7 @@ class Networking extends React.Component {
 
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
-							Связь с организаторами
+							Связь <br />с организаторами
 						</Link>
 					</div>
 				</Header>
@@ -98,11 +98,11 @@ class Networking extends React.Component {
 											<div className="col-4">
 												<Link className="card-link2" to={"/messages/" + user.id}>
 													<div className="ava">
-													  <Link className="card-link2" to={"/messages/" + user.id}>
-														  {user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
-														  {!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
-													  </Link>
-												  </div>
+														<Link className="card-link2" to={"/messages/" + user.id}>
+															{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
+															{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
+														</Link>
+													</div>
 												</Link>
 											</div>
 

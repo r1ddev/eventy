@@ -96,7 +96,7 @@ class Messages extends React.Component {
 				try {
 					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
 					message.text = dec.toString(CryptoJS.enc.Utf8);
-				} catch (error) {}
+				} catch (error) { }
 			}
 			return { ...message, message: message.text };
 		});
@@ -127,7 +127,7 @@ class Messages extends React.Component {
 
 		api.account.messages
 			.sendMessages(this.state.activeUser.user_id, encMessage || message)
-			.then((res) => {})
+			.then((res) => { })
 			.catch((e) => console.log(e));
 
 		let m = this.state.messages;
@@ -187,7 +187,7 @@ class Messages extends React.Component {
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
-							Связь с организаторами
+							Связь <br />с организаторами
 						</Link>
 					</div>
 				</Header>

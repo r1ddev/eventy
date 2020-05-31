@@ -40,7 +40,7 @@ class Сonversations extends React.Component {
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
-							Связь с организаторами
+							Связь <br />с организаторами
 						</Link>
 					</div>
 				</Header>
@@ -102,8 +102,6 @@ class СonversationsContainer extends React.Component {
 		this.props.fetchUser();
 
 		api.account.conversations.getRooms().then((res) => {
-			// console.log(res);
-
 			this.props.conversationRoomsLoaded(res.rooms);
 		});
 	}

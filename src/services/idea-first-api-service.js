@@ -133,6 +133,24 @@ export default class IdeaFirstApiService {
         })
     }
 
+    postUrl(url) {
+        console.log('postUrl', url)
+        return new Promise((resolve, reject) => {
+            axios.post(this.host + "/statistics/url", this.toFormData({
+                url: url
+            }), this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     postVipMessage(userId, text) {
         return new Promise((resolve, reject) => {
             axios.post(this.host + "/personal/messages", this.toFormData({

@@ -88,7 +88,6 @@ button:focus {
 	border: 0;
 }
 #scenes-chat .send-mes-btn {
-	width: 20%;
 	padding: 0px;
 	background-color: white;
 	font-size: 23px;
@@ -182,7 +181,7 @@ button:focus {
 }
 
 .chat-input-wrapper {
-	width: 80%;
+	flex-grow: 1;
 }
 
 .react-emoji-picker--wrapper {
