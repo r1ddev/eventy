@@ -33,8 +33,8 @@ class Menu extends React.Component {
 				</div>
 				<MenuItem icon={desk} label="Infodesk" link="/desk"></MenuItem>
 				<MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
-				<MenuItem icon={program} label="Программа" link="/"></MenuItem>
-				<MenuItem icon={spikers} label="Спикеры" link="/spikers"></MenuItem>
+				<MenuItem icon={program} label="Программа" out={true} link="https://marketingforum.com.ua/ru/home/programm-extended/"></MenuItem>
+				<MenuItem icon={spikers} label="Спикеры" out={true} link="https://marketingforum.com.ua/ru/speakers/"></MenuItem>
 				<MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
 				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
 				<MenuItem icon={messages} label="Мои сообщения" link="/messages"></MenuItem>
