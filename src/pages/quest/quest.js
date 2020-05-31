@@ -8,6 +8,8 @@ import { compose } from '../../utils';
 import { fetchUser } from '../../actions/user-actions';
 import ErrorIndicator from '../../components/error-indicator'
 import NoPermissions from '../../components/no-permissions';
+import Spinner from '../../components/spinner';
+
 
 class Quest extends React.Component {
 
@@ -15,7 +17,7 @@ class Quest extends React.Component {
         return (
             <div id="quest">
                 <div className="quest-header">
-                    <Header data={null}>
+                    <Header data={this.props.user}>
                         <></>
                         <div className="col d-flex align-items-center p-0">
                             <Link to="/messages/5" className="action-link">
@@ -48,25 +50,38 @@ class QuestContainer extends React.Component {
 
 
     componentDidMount() {
+        this.props.fetchUser()
     }
     render() {
+        const { loading, user } = this.props.user;
 
         return (
-            <Quest />
+
+
+            <div style={{ height: '100%', width: '100%' }}>
+                {
+                    (!loading) &&
+                    <Quest user={user} />
+                }
+                {
+                    (loading) && <Spinner big={1} />
+                }
+
+            </div>
         )
     }
 
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ user }) => {
     return {
-
+        user: user
     }
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
-
+        fetchUser: fetchUser(apiService, dispatch)
     }
 };
 
