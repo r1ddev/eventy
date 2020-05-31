@@ -160,6 +160,12 @@ button:focus {
 	font-weight: normal;
 	font-size: 15px;
 	line-height: 16px;
+	color: black;
+}
+
+a.mes-info-name{
+	text-decoration: none;
+	color: black;
 }
 
 .mes-info-content {
