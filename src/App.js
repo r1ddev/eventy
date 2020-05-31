@@ -5,7 +5,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import Presentations from "./pages/presentations";
 import Scenes from "./pages/scenes";
-import Spikers from "./pages/spikers";
 import Messages from "./pages/messages";
 import Exposure from "./pages/exposure";
 import Conversations from "./pages/conversations";
@@ -40,13 +39,11 @@ class App extends React.Component {
 			<div className="App">
 				<Frame>
 					<Switch>
-						{/* Готово/не готово*/}
 						<Route exact path="/" component={Desk} />
 						<Route exact path="/desk" component={Desk} />
 						<Route exact path="/presentations" component={Presentations} />
 						<Route exact path="/presentations/:folder" component={PresentationsList} />
 						<Route exact path="/scenes" component={Scenes} />
-						<Route exact path="/spikers" component={Spikers} />
 						<Route exact path="/messages" component={Messages} />
 						<Route exact path="/messages/:id" component={Messages} />
 						<Route exact path="/exposure" component={Exposure} />

@@ -123,7 +123,7 @@ class Stikers extends React.Component {
                 </div>
 
                 <div className="timetable-wrapper">
-                    <a style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
+                    <a href="https://marketingforum.com.ua/ru/home/programm-extended/" target="_blank" style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
                 </div>
             </div>
         )
