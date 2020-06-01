@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { browserHistory } from 'react-router';
 import './index.css';
 
 import App from './App';
@@ -19,11 +18,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const apiService = new IdeaFirstApiService();
 
-// browserHistory.listen(location => {
-// 	console.log(location)
-// });
+
 
 class Index extends React.Component {
+
 
 	render() {
 		return (

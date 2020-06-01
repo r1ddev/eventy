@@ -75,7 +75,7 @@ class Stikers extends React.Component {
                     {(!banner) && <div className="emoji-stikers-wrapper">
                         <div className="emoji-stikers">
                             <div className="emoji-stikers-caption">
-                                ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
+                                ОЦЕНИТЕ ВЫСТУПЛЕНИЕ
                         </div>
                             <div className="emoji-stikers-list">
 

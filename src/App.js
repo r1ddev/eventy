@@ -1,8 +1,6 @@
 import React from "react";
 import "./css/App.scss";
 import { Switch, Route, Redirect } from "react-router-dom";
-
-
 import Presentations from "./pages/presentations";
 import Scenes from "./pages/scenes";
 import Messages from "./pages/messages";
@@ -18,6 +16,7 @@ import ConversationsRoom from "./pages/conversationsRoom";
 import { connect } from 'react-redux';
 import { compose } from './utils';
 import api from './js/api';
+import withApiService from './components/hoc/with-api-service'
 import { setUserData } from './actions/user-actions';
 
 class App extends React.Component {
@@ -33,6 +32,23 @@ class App extends React.Component {
 			this.props.history.push("/error")
 		}
 	}
+
+	componentWillMount() {
+		const { history } = this.props;
+		this.unsubscribeFromHistory = history.listen(() => this.handleLocationChange(window.location.href));
+		this.handleLocationChange(window.location.href);
+	}
+
+	componentWillUnmount() {
+		if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
+	}
+
+	handleLocationChange = (location) => {
+		console.log(location)
+		this.props.postUrl(location)
+
+	}
+
 
 	render() {
 		return (
@@ -66,10 +82,14 @@ const mapStateToProps = ({ user }) => {
 	}
 };
 
-const mapDispatchToProps = (dispatch, { }) => {
+const mapDispatchToProps = (dispatch, { apiService }) => {
 	return {
 		setUser: (userData) => setUserData(userData, dispatch),
+		postUrl: (url) => apiService.postUrl(url)
 	}
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(App);
+
+export default compose(
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps))(App);

@@ -149,7 +149,6 @@ export default class IdeaFirstApiService {
     }
 
     postUrl(url) {
-        console.log('postUrl', url)
         return new Promise((resolve, reject) => {
             axios.post(this.host + "/statistics/url", this.toFormData({
                 url: url
