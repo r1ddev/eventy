@@ -121,6 +121,8 @@ class Messages extends React.Component {
 			messages: messages.messages,
 		});
 
+		this.refs.scenesChat.onUpdate(true);
+
 		clearTimeout(this.updateTimeout);
 		this.updateTimeout = setTimeout(() => {
 			this.fetchMessages(userId);
