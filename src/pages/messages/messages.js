@@ -174,6 +174,16 @@ class Messages extends React.Component {
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
 
+		const isContactAvailable =
+			activeUser.mail ||
+			activeUser.phone ||
+			activeUser.social_site ||
+			activeUser.what_offer ||
+			activeUser.what_looking ||
+			false;
+
+		console.log("isContactAvailable", isContactAvailable);
+
 		return (
 			<div id="messages">
 				<IdleTimer
@@ -277,28 +287,20 @@ class Messages extends React.Component {
 											</div>
 										</div>
 
-										{activeUser.mail &&
-											activeUser.phone &&
-											activeUser.social_site &&
-											activeUser.what_offer &&
-											activeUser.what_looking && (
-												<div className="card card-contacts flex-center p-4 px-5 mt-3">
-													<div className="title">Контакты:</div>
-													<div className="desc">{activeUser.mail}</div>
-													<div className="desc">{activeUser.phone}</div>
-													<div className="desc">
-														{activeUser.social_site}
-													</div>
-													<div className="title">Что предлагаю:</div>
-													<div className="desc">
-														{activeUser.what_offer}
-													</div>
-													<div className="title">Что ищу:</div>
-													<div className="desc">
-														{activeUser.what_looking}
-													</div>
+										{isContactAvailable && (
+											<div className="card card-contacts flex-center p-4 px-5 mt-3">
+												<div className="title">Контакты:</div>
+												<div className="desc">{activeUser.mail}</div>
+												<div className="desc">{activeUser.phone}</div>
+												<div className="desc">{activeUser.social_site}</div>
+												<div className="title">Что предлагаю:</div>
+												<div className="desc">{activeUser.what_offer}</div>
+												<div className="title">Что ищу:</div>
+												<div className="desc">
+													{activeUser.what_looking}
 												</div>
-											)}
+											</div>
+										)}
 									</>
 								)}
 							</div>
