@@ -53,6 +53,19 @@ class Stikers extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.scene !== this.props.scene) {
+            const api = new IdeaFirstApiService();
+            const idScene = this.props.scene
+            api.getBanner(idScene)
+                .then((res) => {
+                    if (this._ismounted) {
+                        this.setState({ banner: res.data.image, bannerurl: res.data.url })
+                    }
+                })
+        }
+    }
+
     componentWillUnmount() {
         this._ismounted = false;
         clearTimeout(this.timerId)
