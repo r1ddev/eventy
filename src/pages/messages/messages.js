@@ -17,15 +17,17 @@ class Messages extends React.Component {
 		users: [],
 		activeUser: {},
 		messages: [],
-		updateTimeout: undefined,
-		updateTimer: 5000,
 	};
+
+	updateTimer = 5000;
+	updateTimeout = undefined;
+	timeout = undefined;
 
 	componentDidMount() {
 		this.fetchData();
 	}
 
-	fetchData = () => {
+	fetchData = (setUser = true) => {
 		api.account.messages
 			.getDialogs()
 			.then((res) => {
@@ -37,13 +39,20 @@ class Messages extends React.Component {
 						users: res.dialogs,
 					},
 					() => {
-						if (this.props.match.params.id) {
-							this.setUser(this.props.match.params.id);
+						if (setUser) {
+							if (this.props.match.params.id) {
+								this.setUser(this.props.match.params.id);
+							}
 						}
 					}
 				);
 			})
 			.catch((e) => console.log(e));
+
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(() => {
+			this.fetchData(false);
+		}, this.updateTimer);
 	};
 
 	asetState = (newState) => {
@@ -56,6 +65,7 @@ class Messages extends React.Component {
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		if (activeUser !== undefined) {
+			activeUser.read = 1;
 			await this.asetState({
 				activeUser: activeUser,
 			});
@@ -79,7 +89,6 @@ class Messages extends React.Component {
 			});
 		}
 
-		clearTimeout(this.state.updateTimeout);
 		await this.fetchMessages(userId);
 
 		this.refs.scenesChat.onUpdate(true);
@@ -96,7 +105,7 @@ class Messages extends React.Component {
 				try {
 					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
 					message.text = dec.toString(CryptoJS.enc.Utf8);
-				} catch (error) { }
+				} catch (error) {}
 			}
 			return { ...message, message: message.text };
 		});
@@ -105,13 +114,10 @@ class Messages extends React.Component {
 			messages: messages.messages,
 		});
 
-		let timeout = setTimeout(() => {
+		clearTimeout(this.updateTimeout);
+		this.updateTimeout = setTimeout(() => {
 			this.fetchMessages(userId);
-		}, this.state.updateTimer);
-
-		await this.asetState({
-			updateTimeout: timeout,
-		});
+		}, this.updateTimer);
 	};
 
 	sendMessage = (message) => {
@@ -127,7 +133,7 @@ class Messages extends React.Component {
 
 		api.account.messages
 			.sendMessages(this.state.activeUser.user_id, encMessage || message)
-			.then((res) => { })
+			.then((res) => {})
 			.catch((e) => console.log(e));
 
 		let m = this.state.messages;
@@ -150,23 +156,16 @@ class Messages extends React.Component {
 	};
 
 	componentWillUnmount() {
-		clearTimeout(this.state.updateTimeout);
+		clearTimeout(this.updateTimeout);
+		clearTimeout(this.timeout);
 	}
 
 	onActive = async (e) => {
-		await this.asetState({
-			updateTimer: 5000,
-		});
-
-		if (Object.entries(this.state.activeUser).length > 0) {
-			this.setUser(this.state.activeUser.user_id);
-		}
+		this.updateTimer = 5000;
 	};
 
 	onIdle = (e) => {
-		this.setState({
-			updateTimer: 30000,
-		});
+		this.updateTimer = 30000;
 	};
 
 	render() {
@@ -181,7 +180,7 @@ class Messages extends React.Component {
 					element={document}
 					onActive={this.onActive}
 					onIdle={this.onIdle}
-					timeout={1000 * 60}
+					timeout={1000 * 30}
 				/>
 				<Header data={data}>
 					<></>
@@ -210,6 +209,9 @@ class Messages extends React.Component {
 														<div className="row align-items-center">
 															<div className="col-auto">
 																<div className="ava">
+																	{!user.read && (
+																		<div className="unread"></div>
+																	)}
 																	<img
 																		src={
 																			api.auth.getAvatarLocation() +
@@ -275,16 +277,28 @@ class Messages extends React.Component {
 											</div>
 										</div>
 
-										<div className="card card-contacts flex-center p-4 px-5 mt-3">
-											<div className="title">Контакты:</div>
-											<div className="desc">{activeUser.mail}</div>
-											<div className="desc">{activeUser.phone}</div>
-											<div className="desc">{activeUser.social_site}</div>
-											<div className="title">Что предлагаю:</div>
-											<div className="desc">{activeUser.what_offer}</div>
-											<div className="title">Что ищу:</div>
-											<div className="desc">{activeUser.what_looking}</div>
-										</div>
+										{activeUser.mail &&
+											activeUser.phone &&
+											activeUser.social_site &&
+											activeUser.what_offer &&
+											activeUser.what_looking && (
+												<div className="card card-contacts flex-center p-4 px-5 mt-3">
+													<div className="title">Контакты:</div>
+													<div className="desc">{activeUser.mail}</div>
+													<div className="desc">{activeUser.phone}</div>
+													<div className="desc">
+														{activeUser.social_site}
+													</div>
+													<div className="title">Что предлагаю:</div>
+													<div className="desc">
+														{activeUser.what_offer}
+													</div>
+													<div className="title">Что ищу:</div>
+													<div className="desc">
+														{activeUser.what_looking}
+													</div>
+												</div>
+											)}
 									</>
 								)}
 							</div>
