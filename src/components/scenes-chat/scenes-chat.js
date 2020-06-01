@@ -27,7 +27,7 @@ class ScenesChat extends React.Component {
             let scrollPosition = this.refs.scrollbar.scrollTop + this.refs.scrollbar.clientHeight
             let delta = this.refs.scrollbar.scrollHeight - scrollPosition
 
-            if (delta < 200 || force) {
+            if (delta < 400 || force) {
                 this.refs.scrollbar.scrollToBottom()
             }
         }
