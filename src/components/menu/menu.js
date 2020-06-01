@@ -23,7 +23,11 @@ class Menu extends React.Component {
 		const quest = require("../../images/icons/quest.svg");
 		const vipassistent = require("../../images/icons/vipassistent.svg");
 
-		const { range } = this.props;
+		const { range, notifications } = this.props;
+
+		const { newMessages, newVipMessages } = notifications;
+		console.log(this.props)
+
 
 
 		return (
@@ -37,7 +41,7 @@ class Menu extends React.Component {
 				<MenuItem icon={spikers} label="Спикеры" out={true} link="https://marketingforum.com.ua/ru/speakers/"></MenuItem>
 				<MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
 				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
-				<MenuItem icon={messages} label="Мои сообщения" link="/messages"></MenuItem>
+				<MenuItem icon={messages} label="Мои сообщения" link="/messages" notifications={newMessages}></MenuItem>
 				<MenuItem icon={exposure} label="Экспозона" link="/exposure"></MenuItem>
 				{((range !== 1) && (range !== 2)) && <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>}
 				<MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
@@ -45,7 +49,9 @@ class Menu extends React.Component {
 				{((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
 					icon={vipassistent}
 					label="Ассистент для вип"
-					link="/vip-assistent"></MenuItem>
+					link="/vip-assistent"
+					notifications={newVipMessages}
+				></MenuItem>
 				}
 			</div>
 		);
@@ -54,13 +60,14 @@ class Menu extends React.Component {
 
 class MenuItem extends React.Component {
 	render() {
-		const { label, link, icon, out = false } = this.props;
+		const { label, link, icon, out = false, notifications = false } = this.props;
 
 		return (
 			<>
 				{(!out) && <Link to={link} className="menu-item flex-center">
 					<div className="menu-item-icon-wrap">
 						<img alt="" src={icon} className="menu-item-icon" />
+						{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
 					</div>
 					<div className="menu-item-label">{label}</div>
 				</Link>}
@@ -88,7 +95,7 @@ class MenuContainer extends React.Component {
 		if (user) range = user.range
 
 		return (
-			<Menu range={range} />
+			<Menu range={range} {...this.props} />
 		)
 	}
 

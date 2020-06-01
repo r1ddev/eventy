@@ -99,6 +99,21 @@ export default class IdeaFirstApiService {
         })
     }
 
+    getPersonalMessages() {
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/personal/messages`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     updateMessages(chatId, id) {
         return new Promise((resolve, reject) => {
             axios.get(this.host + `/group/messages/from/${id}?chat_id=${chatId}`, this.useAuth())
