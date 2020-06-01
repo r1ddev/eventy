@@ -8,6 +8,7 @@ import api from "./../../js/api";
 import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
 import IdleTimer from "react-idle-timer";
+import { setMessagesNotifications } from "../../actions/notifications-actions";
 
 import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
@@ -63,6 +64,12 @@ class Messages extends React.Component {
 
 	setUser = async (userId) => {
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
+
+		let unreadCount = this.state.users.filter((u) => u.read == 0).length;
+
+		if (unreadCount > 0) {
+			this.props.setMessagesNotifications(false);
+		}
 
 		if (activeUser !== undefined) {
 			activeUser.read = 1;
@@ -322,7 +329,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		setMessagesNotifications: (n) => dispatch(setMessagesNotifications(n)),
+	};
 };
 
 export default compose(
