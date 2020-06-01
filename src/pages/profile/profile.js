@@ -28,6 +28,14 @@ class Registration extends React.Component {
 
 	componentDidMount() {
 		this.fetchData();
+
+		console.log("history", this.props.history);
+		console.log("history", this.props.history.length);
+
+	}
+
+	goBack = () => {
+		this.props.history.length == 1 ? window.close() : this.props.history.goBack()
 	}
 
 	fetchData = async () => {
@@ -135,7 +143,7 @@ class Registration extends React.Component {
 			<LoadingOverlay active={isLoading} spinner text="Загрузка" className="">
 				<div className="bg-light flex-center min-vh-100">
 					<div className="container" id="registration">
-						<div className="back" onClick={() => this.props.history.goBack()}></div>
+						<div className="back" onClick={() => this.goBack()}></div>
 						<div className="profile-wrap">
 							<div className="row m-0">
 								<div className="col-md-5 left p-5">
