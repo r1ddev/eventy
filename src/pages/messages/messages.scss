@@ -7,6 +7,16 @@
 		height: 100%;
 		overflow: hidden;
 
+		.mes-padding {
+			padding-top: 1rem !important;
+			padding-bottom: 1rem !important;
+
+			.mes-padding-left {
+				border-radius: 19px;
+				overflow: hidden;
+			}
+		}
+
 		.users-list {
 			height: 100%;
 			background-color: #f5f5f5;
@@ -24,9 +34,21 @@
 				.ava {
 					height: 40px;
 					width: 40px;
+					position: relative;
+
+					.unread {
+						position: absolute;
+						right: -5px;
+						top: -5px;
+						border-radius: 50%;
+						width: 10px;
+						height: 10px;
+						background: #ff0000;
+					}
 
 					img {
 						width: 100%;
+						border-radius: 8px;
 					}
 				}
 
