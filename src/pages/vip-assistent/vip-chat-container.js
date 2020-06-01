@@ -3,6 +3,8 @@ import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, fetchAddMessage } from '../../actions/vip-chat-actions';
+import { setVipMessagesNotifications, setMessagesNotifications } from '../../actions/notifications-actions';
+
 import ScenesChat from '../../components/scenes-chat';
 import replaceBadWords from '../../utils/bad-words-replacer';
 
@@ -33,6 +35,7 @@ class VipChatContainer extends React.Component {
 
     componentDidMount() {
         this.updateMessages();
+        this.props.setVipMessagesNotifications(false)
     }
 
     updateMessages = () => {
@@ -84,6 +87,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchMessages: (idUser) => fetchMessages(apiService, dispatch)(idUser),
         fetchAddMessage: (idUser, message) => fetchAddMessage(apiService, dispatch)(idUser, message),
+        setVipMessagesNotifications: (n) => dispatch(setVipMessagesNotifications(n))
     }
 };
 

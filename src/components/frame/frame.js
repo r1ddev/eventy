@@ -41,7 +41,7 @@ class FrameContainer extends React.Component {
         this.props.checkNotifications();
         this.timerId = setTimeout(() => {
             this.checkNotifications()
-        }, 5000);
+        }, 15000);
     }
 
     componentWillUnmount() {
@@ -49,7 +49,6 @@ class FrameContainer extends React.Component {
     }
 
     render() {
-        console.log('gggg', this.props.notifications)
 
         return <Frame {...this.props} />;
     }
