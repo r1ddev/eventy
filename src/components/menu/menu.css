@@ -57,6 +57,17 @@
 
 .menu-item-icon-wrap {
 	max-width: 30px;
+	position: relative;
+}
+
+.menu-notify{
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	width: 10px;
+	height: 10px;
+	background-color: #F4004D;
+	border-radius: 50%;
 }
 
 .menu-item-label {
