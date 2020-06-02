@@ -5,6 +5,7 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { fetchUser } from '../../actions/user-actions';
+import IdeaFirstApiService from "../../services/idea-first-api-service";
 
 class Menu extends React.Component {
 
@@ -62,6 +63,9 @@ class MenuItem extends React.Component {
 	render() {
 		const { label, link, icon, out = false, notifications = false } = this.props;
 
+		const api = new IdeaFirstApiService();
+
+
 		return (
 			<>
 				{(!out) && <Link to={link} className="menu-item flex-center">
@@ -71,7 +75,7 @@ class MenuItem extends React.Component {
 					</div>
 					<div className="menu-item-label">{label}</div>
 				</Link>}
-				{(out) && <a target="_blank" href={link} className="menu-item flex-center">
+				{(out) && <a target="_blank" href={link} className="menu-item flex-center" onClick={() => api.postUrl(link)}>
 					<div className="menu-item-icon-wrap">
 						<img alt="" src={icon} className="menu-item-icon" />
 					</div>

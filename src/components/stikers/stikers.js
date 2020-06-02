@@ -81,6 +81,8 @@ class Stikers extends React.Component {
         let engExists = 1;
         if (scenes.length) { engExists = scenes[scene]['eng'] }
 
+        const api = new IdeaFirstApiService();
+
         return (
             <div id="stikers">
                 <div className="wrapper-of-wrappers">
@@ -112,7 +114,7 @@ class Stikers extends React.Component {
                     </div>}
 
                     {(banner) && <div className="banner-wrapper">
-                        <a target="_blank" href={bannerurl} style={{ display: 'block', width: '100%', height: '100%', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundImage: `url(${banner})` }}></a>
+                        <a onClick={() => api.postUrl(bannerurl)} target="_blank" href={bannerurl} style={{ display: 'block', width: '100%', height: '100%', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundImage: `url(${banner})` }}></a>
                     </div>
                     }
 

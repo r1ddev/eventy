@@ -38,7 +38,7 @@ class Scenes extends React.Component {
         return (
             <div id="scenes">
                 <div className="scenes-translation">
-                    <TranslationHeader scene={scene} setScene={setScene} />
+                    <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} />
                     <div className="translation-content">
                         <div className="video-container">
                             <iframe
@@ -80,7 +80,9 @@ class TranslationHeader extends React.Component {
 
 
     render() {
-        const { setScene, scene } = this.props;
+        const { setScene, scene, scenes } = this.props;
+
+        console.log(scenes);
 
         return (
             <div className="translation-header">
@@ -88,21 +90,21 @@ class TranslationHeader extends React.Component {
                 <div className="scene-item">
                     <div>
                         <div className={(scene === 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
-                        <div className="scene-status">идет</div>
+                        <div className="scene-status" style={{ visibility: (scenes[0].status ? 'visible' : 'hidden') }}>идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
                         <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
-                        <div className="scene-status">идет</div>
+                        <div className="scene-status" style={{ visibility: (scenes[1].status ? 'visible' : 'hidden') }}>идет</div>
                     </div>
                 </div>
 
                 <div className="scene-item">
                     <div>
                         <div className={(scene === 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
-                        <div className="scene-status">идет</div>
+                        <div className="scene-status" style={{ visibility: (scenes[2].status ? 'visible' : 'hidden') }}>идет</div>
                     </div>
                 </div>
 
