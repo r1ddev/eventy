@@ -99,9 +99,9 @@ export default class IdeaFirstApiService {
         })
     }
 
-    getPersonalMessages() {
+    getNotify() {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/personal/messages`, this.useAuth())
+            axios.get(this.host + `/personal/notify`, this.useAuth())
                 .then(res => {
                     if (res.data.status) {
                         resolve(res.data);
