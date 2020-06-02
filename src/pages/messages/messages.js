@@ -18,6 +18,7 @@ class Messages extends React.Component {
 		users: [],
 		activeUser: {},
 		messages: [],
+		loading: true,
 	};
 
 	updateTimer = 5000;
@@ -51,11 +52,13 @@ class Messages extends React.Component {
 			})
 			.catch((e) => console.log(e));
 
-		clearTimeout(this.timeout);
-		this.timeout = setTimeout(() => {
-			this.fetchData(false);
-		}, this.updateDialogsTimer);
+		// clearTimeout(this.timeout);
+		// this.timeout = setTimeout(() => {
+		// 	this.fetchData(false);
+		// }, this.updateDialogsTimer);
 	};
+
+	fetchDialogStatus = () => {};
 
 	asetState = (newState) => {
 		return new Promise((resolve, reject) => {
@@ -64,9 +67,14 @@ class Messages extends React.Component {
 	};
 
 	setUser = async (userId) => {
+		this.setState({
+			loading: true,
+		});
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		let unreadCount = this.state.users.filter((u) => u.read == 0).length;
+
+		console.log("unreadCount", unreadCount);
 
 		if (unreadCount > 0) {
 			this.props.setMessagesNotifications(false);
@@ -98,6 +106,10 @@ class Messages extends React.Component {
 		}
 
 		await this.fetchMessages(userId);
+
+		this.setState({
+			loading: false,
+		});
 
 		this.refs.scenesChat.onUpdate(true);
 	};
@@ -181,7 +193,7 @@ class Messages extends React.Component {
 	};
 
 	render() {
-		const { users, activeUser, messages } = this.state;
+		const { users, activeUser, messages, loading: messagesIsLoading } = this.state;
 		const { data } = this.props.user;
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
@@ -195,6 +207,7 @@ class Messages extends React.Component {
 			false;
 
 		console.log("isContactAvailable", isContactAvailable);
+		console.log("messagesIsLoading", messagesIsLoading);
 
 		return (
 			<div id="messages">
@@ -260,7 +273,7 @@ class Messages extends React.Component {
 									<div className="dialog">
 										{isChatAvailable && (
 											<ScenesChat
-												loading={false}
+												loading={messagesIsLoading}
 												messages={messages}
 												sendMessage={this.sendMessage}
 												isPrivate={true}
