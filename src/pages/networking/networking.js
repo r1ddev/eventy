@@ -28,6 +28,24 @@ class Networking extends React.Component {
 
 	fetchData = async () => {
 		api.account.getNetworking().then(res => {
+			res.users = res.users.map(user => {
+				user.avatar = user.avatar || ""
+				user.company = user.company || ""
+				user.first_name = user.first_name || ""
+				user.last_name = user.last_name || ""
+				user.mail = user.mail || ""
+				user.phone = user.phone || ""
+				user.position = user.position || ""
+				user.range = user.range || ""
+				user.read = user.read || ""
+				user.social_site = user.social_site || ""
+				user.user_id = user.user_id || ""
+				user.what_looking = user.what_looking || ""
+				user.what_offer = user.what_offer || ""
+
+				return user
+			})
+
 			this.setState({
 				users: res.users
 			})
