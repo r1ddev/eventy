@@ -12,7 +12,7 @@ const partners = [
 		name: "Специализированный партнер",
 		desc:
 			"Univest Advertising Production - мощная производственная компания, которая создает рекламную продукцию из экологичных материалов.",
-		link: "#"
+		link: "https://us02web.zoom.us/j/86047358537"
 	},
 	{
 		logo: require("../../images/partners/freedom.png"),

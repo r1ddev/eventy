@@ -17,25 +17,12 @@ const setMessagesNotifications = (notify) => {
 
 const checkNotifications = (apiService, dispatch) => {
 
-	apiService.getPersonalMessages()
+	apiService.getNotify()
 		.then((data) => {
-			let newMessages = false;
-			let newVipMessages = false;
+			console.log(data)
 
-			data.dialogs.map((item) => {
-				console.log(item.user_id, item.read)
-				if (!item.read) {
-					if (item.user_id === 9) {
-						newVipMessages = true
-					}
-					else {
-						newMessages = true;
-					}
-				}
-			})
-
-			dispatch(setMessagesNotifications(newMessages));
-			dispatch(setVipMessagesNotifications(newVipMessages));
+			dispatch(setMessagesNotifications(data.new_message));
+			dispatch(setVipMessagesNotifications(data.new_message_ass));
 
 		})
 		.catch((err) => { });

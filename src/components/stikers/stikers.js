@@ -53,6 +53,19 @@ class Stikers extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.scene !== this.props.scene) {
+            const api = new IdeaFirstApiService();
+            const idScene = this.props.scene
+            api.getBanner(idScene)
+                .then((res) => {
+                    if (this._ismounted) {
+                        this.setState({ banner: res.data.image, bannerurl: res.data.url })
+                    }
+                })
+        }
+    }
+
     componentWillUnmount() {
         this._ismounted = false;
         clearTimeout(this.timerId)
@@ -75,7 +88,7 @@ class Stikers extends React.Component {
                     {(!banner) && <div className="emoji-stikers-wrapper">
                         <div className="emoji-stikers">
                             <div className="emoji-stikers-caption">
-                                ОЦЕНИТЕ ВЫСТУПЛЕНИЕ СПИКЕРА
+                                ОЦЕНИТЕ ВЫСТУПЛЕНИЕ
                         </div>
                             <div className="emoji-stikers-list">
 
@@ -123,7 +136,7 @@ class Stikers extends React.Component {
                 </div>
 
                 <div className="timetable-wrapper">
-                    <a href="https://marketingforum.com.ua/ru/home/programm-extended/" target="_blank" style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
+                    <a href="https://drive.google.com/file/d/1bmXC2Ar2q_FtwcAthTF8NlsybVLf2Mll/view?usp=sharing" target="_blank" style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
                 </div>
             </div>
         )
