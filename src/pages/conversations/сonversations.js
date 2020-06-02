@@ -47,7 +47,7 @@ class Сonversations extends React.Component {
 				<div className="container">
 					<div className="title">Открытые комнаты:</div>
 
-					<div className="room-list">
+					<div className="room-list pb-4">
 						{this.props.rooms.map((room, index) => {
 							return (
 								<div key={index}>

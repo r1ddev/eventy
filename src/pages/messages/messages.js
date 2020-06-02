@@ -23,8 +23,9 @@ class Messages extends React.Component {
 
 	updateTimer = 5000;
 	updateDialogsTimer = 20000;
-	updateTimeout = undefined;
-	timeout = undefined;
+
+	timeoutMessages = undefined;
+	timeoutDialogs = undefined;
 
 	componentDidMount() {
 		this.fetchData();
@@ -52,13 +53,11 @@ class Messages extends React.Component {
 			})
 			.catch((e) => console.log(e));
 
-		// clearTimeout(this.timeout);
-		// this.timeout = setTimeout(() => {
-		// 	this.fetchData(false);
-		// }, this.updateDialogsTimer);
+		clearTimeout(this.timeout);
+		this.timeoutDialogs = setTimeout(() => {
+			this.fetchData(false);
+		}, this.updateDialogsTimer);
 	};
-
-	fetchDialogStatus = () => {};
 
 	asetState = (newState) => {
 		return new Promise((resolve, reject) => {
@@ -73,8 +72,6 @@ class Messages extends React.Component {
 		let activeUser = this.state.users.find((u) => u.user_id == userId);
 
 		let unreadCount = this.state.users.filter((u) => u.read == 0).length;
-
-		console.log("unreadCount", unreadCount);
 
 		if (unreadCount > 0) {
 			this.props.setMessagesNotifications(false);
@@ -136,8 +133,8 @@ class Messages extends React.Component {
 
 		this.refs.scenesChat.onUpdate(true);
 
-		clearTimeout(this.updateTimeout);
-		this.updateTimeout = setTimeout(() => {
+		clearTimeout(this.timeoutMessages);
+		this.timeoutMessages = setTimeout(() => {
 			this.fetchMessages(userId);
 		}, this.updateTimer);
 	};
@@ -178,8 +175,8 @@ class Messages extends React.Component {
 	};
 
 	componentWillUnmount() {
-		clearTimeout(this.updateTimeout);
-		clearTimeout(this.timeout);
+		clearTimeout(this.timeoutDialogs);
+		clearTimeout(this.timeoutMessages);
 	}
 
 	onActive = async (e) => {
