@@ -112,9 +112,10 @@ class Stikers extends React.Component {
                     </div>}
 
                     {(banner) && <div className="banner-wrapper">
-                        <a target="_blank" href={bannerurl} style={{ display: 'block', width: '100%' }}><img className="banner" alt='' src={(banner ? banner : '')}></img></a>
+                        <a target="_blank" href={bannerurl} style={{ display: 'block', width: '100%', height: '100%', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundImage: `url(${banner})` }}></a>
                     </div>
                     }
+
                     <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
                         <div className="language-stikers">
                             <div className="language-stikers-caption">

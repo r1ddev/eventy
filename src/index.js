@@ -36,6 +36,7 @@ class Index extends React.Component {
 							<Route path="/error" component={ErrorPage} />
 
 							<Route path="/" component={App} />
+
 						</Switch>
 					</Router>
 
