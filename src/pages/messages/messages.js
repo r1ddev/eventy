@@ -21,6 +21,7 @@ class Messages extends React.Component {
 	};
 
 	updateTimer = 5000;
+	updateDialogsTimer = 20000;
 	updateTimeout = undefined;
 	timeout = undefined;
 
@@ -53,7 +54,7 @@ class Messages extends React.Component {
 		clearTimeout(this.timeout);
 		this.timeout = setTimeout(() => {
 			this.fetchData(false);
-		}, this.updateTimer);
+		}, this.updateDialogsTimer);
 	};
 
 	asetState = (newState) => {
@@ -171,10 +172,12 @@ class Messages extends React.Component {
 
 	onActive = async (e) => {
 		this.updateTimer = 5000;
+		this.updateDialogsTimer = 20000;
 	};
 
 	onIdle = (e) => {
-		this.updateTimer = 30000;
+		this.updateTimer = 60000;
+		this.updateDialogsTimer = 60000;
 	};
 
 	render() {
@@ -209,11 +212,12 @@ class Messages extends React.Component {
 						</Link>
 					</div>
 				</Header>
+
 				<div className="container-fluid">
 					<div className="row h-100">
 						<div className="col-md-8 mes-padding">
 							<div className="row h-100 mes-padding-left m-0">
-								<div className="col-5 p-0">
+								<div className="col-5 p-0 users-list-wrap">
 									<div className="users-list">
 										{users.map((user, index) => {
 											return (
@@ -252,7 +256,7 @@ class Messages extends React.Component {
 									</div>
 								</div>
 
-								<div className="col-7 p-0">
+								<div className="col-7 p-0 dialog-wrap">
 									<div className="dialog">
 										{isChatAvailable && (
 											<ScenesChat
