@@ -69,18 +69,12 @@ class PresentationsList extends React.Component {
 						).files || []
 					).map((file, index) => {
 						return (
-							<div className="file row" key={index}>
-								<div className="col-md">{file.name}</div>
-								<div className="col-md-auto">{file.weight}</div>
-								<div className="col-md-auto">
-									<a href={file.link} target="_blank">
-										<img
-											src={require("../../images/presentations-download.svg")}
-											alt=""
-										/>
-									</a>
+							<a href={file.link} target="_blank" className="file-link">
+								<div className="file row" key={index}>
+									<div className="col-md">{file.name}</div>
+									<div className="col-md-auto">{file.weight}</div>
 								</div>
-							</div>
+							</a>
 						);
 					})}
 				</div>

@@ -1,10 +1,14 @@
 #presentations-list {
-	.file {
-		margin-top: 3px;
-		align-items: center;
-		background: #ffffff;
-		padding: 10px;
-		font-family: FuturaBookC;
-		font-size: 24px;
+	.file-link {
+		color: #000000;
+
+		.file {
+			margin-top: 3px;
+			align-items: center;
+			background: #ffffff;
+			padding: 10px;
+			font-family: FuturaBookC;
+			font-size: 24px;
+		}
 	}
 }
