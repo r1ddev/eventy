@@ -131,6 +131,12 @@ class ScenesChat extends React.Component {
 
 class MessageItem extends React.Component {
 
+    linkifyDecorator = (href, text, key) => (
+        <a href={href} key={key} target="_blank">
+            {text}
+        </a>
+    );
+
     render() {
 
         const {
@@ -163,7 +169,7 @@ class MessageItem extends React.Component {
                     </Link>
                     <div className="mes-info-content">
                         <Linkify
-                            properties={{ target: '_blank' }}
+                            componentDecorator={this.linkifyDecorator}
                         >
                             {message}
                         </Linkify>

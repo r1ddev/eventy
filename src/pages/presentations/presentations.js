@@ -4,14 +4,14 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
-import api from './../../js/api';
+import api from "./../../js/api";
 import Header from "../../components/header";
 
 class Presentations extends React.Component {
-	state = {}
+	state = {};
 
 	render() {
-		const { data } = this.props.user
+		const { data } = this.props.user;
 
 		return (
 			<div id="presentations">
@@ -27,23 +27,23 @@ class Presentations extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-lg-6 px-5 mt-5">
-							<Link to="/presentations/speakers" className="folder">
-								Презентации спикеров
+							<Link to="/presentations/day1" className="folder">
+								День 1
 							</Link>
 						</div>
 						<div className="col-lg-6 px-5 mt-5">
-							<Link to="/presentations/organizers" className="folder">
-								Материалы от организаторов
+							<Link to="/presentations/day2" className="folder">
+								День 2
 							</Link>
 						</div>
 					</div>
-					<div className="row">
+					{/* <div className="row">
 						<div className="col-lg-6 px-5 mt-5">
 							<Link to="/presentations/partners" className="folder">
 								Материалы от партнёров
 							</Link>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		);
