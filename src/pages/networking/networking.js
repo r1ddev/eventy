@@ -103,6 +103,7 @@ class Networking extends React.Component {
 					<div className="card-list">
 						{users.filter(user => {
 							return ~user.first_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+								~user.last_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
 								~user.position.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
 								~user.company.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
 								~(user.what_offer || "").toLowerCase().indexOf(searchFilter.toLowerCase()) ||
@@ -126,7 +127,7 @@ class Networking extends React.Component {
 												</div>
 
 												<div className="col d-flex justify-content-center flex-column">
-													<div className="name">{user.first_name}</div>
+													<div className="name">{user.first_name + " " + user.last_name}</div>
 													<div className="desc">{user.position + " в " + user.company}</div>
 												</div>
 											</div>

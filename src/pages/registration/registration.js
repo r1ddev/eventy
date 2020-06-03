@@ -15,14 +15,16 @@ const defaultTags = [
 	{
 		value: "creator",
 		label: "Креатор",
-	},
-	{
-		value: "necreator",
-		label: "Не креатор",
 	}, {
-		value: "alsonecreator",
-		label: "Тоже не креатор",
-	},
+		value: "designer",
+		label: "Дизайнер",
+	}, {
+		value: "manager",
+		label: "Менеджер",
+	}, {
+		value: "director",
+		label: "Директор",
+	}
 ]
 
 class Registration extends React.Component {
