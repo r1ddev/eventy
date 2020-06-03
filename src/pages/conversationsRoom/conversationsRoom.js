@@ -45,7 +45,7 @@ class СonversationsRoom extends React.Component {
 
 		this.timeout = setTimeout(() => {
 			this.updateRoomStatus()
-		}, 6000);
+		}, this.props.conversationsTimer);
 	}
 
 	componentWillUnmount() {
@@ -121,9 +121,9 @@ class СonversationsRoomContainer extends React.Component {
 
 }
 
-const mapStateToProps = ({ user, conversations }) => {
+const mapStateToProps = ({ user, conversations, timers }) => {
 	return {
-		user, conversations
+		user, conversations, timers
 	}
 };
 

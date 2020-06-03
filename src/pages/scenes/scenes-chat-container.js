@@ -73,7 +73,7 @@ class ScenesChatContainer extends React.Component {
         let id = setTimeout(() => {
             this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
             this.updateMessages();
-        }, 5000)
+        }, this.props.timers.sceneChatTime)
 
         this.setState({
             timerId: id
@@ -140,9 +140,9 @@ class ScenesChatContainer extends React.Component {
     }
 }
 
-const mapStateToProps = ({ chat }) => {
+const mapStateToProps = ({ chat, timers }) => {
     return {
-        chat
+        chat, timers
     }
 };
 
