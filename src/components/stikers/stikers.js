@@ -2,6 +2,10 @@ import React from 'react';
 import "./stikers.css"
 import IdeaFirstApiService from '../../services/idea-first-api-service';
 import posed from 'react-pose';
+import { fetchTimers } from '../../actions/timers-actions';
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
 
 const Stiker = posed.div({
     draggable: true,
@@ -21,6 +25,7 @@ class Stikers extends React.Component {
     state = {
         banner: null,
         bannerurl: null,
+        bannerTime: this.props.timers.bannerTime
 
     }
     timerId = null;
@@ -49,7 +54,7 @@ class Stikers extends React.Component {
 
         this.timerId = setTimeout(() => {
             this.getBanner();
-        }, 30000)
+        }, this.state.bannerTime)
 
     }
 
@@ -63,6 +68,13 @@ class Stikers extends React.Component {
                         this.setState({ banner: res.data.image, bannerurl: res.data.url })
                     }
                 })
+        }
+
+
+        if (prevProps.timers !== this.props.timers) {
+            this.setState({
+                bannerTime: this.props.timers.bannerTime
+            })
         }
     }
 
@@ -147,4 +159,22 @@ class Stikers extends React.Component {
 }
 
 
-export default Stikers;
+const mapStateToProps = ({ notifications, timers }) => {
+    return {
+        notifications,
+        timers
+    };
+};
+
+const mapDispatchToProps = (dispatch, { apiService }) => {
+    return {
+
+        fetchTimers: () => fetchTimers(apiService, dispatch)
+    };
+};
+
+export default compose(
+    withApiService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(Stikers);
+

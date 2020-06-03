@@ -5,6 +5,8 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { checkNotifications } from '../../actions/notifications-actions';
+import { fetchTimers } from '../../actions/timers-actions';
+
 import NotifyIndicator from '../notify-indicator';
 
 
@@ -32,21 +34,37 @@ class Frame extends React.Component {
 class FrameContainer extends React.Component {
 
     timerId = null;
+    timerTIMERID = null;
+
+    state = {
+        notifyTime: this.props.timers.notifyTime
+    }
+
 
     componentDidMount() {
         this.props.checkNotifications();
         this.checkNotifications();
+        this.upTime();
+    }
+
+    upTime = () => {
+        this.props.fetchTimers();
+        this.timerTIMERID = setTimeout(() => {
+            this.upTime()
+        }, 3000);
     }
 
     checkNotifications = () => {
         this.props.checkNotifications();
         this.timerId = setTimeout(() => {
             this.checkNotifications()
-        }, 15000);
+        }, this.state.notifyTime);
     }
 
     componentWillUnmount() {
         clearTimeout(this.timerId);
+        clearTimeout(this.timerTIMERID);
+
     }
 
     componentDidUpdate(prevProps) {
@@ -57,6 +75,13 @@ class FrameContainer extends React.Component {
         if (prevProps.notifications.newVipMessages !== this.props.notifications.newVipMessages && this.props.notifications.newVipMessages) {
             NotifyIndicator('У вас новое сообщение от персонального ассистента!', '/vip-assistent');
         }
+
+        if (prevProps.timers !== this.props.timers) {
+            console.log('timers')
+            this.setState({
+                notifyTime: this.props.timers.notifyTime
+            })
+        }
     }
 
     render() {
@@ -65,15 +90,17 @@ class FrameContainer extends React.Component {
     }
 }
 
-const mapStateToProps = ({ notifications }) => {
+const mapStateToProps = ({ notifications, timers }) => {
     return {
         notifications,
+        timers
     };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
-        checkNotifications: () => checkNotifications(apiService, dispatch)
+        checkNotifications: () => checkNotifications(apiService, dispatch),
+        fetchTimers: () => fetchTimers(apiService, dispatch)
     };
 };
 

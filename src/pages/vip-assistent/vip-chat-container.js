@@ -42,7 +42,7 @@ class VipChatContainer extends React.Component {
         this.props.fetchMessages(9);
         let id = setTimeout(() => {
             this.updateMessages();
-        }, 5000)
+        }, this.props.timers.vipChatTime)
 
 
         this.timerId = id;
@@ -77,9 +77,10 @@ class VipChatContainer extends React.Component {
     }
 }
 
-const mapStateToProps = ({ vipchat }) => {
+const mapStateToProps = ({ vipchat, timers }) => {
     return {
-        vipchat: vipchat
+        vipchat: vipchat,
+        timers: timers
     }
 };
 

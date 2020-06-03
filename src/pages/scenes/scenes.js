@@ -152,7 +152,7 @@ class ScenesContainer extends React.Component {
 
         this.timerId = setTimeout(() => {
             this.getScenes()
-        }, 60000)
+        }, this.props.timers.sceneTime)
     }
 
     componentWillUnmount() {
@@ -191,10 +191,11 @@ class ScenesContainer extends React.Component {
 
 }
 
-const mapStateToProps = ({ scenes, user }) => {
+const mapStateToProps = ({ scenes, user, timers }) => {
     return {
         scenes: scenes,
-        user: user
+        user: user,
+        timers: timers
     }
 };
 

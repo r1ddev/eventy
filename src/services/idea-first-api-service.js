@@ -230,6 +230,46 @@ export default class IdeaFirstApiService {
         return data;
     }
 
+    _TimerResponse() {
+
+        const data = {
+            vipChatTime: 5000,
+            sceneTime: 60000,
+            bannerTime: 30000,
+            notifyTime: 15000,
+            updateTimer: 5000,
+            updateMessageTimer: 20000,
+            sceneChatTime: 5000
+        }
+
+        return data;
+    }
+
+
+
+    getTimers() {
+        return new Promise((resolve, reject) => {
+            axios.get(`https://api.riddev.com/umf.php`, this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+    // getTimers() {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             resolve(this._TimerResponse());
+    //         }, 700);
+    //     });
+    // }
+
     // getScenes() {
     //     return new Promise((resolve) => {
     //         setTimeout(() => {
