@@ -11,16 +11,17 @@
 				border-radius: 50%;
 				width: 54px;
 				height: 54px;
+				object-fit: contain;
 			}
 		}
 
 		.action-link {
 			width: 136px;
-			background: #F4004D;
-			border: 1px solid #F4004D;
+			background: #f4004d;
+			border: 1px solid #f4004d;
 			box-sizing: border-box;
 			border-radius: 10px;
-			font-family: 'FuturaBookC';
+			font-family: "FuturaBookC";
 			text-decoration: none;
 			color: white;
 			font-size: 15px;
