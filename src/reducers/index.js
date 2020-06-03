@@ -4,7 +4,9 @@ import chat from './chat';
 import vipchat from './vipchat';
 import scenes from './scenes';
 import conversations from './conversations';
-import notifications from './notifications'
+import notifications from './notifications';
+import timers from './timers';
+
 
 export default combineReducers({
     user,
@@ -12,5 +14,6 @@ export default combineReducers({
     vipchat,
     scenes,
     conversations,
-    notifications
+    notifications,
+    timers
 })

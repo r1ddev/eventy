@@ -122,7 +122,7 @@ class Messages extends React.Component {
 				try {
 					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
 					message.text = dec.toString(CryptoJS.enc.Utf8);
-				} catch (error) {}
+				} catch (error) { }
 			}
 			return { ...message, message: message.text };
 		});
@@ -139,6 +139,16 @@ class Messages extends React.Component {
 		}, this.updateTimer);
 	};
 
+	componentDidUpdate(prevProps) {
+
+		if (prevProps.timers !== this.props.timers) {
+
+			this.updateTimer = this.props.timers.updateTimer;
+			this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
+
+		}
+	}
+
 	sendMessage = (message) => {
 		let encMessage = "";
 
@@ -152,7 +162,7 @@ class Messages extends React.Component {
 
 		api.account.messages
 			.sendMessages(this.state.activeUser.user_id, encMessage || message)
-			.then((res) => {})
+			.then((res) => { })
 			.catch((e) => console.log(e));
 
 		let m = this.state.messages;
@@ -180,13 +190,13 @@ class Messages extends React.Component {
 	}
 
 	onActive = async (e) => {
-		this.updateTimer = 5000;
-		this.updateDialogsTimer = 20000;
+		this.updateTimer = this.props.timers.updateTimer;
+		this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
 	};
 
 	onIdle = (e) => {
-		this.updateTimer = 60000;
-		this.updateDialogsTimer = 60000;
+		this.updateTimer = 80000;
+		this.updateDialogsTimer = 80000;
 	};
 
 	render() {
