@@ -116,8 +116,8 @@ class Messages extends React.Component {
 
 		messages.messages = messages.messages.map((message) => {
 			if (
-				(this.props.user.data.id == 8 && userId == 7) ||
-				(this.props.user.data.id == 7 && userId == 8)
+				(this.props.user.data.id == 616 && userId == 617) ||
+				(this.props.user.data.id == 617 && userId == 616)
 			) {
 				try {
 					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
@@ -153,8 +153,8 @@ class Messages extends React.Component {
 		let encMessage = "";
 
 		if (
-			(this.props.user.data.id == 7 && this.state.activeUser.user_id == 8) ||
-			(this.props.user.data.id == 8 && this.state.activeUser.user_id == 7)
+			(this.props.user.data.id == 616 && this.state.activeUser.user_id == 617) ||
+			(this.props.user.data.id == 617 && this.state.activeUser.user_id == 616)
 		) {
 			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
@@ -190,6 +190,7 @@ class Messages extends React.Component {
 	}
 
 	onActive = async (e) => {
+
 		this.updateTimer = this.props.timers.updateTimer;
 		this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
 	};
@@ -350,8 +351,8 @@ class MessagesContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ user }) => {
-	return { user };
+const mapStateToProps = ({ user, timers }) => {
+	return { user, timers };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {

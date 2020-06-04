@@ -45,7 +45,7 @@ class СonversationsRoom extends React.Component {
 
 		this.timeout = setTimeout(() => {
 			this.updateRoomStatus()
-		}, this.props.conversationsTimer);
+		}, this.props.timers.conversationsTimer);
 	}
 
 	componentWillUnmount() {

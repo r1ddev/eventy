@@ -299,7 +299,6 @@ class Registration extends React.Component {
 												type="email"
 												className="form-control r1-inp"
 												placeholder="Email"
-												pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 												value={email}
 												onChange={(e) => {
 													this.setState({

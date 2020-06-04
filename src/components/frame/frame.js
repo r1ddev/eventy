@@ -51,7 +51,7 @@ class FrameContainer extends React.Component {
         this.props.fetchTimers();
         this.timerTIMERID = setTimeout(() => {
             this.upTime()
-        }, 3000);
+        }, 180000);
     }
 
     checkNotifications = () => {

@@ -37,6 +37,10 @@ class App extends React.Component {
 		const { history } = this.props;
 		this.unsubscribeFromHistory = history.listen(() => this.handleLocationChange(window.location.href));
 		this.handleLocationChange(window.location.href);
+
+		if (window.location.protocol == "https:") {
+			// window.location.href = "http://" + host + pathname
+		}
 	}
 
 	componentWillUnmount() {

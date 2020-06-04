@@ -70,6 +70,8 @@ class ScenesChatContainer extends React.Component {
     }
 
     updateMessages = () => {
+        console.log("this.props.timers", this.props.timers);
+
         let id = setTimeout(() => {
             this.props.updateMessages(this.state.currentChatId, this.props.chat.lastApiMessageId);
             this.updateMessages();

@@ -9,6 +9,7 @@ import { fetchScenes } from '../../actions/scenes-actions';
 import { fetchUser } from '../../actions/user-actions';
 import Spinner from '../../components/spinner';
 import { Link } from 'react-router-dom';
+import api from './../../js/api';
 
 
 
@@ -32,7 +33,8 @@ class Scenes extends React.Component {
             spikerChatId: 0
         }
 
-        let origin = "https://onlineshow.marketingforum.com.ua";
+        // let origin = "http://onlineshow.marketingforum.com.ua";
+        let origin = api.origin;
         let newAvatar = origin + "/images/avatar/" + user.avatar;
 
         return (

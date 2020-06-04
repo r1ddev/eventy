@@ -26,7 +26,7 @@ const timers = (state, action) => {
                 notifyTime: action.payload.notifyTime,
                 updateTimer: action.payload.updateTimer,
                 updateMessageTimer: action.payload.updateMessageTimer,
-                sceneChatTime: action.payload.sceneTime
+                sceneChatTime: action.payload.sceneChatTime
             };
 
         default:
