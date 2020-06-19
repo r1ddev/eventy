@@ -36,24 +36,24 @@ class Menu extends React.Component {
 				<div className="flex-center" style={{ padding: "20px" }}>
 					<img alt="" src={logo} />
 				</div>
-				<MenuItem icon={desk} label="Infodesk" link="/desk"></MenuItem>
+				<MenuItem icon={desk} label="Лобби" link="/desk"></MenuItem>
 				<MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
-				<MenuItem icon={program} label="Программа" out={true} link="https://marketingforum.com.ua/ru/home/programm-extended/"></MenuItem>
-				<MenuItem icon={spikers} label="Спикеры" out={true} link="https://marketingforum.com.ua/ru/speakers/"></MenuItem>
-				<MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
+				{/* <MenuItem icon={program} label="Программа" out={true} link="https://marketingforum.com.ua/ru/home/programm-extended/"></MenuItem> */}
+				{/* <MenuItem icon={spikers} label="Спикеры" out={true} link="https://marketingforum.com.ua/ru/speakers/"></MenuItem> */}
 				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
-				<MenuItem icon={messages} label="Мои сообщения" link="/messages" notifications={newMessages}></MenuItem>
-				<MenuItem icon={exposure} label="Экспозона" link="/exposure"></MenuItem>
+				<MenuItem icon={messages} label="Cообщения" link="/messages" notifications={newMessages}></MenuItem>
 				{((range !== 1) && (range !== 2)) && <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>}
-				<MenuItem icon={quest} label="Квест" link="/quest"></MenuItem>
-				{(range !== 1) && <MenuItem icon={party} label="Вечеринка" out={true} link="https://us5.campaign-archive.com/?e=&u=df5d96ca282cfa5c02d25b866&id=a9931072e8"></MenuItem>}
-				{((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
+				<MenuItem icon={exposure} label="Партнеры" link="/exposure"></MenuItem>
+				<MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
+				{/* <MenuItem icon={quest} label="Квест" link="/quest"></MenuItem> */}
+				{/* {(range !== 1) && <MenuItem icon={party} label="Вечеринка" out={true} link="https://us5.campaign-archive.com/?e=&u=df5d96ca282cfa5c02d25b866&id=a9931072e8"></MenuItem>} */}
+				{/* {((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
 					icon={vipassistent}
 					label="Ассистент для вип"
 					link="/vip-assistent"
 					notifications={newVipMessages}
-				></MenuItem>
-				}
+				></MenuItem> */}
+
 			</div>
 		);
 	}

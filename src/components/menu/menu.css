@@ -2,7 +2,7 @@
 	/* height: 100%; */
 	/* width: 10vw; */
 	/* min-width: 130px; */
-	background-color: #c3d600;
+	background-color: white;
 	/* overflow: hidden; */
 	/* display: flex; */
 	/* flex-direction: column; */
@@ -11,6 +11,8 @@
 
 	display: grid;
 	overflow-y: auto;
+	min-width: 150px;
+	border-right: 1px solid #cecece;
 }
 
 .menu-item {
@@ -32,7 +34,8 @@
 }
 
 .menu-item:hover {
-	background-color: #d5db00;
+	background-color: white;
+	border-left: 3px solid #22D671;
 	transition: background-color 200ms;
 	text-decoration: none;
 	color: black;
@@ -56,7 +59,7 @@
 }
 
 .menu-item-icon-wrap {
-	max-width: 30px;
+	max-width: 35px;
 	position: relative;
 }
 
