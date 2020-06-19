@@ -359,7 +359,7 @@ class Registration extends React.Component {
 													borderRadius: 10,
 													colors: {
 														...theme.colors,
-														primary: "#f4004d",
+														primary: "#22D671",
 													},
 												})}
 												noOptionsMessage={() => 'Нет данных для отображения'}
