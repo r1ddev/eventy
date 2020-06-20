@@ -10,6 +10,7 @@ import { fetchUser } from '../../actions/user-actions';
 import Spinner from '../../components/spinner';
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
+import Header from '../../components/header/header';
 
 
 
@@ -37,6 +38,8 @@ class Scenes extends React.Component {
         let origin = api.origin;
         let newAvatar = origin + "/images/avatar/" + user.avatar;
 
+        console.log(user);
+
         return (
             <div id="scenes">
                 <div className="scenes-translation">
@@ -61,7 +64,16 @@ class Scenes extends React.Component {
                 </div>
                 <div className="scenes-chat">
                     <div className="chat-header">
-                        <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link>
+
+                        <Header data={user}>
+                            <></>
+                            <div className="col d-flex align-items-center p-0">
+                                <Link to="/messages/5" className="action-link">
+                                    Связь <br />с организаторами
+                            </Link>
+                            </div>
+                        </Header>
+                        {/* <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link> */}
                     </div>
                     <div className="chat-content">
                         <ScenesChat
