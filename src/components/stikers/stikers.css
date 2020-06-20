@@ -53,12 +53,12 @@
 }
 
 .emoji-stikers{
-	background: #C3D600;
+	background: white;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 10px;
+	border-radius: 50px;
 	display: flex;
 	height: 100%;
-	border: 1px solid #C3D600;
+	border: 1px solid white;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -82,6 +82,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin: 15px;
 }
 
 .emoji-stikers-item{
@@ -103,11 +104,11 @@
 
 
 .language-stikers{
-	background: #C3D600;
+	background: white;
 	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	display: flex;
-	border: 1px solid #C3D600;
+	border: 1px solid white;
 	height: 100%;
 	flex-direction: column;
 	justify-content: center;
@@ -122,7 +123,7 @@
 	line-height: 25px;
 	padding: 10px;
 	text-align: center;
-	color: #FFFFFF;
+	color: black;
 }
 
 .language-stikers-list{

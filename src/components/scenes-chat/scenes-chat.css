@@ -33,6 +33,9 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+	border-right: 1px solid #d1d1d1;
+	transition: 100ms;
+
 }
 #scenes-chat .chat-tabs .chat-tab-item-active {
 	flex-grow: 1;
@@ -44,15 +47,15 @@
 	cursor: pointer;
 }
 
-#scenes-chat .chat-tabs > div:nth-child(1) {
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(1) {
 	border-top: 4px solid #c3d600;
 }
 
-#scenes-chat .chat-tabs > div:nth-child(2) {
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(2) {
 	border-top: 4px solid #f4004d;
 }
 
-#scenes-chat .chat-tabs > div:nth-child(3) {
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(3) {
 	border-top: 4px solid #ffe800;
 }
 
