@@ -5,6 +5,8 @@ import RSC from "react-scrollbars-custom";
 import Spinner from '../spinner';
 import Linkify from 'react-linkify';
 import { Link } from 'react-router-dom';
+import api from './../../js/api';
+
 
 class ScenesChat extends React.Component {
 
@@ -149,7 +151,7 @@ class MessageItem extends React.Component {
         } = this.props;
 
         // let origin = "https://onlineshow.marketingforum.com.ua";
-        let origin = window.location.origin
+        let origin = api.origin;
 
 
         let newAvatar = origin + "/images/avatar/" + avatar;

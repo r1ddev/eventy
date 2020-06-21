@@ -1,7 +1,7 @@
 #exposure {
 	.card-list {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
 
 		.card {
 			background: #ffffff;
@@ -10,6 +10,7 @@
 			overflow: hidden;
 			border: none;
 			text-decoration: none;
+			min-height: 300px;
 
 			.head {
 				padding: 20px;
@@ -33,13 +34,13 @@
 			}
 
 			.desc {
-				background-color: #e7044c;
 				padding: 15px 25px;
 				height: 100%;
 				font-family: "FuturaBookC";
 				font-size: 24px;
 				line-height: 27px;
 				color: #ffffff;
+
 			}
 		}
 	}

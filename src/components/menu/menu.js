@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./menu.css";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
@@ -68,13 +68,23 @@ class MenuItem extends React.Component {
 
 		return (
 			<>
-				{(!out) && <Link to={link} className="menu-item flex-center">
-					<div className="menu-item-icon-wrap">
-						<img alt="" src={icon} className="menu-item-icon" />
-						{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
-					</div>
-					<div className="menu-item-label">{label}</div>
-				</Link>}
+				{(!out) &&
+					<NavLink
+						to={link}
+						activeStyle={{
+							background: '#e3ffef',
+							borderLeft: '3px solid #22D671',
+
+						}}
+						className="menu-item flex-center"
+					>
+						<div className="menu-item-icon-wrap">
+							<img alt="" src={icon} className="menu-item-icon" />
+							{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
+						</div>
+						<div className="menu-item-label">{label}</div>
+					</NavLink>}
+
 				{(out) && <a target="_blank" href={link} className="menu-item flex-center" onClick={() => api.postUrl(link)}>
 					<div className="menu-item-icon-wrap">
 						<img alt="" src={icon} className="menu-item-icon" />
