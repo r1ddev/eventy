@@ -5,7 +5,7 @@ const options = {
 	host: '116.203.213.27',
 	username: 'root',
 	password: 'root',
-	privateKeyFile: 'K:\\key\\riddev.ppk',
+	privateKeyFile: '/home/zdsgf/.ssh/riddev_pk',
 	deployPath: '/var/www/html/front/',
 };
 
