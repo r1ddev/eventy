@@ -4,7 +4,7 @@
 
 		.search {
 			width: 75%;
-			border: 1px solid #000000;
+			border: 1px solid #22D671;
 
 			@media screen and (max-width: 767px) {
 				margin-top: 15px !important;
@@ -19,7 +19,7 @@
 			.btn-search {
 				border: none;
 				background: url(../../images/search.svg) center center no-repeat;
-				background-color: #f4004d;
+				background-color: #22D671;
 				height: 35px;
 				width: 35px;
 				vertical-align: top;
@@ -87,14 +87,14 @@
 			}
 
 			.title {
-				margin-top: 20px;
+				margin-top: 20px !important;
 				font-family: "FuturaDemiC";
 				font-style: normal;
 				font-weight: 600;
 				font-size: 28px;
 				line-height: 33px;
 
-				color: #f4004d;
+				color: #22D671;
 			}
 
 			.text {

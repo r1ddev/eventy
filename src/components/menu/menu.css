@@ -23,7 +23,6 @@
 	background-color: #c3d600;
 	transition: background-color 200ms;
 	flex-grow: 1; */
-	transition: background-color 200ms;
 	color: black;
 	text-decoration: none;
 	font-family: "Gilroy";
@@ -31,12 +30,16 @@
 	padding: 0px 10px;
 	flex-direction: column;
 	text-align: center;
+	border-left: 0px solid #22D671;
+	transition: 100ms;
+	background-color: white;
+
 }
 
 .menu-item:hover {
-	background-color: white;
+	background-color:#e3ffef;
 	border-left: 3px solid #22D671;
-	transition: background-color 200ms;
+	transition:100ms;
 	text-decoration: none;
 	color: black;
 }
@@ -59,7 +62,7 @@
 }
 
 .menu-item-icon-wrap {
-	max-width: 35px;
+	max-width: 40px;
 	position: relative;
 }
 

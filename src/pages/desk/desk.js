@@ -17,7 +17,7 @@ class Desk extends React.Component {
 
         return (
             <div id="desk" className="h-100">
-                <Header data={this.props.user.data}>
+                <Header className='fixed transparented' data={this.props.user.data}>
                     <></>
                     <div className="col d-flex align-items-center p-0">
                         <Link to="/messages/5" className="action-link">
@@ -25,8 +25,8 @@ class Desk extends React.Component {
 						</Link>
                     </div>
                 </Header>
-                <section className="first-section">
-                    <img src={require('../../images/lobby.jpg')} alt="img" />
+                <section className="first-section" style={{ backgroundImage: `url(${require('../../images/lobby.jpg')})` }}>
+                    {/* <img src={require('../../images/lobby.jpg')} alt="img" /> */}
                     <div className='lobby-text'>
                         Добро пожаловать на<br />
                         демонстрацию возможностей Smit.Events

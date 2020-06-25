@@ -5,6 +5,8 @@ import RSC from "react-scrollbars-custom";
 import Spinner from '../spinner';
 import Linkify from 'react-linkify';
 import { Link } from 'react-router-dom';
+import api from './../../js/api';
+
 
 class ScenesChat extends React.Component {
 
@@ -149,13 +151,13 @@ class MessageItem extends React.Component {
         } = this.props;
 
         // let origin = "https://onlineshow.marketingforum.com.ua";
-        let origin = window.location.origin
+        let origin = api.origin;
 
 
         let newAvatar = origin + "/images/avatar/" + avatar;
 
         return (
-            <div className="message-item" style={{ backgroundColor: `${(ad ? '#FFE800' : 'white')}` }}>
+            <div className="message-item" style={{ backgroundColor: `${(ad ? '#22D671' : 'white')}` }}>
                 <div className="mes-photo-wrapper">
                     <Link to={"/profile/" + id} target="_blank">
                         <div className="mes-photo" style={avatar ? { backgroundImage: `url(${newAvatar})` } : {}}></div>
@@ -167,7 +169,7 @@ class MessageItem extends React.Component {
                     <Link to={"/profile/" + id} target="_blank" className="mes-info-name">
                         {name}
 
-                        <span className="mes-info-status" style={{ padding: `${(sponsor ? '5px' : '0px')}`, backgroundColor: `${(sponsor ? '#FFE800' : 'white')}` }}>{(sponsor ? 'UMF' : '')}</span>
+                        <span className="mes-info-status" style={{ padding: `${(sponsor ? '5px' : '0px')}`, backgroundColor: `${(sponsor ? '#22D671' : 'white')}` }}>{(sponsor ? 'UMF' : '')}</span>
                     </Link>
                     <div className="mes-info-content">
                         <Linkify

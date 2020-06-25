@@ -101,9 +101,9 @@ class Stikers extends React.Component {
 
                     {(!banner) && <div className="emoji-stikers-wrapper">
                         <div className="emoji-stikers">
-                            <div className="emoji-stikers-caption">
+                            {/* <div className="emoji-stikers-caption">
                                 ОЦЕНИТЕ ВЫСТУПЛЕНИЕ
-                        </div>
+                            </div> */}
                             <div className="emoji-stikers-list">
 
                                 <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
@@ -150,9 +150,9 @@ class Stikers extends React.Component {
                     </div>
                 </div>
 
-                <div className="timetable-wrapper">
+                {/* <div className="timetable-wrapper">
                     <a href="https://drive.google.com/file/d/1bmXC2Ar2q_FtwcAthTF8NlsybVLf2Mll/view?usp=sharing" target="_blank" style={{ display: 'block', width: '100%' }}><img className='timetable' src={require("../../images/program.svg")}></img></a>
-                </div>
+                </div> */}
             </div>
         )
     }
