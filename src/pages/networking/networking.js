@@ -131,12 +131,18 @@ class Networking extends React.Component {
 													<div className="desc">{user.position + " в " + user.company}</div>
 												</div>
 											</div>
-
+											{/* {(!!user.what_offer) &&
+												<> */}
 											<div className="title">Что предлагаю:</div>
 											<div className="text">{user.what_offer}</div>
-
+											{/* </>
+											} */}
+											{/* {(!!user.what_looking) &&
+												<> */}
 											<div className="title mt-5">Что ищу:</div>
 											<div className="text">{user.what_looking}</div>
+											{/* </>
+											} */}
 										</Link>
 									</div>
 
