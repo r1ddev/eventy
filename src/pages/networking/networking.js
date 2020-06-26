@@ -12,6 +12,8 @@ class Networking extends React.Component {
 	state = {
 		searchText: "",
 		searchFilter: "",
+		lazyLoad: false,
+		superLazyLoad: false,
 		users: []
 	};
 
@@ -24,6 +26,16 @@ class Networking extends React.Component {
 
 	componentDidMount() {
 		this.fetchData()
+		setTimeout(() => {
+			this.setState({
+				lazyLoad: true
+			})
+		}, 500)
+		setTimeout(() => {
+			this.setState({
+				superLazyLoad: true
+			})
+		}, 2000)
 	}
 
 	fetchData = async () => {
@@ -56,20 +68,42 @@ class Networking extends React.Component {
 		const { users, searchText, searchFilter } = this.state;
 		const { data } = this.props.user
 
-		const Card = posed.div({
-			draggable: true,
-			init: { scale: 1 },
-			drag: {
-				scale: 1.1,
-				zIndex: 55
-			},
+		const cards = users.filter(user => {
+			return ~user.first_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+				~user.last_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+				~user.position.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+				~user.company.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+				~(user.what_offer || "").toLowerCase().indexOf(searchFilter.toLowerCase()) ||
+				~(user.what_looking || "").toLowerCase().indexOf(searchFilter.toLowerCase())
+		})
+			.map((user, index) => {
+				return (
+					<div className="card" key={index}>
+						<Link className="card-link2" to={"/messages/" + user.id}>
+							<div className="row">
+								<div className="col-4">
+									<div className="ava">
+										{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
+										{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
+									</div>
+								</div>
 
-			dragEnd: {
-				x: 0,
-				y: 0,
-				transition: { type: 'spring' }
-			}
-		});
+								<div className="col d-flex justify-content-center flex-column">
+									<div className="name">{user.first_name + " " + user.last_name}</div>
+									<div className="desc">{user.position + " в " + user.company}</div>
+								</div>
+							</div>
+
+							<div className="title">Что предлагаю:</div>
+							<div className="text">{user.what_offer}</div>
+							<div className="title mt-5">Что ищу:</div>
+							<div className="text">{user.what_looking}</div>
+						</Link>
+					</div>
+
+				);
+			})
+
 
 		return (
 			<div id="networking" >
@@ -101,54 +135,16 @@ class Networking extends React.Component {
 
 				<div className="container">
 					<div className="card-list">
-						{users.filter(user => {
-							return ~user.first_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
-								~user.last_name.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
-								~user.position.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
-								~user.company.toLowerCase().indexOf(searchFilter.toLowerCase()) ||
-								~(user.what_offer || "").toLowerCase().indexOf(searchFilter.toLowerCase()) ||
-								~(user.what_looking || "").toLowerCase().indexOf(searchFilter.toLowerCase())
-						})
-							.map((user, index) => {
-								return (
-									// <Card className="" key={index}>
-									<div className="card" key={index}>
-										<Link className="card-link2" to={"/messages/" + user.id}>
-											<div className="row">
-												<div className="col-4">
-													{/* <Link className="card-link2" to={"/messages/" + user.id}> */}
-													<div className="ava">
-														{/* <Link className="card-link2" to={"/messages/" + user.id}> */}
-														{user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
-														{!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
-														{/* </Link> */}
-													</div>
-													{/* </Link> */}
-												</div>
+						{
+							cards.slice(0, 12)
+						}
+						{(this.state.lazyLoad) &&
+							cards.slice(13, 13 + cards.length / 3)
+						}
+						{(this.state.superLazyLoad) &&
+							cards.slice(13 + cards.length / 3, cards.length)
+						}
 
-												<div className="col d-flex justify-content-center flex-column">
-													<div className="name">{user.first_name + " " + user.last_name}</div>
-													<div className="desc">{user.position + " в " + user.company}</div>
-												</div>
-											</div>
-											{/* {(!!user.what_offer) &&
-												<> */}
-											<div className="title">Что предлагаю:</div>
-											<div className="text">{user.what_offer}</div>
-											{/* </>
-											} */}
-											{/* {(!!user.what_looking) &&
-												<> */}
-											<div className="title mt-5">Что ищу:</div>
-											<div className="text">{user.what_looking}</div>
-											{/* </>
-											} */}
-										</Link>
-									</div>
-
-									// </Card>
-								);
-							})}
 					</div>
 				</div>
 			</div>

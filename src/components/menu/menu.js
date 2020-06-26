@@ -38,21 +38,12 @@ class Menu extends React.Component {
 				</div>
 				<MenuItem icon={desk} label="Лобби" link="/desk"></MenuItem>
 				<MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
-				{/* <MenuItem icon={program} label="Программа" out={true} link="https://marketingforum.com.ua/ru/home/programm-extended/"></MenuItem> */}
-				{/* <MenuItem icon={spikers} label="Спикеры" out={true} link="https://marketingforum.com.ua/ru/speakers/"></MenuItem> */}
 				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
 				<MenuItem icon={messages} label="Cообщения" link="/messages" notifications={newMessages}></MenuItem>
-				{((range !== 1) && (range !== 2)) && <MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>}
+				<MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>
 				<MenuItem icon={exposure} label="Партнеры" link="/exposure"></MenuItem>
 				<MenuItem icon={presentations} label="Презентации" link="/presentations"></MenuItem>
-				{/* <MenuItem icon={quest} label="Квест" link="/quest"></MenuItem> */}
-				{/* {(range !== 1) && <MenuItem icon={party} label="Вечеринка" out={true} link="https://us5.campaign-archive.com/?e=&u=df5d96ca282cfa5c02d25b866&id=a9931072e8"></MenuItem>} */}
-				{/* {((range !== 1) && (range !== 2) && (range !== 6)) && <MenuItem
-					icon={vipassistent}
-					label="Ассистент для вип"
-					link="/vip-assistent"
-					notifications={newVipMessages}
-				></MenuItem> */}
+
 
 			</div>
 		);
@@ -67,31 +58,21 @@ class MenuItem extends React.Component {
 
 
 		return (
-			<>
-				{(!out) &&
-					<NavLink
-						to={link}
-						activeStyle={{
-							background: '#e3ffef',
-							borderLeft: '3px solid #22D671',
+			<NavLink
+				to={link}
+				activeStyle={{
+					background: '#e3ffef',
+					borderLeft: '3px solid #22D671',
 
-						}}
-						className="menu-item flex-center"
-					>
-						<div className="menu-item-icon-wrap">
-							<img alt="" src={icon} className="menu-item-icon" />
-							{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
-						</div>
-						<div className="menu-item-label">{label}</div>
-					</NavLink>}
-
-				{(out) && <a target="_blank" href={link} className="menu-item flex-center" onClick={() => api.postUrl(link)}>
-					<div className="menu-item-icon-wrap">
-						<img alt="" src={icon} className="menu-item-icon" />
-					</div>
-					<div className="menu-item-label">{label}</div>
-				</a>}
-			</>
+				}}
+				className="menu-item flex-center"
+			>
+				<div className="menu-item-icon-wrap">
+					<img alt="" src={icon} className="menu-item-icon" />
+					{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
+				</div>
+				<div className="menu-item-label">{label}</div>
+			</NavLink>
 		);
 	}
 }
@@ -99,7 +80,7 @@ class MenuItem extends React.Component {
 class MenuContainer extends React.Component {
 
 	componentDidMount() {
-		this.props.fetchUser();
+		if (!this.props.user) this.props.fetchUser();
 	}
 
 	render() {
