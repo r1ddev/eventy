@@ -109,7 +109,7 @@ class ScenesChat extends React.Component {
                 </div>
                 <div className="chat-input-container">
                     <div className="chat-input-wrapper">
-                        <InputEmoji
+                        {(!loading) && <InputEmoji
                             value={message}
                             onChange={this.onChangeMessageValue}
                             cleanOnEnter
@@ -118,7 +118,8 @@ class ScenesChat extends React.Component {
                             onEnter={this.onSubmit}
                             borderRadius={10}
                             ref="chatInput"
-                        />
+                        />}
+
                     </div>
                     <button className="send-mes-btn" onClick={this.onSubmit}>
                         <div className="send-mes-btn-icon" onClick={this.onSubmit}></div>
