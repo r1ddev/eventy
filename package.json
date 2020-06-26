@@ -42,8 +42,8 @@
 	},
 	"scripts": {
 		"start": "cross-env PORT=3000 HTTPS=true react-scripts start",
-		"build": "react-scripts build",
-		"deploy": "npm run build && node ./deploy.js"
+		"build": "PUBLIC_URL=/front/www react-scripts build",
+		"deploy": "PUBLIC_URL=/front/www npm run build && node ./deploy.js"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
