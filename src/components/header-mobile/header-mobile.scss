@@ -19,10 +19,9 @@
 	color: white;
 	font-size: 28px;
 	transition: 200ms;
-
+	z-index: 5;
 
 	&.active{
-		z-index: 5;
     transform: rotate(-45deg) translateY(140px) translateX(-145px);
     transition: 300ms;
 	}
