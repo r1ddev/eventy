@@ -24,7 +24,7 @@ class HeaderMobile extends React.Component {
 				<div className={(activeLogo) ? "logo-mobile active" : "logo-mobile"}>
 					smit.events
 				</div>
-				<div id="profile-link-mobile"></div>
+				<Link to='/profile' id="profile-link-mobile"></Link>
 			</div>
 		)
 	}
