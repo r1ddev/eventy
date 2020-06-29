@@ -1,0 +1,31 @@
+#header-mobile {
+	background-color:#22D671;
+	display: grid;
+	grid-template-columns: 60px 1fr 60px;
+}
+
+#profile-link-mobile{
+	background-image: url('../../images/menu/profile-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+.logo-mobile{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "FuturaBookC";
+	color: white;
+	font-size: 28px;
+	transition: 200ms;
+
+
+	&.active{
+		z-index: 5;
+    transform: rotate(-45deg) translateY(140px) translateX(-145px);
+    transition: 300ms;
+	}
+	
+
+}
