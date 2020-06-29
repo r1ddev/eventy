@@ -10,6 +10,7 @@ import { fetchUser } from '../../actions/user-actions';
 import IdeaFirstApiService from "../../services/idea-first-api-service";
 
 const logo = require("../../images/icons/logo.svg");
+const closebtn = require("../../images/menu/close-icon.svg");
 const desk = require("../../images/icons/desk.svg");
 const scenes = require("../../images/icons/scenes.svg");
 const networking = require("../../images/icons/networking.svg");
@@ -73,10 +74,9 @@ class MenuMobile extends React.Component {
 						<MenuItemMobile link='/messages' icon={messages} label='Сообщения' onClose={this.onClose} />
 						<div className="icon-item"></div>
 						<MenuItemMobile link='/conversations' icon={conversations} label='Переговорки' onClose={this.onClose} />
-						<MenuItemMobile link='/networking' icon={networking} label='Нетворкинг' onClose={this.onClose} />
 						<MenuItemMobile link='/exposure' icon={exposure} label='Партнеры' onClose={this.onClose} />
 						<MenuItemMobile link='/presentations' icon={presentations} label='Презентации' onClose={this.onClose} />
-
+						<div className="icon-item" onClick={this.onClose} style={{ backgroundImage: `url(${closebtn})`, backgroundPosition: 'center' }}></div>
 
 					</div>
 				</div>
