@@ -1,5 +1,6 @@
 import React from 'react';
-import "./frame.css"
+import "./frame.css";
+import "./frame-mobile.css";
 import Menu from '../menu';
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
@@ -8,13 +9,12 @@ import { checkNotifications } from '../../actions/notifications-actions';
 import { fetchTimers } from '../../actions/timers-actions';
 
 import NotifyIndicator from '../notify-indicator';
-
+import { isMobile } from 'react-device-detect';
+import HeaderMobile from '../header-mobile';
 
 class Frame extends React.Component {
 
     render() {
-
-
         return (
             <div id="frame">
                 <Menu notifications={this.props.notifications} />
@@ -27,6 +27,23 @@ class Frame extends React.Component {
         )
     }
 }
+
+class FrameMobile extends React.Component {
+
+    render() {
+        return (
+            <div id="frame-mobile">
+                <HeaderMobile />
+                <div className="frame-mobile-container">
+                    {
+                        this.props.children
+                    }
+                </div>
+            </div>
+        )
+    }
+}
+
 
 
 
@@ -86,7 +103,9 @@ class FrameContainer extends React.Component {
 
     render() {
 
-        return <Frame {...this.props} />;
+        return (
+            (isMobile) ? <FrameMobile {...this.props} /> : <Frame {...this.props} />
+        )
     }
 }
 

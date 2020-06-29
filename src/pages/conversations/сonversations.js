@@ -107,21 +107,23 @@ class СonversationsContainer extends React.Component {
 	}
 	render() {
 		let loading = true;
-		const { loading: userLoading, user, error } = this.props.user;
+		// const { loading: userLoading, user, error } = this.props.user;
 		const { isLoaded: roomsLoaded, rooms } = this.props.conversations;
 
-		loading = userLoading || !roomsLoaded;
+		// loading = userLoading || !roomsLoaded;
+		loading = !roomsLoaded;
 
-		let errorUserPermissions = false;
-		if (user) errorUserPermissions = error || user.range === 1 || user.range === 2;
+
+		// let errorUserPermissions = false;
+		// if (user) errorUserPermissions = error || user.range === 1 || user.range === 2;
 
 		return (
 			<>
-				{!loading && !errorUserPermissions && (
+				{!loading && (
 					<Сonversations {...this.props} rooms={rooms} />
 				)}
 				{loading && <Spinner big={1} />}
-				{!loading && errorUserPermissions && <NoPermissions />}
+
 			</>
 		);
 	}
