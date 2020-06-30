@@ -7,6 +7,7 @@ import Header from '../../components/header';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../../actions/user-actions';
 import IdeaFirstApiService from '../../services/idea-first-api-service';
+import { isMobile } from 'react-device-detect';
 
 
 class Desk extends React.Component {
@@ -17,14 +18,14 @@ class Desk extends React.Component {
 
         return (
             <div id="desk" className="h-100">
-                <Header className='fixed transparented' data={this.props.user.data}>
+                {(!isMobile) && <Header className='fixed transparented' data={this.props.user.data}>
                     <></>
                     <div className="col d-flex align-items-center p-0">
                         <Link to="/messages/5" className="action-link">
                             Связь <br />с организаторами
 						</Link>
                     </div>
-                </Header>
+                </Header>}
                 <section className="first-section" style={{ backgroundImage: `url(${require('../../images/lobby.jpg')})` }}>
                     {/* <img src={require('../../images/lobby.jpg')} alt="img" /> */}
                     <div className='lobby-text'>
