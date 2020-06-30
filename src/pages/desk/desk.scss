@@ -64,3 +64,11 @@
     border-bottom: 1px solid #403f3f;
 	}
 }
+
+@media screen and (max-width: 900px) {
+	#desk .lobby-text {
+		font-size: 6vw;
+    line-height: 1.5;
+    padding: 40vmin 5vmin;
+	}
+}
