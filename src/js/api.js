@@ -6,8 +6,8 @@ const api = {
 	// origin: "https://onlineshow.marketingforum.com.ua",
 	// host: "https://onlineshow.marketingforum.com.ua/api",
 
-	origin: window.location.protocol + "//onlineshow.marketingforum.com.ua",
-	host: window.location.protocol + "//onlineshow.marketingforum.com.ua/api",
+	origin: window.location.protocol + "//smit.events",
+	host: window.location.protocol + "//smit.events/api",
 
 	// origin: window.location.origin,
 	// host: window.location.origin + "/api",
