@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
 import ScenesChat from '../../components/scenes-chat';
-import replaceBadWords from '../../utils/bad-words-replacer';
 
 class ScenesChatContainer extends React.Component {
 
@@ -46,7 +45,7 @@ class ScenesChatContainer extends React.Component {
             avatar: avatar,
             range: range,
             messages_id: 1,
-            message: replaceBadWords(message)
+            message: message
         }
 
         this.props.fetchAddMessage(this.state.currentChatId, mes)

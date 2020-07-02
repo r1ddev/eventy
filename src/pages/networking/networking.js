@@ -107,34 +107,42 @@ class Networking extends React.Component {
 			})
 
 
+		const search = (
+			<div className="search">
+				<form
+					method="post"
+					className="row m-0"
+					onSubmit={this.searchSubmit}>
+					<input
+						type="text"
+						className="inp-search col"
+						placeholder="Search"
+						onChange={(e) => {
+							this.setState({ searchText: e.target.value });
+						}}
+					/>
+					<input type="submit" value="" className="btn-search" />
+				</form>
+			</div>
+		)
+
 		return (
 			<div id="networking" >
 
 				{(!isMobile) && <Header data={data}>
-					<div className="search">
-						<form
-							method="post"
-							className="row m-0"
-							onSubmit={this.searchSubmit}>
-							<input
-								type="text"
-								className="inp-search col"
-								placeholder="Search"
-								onChange={(e) => {
-									this.setState({ searchText: e.target.value });
-								}}
-							/>
-							<input type="submit" value="" className="btn-search" />
-						</form>
-					</div>
+
+					{
+						search
+					}
 
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
-				}
+				</Header>}
+				{search}
+
 
 				<div className="container">
 					<div className="card-list">
