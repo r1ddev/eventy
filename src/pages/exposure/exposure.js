@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import Header from "../../components/header";
 import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+
 
 const partners = [
 	{
@@ -56,7 +58,8 @@ class Exposure extends React.Component {
 
 		return (
 			<div id="exposure">
-				<Header className="fixed" data={this.props.user.data}>
+
+				{(!isMobile)&&<Header className="fixed" data={this.props.user.data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
@@ -64,7 +67,7 @@ class Exposure extends React.Component {
 						</Link>
 					</div>
 				</Header>
-
+				}
 				<div className="container">
 					<div className="card-list">{partnersList}</div>
 				</div>

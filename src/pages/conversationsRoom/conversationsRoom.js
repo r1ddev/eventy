@@ -11,6 +11,8 @@ import NoPermissions from '../../components/no-permissions';
 import { fetchUser } from '../../actions/user-actions';
 import { conversationRoomsLoading, conversationRoomsLoaded } from '../../actions/conversations-actions';
 import api from './../../js/api';
+import { isMobile } from 'react-device-detect';
+
 
 class СonversationsRoom extends React.Component {
 
@@ -57,14 +59,15 @@ class СonversationsRoom extends React.Component {
 
 		return (
 			<div id="conversations-room">
-				<Header data={data}>
+				{(!isMobile) && <Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
+				</Header>}
+
 				<div className="container">
 					{this.state.room &&
 						<iframe className="video"

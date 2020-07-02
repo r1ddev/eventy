@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import api from './../../js/api';
 import Header from './../../components/header/index';
 import posed from 'react-pose';
+import { isMobile } from 'react-device-detect';
+
 
 class Networking extends React.Component {
 	state = {
@@ -108,7 +110,7 @@ class Networking extends React.Component {
 		return (
 			<div id="networking" >
 
-				<Header data={data}>
+				{(!isMobile) && <Header data={data}>
 					<div className="search">
 						<form
 							method="post"
@@ -132,6 +134,7 @@ class Networking extends React.Component {
 						</Link>
 					</div>
 				</Header>
+				}
 
 				<div className="container">
 					<div className="card-list">
