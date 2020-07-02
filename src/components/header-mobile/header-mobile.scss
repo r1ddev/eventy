@@ -22,9 +22,27 @@
 	z-index: 5;
 
 	&.active{
-    transform: rotate(-45deg) translateY(140px) translateX(-145px);
-    transition: 300ms;
+    // transform: rotate(-45deg) translateY(140px) translateX(-145px);
+		// transition: 300ms;
+		.logo-mobile--text:nth-child(1){
+			transform: translateY(190px) translateX(25px);
+			transition: 300ms;
+		}
+		.logo-mobile--text:nth-child(2){
+			transform: translateY(190px) translateX(25px);
+			transition: 300ms;
+			transition-delay: 50ms;
+		}
+		.logo-mobile--text:nth-child(3){
+			transform: translateY(210px) translateX(-23px);
+			transition: 300ms;
+		}
+
 	}
+
+	.logo-mobile--text{
+			transition: 300ms;
+		}
 	
 
 }

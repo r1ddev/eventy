@@ -6,7 +6,6 @@ import { fetchMessages, fetchAddMessage } from '../../actions/vip-chat-actions';
 import { setVipMessagesNotifications, setMessagesNotifications } from '../../actions/notifications-actions';
 
 import ScenesChat from '../../components/scenes-chat';
-import replaceBadWords from '../../utils/bad-words-replacer';
 
 class VipChatContainer extends React.Component {
 
@@ -26,7 +25,7 @@ class VipChatContainer extends React.Component {
             avatar: avatar,
             range: range,
             messages_id: 1,
-            message: replaceBadWords(message)
+            message: message
         }
 
         this.props.fetchAddMessage(9, mes)

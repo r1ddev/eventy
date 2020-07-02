@@ -20,7 +20,7 @@ const partners = [
 				"SMIT.studio - эксперты в интерактивом маркетинге <br/> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда"
 			</p>
 		),
-				link: "https://us02web.zoom.us/j/86047358537"
+				link: "https://smit.studio/"
 	},
 	{
 		logo: require("../../images/partners/smitscreen.png"),
@@ -29,7 +29,7 @@ const partners = [
 		name: "Smit.Screen",
 		desc:
 			"Инвестиционная компания, которая открывает перед клиентами возможности в мире ценных бумаг и фондового рынка.",
-		link: "https://ffin.ua/"
+		link: "https://smit.studio/"
 	},
 ];
 
