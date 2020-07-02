@@ -31,6 +31,7 @@
 		.logo-mobile--text:nth-child(2){
 			transform: translateY(190px) translateX(25px);
 			transition: 300ms;
+			transition-delay: 50ms;
 		}
 		.logo-mobile--text:nth-child(3){
 			transform: translateY(210px) translateX(-23px);
