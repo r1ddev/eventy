@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import Header from "../../components/header";
+import { isMobile } from 'react-device-detect';
 
 const folders = [
 	{
@@ -52,14 +53,16 @@ class PresentationsList extends React.Component {
 
 		return (
 			<div id="presentations-list">
-				<Header data={data}>
+
+				{(!isMobile) && < Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
+				</Header>}
+
 				<div className="container pt-3">
 					{(
 						(
@@ -78,7 +81,7 @@ class PresentationsList extends React.Component {
 						);
 					})}
 				</div>
-			</div>
+			</div >
 		);
 	}
 }

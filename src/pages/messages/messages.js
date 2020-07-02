@@ -9,6 +9,7 @@ import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
 import IdleTimer from "react-idle-timer";
 import { setMessagesNotifications } from "../../actions/notifications-actions";
+import { isMobile } from 'react-device-detect';
 
 import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
@@ -225,14 +226,15 @@ class Messages extends React.Component {
 					onIdle={this.onIdle}
 					timeout={1000 * 30}
 				/>
-				<Header data={data}>
+
+				{(!isMobile) && <Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
+				</Header>}
 
 				<div className="container-fluid">
 					<div className="row h-100">

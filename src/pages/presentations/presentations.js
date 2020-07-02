@@ -6,6 +6,8 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import Header from "../../components/header";
+import { isMobile } from 'react-device-detect';
+
 
 class Presentations extends React.Component {
 	state = {};
@@ -15,14 +17,14 @@ class Presentations extends React.Component {
 
 		return (
 			<div id="presentations">
-				<Header data={data}>
+				{(!isMobile) && <Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
+				</Header>}
 
 				<div className="container">
 					<div className="row">

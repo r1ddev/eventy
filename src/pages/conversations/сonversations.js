@@ -8,6 +8,7 @@ import api from "./../../js/api";
 import Header from "../../components/header";
 import Spinner from "../../components/spinner";
 import NoPermissions from "../../components/no-permissions";
+import { isMobile } from 'react-device-detect';
 import { fetchUser } from "../../actions/user-actions";
 import {
 	conversationRoomsLoading,
@@ -36,14 +37,15 @@ class Сonversations extends React.Component {
 
 		return (
 			<div id="conversations">
-				<Header data={data}>
+				{(!isMobile) && <Header data={data}>
 					<></>
 					<div className="col d-flex align-items-center p-0">
 						<Link to="/messages/5" className="action-link">
 							Связь <br />с организаторами
 						</Link>
 					</div>
-				</Header>
+				</Header>}
+
 				<div className="container">
 					<div className="title">Открытые комнаты:</div>
 
