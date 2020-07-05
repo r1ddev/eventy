@@ -40,9 +40,9 @@ class Login extends React.Component {
 			<div id="login">
 				<form onSubmit={this.onSubmit} className="login-form">
 					<div className="login-form--wrapper">
-						<div className="login-form--caption">Регистрация</div>
+						<div className="login-form--caption">Авторизация</div>
 						<input required type="email" value={email} onChange={this.onChangeEmail} className="email-input" placeholder="e-mail"></input>
-						<input requered type="password" value={password} onChange={this.onChangePassword} className="password-input" placeholder="Пароль"></input>
+						<input required type="password" value={password} onChange={this.onChangePassword} className="password-input" placeholder="Пароль"></input>
 						<button disabled={email == '' || password == ''} className="white-button login-btn">ВОЙТИ</button>
 						<Link className="reg-link" to="/registration">Зарегистрироваться</Link>
 					</div>

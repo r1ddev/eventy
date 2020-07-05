@@ -16,6 +16,7 @@ import Login from './pages/login';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Registration from './pages/registration';
 
 const apiService = new IdeaFirstApiService();
 
@@ -35,6 +36,8 @@ class Index extends React.Component {
 							<Route path="/profile/:id" component={Profile} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/login" component={Login} />
+							<Route path="/registration" component={Registration} />
+
 							<Route path="/error" component={ErrorPage} />
 
 							<Route path="/" component={App} />
