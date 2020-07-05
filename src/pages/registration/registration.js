@@ -159,6 +159,7 @@ class Registration extends React.Component {
 
 
 						<Select
+							isSearchable={false}
 							defaultValue={regOptions[0]}
 							options={regOptions}
 							onChange={this.onChangeRegTag}

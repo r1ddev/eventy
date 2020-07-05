@@ -9,7 +9,7 @@
     .registration-form{
       width: 550px;
       height: 660px;
-      max-height: 100%;
+      max-height: 100vh;
       background: #22D671;
       border-radius: 45px;
       
@@ -110,8 +110,7 @@
           color: white;
           font-size: 26px;
           margin: 20px;
-
-
+          text-align: center;
       }
     }
   
