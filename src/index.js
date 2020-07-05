@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import EditProfile from './pages/edit-profile';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error';
+import Login from './pages/login';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,6 +34,7 @@ class Index extends React.Component {
 							<Route path="/profile/edit" component={EditProfile} />
 							<Route path="/profile/:id" component={Profile} />
 							<Route path="/profile" component={Profile} />
+							<Route path="/login" component={Login} />
 							<Route path="/error" component={ErrorPage} />
 
 							<Route path="/" component={App} />
