@@ -9,7 +9,7 @@ import { ApiServiceProvider } from './components/api-service-context';
 import store from './store';
 import { Provider } from 'react-redux';
 
-import Registration from './pages/registration';
+import EditProfile from './pages/edit-profile';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error';
 
@@ -30,7 +30,7 @@ class Index extends React.Component {
 					<ToastContainer />
 					<Router>
 						<Switch>
-							<Route path="/profile/edit" component={Registration} />
+							<Route path="/profile/edit" component={EditProfile} />
 							<Route path="/profile/:id" component={Profile} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/error" component={ErrorPage} />

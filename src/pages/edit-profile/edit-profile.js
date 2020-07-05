@@ -6,7 +6,7 @@ import withApiService from '../../components/hoc/with-api-service';
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 
-import "./registration.scss";
+import "./edit-profile.scss";
 import api from "../../js/api";
 
 import ErrorIndicator from '../../components/error-indicator'
@@ -27,7 +27,7 @@ const defaultTags = [
 	}
 ]
 
-class Registration extends React.Component {
+class EditProfile extends React.Component {
 	state = {
 		avatar: "",
 		name: "",
@@ -187,7 +187,7 @@ class Registration extends React.Component {
 				className=""
 			>
 				<div className="bg-light flex-center min-vh-100">
-					<div className="container" id="registration">
+					<div className="container" id="edit-profile">
 						<div className={isEditProfile ? "edit-wrap" : "registration-wrap"}>
 							<form action="" method="post" onSubmit={this.submit}>
 								<div className="row m-0">
@@ -437,4 +437,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 
 export default compose(
 	withApiService(),
-	connect(mapStateToProps, mapDispatchToProps))(Registration);
+	connect(mapStateToProps, mapDispatchToProps))(EditProfile);

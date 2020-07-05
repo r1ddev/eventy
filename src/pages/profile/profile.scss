@@ -1,4 +1,6 @@
-#registration {
+
+
+#profile {
 	position: relative;
 
 	.back {
@@ -12,6 +14,7 @@
 		background: url(../../images/back.svg) center center no-repeat;
 		background-color: #22d671;
 	}
+
 	.profile-wrap {
 		.left {
 			display: flex;
@@ -47,6 +50,100 @@
 				font-family: FuturaBookC;
 				font-weight: normal;
 				font-size: 30px;
+			}
+		}
+	}
+
+	
+
+	.registration-wrap,
+	.edit-wrap,
+	.profile-wrap {
+		transition: 0.2s;
+		background-color: #fff;
+		border-radius: 20px;
+		box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
+		// overflow: hidden;
+
+		.left {
+			background-color: #22D671;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+
+			.ava {
+				img {
+					object-fit: cover;
+				}
+			}
+
+			.btn {
+				img {
+					width: 100%;
+				}
+			}
+
+			input[type="file"] {
+				width: 100px;
+				height: 100px;
+			}
+		}
+
+		.right {
+			.radio {
+				user-select: none;
+				transition: 0.2s;
+				cursor: pointer;
+				color: #000;
+				border: 2px solid #22D671;
+				background: #fff;
+				border-radius: 10px;
+				padding: 5px 20px;
+
+				&-selected {
+					color: #fff;
+					background: #22D671;
+				}
+
+				&:hover {
+					background: #1dd6737a;
+				}
+			}
+
+			.css-vndh9s-control {
+				border: 1px solid #22D671;
+				box-shadow: 0 0 0px 1px #22D671;
+			}
+			// .css-1pahdxg-control {
+			// 	box-shadow: 0 0 0 1px #f4004d;
+			// 	&:hover {
+			// 		border-color: #f4004d;
+			// 	}
+			// }
+			// .css-1laao21-a11yText {
+			// 	// border: 3px solid #f4004d;
+			// }
+		}
+	}
+	.edit-wrap {
+		.left {
+			background-color: #1dd673;
+		}
+
+		.r1-inp {
+			border: 2px solid #1dd673;
+		}
+
+		.right {
+			.radio {
+				border: 2px solid #1dd673;
+
+				&-selected {
+					background: #1dd673;
+				}
+			}
+			.css-vndh9s-control {
+				border: 1px solid #1dd673;
+				box-shadow: 0 0 0px 1px #1dd673;
 			}
 		}
 	}
