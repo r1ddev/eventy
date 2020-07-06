@@ -79,13 +79,13 @@ class Registration extends React.Component {
 					.then((res) => {
 						this.setState({
 							avatar: res.user.avatar,
-							name: res.user.first_name,
-							lastName: res.user.last_name,
-							company: res.user.company,
-							position: res.user.position,
-							phone: res.user.phone,
-							email: res.user.mail,
-							soc: res.user.social_site,
+							name: res.user.first_name || "",
+							lastName: res.user.last_name || "",
+							company: res.user.company || "",
+							position: res.user.position || "",
+							phone: res.user.phone || "",
+							email: res.user.mail || "",
+							soc: res.user.social_site || "",
 							isEditable: true,
 						});
 
