@@ -11,6 +11,7 @@ class Error extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
+		console.log('f')
 		if (window.localStorage.token) {
 			this.props.history.push("/desk")
 		} else {
@@ -28,7 +29,7 @@ class Error extends React.Component {
 						</div>
 
 					</div>
-					<button className="white-button login-btn">Найтись</button>
+					<button type="submit" onClick={this.onSubmit} className="white-button login-btn">Найтись</button>
 
 				</form>
 			</div>
@@ -41,7 +42,7 @@ class ErrorContainer extends React.Component {
 	render() {
 
 		return (
-			<Error />
+			<Error {...this.props} />
 		);
 	}
 }
