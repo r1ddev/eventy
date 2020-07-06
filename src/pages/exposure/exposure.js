@@ -29,7 +29,7 @@ const partners = [
 		name: "Smit.Screen",
 		desc:
 			"Инвестиционная компания, которая открывает перед клиентами возможности в мире ценных бумаг и фондового рынка.",
-		link: "https://smit.studio/"
+		link: "https://smitscreen.ru"
 	},
 ];
 
