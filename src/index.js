@@ -13,10 +13,11 @@ import EditProfile from './pages/edit-profile';
 import Profile from './pages/profile';
 import ErrorPage from './pages/error';
 import Login from './pages/login';
+import Registration from './pages/registration';
+import PasswordRecovery from './pages/password-recovery';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Registration from './pages/registration';
 
 const apiService = new IdeaFirstApiService();
 
@@ -37,6 +38,7 @@ class Index extends React.Component {
 							<Route path="/profile" component={Profile} />
 							<Route path="/login" component={Login} />
 							<Route path="/registration" component={Registration} />
+							<Route path="/password-recovery" component={PasswordRecovery} />
 
 							<Route path="/error" component={ErrorPage} />
 
