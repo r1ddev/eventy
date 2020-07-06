@@ -3,11 +3,11 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 
-import "./pregistration-acception.scss";
+import "./registration-acception.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from '../../components/error-indicator'
 
-class PasswordRecovery extends React.Component {
+class RegistrationAcception extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();

@@ -1,17 +1,58 @@
-import React from 'react';
-import './error.scss'
+import React from "react";
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+
+import "./error.scss";
+import { Link } from "react-router-dom";
+import ErrorIndicator from '../../components/error-indicator'
 
 class Error extends React.Component {
 
+	onSubmit = (e) => {
+		e.preventDefault();
+	}
+
 	render() {
 		return (
-			<div style={{ backgroundColor: '#ffe800' }} className="min-vh-100 flex-center">
-				<div className="alert alert-success" role="alert">
-					<div className='alert-link'>404</div>
-				</div>
+			<div id="registration-acception">
+				<form onSubmit={this.onSubmit} className="registration-acception-form">
+					<div className="registration-acception-form--wrapper">
+						<div className="registration-acception-form--caption">
+							Потерялись на конференции? Давайте вернёмся к стойке регистрации.
+						</div>
+
+					</div>
+					<button className="white-button login-btn">Найтись</button>
+
+				</form>
 			</div>
-		)
+		);
 	}
 }
 
-export default Error;
+class ErrorContainer extends React.Component {
+
+	render() {
+
+		return (
+			<Error />
+		);
+	}
+}
+
+
+const mapStateToProps = ({ user }) => {
+	return {
+		user,
+	};
+};
+
+const mapDispatchToProps = (dispatch, { apiService }) => {
+	return {};
+};
+
+export default compose(
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps)
+)(ErrorContainer);
