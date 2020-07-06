@@ -8,7 +8,7 @@ import "./profile.scss";
 import api from "../../js/api";
 import { Link } from "react-router-dom";
 
-import ErrorIndicator from '../../components/error-indicator'
+import ErrorIndicator from "../../components/error-indicator";
 
 class Registration extends React.Component {
 	state = {
@@ -20,10 +20,8 @@ class Registration extends React.Component {
 		phone: "",
 		email: "",
 		soc: "",
-		whatSearch: "",
-		whatOffer: "",
 		isLoading: false,
-		isEditable: false
+		isEditable: false,
 	};
 
 	componentDidMount() {
@@ -31,21 +29,21 @@ class Registration extends React.Component {
 
 		console.log("history", this.props.history);
 		console.log("history", this.props.history.length);
-
 	}
 
 	goBack = () => {
-		this.props.history.length == 1 ? window.close() : this.props.history.goBack()
-	}
+		this.props.history.length == 1
+			? window.close()
+			: this.props.history.goBack();
+	};
 
 	fetchData = async () => {
 		if (window.localStorage.token !== undefined) {
 			if (this.props.match.params.id) {
-
 				if (this.props.match.params.id === this.props.user.id) {
 					this.setState({
-						isEditable: true
-					})
+						isEditable: true,
+					});
 				}
 
 				this.setLoading(true);
@@ -61,8 +59,6 @@ class Registration extends React.Component {
 							phone: res.user.phone,
 							email: res.user.mail,
 							soc: res.user.social_site,
-							whatSearch: res.user.what_looking,
-							whatOffer: res.user.what_offer,
 						});
 
 						this.setLoading(false);
@@ -90,9 +86,7 @@ class Registration extends React.Component {
 							phone: res.user.phone,
 							email: res.user.mail,
 							soc: res.user.social_site,
-							whatSearch: res.user.what_looking,
-							whatOffer: res.user.what_offer,
-							isEditable: true
+							isEditable: true,
 						});
 
 						this.setLoading(false);
@@ -108,7 +102,7 @@ class Registration extends React.Component {
 					});
 			}
 		} else {
-			this.props.history.push("/error")
+			this.props.history.push("/error");
 		}
 	};
 
@@ -129,21 +123,25 @@ class Registration extends React.Component {
 			phone,
 			email,
 			soc,
-			whatSearch,
-			whatOffer,
-			isEditable
+			isEditable,
 		} = this.state;
 
-		let userAvatar = require("../../images/default-avatar.svg")
+		let userAvatar = require("../../images/default-avatar.svg");
 		if (avatar) {
-			userAvatar = api.auth.getAvatarLocation() + avatar
+			userAvatar = api.auth.getAvatarLocation() + avatar;
 		}
 
 		return (
-			<LoadingOverlay active={isLoading} spinner text="Загрузка" className="">
+			<LoadingOverlay
+				active={isLoading}
+				spinner
+				text="Загрузка"
+				className="">
 				<div className="bg-light flex-center min-vh-100">
 					<div className="container" id="profile">
-						<div className="back" onClick={() => this.goBack()}></div>
+						<div
+							className="back"
+							onClick={() => this.goBack()}></div>
 						<div className="profile-wrap">
 							<div className="row m-0">
 								<div className="col-md-5 left p-5">
@@ -153,33 +151,29 @@ class Registration extends React.Component {
 
 									<div className="field mt-3">{name}</div>
 									<div className="field mt-3">{lastName}</div>
-									{isEditable &&
-										<div className="btn-wrap">
-											<Link to="/profile/edit" className="flex-center">
-												<button
-													type="submit"
-													className="btn mt-3"
-													disabled={isLoading}>
-													<img
-														src={require("../../images/profile-btn.png")}
-													/>
-												</button>
-											</Link>
-										</div>
-									}
 								</div>
 
 								{!isLoading && (
 									<div className="col-md-7 right p-5">
-										<div className="title">{position + " в " + company}</div>
-										<div className="title mt-2">Контакты:</div>
+										<div className="title">
+											{position + " в " + company}
+										</div>
+										<div className="title mt-2">
+											Контакты:
+										</div>
 										<div className="text">{email}</div>
 										<div className="text">{phone}</div>
 										<div className="text">{soc}</div>
-										<div className="title mt-3">Что ищу:</div>
-										<div className="text">{whatSearch}</div>
-										<div className="title mt-3">Что предлагаю:</div>
-										<div className="text">{whatOffer}</div>
+
+										{isEditable && (
+											<div className="field mt-3 flex-center">
+												<Link
+													to="/profile/edit"
+													className="flex-center btn-submit text-center">
+													Изменить профиль
+												</Link>
+											</div>
+										)}
 									</div>
 								)}
 							</div>
