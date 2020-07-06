@@ -151,22 +151,6 @@ class Registration extends React.Component {
 
 									<div className="field mt-3">{name}</div>
 									<div className="field mt-3">{lastName}</div>
-									{isEditable && (
-										<div className="btn-wrap">
-											<Link
-												to="/profile/edit"
-												className="flex-center">
-												<button
-													type="submit"
-													className="btn mt-3"
-													disabled={isLoading}>
-													<img
-														src={require("../../images/profile-btn.png")}
-													/>
-												</button>
-											</Link>
-										</div>
-									)}
 								</div>
 
 								{!isLoading && (
@@ -180,6 +164,16 @@ class Registration extends React.Component {
 										<div className="text">{email}</div>
 										<div className="text">{phone}</div>
 										<div className="text">{soc}</div>
+
+										{isEditable && (
+											<div className="field mt-3 flex-center">
+												<Link
+													to="/profile/edit"
+													className="flex-center btn-submit text-center">
+													Изменить профиль
+												</Link>
+											</div>
+										)}
 									</div>
 								)}
 							</div>
