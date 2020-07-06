@@ -156,9 +156,6 @@ class Registration extends React.Component {
 							placeholder="Компания">
 						</input>
 
-
-
-
 						<Select
 							isSearchable={false}
 							defaultValue={regOptions[0]}
@@ -166,7 +163,6 @@ class Registration extends React.Component {
 							onChange={this.onChangeRegTag}
 							className="reg-select"
 						/>
-
 
 						<button disabled={passwordRepeatedError || email == '' || password == '' || passwordRepeated == '' || company == '' || disableForm} className="white-button login-btn">РЕГИСТРАЦИЯ</button>
 					</div>

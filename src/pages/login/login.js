@@ -11,7 +11,8 @@ class Login extends React.Component {
 
 	state = {
 		email: '',
-		password: ''
+		password: '',
+		disableForm: false,
 
 	}
 
@@ -29,12 +30,39 @@ class Login extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		alert('login');
+
+		let user = {
+			email: this.state.email,
+			password: this.state.password,
+		};
+
+		console.log(user)
+		this.setState({
+			disableForm: false
+		})
+
+		this.props.autorizate(user)
+			.then((res) => {
+				if (res.status) console.log('авторизация успешна');
+				console.log(res)
+				window.localStorage.token = res.token;
+				if (res.myfirsttime) {
+					this.props.history.push("/profile/edit")
+				} else {
+					this.props.history.push("/desk")
+				}
+			})
+			.catch(err => {
+				console.log(err.message);
+				this.setState({
+					disableForm: false
+				})
+			})
 	}
 
 	render() {
 
-		const { email, password } = this.state;
+		const { email, password, disableForm } = this.state;
 
 		return (
 			<div id="login">
@@ -43,7 +71,7 @@ class Login extends React.Component {
 						<div className="login-form--caption">Авторизация</div>
 						<input required type="email" value={email} onChange={this.onChangeEmail} className="email-input" placeholder="e-mail"></input>
 						<input required type="password" value={password} onChange={this.onChangePassword} className="password-input" placeholder="Пароль"></input>
-						<button disabled={email == '' || password == ''} className="white-button login-btn">ВОЙТИ</button>
+						<button disabled={email == '' || password == '' || disableForm} className="white-button login-btn">ВОЙТИ</button>
 						<Link className="reg-link" to="/registration">Зарегистрироваться</Link>
 					</div>
 					<Link className="passrec-link" to="/password-recovery">забыли пароль?</Link>
@@ -59,7 +87,7 @@ class LoginContainer extends React.Component {
 	render() {
 
 		return (
-			<Login />
+			<Login {...this.props} />
 		);
 	}
 }
@@ -72,7 +100,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		autorizate: (user) => apiService.autorizate(user)
+	};
 };
 
 export default compose(

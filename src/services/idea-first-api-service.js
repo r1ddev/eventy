@@ -41,6 +41,21 @@ export default class IdeaFirstApiService {
         })
     }
 
+    autorizate(user) {
+        return new Promise((resolve, reject) => {
+            axios.post(this.host + "/v2/users/login", this.toFormData(user), this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     getMessages(chatId) {
         return new Promise((resolve, reject) => {
             axios.get(this.host + `/group/messages?chat_id=${chatId}`, this.useAuth())
