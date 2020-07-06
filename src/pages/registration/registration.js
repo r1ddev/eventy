@@ -45,17 +45,18 @@ class Registration extends React.Component {
 				disableForm: false
 			})
 
-			// let api = new IdeaFirstApiService;
-			// api.addUser(user)
-			// 		.then((res) => {
-			// 				if (res.status) console.log('регистрация успешна');
-			// 		})
-			// 		.catch(err => {
-			// 				console.log(err.message);
-			// 				this.setState({
-			// 						disableForm: false
-			// 				})
-			// 		})
+
+			this.props.addUser(user)
+				.then((res) => {
+					if (res.status) console.log('регистрация успешна');
+					this.props.history.push("/registration-acception")
+				})
+				.catch(err => {
+					console.log(err.message);
+					this.setState({
+						disableForm: false
+					})
+				})
 		}
 	}
 	validate = () => {
@@ -182,7 +183,7 @@ class RegistrationContainer extends React.Component {
 	render() {
 
 		return (
-			<Registration />
+			<Registration {...this.props} />
 		);
 	}
 }
@@ -195,7 +196,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		addUser: (user) => apiService.addUser(user)
+	};
 };
 
 export default compose(
