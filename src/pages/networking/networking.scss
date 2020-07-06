@@ -2,29 +2,7 @@
 	.header {
 		border-bottom: 1px solid #c4c4c4;
 
-		.search {
-			width: 75%;
-			border: 1px solid #22D671;
-
-			@media screen and (max-width: 767px) {
-				margin-top: 15px !important;
-				width: 100%;
-			}
-
-			.inp-search {
-				height: 35px;
-				vertical-align: top;
-			}
-
-			.btn-search {
-				border: none;
-				background: url(../../images/search.svg) center center no-repeat;
-				background-color: #22D671;
-				height: 35px;
-				width: 35px;
-				vertical-align: top;
-			}
-		}
+		
 		.profile {
 			.ava {
 				padding: 10px;
@@ -33,6 +11,29 @@
 					border-radius: 50%;
 				}
 			}
+		}
+	}
+	.search {
+		width: 75%;
+		border: 1px solid #22D671;
+
+		@media screen and (max-width: 767px) {
+			margin-top: 15px !important;
+			width: 100%;
+		}
+
+		.inp-search {
+			height: 35px;
+			vertical-align: top;
+		}
+
+		.btn-search {
+			border: none;
+			background: url(../../images/search.svg) center center no-repeat;
+			background-color: #22D671;
+			height: 35px;
+			width: 35px;
+			vertical-align: top;
 		}
 	}
 	.card-list {

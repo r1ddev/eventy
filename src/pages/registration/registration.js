@@ -45,6 +45,7 @@ class Registration extends React.Component {
 				disableForm: false
 			})
 
+			localStorage.removeItem('token');
 
 			this.props.addUser(user)
 				.then((res) => {

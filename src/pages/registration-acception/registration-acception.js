@@ -38,7 +38,7 @@ class RegistrationAcceptionContainer extends React.Component {
 	render() {
 
 		return (
-			<RegistrationAcception />
+			<RegistrationAcception {...this.props} />
 		);
 	}
 }
