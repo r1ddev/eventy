@@ -11,6 +11,7 @@ class PasswordRecovery extends React.Component {
 
 	state = {
 		email: '',
+		disableForm: false
 	}
 
 	onChangeEmail = (e) => {
@@ -21,12 +22,28 @@ class PasswordRecovery extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		alert('login');
+
+		this.setState({
+			disableForm: false
+		})
+
+		this.props.recoverPassword(this.state.email)
+			.then((res) => {
+				if (res.status) console.log('Пароль восстановлен');
+				this.props.history.push("/login")
+
+			})
+			.catch(err => {
+				console.log(err.message);
+				this.setState({
+					disableForm: false
+				})
+			})
 	}
 
 	render() {
 
-		const { email } = this.state;
+		const { email, disableForm } = this.state;
 
 		return (
 			<div id="password-recovery">
@@ -35,7 +52,7 @@ class PasswordRecovery extends React.Component {
 						<div className="password-recovery-form--caption">Восстановление пароля</div>
 						<input required type="email" value={email} onChange={this.onChangeEmail} className="email-input" placeholder="e-mail"></input>
 					</div>
-					<button disabled={email == ''} className="white-button login-btn">ВОССТАНОВИТЬ</button>
+					<button disabled={email == '' || disableForm} className="white-button login-btn">ВОССТАНОВИТЬ</button>
 				</form>
 			</div>
 		);
@@ -47,7 +64,7 @@ class PasswordRecoveryContainer extends React.Component {
 	render() {
 
 		return (
-			<PasswordRecovery />
+			<PasswordRecovery {...this.props} />
 		);
 	}
 }
@@ -60,7 +77,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		recoverPassword: (email) => apiService.recoverPassword(email)
+	};
 };
 
 export default compose(
