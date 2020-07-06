@@ -1,5 +1,3 @@
-
-
 #profile {
 	position: relative;
 
@@ -40,6 +38,10 @@
 		}
 
 		.right {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
 			.title {
 				font-family: FuturaDemiC;
 				font-weight: 600;
@@ -54,8 +56,6 @@
 		}
 	}
 
-	
-
 	.registration-wrap,
 	.edit-wrap,
 	.profile-wrap {
@@ -66,7 +66,7 @@
 		// overflow: hidden;
 
 		.left {
-			background-color: #22D671;
+			background-color: #22d671;
 			border-top-left-radius: 20px;
 			border-bottom-left-radius: 20px;
 
@@ -94,14 +94,14 @@
 				transition: 0.2s;
 				cursor: pointer;
 				color: #000;
-				border: 2px solid #22D671;
+				border: 2px solid #22d671;
 				background: #fff;
 				border-radius: 10px;
 				padding: 5px 20px;
 
 				&-selected {
 					color: #fff;
-					background: #22D671;
+					background: #22d671;
 				}
 
 				&:hover {
@@ -110,8 +110,8 @@
 			}
 
 			.css-vndh9s-control {
-				border: 1px solid #22D671;
-				box-shadow: 0 0 0px 1px #22D671;
+				border: 1px solid #22d671;
+				box-shadow: 0 0 0px 1px #22d671;
 			}
 			// .css-1pahdxg-control {
 			// 	box-shadow: 0 0 0 1px #f4004d;

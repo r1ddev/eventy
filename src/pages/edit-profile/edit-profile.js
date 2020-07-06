@@ -11,25 +11,6 @@ import api from "../../js/api";
 
 import ErrorIndicator from "../../components/error-indicator";
 
-const defaultTags = [
-	{
-		value: "creator",
-		label: "Креатор",
-	},
-	{
-		value: "designer",
-		label: "Дизайнер",
-	},
-	{
-		value: "manager",
-		label: "Менеджер",
-	},
-	{
-		value: "director",
-		label: "Директор",
-	},
-];
-
 class EditProfile extends React.Component {
 	state = {
 		avatar: "",
@@ -39,12 +20,10 @@ class EditProfile extends React.Component {
 		position: "",
 		phone: "",
 		email: "",
-		soc: "",
 		shareContact: true,
-		tags: [],
+		soc: "",
 
 		isLoading: false,
-		isEditProfile: false,
 	};
 
 	submit = (e) => {
@@ -55,9 +34,8 @@ class EditProfile extends React.Component {
 			position,
 			phone,
 			email,
-			soc,
 			shareContact,
-			tags,
+			soc,
 		} = this.state;
 
 		this.setLoading(true);
@@ -70,9 +48,8 @@ class EditProfile extends React.Component {
 				position,
 				phone,
 				email,
-				soc,
 				shareContact,
-				JSON.stringify(tags.map((v) => v.label.toLowerCase()))
+				soc
 			)
 			.then((res) => {
 				this.setLoading(false);
@@ -95,48 +72,12 @@ class EditProfile extends React.Component {
 		this.fetchData();
 	}
 
-	getGetParams = () => {
-		var params = {};
-
-		if (window.location.search) {
-			var parts = window.location.search.substring(1).split("&");
-
-			for (var i = 0; i < parts.length; i++) {
-				var nv = parts[i].split("=");
-				if (!nv[0]) continue;
-				params[nv[0]] = nv[1] || true;
-			}
-		}
-
-		return params;
-	};
-
 	fetchData = async () => {
-		const token = this.getGetParams().token || null;
-
-		if (token != null) {
-			window.localStorage.token = token;
-		} else {
-			if (window.localStorage.token !== undefined) {
-				this.setState({ isEditProfile: true });
-			} else {
-				this.props.history.push("/error");
-			}
-		}
-
 		this.setLoading(true);
 
 		api.account
 			.getUserData()
 			.then((res) => {
-				let userTags = JSON.parse(res.user.tags);
-
-				userTags = userTags.map((v) => {
-					return defaultTags.find((t) => {
-						return t.label.toLowerCase() == v.toLowerCase();
-					});
-				});
-
 				this.setState({
 					avatar: api.auth.getAvatarLocation() + res.user.avatar,
 					name: res.user.first_name,
@@ -145,9 +86,8 @@ class EditProfile extends React.Component {
 					position: res.user.position,
 					phone: res.user.phone,
 					email: res.user.mail,
-					soc: res.user.social_site,
 					shareContact: !!res.user.view_contact,
-					tags: userTags,
+					soc: res.user.social_site,
 				});
 
 				this.setLoading(false);
@@ -178,11 +118,9 @@ class EditProfile extends React.Component {
 			position,
 			phone,
 			email,
-			soc,
 			shareContact,
 			isLoading,
-			isEditProfile,
-			tags,
+			soc,
 		} = this.state;
 
 		return (
@@ -193,12 +131,7 @@ class EditProfile extends React.Component {
 				className="">
 				<div className="bg-light flex-center min-vh-100">
 					<div className="container" id="edit-profile">
-						<div
-							className={
-								isEditProfile
-									? "edit-wrap"
-									: "registration-wrap"
-							}>
+						<div className="edit-wrap">
 							<form
 								action=""
 								method="post"
@@ -281,23 +214,6 @@ class EditProfile extends React.Component {
 												required
 											/>
 										</div>
-										<div className="btn-wrap">
-											<button
-												type="submit"
-												className="btn mt-3"
-												disabled={isLoading}>
-												{isEditProfile && (
-													<img
-														src={require("../../images/editProfile-btn.png")}
-													/>
-												)}
-												{!isEditProfile && (
-													<img
-														src={require("../../images/registration-btn.png")}
-													/>
-												)}
-											</button>
-										</div>
 									</div>
 
 									<div className="col-md-7 right p-5">
@@ -338,35 +254,6 @@ class EditProfile extends React.Component {
 												onChange={(e) => {
 													this.setState({
 														soc: e.target.value,
-													});
-												}}
-											/>
-										</div>
-
-										<div className="field mt-4">
-											<Select
-												placeholder="Выберите теги"
-												isMulti
-												options={
-													tags.length >= 2
-														? []
-														: defaultTags
-												}
-												value={tags}
-												theme={(theme) => ({
-													...theme,
-													borderRadius: 10,
-													colors: {
-														...theme.colors,
-														primary: "#22D671",
-													},
-												})}
-												noOptionsMessage={() =>
-													"Нет данных для отображения"
-												}
-												onChange={(e) => {
-													this.setState({
-														tags: e || [],
 													});
 												}}
 											/>
@@ -419,6 +306,15 @@ class EditProfile extends React.Component {
 													</div>
 												</div>
 											</div>
+										</div>
+
+										<div className="field mt-3 flex-center">
+											<button
+												type="submit"
+												className="btn-submit mt-3"
+												disabled={isLoading}>
+												Изменить профиль
+											</button>
 										</div>
 									</div>
 								</div>

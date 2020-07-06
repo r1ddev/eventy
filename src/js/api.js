@@ -43,9 +43,8 @@ const api = {
 			position,
 			phone,
 			email,
-			soc,
 			shareContact,
-			tags
+			soc
 		) => {
 			let response = await axios.post(
 				api.proxy + api.host + "/users/edit",
@@ -60,7 +59,6 @@ const api = {
 					what_looking: "",
 					what_offer: "",
 					view_contact: shareContact - 0,
-					tags: tags,
 				}),
 				api.useAuth()
 			);
