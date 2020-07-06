@@ -165,7 +165,8 @@ class Networking extends React.Component {
 						</div>
 					</Header>
 				)}
-				{search}
+
+				{isMobile && <>{search}</>}
 
 				<div className="container">
 					<div className="card-list">
