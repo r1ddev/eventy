@@ -11,6 +11,11 @@ class Error extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
+		if (window.localStorage.token) {
+			this.props.history.push("/desk")
+		} else {
+			this.props.history.push("/login")
+		}
 	}
 
 	render() {
