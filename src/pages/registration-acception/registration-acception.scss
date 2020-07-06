@@ -1,4 +1,4 @@
-#error {
+#registration-acception {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   width: 100vw;
   background-color:  #F5F5F5;
 
-    .error-form{
+    .registration-acception-form{
       width: 550px;
       height: 660px;
       max-height: 100vh;
@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
 
-      .error-form--wrapper{
+      .registration-acception-form--wrapper{
         flex-grow: 1;
         min-width: 50%;
         max-width: 80%;
@@ -27,7 +27,7 @@
         flex-direction: column;
         align-items: center;
         
-        .error-form--caption{
+        .registration-acception-form--caption{
           margin-top: 80px;
           font-size: 36px;
           line-height: 47px;

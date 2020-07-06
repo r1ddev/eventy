@@ -71,3 +71,50 @@ body {
 ::-webkit-scrollbar-corner {
 	background: transparent;
 }
+
+.white-button{
+  padding:8px;
+  background-color: white;
+  color:  #18BA5A;
+  border-radius: 12px;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.white-button:hover{
+  background-color: rgb(221, 253, 223);
+}
+
+.white-button:active{
+  background-color: rgb(179, 255, 189);
+}
+
+button.white-button{
+  align-self: center;
+  width: 100%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+button.white-button:active, button:focus {
+  outline: none;
+}
+
+button.white-button::-moz-focus-inner {
+  border: 0;
+}
+
+button.white-button:disabled {
+	cursor: auto;
+	background-color: #eaeaead9;
+	color: #a3bbad;
+}
+
+button.white-button:disabled:hover {
+	background-color: #eaeaead9;
+	color: #a3bbad;
+}

@@ -1,4 +1,4 @@
-#registration {
+#login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   width: 100vw;
   background-color:  #F5F5F5;
 
-    .registration-form{
+    .login-form{
       width: 550px;
       height: 660px;
       max-height: 100vh;
@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
 
-      .registration-form--wrapper{
+      .login-form--wrapper{
         flex-grow: 1;
         min-width: 50%;
         font-family: "FuturaBookC";
@@ -26,17 +26,15 @@
         flex-direction: column;
         align-items: center;
         
-        .registration-form--caption{
-          margin-top: 10vh;
+        .login-form--caption{
+          margin-top: 80px;
           font-size: 36px;
           line-height: 47px;
           text-align: center;
           color: #FFFFFF;
         }
 
-
-
-        &>input{
+        input{
           width: 100%;
           margin-top: 20px;
 
@@ -57,39 +55,12 @@
             outline: none;
         }
 
-        input.error-input{
-          color:#FF6D00;
-          border: 2px solid #FF6D00;
-        }
-
-        .error-message{
-          margin: 5px;
-          font-size: 17px;
-          color: #fff2cc;
-        }
-
         .email-input{
          
         }
         
         .password-input{
 
-        }
-
-        .reg-select{
-          font-family: "FuturaBookC";
-          font-size: 20px;
-          width: 100%;
-          margin-top: 20px;
-
-          .css-yk16xz-control{
-            border-radius: 8px;
-          }
-
-          .css-g1d714-ValueContainer{
-            padding: 0 8px;
-
-          }
         }
 
         .login-btn{
@@ -111,6 +82,8 @@
           font-size: 26px;
           margin: 20px;
           text-align: center;
+
+
       }
     }
   

@@ -3,11 +3,11 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 
-import "./error.scss";
+import "./registration-acception.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from '../../components/error-indicator'
 
-class Error extends React.Component {
+class RegistrationAcception extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
@@ -19,11 +19,12 @@ class Error extends React.Component {
 				<form onSubmit={this.onSubmit} className="registration-acception-form">
 					<div className="registration-acception-form--wrapper">
 						<div className="registration-acception-form--caption">
-							Потерялись на конференции? Давайте вернёмся к стойке регистрации.
+							Вам на почту пришла ссылка,
+							пожалуйста перейдите по ней, чтобы завершить регистрацию
 						</div>
 
 					</div>
-					<button className="white-button login-btn">Найтись</button>
+					<button className="white-button login-btn">ВОЙТИ</button>
 
 				</form>
 			</div>
@@ -31,12 +32,12 @@ class Error extends React.Component {
 	}
 }
 
-class ErrorContainer extends React.Component {
+class RegistrationAcceptionContainer extends React.Component {
 
 	render() {
 
 		return (
-			<Error />
+			<RegistrationAcception />
 		);
 	}
 }
@@ -55,4 +56,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 export default compose(
 	withApiService(),
 	connect(mapStateToProps, mapDispatchToProps)
-)(ErrorContainer);
+)(RegistrationAcceptionContainer);

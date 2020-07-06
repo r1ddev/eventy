@@ -142,7 +142,7 @@ class Registration extends React.Component {
 		return (
 			<LoadingOverlay active={isLoading} spinner text="Загрузка" className="">
 				<div className="bg-light flex-center min-vh-100">
-					<div className="container" id="registration">
+					<div className="container" id="profile">
 						<div className="back" onClick={() => this.goBack()}></div>
 						<div className="profile-wrap">
 							<div className="row m-0">

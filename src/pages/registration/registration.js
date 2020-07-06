@@ -1,440 +1,204 @@
 import React from "react";
-import AvatarUploader from "react-avatar-uploader";
-import Select from "react-select";
-import LoadingOverlay from 'react-loading-overlay';
-import withApiService from '../../components/hoc/with-api-service';
-import { connect } from 'react-redux';
-import { compose } from '../../utils';
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
 
 import "./registration.scss";
-import api from "../../js/api";
+import { Link } from "react-router-dom";
+import ErrorIndicator from '../../components/error-indicator';
+import Select from 'react-select';
 
-import ErrorIndicator from '../../components/error-indicator'
-
-const defaultTags = [
-	{
-		value: "creator",
-		label: "Креатор",
-	}, {
-		value: "designer",
-		label: "Дизайнер",
-	}, {
-		value: "manager",
-		label: "Менеджер",
-	}, {
-		value: "director",
-		label: "Директор",
-	}
+const regOptions = [
+	{ value: 'Компания', label: 'Компания' },
+	{ value: 'Агенство', label: 'Агенство' },
 ]
 
 class Registration extends React.Component {
+
 	state = {
-		avatar: "",
-		name: "",
-		lastName: "",
-		company: "",
-		position: "",
-		phone: "",
-		email: "",
-		soc: "",
-		whatSearch: "",
-		whatOffer: "",
-		shareContact: true,
-		tags: [],
+		email: '',
+		password: '',
+		passwordRepeated: '',
+		company: '',
+		regTag: 'Компания',
+		passwordRepeatedError: false,
+		disableForm: false
+	}
 
-		isLoading: false,
-		isEditProfile: false
-	};
-
-	submit = (e) => {
-		const { name, lastName, company, position, phone, email, soc, whatSearch, whatOffer, shareContact, tags } = this.state;
-
-		this.setLoading(true)
-
-		api.auth
-			.registration(
-				name,
-				lastName,
-				company,
-				position,
-				phone,
-				email,
-				soc,
-				whatSearch,
-				whatOffer,
-				shareContact,
-				JSON.stringify(tags.map(v => v.label.toLowerCase()))
-			)
-			.then((res) => {
-				this.setLoading(false)
-				this.props.history.push("/desk");
-			})
-			.catch((e) => {
-				this.setLoading(false);
-
-				api.errorHandler(e, {
-					"user_not_found": () => {
-						this.props.history.push("/error");
-					}
-				});
-			});
-
+	onSubmit = (e) => {
 		e.preventDefault();
-	};
-
-	componentDidMount() {
-		this.fetchData()
-	}
-
-	getGetParams = () => {
-		var params = {};
-
-		if (window.location.search) {
-			var parts = window.location.search.substring(1).split('&');
-
-			for (var i = 0; i < parts.length; i++) {
-				var nv = parts[i].split('=');
-				if (!nv[0]) continue;
-				params[nv[0]] = nv[1] || true;
-			}
-		}
-
-		return params
-	}
-
-	fetchData = async () => {
-		const token = this.getGetParams().token || null
-
-		if (token != null) {
-			window.localStorage.token = token
-		} else {
-			if (window.localStorage.token !== undefined) {
-				this.setState({ isEditProfile: true })
-			} else {
-				this.props.history.push("/error");
-			}
-		}
-
-		this.setLoading(true);
-
-		api.account.getUserData().then(res => {
-
-			let userTags = JSON.parse(res.user.tags)
-
-			userTags = userTags.map(v => {
-				return defaultTags.find(t => {
-					return t.label.toLowerCase() == v.toLowerCase()
-				})
-			})
-
+		if (this.validate()) {
 			this.setState({
-				avatar: api.auth.getAvatarLocation() + res.user.avatar,
-				name: res.user.first_name,
-				lastName: res.user.last_name,
-				company: res.user.company,
-				position: res.user.position,
-				phone: res.user.phone,
-				email: res.user.mail,
-				soc: res.user.social_site,
-				whatSearch: res.user.what_looking,
-				whatOffer: res.user.what_offer,
-				shareContact: !!res.user.view_contact,
-				tags: userTags
+				disableForm: true
 			})
 
-			this.setLoading(false);
-		}).catch(e => {
-			api.errorHandler(e, {
-				"user_not_found": () => {
-					this.setLoading(false);
-					ErrorIndicator("Пользователь не найден")
-					this.props.history.push("/error");
-				}
+			let user = {
+				email: this.state.email,
+				password: this.state.password,
+				re_password: this.state.passwordRepeated,
+				company: this.state.company,
+				tag: this.state.regTag
+			};
+
+			console.log(user)
+			this.setState({
+				disableForm: false
 			})
+
+			// let api = new IdeaFirstApiService;
+			// api.addUser(user)
+			// 		.then((res) => {
+			// 				if (res.status) console.log('регистрация успешна');
+			// 		})
+			// 		.catch(err => {
+			// 				console.log(err.message);
+			// 				this.setState({
+			// 						disableForm: false
+			// 				})
+			// 		})
+		}
+	}
+	validate = () => {
+
+		this.setState({
+			passwordRepeatedError: !this.validatePasswords(),
+		})
+		if (this.validatePasswords()) return 1;
+		return 0;
+	}
+
+	validatePasswords = () => {
+		const { password, passwordRepeated } = this.state;
+		if (password === passwordRepeated) return 1; //все ок
+		return 0; //ошибка
+	}
+
+
+	onChangeEmail = (e) => {
+		this.setState({
+			email: e.target.value
 		})
 	}
 
-	setLoading = (status) => {
+	onChangePassword = (e) => {
 		this.setState({
-			isLoading: status
+			password: e.target.value,
+			passwordRepeatedError: false
 		})
+	}
+
+	onChangePasswordRepeated = (e) => {
+		this.setState({
+			passwordRepeated: e.target.value,
+			passwordRepeatedError: false
+		})
+	}
+
+	onChangeCompany = (e) => {
+		this.setState({
+			company: e.target.value
+		})
+	}
+
+	onChangeRegTag = (e) => {
+		this.setState({ regTag: e.value.split(' ') || [] });
 	}
 
 	render() {
-		const {
-			avatar,
-			name,
-			lastName,
-			company,
-			position,
-			phone,
-			email,
-			soc,
-			whatSearch,
-			whatOffer,
-			shareContact,
-			isLoading,
-			isEditProfile,
-			tags
-		} = this.state;
 
+		const { email, password, passwordRepeated, company, regTag, disableForm, passwordRepeatedError } = this.state;
 
 		return (
-			<LoadingOverlay
-				active={isLoading}
-				spinner
-				text='Загрузка'
-				className=""
-			>
-				<div className="bg-light flex-center min-vh-100">
-					<div className="container" id="registration">
-						<div className={isEditProfile ? "edit-wrap" : "registration-wrap"}>
-							<form action="" method="post" onSubmit={this.submit}>
-								<div className="row m-0">
-									<div className="col-md-5 left p-5">
-										<div className="ava p-3 flex-center">
-											<AvatarUploader
-												customHeaders={api.useAuth().headers}
-												defaultImg={avatar}
-												name="file"
-												size={100}
-												uploadURL={api.proxy + api.host + api.auth.getUploadAvatarUrl()}
-												fileType={"image/png,image/jpeg"}
-											/>
-										</div>
-										<div className="field mt-3">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Имя"
-												value={name}
-												onChange={(e) => {
-													this.setState({
-														name: e.target.value,
-													});
-												}}
-												required
-											/>
-										</div>
-										<div className="field mt-3">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Фамилия"
-												value={lastName}
-												onChange={(e) => {
-													this.setState({
-														lastName: e.target.value,
-													});
-												}}
-												required
-											/>
-										</div>
-										<div className="field mt-3">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Компания"
-												value={company}
-												onChange={(e) => {
-													this.setState({
-														company: e.target.value,
-													});
-												}}
-												required
-											/>
-										</div>
-										<div className="field mt-3">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Должность"
-												value={position}
-												onChange={(e) => {
-													this.setState({
-														position: e.target.value,
-													});
-												}}
-												required
-											/>
-										</div>
-										<div className="btn-wrap">
-											<button
-												type="submit"
-												className="btn mt-3"
-												disabled={isLoading}>
-												{
-													isEditProfile &&
-													<img
-														src={require("../../images/editProfile-btn.png")}
-													/>
-												}
-												{
-													!isEditProfile &&
-													<img
-														src={require("../../images/registration-btn.png")}
-													/>
-												}
-											</button>
-										</div>
-									</div>
+			<div id="registration">
+				<form onSubmit={this.onSubmit} className="registration-form">
+					<div className="registration-form--wrapper">
+						<div className="registration-form--caption">Регистрация</div>
 
-									<div className="col-md-7 right p-5">
-										<div className="field">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Телефон"
-												value={phone}
-												onChange={(e) => {
-													this.setState({
-														phone: e.target.value,
-													});
-												}}
-											/>
-										</div>
+						<input
+							required
+							type="email"
+							value={email}
+							onChange={this.onChangeEmail}
+							className="email-input"
+							placeholder="e-mail">
+						</input>
 
-										<div className="field mt-4">
-											<input
-												type="email"
-												className="form-control r1-inp"
-												placeholder="Email"
-												value={email}
-												onChange={(e) => {
-													this.setState({
-														email: e.target.value,
-													});
-												}}
-											/>
-										</div>
+						<input
+							required
+							type="password"
+							value={password}
+							onChange={this.onChangePassword}
+							className="password-input"
+							placeholder="Пароль">
+						</input>
 
-										<div className="field mt-4">
-											<input
-												type="text"
-												className="form-control r1-inp"
-												placeholder="Ссылка на соц. сеть"
-												value={soc}
-												onChange={(e) => {
-													this.setState({
-														soc: e.target.value,
-													});
-												}}
-											/>
-										</div>
+						<input
+							required
+							type="password"
+							value={passwordRepeated}
+							onChange={this.onChangePasswordRepeated}
+							className={(!passwordRepeatedError) ? "password-input" : "password-input error-input"}
+							placeholder="Подтверждение пароля">
+						</input>
 
-										<div className="field mt-4">
-											<textarea
-												className="form-control r1-inp"
-												placeholder="Что ищу"
-												value={whatSearch}
-												maxLength="150"
-												onChange={(e) => {
-													this.setState({
-														whatSearch: e.target.value,
-													});
-												}}></textarea>
-										</div>
+						{(passwordRepeatedError) && <p className="error-message">
+							Пароли должны быть одинаковыми
+						</p>
+						}
 
-										<div className="field mt-4">
-											<textarea
-												className="form-control r1-inp"
-												placeholder="Что предлагаю"
-												value={whatOffer}
-												maxLength="150"
-												onChange={(e) => {
-													this.setState({
-														whatOffer: e.target.value,
-													});
-												}}></textarea>
-										</div>
+						<input
+							required
+							type="text"
+							value={company}
+							onChange={this.onChangeCompany}
+							className="company-input"
+							placeholder="Компания">
+						</input>
 
-										<div className="field mt-4">
-											<Select
-												placeholder="Выберите теги"
-												isMulti
-												options={tags.length >= 2 ? [] : defaultTags}
-												value={tags}
-												theme={(theme) => ({
-													...theme,
-													borderRadius: 10,
-													colors: {
-														...theme.colors,
-														primary: "#22D671",
-													},
-												})}
-												noOptionsMessage={() => 'Нет данных для отображения'}
-												onChange={(e) => {
-													this.setState({ tags: e || [] });
-												}}
-											/>
-										</div>
 
-										<div className="field mt-4">
-											<div className="row">
-												<div className="col d-flex align-items-center">
-													Хочу ли я делиться контактами?
-											</div>
-												<div className="col-auto">
-													<div className="row">
-														<div className="col">
-															<div
-																className={
-																	"radio" +
-																	(shareContact
-																		? " radio-selected"
-																		: "")
-																}
-																onClick={() => {
-																	this.setState({
-																		shareContact: true,
-																	});
-																}}>
-																да
-														</div>
-														</div>
-														<div className="col">
-															<div
-																className={
-																	"radio" +
-																	(shareContact
-																		? ""
-																		: " radio-selected")
-																}
-																onClick={() => {
-																	this.setState({
-																		shareContact: false,
-																	});
-																}}>
-																нет
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
+
+
+						<Select
+							isSearchable={false}
+							defaultValue={regOptions[0]}
+							options={regOptions}
+							onChange={this.onChangeRegTag}
+							className="reg-select"
+						/>
+
+
+						<button disabled={passwordRepeatedError || email == '' || password == '' || passwordRepeated == '' || company == '' || disableForm} className="white-button login-btn">РЕГИСТРАЦИЯ</button>
 					</div>
-				</div>
-			</LoadingOverlay>
+					<Link className="passrec-link" to="/password-recovery">забыли пароль?</Link>
+
+				</form>
+			</div>
 		);
 	}
 }
 
+class RegistrationContainer extends React.Component {
+
+	render() {
+
+		return (
+			<Registration />
+		);
+	}
+}
+
+
 const mapStateToProps = ({ user }) => {
 	return {
-		user
-	}
+		user,
+	};
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {
-
-	}
+	return {};
 };
 
 export default compose(
 	withApiService(),
-	connect(mapStateToProps, mapDispatchToProps))(Registration);
+	connect(mapStateToProps, mapDispatchToProps)
+)(RegistrationContainer);
