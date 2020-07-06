@@ -3,7 +3,7 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 
-import "./password-recovery.scss";
+import "./pregistration-acception.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from '../../components/error-indicator'
 
@@ -15,10 +15,10 @@ class PasswordRecovery extends React.Component {
 
 	render() {
 		return (
-			<div id="password-recovery">
-				<form onSubmit={this.onSubmit} className="password-recovery-form">
-					<div className="password-recovery-form--wrapper">
-						<div className="password-recovery-form--caption">
+			<div id="registration-acception">
+				<form onSubmit={this.onSubmit} className="registration-acception-form">
+					<div className="registration-acception-form--wrapper">
+						<div className="registration-acception-form--caption">
 							Вам на почту пришла ссылка,
 							пожалуйста перейдите по ней, чтобы завершить регистрацию
 						</div>
@@ -32,12 +32,12 @@ class PasswordRecovery extends React.Component {
 	}
 }
 
-class PasswordRecoveryContainer extends React.Component {
+class RegistrationAcceptionContainer extends React.Component {
 
 	render() {
 
 		return (
-			<PasswordRecovery />
+			<RegistrationAcception />
 		);
 	}
 }
@@ -56,4 +56,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 export default compose(
 	withApiService(),
 	connect(mapStateToProps, mapDispatchToProps)
-)(PasswordRecoveryContainer);
+)(RegistrationAcceptionContainer);
