@@ -11,6 +11,7 @@ class RegistrationAcception extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
+		this.props.history.push("/login")
 	}
 
 	render() {
