@@ -108,7 +108,7 @@ class TranslationHeader extends React.Component {
                     </div>
                 </div>
 
-                <div className="scene-item">
+                {/* <div className="scene-item">
                     <div>
                         <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
                         <div className="scene-status" style={{ visibility: (scenes[1].status ? 'visible' : 'hidden') }}>идет</div>
@@ -120,7 +120,7 @@ class TranslationHeader extends React.Component {
                         <div className={(scene === 2) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(2)}>СЦЕНА 3</div>
                         <div className="scene-status" style={{ visibility: (scenes[2].status ? 'visible' : 'hidden') }}>идет</div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
         )
