@@ -20,7 +20,7 @@ class Registration extends React.Component {
 		password: '',
 		passwordRepeated: '',
 		company: '',
-		regTag: 'Компания',
+		regTag: ["Компания"],
 		passwordRepeatedError: false,
 		disableForm: false
 	}
@@ -37,7 +37,7 @@ class Registration extends React.Component {
 				password: this.state.password,
 				re_password: this.state.passwordRepeated,
 				company: this.state.company,
-				tag: this.state.regTag
+				tag: JSON.stringify(this.state.regTag)
 			};
 
 			console.log(user)
