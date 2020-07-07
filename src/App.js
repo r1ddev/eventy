@@ -29,7 +29,7 @@ class App extends React.Component {
 				}).catch(e => console.log(e))
 			}
 		} else {
-			this.props.history.push("/error")
+			this.props.history.push("/login")
 		}
 	}
 
