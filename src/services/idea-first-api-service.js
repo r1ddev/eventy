@@ -51,7 +51,9 @@ export default class IdeaFirstApiService {
                         reject(res.data.error)
                     }
                 })
-                .catch(error => { reject(error) }
+                .catch(error => {
+                    reject(error)
+                }
                 )
         })
     }

@@ -32,8 +32,9 @@
 }
 
 #scenes .scenes-chat {
-	min-width: 300px;
-	width: 35%;
+	max-width: 35%;
+	width: 500px;
+	min-width: 450px;
 	background-color: white;
 	display: flex;
 	flex-direction: column;

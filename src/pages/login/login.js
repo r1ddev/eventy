@@ -6,6 +6,7 @@ import { compose } from "../../utils";
 import "./login.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from '../../components/error-indicator'
+import Spinner from "../../components/spinner";
 
 class Login extends React.Component {
 
@@ -13,6 +14,7 @@ class Login extends React.Component {
 		email: '',
 		password: '',
 		disableForm: false,
+		loading: false,
 
 	}
 
@@ -28,6 +30,18 @@ class Login extends React.Component {
 		})
 	}
 
+	onLoading = (status) => {
+		this.setState({
+			loading: status
+		})
+	}
+
+	onDisableForm = (status) => {
+		this.setState({
+			disableForm: status
+		})
+	}
+
 	onSubmit = (e) => {
 		e.preventDefault();
 
@@ -36,13 +50,16 @@ class Login extends React.Component {
 			password: this.state.password,
 		};
 
-		console.log(user)
-		this.setState({
-			disableForm: false
-		})
+
+		this.onLoading(true);
+		this.onDisableForm(true);
 
 		this.props.autorizate(user)
 			.then((res) => {
+
+				this.onLoading(false);
+				this.onDisableForm(false);
+
 				if (res.status) console.log('авторизация успешна');
 				console.log(res)
 				window.localStorage.token = res.token;
@@ -51,18 +68,24 @@ class Login extends React.Component {
 				} else {
 					this.props.history.push("/desk")
 				}
+
+
 			})
 			.catch(err => {
-				console.log(err.message);
-				this.setState({
-					disableForm: false
-				})
+
+				if (err.response.data.error == 'user_not_found') {
+					ErrorIndicator('Пользователя с этими данными не существует');
+				};
+
+
+				this.onLoading(false);
+				this.onDisableForm(false);
 			})
 	}
 
 	render() {
 
-		const { email, password, disableForm } = this.state;
+		const { email, password, disableForm, loading } = this.state;
 
 		return (
 			<div id="login">
@@ -71,7 +94,9 @@ class Login extends React.Component {
 						<div className="login-form--caption">Авторизация</div>
 						<input required type="email" value={email} onChange={this.onChangeEmail} className="email-input" placeholder="e-mail"></input>
 						<input required type="password" value={password} onChange={this.onChangePassword} className="password-input" placeholder="Пароль"></input>
-						<button disabled={email == '' || password == '' || disableForm} className="white-button login-btn">ВОЙТИ</button>
+						<button disabled={email == '' || password == '' || disableForm} className="white-button login-btn">
+							{(loading) ? <Spinner /> : "ВОЙТИ"}
+						</button>
 						<Link className="reg-link" to="/registration">Зарегистрироваться</Link>
 					</div>
 					<Link className="passrec-link" to="/password-recovery">забыли пароль?</Link>
