@@ -10,7 +10,7 @@ import Select from 'react-select';
 
 const regOptions = [
 	{ value: 'Компания', label: 'Компания' },
-	{ value: 'Агенство', label: 'Агенство' },
+	{ value: 'Агентство', label: 'Агентство' },
 ]
 
 class Registration extends React.Component {
@@ -154,7 +154,7 @@ class Registration extends React.Component {
 							value={company}
 							onChange={this.onChangeCompany}
 							className="company-input"
-							placeholder="Компания">
+							placeholder="Название компании">
 						</input>
 
 						<Select
