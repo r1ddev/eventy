@@ -32,8 +32,8 @@
 }
 
 #scenes .scenes-chat {
-	max-width: 30%;
-	width: 500px;
+	min-width: 300px;
+	width: 35%;
 	background-color: white;
 	display: flex;
 	flex-direction: column;
@@ -48,7 +48,7 @@
 	align-items: center;
 }
 .translation-header > .scene-item > div {
-	width: 80%;
+	width: 50%;
 	height: 90%;
 	display: flex;
 	flex-direction: row;
