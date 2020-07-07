@@ -49,8 +49,8 @@ class Scenes extends React.Component {
                             <iframe
                                 title="translation"
                                 src={sceneUrl}
-                                width="800"
-                                height="600"
+                                width="640"
+                                height="382"
                                 frameBorder="0"
                                 webkitallowfullscreen="1"
                                 mozallowfullscreen="1"
