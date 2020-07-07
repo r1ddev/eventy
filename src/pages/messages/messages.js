@@ -9,7 +9,7 @@ import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
 import IdleTimer from "react-idle-timer";
 import { setMessagesNotifications } from "../../actions/notifications-actions";
-import { isMobile } from 'react-device-detect';
+import { isMobile } from "react-device-detect";
 
 import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
@@ -121,9 +121,12 @@ class Messages extends React.Component {
 				(this.props.user.data.id == 617 && userId == 616)
 			) {
 				try {
-					let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
+					let dec = AES.decrypt(
+						message.text,
+						window.localStorage.ckey || ""
+					);
 					message.text = dec.toString(CryptoJS.enc.Utf8);
-				} catch (error) { }
+				} catch (error) {}
 			}
 			return { ...message, message: message.text };
 		});
@@ -141,12 +144,9 @@ class Messages extends React.Component {
 	};
 
 	componentDidUpdate(prevProps) {
-
 		if (prevProps.timers !== this.props.timers) {
-
 			this.updateTimer = this.props.timers.updateTimer;
 			this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
-
 		}
 	}
 
@@ -154,8 +154,10 @@ class Messages extends React.Component {
 		let encMessage = "";
 
 		if (
-			(this.props.user.data.id == 616 && this.state.activeUser.user_id == 617) ||
-			(this.props.user.data.id == 617 && this.state.activeUser.user_id == 616)
+			(this.props.user.data.id == 616 &&
+				this.state.activeUser.user_id == 617) ||
+			(this.props.user.data.id == 617 &&
+				this.state.activeUser.user_id == 616)
 		) {
 			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
@@ -163,7 +165,7 @@ class Messages extends React.Component {
 
 		api.account.messages
 			.sendMessages(this.state.activeUser.user_id, encMessage || message)
-			.then((res) => { })
+			.then((res) => {})
 			.catch((e) => console.log(e));
 
 		let m = this.state.messages;
@@ -191,7 +193,6 @@ class Messages extends React.Component {
 	}
 
 	onActive = async (e) => {
-
 		this.updateTimer = this.props.timers.updateTimer;
 		this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
 	};
@@ -202,7 +203,12 @@ class Messages extends React.Component {
 	};
 
 	render() {
-		const { users, activeUser, messages, loading: messagesIsLoading } = this.state;
+		const {
+			users,
+			activeUser,
+			messages,
+			loading: messagesIsLoading,
+		} = this.state;
 		const { data } = this.props.user;
 
 		var isChatAvailable = Object.entries(activeUser).length > 0;
@@ -227,14 +233,16 @@ class Messages extends React.Component {
 					timeout={1000 * 30}
 				/>
 
-				{(!isMobile) && <Header data={data}>
-					<></>
-					<div className="col d-flex align-items-center p-0">
-						<Link to="/messages/5" className="action-link">
-							Связь <br />с организаторами
-						</Link>
-					</div>
-				</Header>}
+				{!isMobile && (
+					<Header data={data}>
+						<></>
+						<div className="col d-flex align-items-center p-0">
+							<Link to="/messages/5" className="action-link">
+								Связь <br />с организаторами
+							</Link>
+						</div>
+					</Header>
+				)}
 
 				<div className="container-fluid">
 					<div className="row h-100">
@@ -245,11 +253,16 @@ class Messages extends React.Component {
 										{users.map((user, index) => {
 											return (
 												<Link
-													to={"/messages/" + user.user_id}
+													to={
+														"/messages/" +
+														user.user_id
+													}
 													className="user"
 													key={index}
 													onClick={() => {
-														this.setUser(user.user_id);
+														this.setUser(
+															user.user_id
+														);
 													}}>
 													<div>
 														<div className="row align-items-center">
@@ -292,8 +305,9 @@ class Messages extends React.Component {
 										)}
 										{!isChatAvailable && (
 											<div className="flex-center h-100 text-black-50 text-center">
-												Перейдите в нетворкинг и выберите человека, чтобы
-												начать с ним общаться
+												Перейдите в нетворкинг и
+												выберите человека, чтобы начать
+												с ним общаться
 											</div>
 										)}
 									</div>
@@ -306,7 +320,11 @@ class Messages extends React.Component {
 									<>
 										<div className="card flex-center p-4">
 											<div className="ava">
-												<Link to={"/profile/" + activeUser.user_id}>
+												<Link
+													to={
+														"/profile/" +
+														activeUser.user_id
+													}>
 													<img
 														src={
 															api.auth.getAvatarLocation() +
@@ -316,24 +334,30 @@ class Messages extends React.Component {
 												</Link>
 											</div>
 											<div className="title">
-												{activeUser.first_name + " " + activeUser.last_name}
+												{activeUser.first_name +
+													" " +
+													activeUser.last_name}
 											</div>
 											<div className="desc">
-												{activeUser.position + " в " + activeUser.company}
+												{activeUser.position +
+													" в " +
+													activeUser.company}
 											</div>
 										</div>
 
 										{isContactAvailable && (
 											<div className="card card-contacts flex-center p-4 px-5 mt-3">
-												<div className="title">Контакты:</div>
-												<div className="desc">{activeUser.mail}</div>
-												<div className="desc">{activeUser.phone}</div>
-												<div className="desc">{activeUser.social_site}</div>
-												<div className="title">Что предлагаю:</div>
-												<div className="desc">{activeUser.what_offer}</div>
-												<div className="title">Что ищу:</div>
+												<div className="title">
+													Контакты:
+												</div>
 												<div className="desc">
-													{activeUser.what_looking}
+													{activeUser.mail}
+												</div>
+												<div className="desc">
+													{activeUser.phone}
+												</div>
+												<div className="desc">
+													{activeUser.social_site}
 												</div>
 											</div>
 										)}
