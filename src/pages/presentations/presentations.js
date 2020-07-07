@@ -30,14 +30,14 @@ class Presentations extends React.Component {
 					<div className="row">
 						<div className="col-lg-6 px-5 mt-5">
 							<Link to="/presentations/day1" className="folder">
-								День 1
+								Презентация Smit.studio
 							</Link>
 						</div>
-						<div className="col-lg-6 px-5 mt-5">
+						{/* <div className="col-lg-6 px-5 mt-5">
 							<Link to="/presentations/day2" className="folder">
 								День 2
 							</Link>
-						</div>
+						</div> */}
 					</div>
 					{/* <div className="row">
 						<div className="col-lg-6 px-5 mt-5">

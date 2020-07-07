@@ -12,14 +12,9 @@ const folders = [
 		folder: "day1",
 		files: [
 			{
-				name: "Сцена 1 “Big Marketing Talks”",
+				name: "Презентация Smit.studio",
 				weight: "",
-				link: "https://drive.google.com/drive/folders/1y-kqwqZ_8a3FNoS3LqhwO2sQ_gW3Beyw?usp=sharing",
-			},
-			{
-				name: "Сцена 2 “Кабинет маркетинг-директора”",
-				weight: "",
-				link: "https://drive.google.com/drive/folders/1E3n48YF5E0c-E8MdvTcQECN6puyZzkbR?usp=sharing",
+				link: "https://drive.google.com/drive/folders/1K9EdTVHS-WIDND31GK5oCYcvqHr7ZQzW?usp=sharing",
 			},
 		],
 	},
