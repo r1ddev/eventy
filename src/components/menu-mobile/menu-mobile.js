@@ -75,7 +75,7 @@ class MenuMobile extends React.Component {
 						<div className="icon-item"></div>
 						<MenuItemMobile link='/conversations' icon={conversations} label='Переговорки' onClose={this.onClose} />
 						<MenuItemMobile link='/exposure' icon={exposure} label='Партнеры' onClose={this.onClose} />
-						<MenuItemMobile link='/presentations' icon={presentations} label='Презентации' onClose={this.onClose} />
+						<MenuItemMobile link='/presentations/day1' icon={presentations} label='Презентации' onClose={this.onClose} />
 						<div className="icon-item" onClick={this.onClose} style={{ backgroundImage: `url(${closebtn})`, backgroundPosition: 'center' }}></div>
 
 					</div>
