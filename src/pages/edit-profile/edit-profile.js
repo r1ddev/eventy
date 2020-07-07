@@ -189,7 +189,7 @@ class EditProfile extends React.Component {
 											<input
 												type="text"
 												className="form-control r1-inp"
-												placeholder="Компания"
+												placeholder="Название компании"
 												value={company}
 												onChange={(e) => {
 													this.setState({
