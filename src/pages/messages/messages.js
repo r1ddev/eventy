@@ -116,10 +116,7 @@ class Messages extends React.Component {
 		let messages = await api.account.messages.getMessages(userId);
 
 		messages.messages = messages.messages.map((message) => {
-			if (
-				(this.props.user.data.id == 616 && userId == 617) ||
-				(this.props.user.data.id == 617 && userId == 616)
-			) {
+			if (window.localStorage.ckey != undefined) {
 				try {
 					let dec = AES.decrypt(
 						message.text,
@@ -153,12 +150,7 @@ class Messages extends React.Component {
 	sendMessage = (message) => {
 		let encMessage = "";
 
-		if (
-			(this.props.user.data.id == 616 &&
-				this.state.activeUser.user_id == 617) ||
-			(this.props.user.data.id == 617 &&
-				this.state.activeUser.user_id == 616)
-		) {
+		if (window.localStorage.ckey != undefined) {
 			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
 		}
