@@ -30,7 +30,7 @@ class Desk extends React.Component {
                     {/* <img src={require('../../images/lobby.jpg')} alt="img" /> */}
                     <div className='lobby-text'>
                         Добро пожаловать на<br />
-                        демонстрацию возможностей Smit.Events
+                        digital Stand-up Smit.Studio
                     </div>
 
                     {/* <div className="first-svg">
