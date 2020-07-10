@@ -8,7 +8,7 @@ import ScenesChat from '../../components/scenes-chat';
 class ScenesChatContainer extends React.Component {
 
     state = {
-        activeChat: 'sponsor',
+        activeChat: 'general',
         currentChatId: this.props.sponsorChatId,
         sponsorChatId: this.props.sponsorChatId,
         generalChatId: this.props.generalChatId,
@@ -54,7 +54,7 @@ class ScenesChatContainer extends React.Component {
 
     componentDidMount() {
         this.setState({
-            activeChat: 'sponsor',
+            activeChat: 'general',
             currentChatId: this.props.sponsorChatId,
             sponsorChatId: this.props.sponsorChatId,
             generalChatId: this.props.generalChatId,
