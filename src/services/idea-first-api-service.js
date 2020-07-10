@@ -41,6 +41,22 @@ export default class IdeaFirstApiService {
         })
     }
 
+    addGuestUser() {
+        return new Promise((resolve, reject) => {
+            axios.post(this.host + "/v2/users/login/guest", this.toFormData({}), this.useAuth())
+                .then(res => {
+                    if (res.data.status) {
+                        resolve(res.data);
+                    } else {
+                        reject(res.data.error)
+                    }
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+
     autorizate(user) {
         return new Promise((resolve, reject) => {
             axios.post(this.host + "/v2/users/login", this.toFormData(user), this.useAuth())
