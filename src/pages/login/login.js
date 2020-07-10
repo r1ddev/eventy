@@ -115,7 +115,7 @@ class Login extends React.Component {
 							{(loading) ? <Spinner /> : "ВОЙТИ"}
 						</button>
 
-						<button className="white-button guest-btn" onClick={this.onLoginGuest}>
+						<button type='button' className="white-button guest-btn" onClick={this.onLoginGuest}>
 							ВОЙТИ КАК ГОСТЬ
 						</button>
 
