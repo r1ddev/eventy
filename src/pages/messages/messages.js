@@ -15,9 +15,11 @@ import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 
 class Messages extends React.Component {
+	scrollToBottom = () => {
+		this.refs.scenesChat.onUpdate(true);
+	};
+
 	render() {
-		// console.log("this.props", this.props);
-		// return <></>;
 		const {
 			users,
 			activeUser,
@@ -276,7 +278,7 @@ class MessagesContainer extends React.Component {
 			loading: false,
 		});
 
-		// this.refs.scenesChat.onUpdate(true);
+		this.refs.messages.scrollToBottom(true);
 	};
 
 	asetState = (newState) => {
@@ -305,7 +307,7 @@ class MessagesContainer extends React.Component {
 			messages: messages.messages,
 		});
 
-		//this.refs.scenesChat.onUpdate(true);
+		this.refs.messages.scrollToBottom(true);
 
 		clearTimeout(this.timeoutMessages);
 		this.timeoutMessages = setTimeout(() => {
@@ -347,7 +349,7 @@ class MessagesContainer extends React.Component {
 				messages: m,
 			},
 			() => {
-				// this.refs.scenesChat.onUpdate(true);
+				this.refs.messages.scrollToBottom(true);
 			}
 		);
 	};
@@ -370,6 +372,7 @@ class MessagesContainer extends React.Component {
 	render() {
 		return (
 			<Messages
+				ref="messages"
 				users={this.state.users}
 				activeUser={this.state.activeUser}
 				messages={this.state.messages}
