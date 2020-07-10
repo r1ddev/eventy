@@ -42,6 +42,12 @@ class Login extends React.Component {
 		})
 	}
 
+	saveToken = (token) => {
+		window.localStorage.token = token;
+	}
+
+
+
 	onSubmit = (e) => {
 		e.preventDefault();
 
@@ -59,16 +65,13 @@ class Login extends React.Component {
 
 				this.onLoading(false);
 				this.onDisableForm(false);
+				this.saveToken(res.Token)
 
-				if (res.status) console.log('авторизация успешна');
-				console.log(res)
-				window.localStorage.token = res.token;
 				if (res.myfirsttime) {
 					this.props.history.push("/profile/edit")
 				} else {
 					this.props.history.push("/desk")
 				}
-
 
 			})
 			.catch(err => {
@@ -81,6 +84,20 @@ class Login extends React.Component {
 				this.onLoading(false);
 				this.onDisableForm(false);
 			})
+	}
+
+	onLoginGuest = () => {
+		this.props.addGuestUser()
+			.then((res) => {
+				this.saveToken(res.token);
+				this.props.history.push("/desk")
+
+			})
+			.catch(
+				err => {
+					ErrorIndicator('Пользователя с этими данными не существует');
+				}
+			)
 	}
 
 	render() {
@@ -97,7 +114,13 @@ class Login extends React.Component {
 						<button disabled={email == '' || password == '' || disableForm} className="white-button login-btn">
 							{(loading) ? <Spinner /> : "ВОЙТИ"}
 						</button>
+
+						<button className="white-button guest-btn" onClick={this.onLoginGuest}>
+							ВОЙТИ КАК ГОСТЬ
+						</button>
+
 						<Link className="reg-link" to="/registration">Зарегистрироваться</Link>
+
 					</div>
 					<Link className="passrec-link" to="/password-recovery">забыли пароль?</Link>
 
@@ -126,7 +149,8 @@ const mapStateToProps = ({ user }) => {
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
 	return {
-		autorizate: (user) => apiService.autorizate(user)
+		autorizate: (user) => apiService.autorizate(user),
+		addGuestUser: () => apiService.addGuestUser(),
 	};
 };
 
