@@ -65,7 +65,7 @@ class Login extends React.Component {
 
 				this.onLoading(false);
 				this.onDisableForm(false);
-				this.saveToken(res.Token)
+				this.saveToken(res.token)
 
 				if (res.myfirsttime) {
 					this.props.history.push("/profile/edit")
