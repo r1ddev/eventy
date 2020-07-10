@@ -55,7 +55,7 @@ class ScenesChatContainer extends React.Component {
     componentDidMount() {
         this.setState({
             activeChat: 'general',
-            currentChatId: this.props.sponsorChatId,
+            currentChatId: this.props.generalChatId,
             sponsorChatId: this.props.sponsorChatId,
             generalChatId: this.props.generalChatId,
             spikerChatId: this.props.spikerChatId
