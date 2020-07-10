@@ -34,7 +34,6 @@ class Scenes extends React.Component {
             spikerChatId: 0
         }
 
-        // let origin = "http://onlineshow.marketingforum.com.ua";
         let origin = api.origin;
         let newAvatar = origin + "/images/avatar/" + user.avatar;
 
