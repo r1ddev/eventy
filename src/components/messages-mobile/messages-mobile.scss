@@ -1,0 +1,16 @@
+#messages-mobile {
+	.dialog-item {
+		background: #fff;
+		border-bottom: 1px solid #ccc;
+		padding: 10px;
+
+		.avatar {
+			img {
+				border-radius: 50%;
+				height: 70px;
+				width: 70px;
+				object-fit: cover;
+			}
+		}
+	}
+}
