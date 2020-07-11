@@ -23,26 +23,35 @@ class DialogMobile extends React.Component {
 								&#10094;
 							</Link>
 						</div>
-						<div className="col-auto">
-							<div className="avatar">
-								<img
-									src={
-										api.auth.getAvatarLocation() +
-										activeUser.avatar
-									}
-									alt=""
-									srcSet=""
-								/>
-							</div>
-						</div>
-						<div className="col username">
-							{userIsLoaded && (
-								<>
-									{activeUser.first_name +
-										" " +
-										activeUser.last_name}
-								</>
-							)}
+						<div className="col">
+							<Link
+								to={"/profile/" + activeUser.user_id}
+								target="_blank"
+								className="userdata">
+								<div className="row">
+									<div className="col-auto">
+										<div className="avatar">
+											<img
+												src={
+													api.auth.getAvatarLocation() +
+													activeUser.avatar
+												}
+												alt=""
+												srcSet=""
+											/>
+										</div>
+									</div>
+									<div className="col username">
+										{userIsLoaded && (
+											<>
+												{activeUser.first_name +
+													" " +
+													activeUser.last_name}
+											</>
+										)}
+									</div>
+								</div>
+							</Link>
 						</div>
 					</div>
 				</div>

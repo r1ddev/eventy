@@ -382,6 +382,7 @@ class MessagesContainer extends React.Component {
 								activeUser={this.state.activeUser}
 								messages={this.state.messages}
 								loading={this.state.loading}
+								sendMessage={this.sendMessage}
 							/>
 						)}
 						{!this.props.match.params.id && (
@@ -389,7 +390,6 @@ class MessagesContainer extends React.Component {
 								ref="messages"
 								users={this.state.users}
 								setUser={this.setUser}
-								sendMessage={this.sendMessage}
 							/>
 						)}
 					</>
