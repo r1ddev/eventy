@@ -41,6 +41,8 @@ class App extends React.Component {
 		if (window.location.protocol == "https:") {
 			// window.location.href = "http://" + host + pathname
 		}
+
+		
 	}
 
 	componentWillUnmount() {
