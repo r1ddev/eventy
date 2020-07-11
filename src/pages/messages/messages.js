@@ -17,7 +17,7 @@ import MessagesMobile from "../../components/messages-mobile";
 import DialogMobile from "../dialog-mobile/dialog-mobile";
 
 class Messages extends React.Component {
-	scrollToBottom = () => {
+	scrollToBottom = (upd) => {
 		this.refs.scenesChat.onUpdate(true);
 	};
 
@@ -308,6 +308,8 @@ class MessagesContainer extends React.Component {
 		await this.asetState({
 			messages: messages.messages,
 		});
+
+		console.log("this.refs.messages", this.refs.messages);
 
 		this.refs.messages.scrollToBottom(true);
 

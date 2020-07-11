@@ -3,8 +3,12 @@ import "./messages-mobile.scss";
 import api from "../../js/api";
 import { Link } from "react-router-dom";
 
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+
 class MessagesMobile extends React.Component {
-	scrollToBottom = () => {
+	scrollToBottom = (upd) => {
 		//this.refs.scenesChat.onUpdate(true);
 	};
 

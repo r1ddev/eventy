@@ -4,8 +4,12 @@ import api from "../../js/api";
 import { Link } from "react-router-dom";
 import ScenesChat from "../../components/scenes-chat/scenes-chat";
 
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+
 class DialogMobile extends React.Component {
-	scrollToBottom = () => {
+	scrollToBottom = (upd) => {
 		this.refs.scenesChat.onUpdate(true);
 	};
 	render() {
@@ -68,4 +72,17 @@ class DialogMobile extends React.Component {
 	}
 }
 
-export default DialogMobile;
+const mapStateToProps = ({ notifications }) => {
+	return { notifications };
+};
+
+const mapDispatchToProps = (dispatch, { apiService }) => {
+	return {};
+};
+
+export default compose(
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps)
+)(DialogMobile);
+
+// export default DialogMobile;
