@@ -46,8 +46,6 @@ class Login extends React.Component {
 		window.localStorage.token = token;
 	}
 
-
-
 	onSubmit = (e) => {
 		e.preventDefault();
 
