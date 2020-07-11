@@ -14,6 +14,7 @@ import { isMobile } from "react-device-detect";
 import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import MessagesMobile from "../../components/messages-mobile";
+import DialogMobile from "../dialog-mobile/dialog-mobile";
 
 class Messages extends React.Component {
 	scrollToBottom = () => {
@@ -373,14 +374,33 @@ class MessagesContainer extends React.Component {
 	render() {
 		return (
 			<>
-				{isMobile && <MessagesMobile users={this.state.users} />}
+				{isMobile && (
+					<>
+						{this.props.match.params.id && (
+							<DialogMobile
+								ref="messages"
+								activeUser={this.state.activeUser}
+								messages={this.state.messages}
+								loading={this.state.loading}
+							/>
+						)}
+						{!this.props.match.params.id && (
+							<MessagesMobile
+								ref="messages"
+								users={this.state.users}
+								setUser={this.setUser}
+								sendMessage={this.sendMessage}
+							/>
+						)}
+					</>
+				)}
 				{!isMobile && (
 					<Messages
 						ref="messages"
 						users={this.state.users}
 						activeUser={this.state.activeUser}
 						messages={this.state.messages}
-						loading={this.state.messagesIsLoading}
+						loading={this.state.loading}
 						onActive={this.onActive}
 						onIdle={this.onIdle}
 						setUser={this.setUser}

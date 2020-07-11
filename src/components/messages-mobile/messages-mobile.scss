@@ -1,14 +1,17 @@
 #messages-mobile {
+	height: 100%;
+
 	.dialog-item {
 		background: #fff;
 		border-bottom: 1px solid #ccc;
 		padding: 10px;
+		color: #333;
 
 		.avatar {
 			img {
 				border-radius: 50%;
-				height: 70px;
-				width: 70px;
+				height: 60px;
+				width: 60px;
 				object-fit: cover;
 			}
 		}
