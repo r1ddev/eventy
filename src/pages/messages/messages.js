@@ -17,7 +17,7 @@ import MessagesMobile from "../../components/messages-mobile";
 import DialogMobile from "../dialog-mobile/dialog-mobile";
 
 class Messages extends React.Component {
-	scrollToBottom = (upd) => {
+	scrollToBottom = (upd = true) => {
 		this.refs.scenesChat.onUpdate(true);
 	};
 
@@ -307,7 +307,7 @@ class MessagesContainer extends React.Component {
 			messages: messages.messages,
 		});
 
-		this.refs.messages.scrollToBottom(true);
+		this.refs.messages.scrollToBottom(false);
 
 		clearTimeout(this.timeoutMessages);
 		this.timeoutMessages = setTimeout(() => {

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import ScenesChat from "../../components/scenes-chat/scenes-chat";
 
 class DialogMobile extends React.Component {
-	scrollToBottom = (upd) => {
-		this.refs.scenesChat.onUpdate(true);
+	scrollToBottom = (force = true) => {
+		this.refs.scenesChat.onUpdate(force);
 	};
 	render() {
 		const { activeUser, messages, loading, sendMessage } = this.props;
