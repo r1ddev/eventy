@@ -211,8 +211,6 @@ class MessagesContainer extends React.Component {
 		api.account.messages
 			.getDialogs()
 			.then((res) => {
-				console.log("res", res);
-
 				res.dialogs = res.dialogs.filter((dialog) => {
 					return dialog.range != 6;
 				});
@@ -308,8 +306,6 @@ class MessagesContainer extends React.Component {
 		await this.asetState({
 			messages: messages.messages,
 		});
-
-		console.log("this.refs.messages", this.refs.messages);
 
 		this.refs.messages.scrollToBottom(true);
 

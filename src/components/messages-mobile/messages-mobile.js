@@ -13,7 +13,8 @@ class MessagesMobile extends React.Component {
 	};
 
 	render() {
-		const { users, setUser } = this.props;
+		const { users, setUser, notifications } = this.props;
+
 		return (
 			<div id="messages-mobile">
 				<div className="container">
@@ -28,6 +29,9 @@ class MessagesMobile extends React.Component {
 								}}>
 								<div className="col-auto p-0">
 									<div className="avatar">
+										{!user.read && (
+											<div className="unread"></div>
+										)}
 										<img
 											className="img-fluid"
 											src={
