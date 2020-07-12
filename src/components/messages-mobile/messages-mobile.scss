@@ -1,0 +1,29 @@
+#messages-mobile {
+	height: 100%;
+
+	.dialog-item {
+		background: #fff;
+		border-bottom: 1px solid #ccc;
+		padding: 10px;
+		color: #333;
+
+		.avatar {
+			.unread {
+				position: absolute;
+				right: -5px;
+				top: -5px;
+				border-radius: 50%;
+				width: 10px;
+				height: 10px;
+				background: #ff0000;
+			}
+
+			img {
+				border-radius: 50%;
+				height: 60px;
+				width: 60px;
+				object-fit: cover;
+			}
+		}
+	}
+}

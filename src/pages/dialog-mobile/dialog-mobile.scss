@@ -1,0 +1,49 @@
+#dialog-mobile {
+	background: #fff;
+	height: 100%;
+
+	.header {
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+
+		.back {
+			font-size: 30px;
+			font-weight: 100;
+			line-height: 1;
+			transform: scaleX(0.8);
+			color: #666;
+		}
+
+		.userdata {
+			color: #333;
+			text-decoration: none;
+		}
+
+		.avatar {
+			width: 40px;
+			height: 40px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		}
+
+		.username {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	#scenes-chat {
+		height: calc(100% - 61px);
+
+		.react-emoji-picker--wrapper {
+			position: fixed;
+			right: 0;
+			bottom: 48px;
+		}
+	}
+}
