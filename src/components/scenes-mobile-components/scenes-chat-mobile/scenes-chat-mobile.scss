@@ -1,0 +1,91 @@
+
+
+#scenes-chat-mobile{
+  
+  background-color: whitesmoke;
+
+  &.isOpen{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+}
+
+.check-chat-panel{
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+
+  .item{
+    width: 33.3%;
+    background-color: #e4e4e4;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    &.active{
+      background-color: #c9d0cc
+    }
+  }
+
+  .item:nth-child(2){
+    border-left: 1px solid #c9d0cc;
+    border-right: 1px solid #c9d0cc;
+  }
+
+  .close-btn{
+    width: 65px;
+    height: 45px;
+    border-radius: 2px;
+    background-image: url(../../../images/menu/close-gray-icon.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+.message-box{
+
+  flex-grow: 1;
+}
+
+.message-input{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &>input{
+    font-family: "FuturaBookC";
+    display: block;
+    width: calc(100% - 10px);
+    margin: 5px;
+    border-radius: 2px;
+    height: 45px;
+    padding: 0 10px 0 10px;
+    border: 0px;
+    font-size: 20px;
+    box-sizing: border-box;
+    color: black;
+  }
+
+  input:focus{
+      outline: none;
+  }
+
+  .send-btn{
+    width: 65px;
+    height: 45px;
+    border-radius: 2px;
+    background-color: #22D671;
+    background-image: url(../../../images/icons/send.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+  }
+
+}

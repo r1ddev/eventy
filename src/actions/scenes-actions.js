@@ -25,13 +25,11 @@ const fetchScenes = (apiService, dispatch) => () => {
 
             data = data.streams.map((item, index) => {
 
-                const chatId = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
                 return {
                     ...item,
-                    generalChatId: chatId[index * 3 + 0],
-                    sponsorChatId: chatId[index * 3 + 1],
-                    spikerChatId: chatId[index * 3 + 2],
+                    generalChatId: index * 3 + 1,
+                    sponsorChatId: index * 3 + 2,
+                    spikerChatId: index * 3 + 3,
                 }
             })
 

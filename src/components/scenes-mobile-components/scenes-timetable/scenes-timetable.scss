@@ -1,0 +1,20 @@
+#scenes-timetable{
+
+  flex-grow: 1;
+  text-align: left;
+  padding: 20px;
+  overflow-y: auto;
+  span{
+    display: block;
+    color: gray;
+
+    &.caption{
+      color: lightslategrey;
+    }
+
+    &.current{
+      background-color: #d7ffd7;
+      border-radius: 5px;
+    };
+  }
+}
