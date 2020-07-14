@@ -11,7 +11,8 @@ import Spinner from '../../components/spinner';
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
 import Header from '../../components/header/header';
-
+import { isMobile } from 'react-device-detect';
+import ScenesMobile from '../scenes-mobile';
 
 
 class Scenes extends React.Component {
@@ -185,7 +186,18 @@ class ScenesContainer extends React.Component {
         return (
             <div style={{ height: '100%', width: '100%' }}>
                 {
-                    (!loading) && <Scenes
+                    (!loading && !isMobile) && <Scenes
+                        sceneUrl={scenes[scene][lang]}
+                        scenes={scenes}
+                        scene={scene}
+                        lang={lang}
+                        setLang={this.setLang}
+                        setScene={this.setScene}
+                        user={user}
+                    />
+                }
+                {
+                    (!loading && isMobile) && <ScenesMobile
                         sceneUrl={scenes[scene][lang]}
                         scenes={scenes}
                         scene={scene}

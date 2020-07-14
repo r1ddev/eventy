@@ -3,7 +3,9 @@ export const initialState = {
     lastApiMessageId: 0,
     error: null,
     loading: true,
-    updateLoading: true
+    updateLoading: true,
+    mobileChatIsOpen: false,
+    mobileChatInputIsActive: false,
 }
 
 function updateMessage(messages, lastId, newmes) {

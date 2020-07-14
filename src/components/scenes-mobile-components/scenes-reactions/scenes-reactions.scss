@@ -1,0 +1,23 @@
+
+#scenes-reactions{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+ 
+  .stiker-reaction{
+    display: flex;
+  }
+
+  img{
+    width: 45px;  
+    filter: hue-rotate(65deg);
+  }
+
+  .stiker-reaction:nth-child(1){
+    img{
+      filter: brightness(1.8) hue-rotate(-55deg);
+    }
+  }
+
+}

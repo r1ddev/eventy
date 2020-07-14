@@ -1,0 +1,19 @@
+#scenes-video{
+
+  .video-container {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+  }
+
+  .video-container iframe,
+  .video-container object,
+  .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+}
