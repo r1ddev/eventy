@@ -4,6 +4,8 @@ import './scenes-reactions.scss';
 class ScenesReactions extends React.Component {
 
   render() {
+
+
     return (
       <div id="scenes-reactions">
         <div className="stiker-reaction"><img alt="" src={require("../../../images/stikers/heart.svg")} /></div>

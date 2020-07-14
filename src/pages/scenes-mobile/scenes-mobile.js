@@ -11,24 +11,43 @@ import ScenesReactions from '../../components/scenes-mobile-components/scenes-re
 import ScenesLangChecker from '../../components/scenes-mobile-components/scenes-lang-checker';
 import ScenesBanner from '../../components/scenes-mobile-components/scenes-banner';
 import ScenesTimetable from '../../components/scenes-mobile-components/scenes-timetable';
-import ScenesChatMobile from '../../components/scenes-mobile-components/scenes-chat-mobile';
+import ScenesChatMobile from './scenes-chat-mobile-container';
+
 
 
 class ScenesMobile extends React.Component {
 
+    state = {
+        chatIsOpen: false,
+    }
+
+    onChangeChatIsOpenValue = (value) => {
+        this.setState({ chatIsOpen: value })
+        console.log(value);
+    }
+
     render() {
+        const { chatIsOpen } = this.state;
 
         return (
             <div id="scenes-mobile">
-                {/* <ScenesChecker /> */}
+
+                <ScenesChecker isVisible={!chatIsOpen} />
                 <ScenesVideo />
-                {/* <ScenesVideoActions>
+
+                <ScenesVideoActions isVisible={!chatIsOpen}>
                     <ScenesReactions />
                     <ScenesLangChecker />
                 </ScenesVideoActions>
-                <ScenesBanner />
-                <ScenesTimetable /> */}
-                <ScenesChatMobile />
+
+                <ScenesBanner isVisible={!chatIsOpen} />
+                <ScenesTimetable isVisible={!chatIsOpen} />
+
+                <ScenesChatMobile
+                    onOpen={() => this.onChangeChatIsOpenValue(true)}
+                    onClose={() => this.onChangeChatIsOpenValue(false)}
+                />
+
             </div >
         )
     }

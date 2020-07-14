@@ -5,4 +5,13 @@
   grid-template-columns: 4fr 1fr;
   background: #e4e4e4;
   margin: 5px 0;
+  transition: 200ms;
+
+  &.hidden{
+    min-height: 0px;
+    height: 0px;
+    overflow: hidden;
+    margin: 0; 
+    transition: min-height 200ms, height 200ms, margin 200ms;
+  }
 }

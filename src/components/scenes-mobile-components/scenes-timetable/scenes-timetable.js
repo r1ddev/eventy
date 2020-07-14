@@ -4,8 +4,11 @@ import './scenes-timetable.scss';
 class ScenesTimetable extends React.Component {
 
   render() {
+
+    const { isVisible = true } = this.props;
+
     return (
-      <div id="scenes-timetable">
+      <div id="scenes-timetable" className={(isVisible) ? '' : 'hidden'}>
         <span className="caption">Расписание</span>
         <span className="current">10:10 | 1 спикер</span>
         <span>10:20 | 2 спикер</span>
