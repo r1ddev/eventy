@@ -17,7 +17,13 @@ class MessagesMobile extends React.Component {
 
 		return (
 			<div id="messages-mobile">
-				<div className="container">
+				<div className="container h-100">
+					{users.length == 0 && (
+						<div className="flex-center h-100 text-black-50 text-center">
+							Перейдите в нетворкинг и выберите человека, чтобы
+							начать с ним общаться
+						</div>
+					)}
 					{users.map((user, index) => {
 						return (
 							<Link
