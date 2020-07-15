@@ -49,7 +49,7 @@ class ScenesChatMobile extends React.Component {
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
-    if (activeInput) chatMobileClasses += 'hidden';
+    if (activeInput) chatMobileClasses += ' hidden';
 
     console.log(loading + '5454');
 
@@ -65,6 +65,7 @@ class ScenesChatMobile extends React.Component {
         {(isOpen && loading) && <Spinner />}
         <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
 
+        {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
       </div >
     )
   }
@@ -140,8 +141,10 @@ class MessageBox extends React.Component {
       )
     })
 
+    const { isVisible } = this.props;
+
     return (
-      <div className="message-box">
+      <div className={(isVisible) ? 'message-box' : 'message-box hidden'}>
         <RSC ref="scrollbar">
           {
             messageList
