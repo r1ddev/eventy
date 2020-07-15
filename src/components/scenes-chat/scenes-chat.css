@@ -151,7 +151,9 @@ button:focus {
 	justify-content: flex-end;
 	align-items: flex-start;
 	width: 100%;
+
 }
+
 .mes-info {
 	width: calc(100% - 100px);
 	overflow-wrap: break-word;
