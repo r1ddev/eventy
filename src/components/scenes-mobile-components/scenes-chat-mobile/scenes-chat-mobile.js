@@ -163,13 +163,7 @@ class MessageItem extends React.Component {
       <div className="message-item">
         <img alt="" src={require("../../../images/stikers/heart.svg")} />
         <div className='text'>
-          <span>Имя Фамилия</span>
-          <div> Сообщение</div>
-          <div> Сообщение</div>
-          <div> Сообщение</div>
-          <div> Сообщение</div>
-          <div> Сообщение</div>
-          <div> Сообщение</div>
+          <span>Игнат Васильевич</span>
           <div> Сообщение</div>
 
         </div>
