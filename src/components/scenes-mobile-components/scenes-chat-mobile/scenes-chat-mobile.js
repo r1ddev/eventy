@@ -3,7 +3,7 @@ import './scenes-chat-mobile.scss';
 
 import RSC from "react-scrollbars-custom";
 import Spinner from '../../spinner';
-import { isMobileSafari } from "react-device-detect";
+import { isMobileSafari, isIOS } from "react-device-detect";
 
 class ScenesChatMobile extends React.Component {
 
@@ -49,13 +49,13 @@ class ScenesChatMobile extends React.Component {
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
-    if (activeInput) chatMobileClasses += ' hidden';
+    if (activeInput && (!isIOS || !isMobileSafari)) chatMobileClasses += ' hidden';
 
     console.log(loading + '5454');
 
     return (
       <>
-        {(!isMobileSafari) &&
+        {(!isMobileSafari && !isIOS) &&
           <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
             <CheckChatPanel
               onOpen={this.onOpen}
@@ -71,7 +71,7 @@ class ScenesChatMobile extends React.Component {
           </div >
         }
 
-        {(isMobileSafari) &&
+        {(isMobileSafari || isIOS) &&
           <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
             <CheckChatPanel
               onOpen={this.onOpen}
