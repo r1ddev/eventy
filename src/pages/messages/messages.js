@@ -198,6 +198,8 @@ class MessagesContainer extends React.Component {
 		newUser: undefined,
 	};
 
+	isEncrypted = false;
+
 	updateTimer = 5000;
 	updateDialogsTimer = 20000;
 
@@ -300,9 +302,14 @@ class MessagesContainer extends React.Component {
 
 	fetchMessages = async (userId) => {
 		let messages = await api.account.messages.getMessages(userId);
+		let isEncrypted = false;
 
 		messages.messages = messages.messages.map((message) => {
-			if (window.localStorage.ckey != undefined) {
+			if (
+				message.text.substr(0, 10) == "U2FsdGVkX1" &&
+				window.localStorage.ckey != undefined
+			) {
+				isEncrypted = true;
 				try {
 					let dec = AES.decrypt(
 						message.text,
@@ -317,6 +324,7 @@ class MessagesContainer extends React.Component {
 		await this.asetState({
 			messages: messages.messages,
 		});
+		this.isEncrypted = isEncrypted;
 
 		this.refs.messages.scrollToBottom(false);
 
@@ -340,7 +348,7 @@ class MessagesContainer extends React.Component {
 	sendMessage = (message) => {
 		let encMessage = "";
 
-		if (window.localStorage.ckey != undefined) {
+		if (this.isEncrypted && window.localStorage.ckey != undefined) {
 			let enc = AES.encrypt(message, window.localStorage.ckey || "");
 			encMessage = enc.toString();
 		}
