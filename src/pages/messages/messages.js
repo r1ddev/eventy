@@ -195,6 +195,7 @@ class MessagesContainer extends React.Component {
 		activeUser: {},
 		messages: [],
 		loading: true,
+		newUser: undefined,
 	};
 
 	updateTimer = 5000;
@@ -255,20 +256,30 @@ class MessagesContainer extends React.Component {
 		} else {
 			let userData = await api.account.getUserDataById(userId);
 
+			let newUserData = {
+				first_name: userData.user.first_name,
+				last_name: userData.user.last_name,
+				avatar: userData.user.avatar,
+				user_id: userId,
+				company: userData.user.company,
+				position: userData.user.position,
+				mail: userData.user.mail || "",
+				phone: userData.user.phone || "",
+				social_site: userData.user.social_site || "",
+				what_looking: userData.user.what_looking || "",
+				what_offer: userData.user.what_offer || "",
+			};
+
 			await this.asetState({
-				activeUser: {
-					first_name: userData.user.first_name,
-					last_name: userData.user.last_name,
-					avatar: userData.user.avatar,
-					user_id: userId,
-					company: userData.user.company,
-					position: userData.user.position,
-					mail: userData.user.mail || "",
-					phone: userData.user.phone || "",
-					social_site: userData.user.social_site || "",
-					what_looking: userData.user.what_looking || "",
-					what_offer: userData.user.what_offer || "",
-				},
+				activeUser: newUserData,
+			});
+
+			// let isNewUserInList = this.state.users.filter(u => {
+			// 	return u.user_id === this.props.match.params.id
+			// }).length > 0
+
+			this.setState({
+				newUser: { ...newUserData, read: 1 },
 			});
 		}
 
@@ -320,6 +331,10 @@ class MessagesContainer extends React.Component {
 			this.updateTimer = this.props.timers.updateTimer;
 			this.updateDialogsTimer = this.props.timers.updateDialogsTimer;
 		}
+
+		if (prevProps.match.params.id !== this.props.match.params.id) {
+			this.setUser(this.props.match.params.id);
+		}
 	}
 
 	sendMessage = (message) => {
@@ -370,6 +385,15 @@ class MessagesContainer extends React.Component {
 	};
 
 	render() {
+		let users = [...this.state.users];
+		console.log("users", users);
+
+		if (this.state.newUser !== undefined) {
+			users.push(this.state.newUser);
+		}
+
+		console.log("users 2", users);
+
 		return (
 			<>
 				{isMobile && (
@@ -386,7 +410,7 @@ class MessagesContainer extends React.Component {
 						{!this.props.match.params.id && (
 							<MessagesMobile
 								ref="messages"
-								users={this.state.users}
+								users={users}
 								setUser={this.setUser}
 							/>
 						)}
@@ -395,7 +419,7 @@ class MessagesContainer extends React.Component {
 				{!isMobile && (
 					<Messages
 						ref="messages"
-						users={this.state.users}
+						users={users}
 						activeUser={this.state.activeUser}
 						messages={this.state.messages}
 						loading={this.state.loading}
