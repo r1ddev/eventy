@@ -20,6 +20,7 @@
 }
 
 .check-chat-panel{
+  min-height: 50px;
   height: 50px;
   display: flex;
   flex-direction: row;
@@ -30,8 +31,9 @@
 
   &.hidden{
     height: 0px;
+    min-height: 0px;
     margin:0px;
-    transition: height 200ms;
+    transition: height 200ms, min-height 0px;
   }
 
   .item{
@@ -80,9 +82,14 @@
   transition: flex-grow 200ms;
   overflow: hidden;
 
+  display: flex;
+  height: 100%;
+  flex-direction: column-reverse;
+
   &.hidden{
     flex-grow: 0;
-    transition: flex-grow 200ms;
+    height: 0%;
+    transition: flex-grow 200ms, height 200ms;
   }
 
   .message-item{
