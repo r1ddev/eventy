@@ -13,7 +13,7 @@
   }
 
   &.hidden{
-    flex-grow: 0;
+    flex-grow: 1;
     transition: flex-grow 200ms;
   }
 
@@ -77,8 +77,9 @@
 
   flex-grow: 1;
   transition: flex-grow 200ms;
+  overflow: hidden;
 
-  &:hidden{
+  &.hidden{
     flex-grow: 0;
     transition: flex-grow 200ms;
   }
@@ -140,8 +141,8 @@
     width: 65px;
     height: 45px;
     border-radius: 2px;
-    background-color: #22D671;
-    background-image: url(../../../images/icons/send.svg);
+    background-color: #c9d0cc;
+    background-image: url(../../../images/icons/send-btn.svg);
     background-position: center center;
     background-repeat: no-repeat;
     margin-right: 5px;
