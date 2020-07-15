@@ -82,8 +82,7 @@
   transition: flex-grow 200ms;
   overflow: hidden;
 
-  display: flex;
-  height: 100%;
+
   flex-direction: column-reverse;
 
   position: relative;
@@ -94,8 +93,7 @@
 
   &.hidden{
     flex-grow: 0;
-    height: 0%;
-    transition: flex-grow 200ms, height 200ms;
+    transition: flex-grow 200ms;
   }
 
   .message-item{
