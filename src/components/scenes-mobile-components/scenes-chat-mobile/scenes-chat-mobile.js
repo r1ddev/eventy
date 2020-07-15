@@ -3,7 +3,7 @@ import './scenes-chat-mobile.scss';
 
 import RSC from "react-scrollbars-custom";
 import Spinner from '../../spinner';
-
+import { isMobileSafari } from "react-device-detect";
 
 class ScenesChatMobile extends React.Component {
 
@@ -54,19 +54,37 @@ class ScenesChatMobile extends React.Component {
     console.log(loading + '5454');
 
     return (
-      <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
-        <CheckChatPanel
-          onOpen={this.onOpen}
-          onClose={this.onClose}
-          isVisible={!activeInput}
-        />
+      <>
+        {(!isMobileSafari) &&
+          <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
+            <CheckChatPanel
+              onOpen={this.onOpen}
+              onClose={this.onClose}
+              isVisible={!activeInput}
+            />
 
-        {(isOpen && !loading) && <MessageBox isVisible={!activeInput} />}
-        {(isOpen && loading) && <Spinner />}
-        <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
+            {(isOpen && !loading) && <MessageBox isVisible={!activeInput} />}
+            {(isOpen && loading) && <Spinner />}
+            <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
 
-        {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
-      </div >
+            {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
+          </div >
+        }
+
+        {(isMobileSafari) &&
+          <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
+            <CheckChatPanel
+              onOpen={this.onOpen}
+              onClose={this.onClose}
+              isVisible={true}
+            />
+
+            {(isOpen && !loading) && <MessageBox isVisible={true} />}
+            {(isOpen && loading) && <Spinner />}
+            <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
+          </div >
+        }
+      </>
     )
   }
 }

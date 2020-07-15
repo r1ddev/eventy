@@ -9,7 +9,7 @@ class ScenesBanner extends React.Component {
 
     return (
       <div id="scenes-banner" className={(isVisible) ? '' : 'hidden'}>
-        <img alt="" src={"http://demo.smit.events/images/eco-torba.png"} />
+        <img alt="" src={"http://demo.smit.events/images/smitbanner.png"} />
       </div >
     )
   }
