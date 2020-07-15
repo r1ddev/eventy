@@ -1,6 +1,7 @@
 #dialog-mobile {
 	background: #fff;
 	height: 100%;
+	text-align: left;
 
 	.header {
 		padding: 10px;
@@ -39,11 +40,27 @@
 
 	#scenes-chat {
 		height: calc(100% - 61px);
+		margin-top: 1px;
+
+		.react-emoji {
+			padding-right: 0 !important;
+		}
+
+		.react-input-emoji--button {
+			margin-bottom: unset;
+			height: 100%;
+		}
 
 		.react-emoji-picker--wrapper {
 			position: fixed;
-			right: 0;
-			bottom: 48px;
+			right: 5px;
+			bottom: 50px;
+		}
+
+		.send-mes-btn {
+			margin-bottom: 0;
+			width: 65px;
+			background-position: 5px center;
 		}
 	}
 }
