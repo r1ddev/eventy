@@ -145,7 +145,7 @@ class MessageBox extends React.Component {
 
     return (
       <div className={(isVisible) ? 'message-box' : 'message-box hidden'}>
-        <RSC ref="scrollbar">
+        <RSC ref="scrollbar" >
           {
             messageList
           }
