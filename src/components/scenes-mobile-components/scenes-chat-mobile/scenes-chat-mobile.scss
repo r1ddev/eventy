@@ -89,7 +89,7 @@
   position: relative;
 
 	.ScrollbarsCustom {
-		position:static;
+		position:static !important;
 	}
 
   &.hidden{
