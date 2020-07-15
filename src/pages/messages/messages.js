@@ -394,13 +394,10 @@ class MessagesContainer extends React.Component {
 
 	render() {
 		let users = [...this.state.users];
-		console.log("users", users);
 
 		if (this.state.newUser !== undefined) {
 			users.push(this.state.newUser);
 		}
-
-		console.log("users 2", users);
 
 		return (
 			<>
