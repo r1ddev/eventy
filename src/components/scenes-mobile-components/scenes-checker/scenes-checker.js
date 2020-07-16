@@ -5,16 +5,28 @@ class ScenesChecker extends React.Component {
 
   render() {
 
-    const { isVisible = true } = this.props;
+    const { isVisible = true, sceneNumber, scenes, setScene } = this.props;
+
 
     return (
       <div id="scenes-checker" className={(isVisible) ? '' : 'hidden'}>
-        <div className="scenes-checker--item active inprogress">Сцена 1</div>
-        <div className="scenes-checker--item">Сцена 2</div>
-        <div className="scenes-checker--item inprogress">Сцена 3</div>
-        <div className="scenes-checker--item">Сцена 4</div>
-        <div className="scenes-checker--item">Сцена 5</div>
-        <div className="scenes-checker--item">Сцена 6</div>
+
+        <div className={"scenes-checker--item" +
+          ((sceneNumber == 0) ? " active" : "") +
+          ((scenes[0].status) ? " inprogress" : "")}
+          onClick={() => setScene(0)}
+        >
+          Сцена 1
+        </div>
+
+        <div className={"scenes-checker--item" +
+          ((sceneNumber == 1) ? " active" : "") +
+          ((scenes[1].status) ? " inprogress" : "")}
+          onClick={() => setScene(1)}
+        >
+          Сцена 2
+        </div>
+
       </div >
     )
   }
