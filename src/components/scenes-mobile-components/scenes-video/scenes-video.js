@@ -3,14 +3,18 @@ import './scenes-video.scss';
 
 class ScenesVideo extends React.Component {
 
+
   render() {
+
+    const { sceneUrl } = this.props;
+
     return (
       <div id="scenes-video">
         <div className="translation-content">
           <div className="video-container">
             <iframe
               title="translation"
-              src={'https://player.vimeo.com/video/123538098'}
+              src={sceneUrl}
               width="640"
               height="382"
               frameBorder="0"
