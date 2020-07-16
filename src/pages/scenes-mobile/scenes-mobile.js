@@ -58,7 +58,7 @@ class ScenesMobile extends React.Component {
                 <ScenesVideo sceneUrl={sceneUrl} />
 
                 <ScenesVideoActions isVisible={!chatIsOpen}>
-                    <ScenesReactions />
+                    <ScenesReactions sceneNumber={scene} />
                     <ScenesLangChecker />
                 </ScenesVideoActions>
 
