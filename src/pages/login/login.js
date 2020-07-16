@@ -47,9 +47,11 @@ class Login extends React.Component {
 		window.localStorage.token = token;
 	};
 
-	onSubmit = (e) => {
-		i18next.changeLanguage("en");
+	setLang = (lang) => {
+		i18next.changeLanguage(lang);
+	};
 
+	onSubmit = (e) => {
 		e.preventDefault();
 
 		let user = {
@@ -133,6 +135,13 @@ class Login extends React.Component {
 						<Link className="reg-link" to="/registration">
 							Зарегистрироваться
 						</Link>
+
+						<button onClick={() => this.setLang("en")} type="button">
+							set Eng
+						</button>
+						<button onClick={() => this.setLang("ru")} type="button">
+							set RU
+						</button>
 
 						{t("Introduction")}
 					</div>
