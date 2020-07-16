@@ -44,7 +44,7 @@ class ScenesChatMobile extends React.Component {
   render() {
 
     const { isOpen, activeInput } = this.state;
-    const { loading, messages, setItem, sendMessage } = this.props;
+    const { loading, messages, setItem, sendMessage, survey } = this.props;
 
     console.log(messages)
 
@@ -63,7 +63,7 @@ class ScenesChatMobile extends React.Component {
               onChangeItem={setItem}
             />
 
-            {(isOpen && !loading) &&
+            {(isOpen && !loading && !survey) &&
               <MessageBox
                 isVisible={!activeInput}
                 messages={messages}
@@ -71,12 +71,12 @@ class ScenesChatMobile extends React.Component {
 
             {(isOpen && loading) && <Spinner />}
 
-            <MessageInput
+            {(!survey) && <MessageInput
               isVisible={isOpen}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
               sendMessage={sendMessage}
-            />
+            />}
 
             {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
           </div >
@@ -91,13 +91,17 @@ class ScenesChatMobile extends React.Component {
               onChangeItem={setItem}
             />
 
-            {(isOpen && !loading) &&
+            {(isOpen && !loading && !survey) &&
               <MessageBox
                 isVisible={true}
                 messages={messages}
               />}
             {(isOpen && loading) && <Spinner />}
-            <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
+            {(!survey) && <MessageInput
+              isVisible={isOpen}
+              onFocus={this.onFocusInput}
+              onBlur={this.onBlurInput}
+              sendMessage={sendMessage} />}
           </div >
         }
       </>
