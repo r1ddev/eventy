@@ -6,6 +6,8 @@ import scenes from './scenes';
 import conversations from './conversations';
 import notifications from './notifications';
 import timers from './timers';
+import floatvideo from './floatvideo';
+
 
 
 export default combineReducers({
@@ -15,5 +17,6 @@ export default combineReducers({
     scenes,
     conversations,
     notifications,
-    timers
+    timers,
+    floatvideo
 })

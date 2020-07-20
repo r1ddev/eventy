@@ -28,6 +28,7 @@
 		"react-input-emoji": "^1.0.7",
 		"react-linkify": "^1.0.0-alpha",
 		"react-loading-overlay": "^1.0.1",
+		"react-picture-in-picture": "^1.0.0",
 		"react-pose": "^4.0.10",
 		"react-redux": "^6.0.0",
 		"react-router": "^5.2.0",
