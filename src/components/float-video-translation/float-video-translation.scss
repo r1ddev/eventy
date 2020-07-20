@@ -39,6 +39,7 @@
       position: relative;
       left: calc(100% - 475px);
       top: calc(100% - 190px);
+      height: min-content;
       max-width: 300px;
       z-index: 5;
       overflow: unset;
