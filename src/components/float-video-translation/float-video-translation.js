@@ -21,7 +21,7 @@ class FloatVideoTranslation extends React.Component {
       <div id="float-video-translation" className={(frameIsVisible ? ((frameIsFloating) ? 'floated' : '') : 'hidden')}>
         <div className="video">
           {(frameIsFloating) && <div className="close-btn" onClick={() => this.props.setVideoFrameHidden()}></div>}
-          <ScenesVideo sceneUrl={currentSceneUrl} />
+          {(frameIsVisible) && <ScenesVideo sceneUrl={currentSceneUrl} />}
 
 
         </div>
