@@ -7,6 +7,14 @@ import ScenesChat from './scenes-chat-container';
 import Stikers from '../../components/stikers';
 import { fetchScenes } from '../../actions/scenes-actions';
 import { fetchUser } from '../../actions/user-actions';
+
+import { setVideoFrameVisible } from '../../actions/floatvideo-actions';
+import { setVideoFixed } from '../../actions/floatvideo-actions';
+import { setVideoFloated } from '../../actions/floatvideo-actions';
+import { setCurrentSceneUrl } from '../../actions/floatvideo-actions';
+
+
+
 import Spinner from '../../components/spinner';
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
@@ -16,6 +24,10 @@ import ScenesMobile from '../scenes-mobile';
 
 
 class Scenes extends React.Component {
+
+    componentDidMount() {
+        this.props.setCurrentSceneUrl(this.props.sceneUrl);
+    }
 
     render() {
 
@@ -46,7 +58,7 @@ class Scenes extends React.Component {
                     <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} />
                     <div className="translation-content">
                         <div className="video-container">
-                            <iframe
+                            {/* <iframe
                                 title="translation"
                                 src={sceneUrl}
                                 width="640"
@@ -55,7 +67,7 @@ class Scenes extends React.Component {
                                 webkitallowfullscreen="1"
                                 mozallowfullscreen="1"
                                 allowFullScreen="1">
-                            </iframe>
+                            </iframe> */}
                         </div>
                     </div>
                     <div className="translation-footer">
@@ -145,6 +157,8 @@ class ScenesContainer extends React.Component {
             scene: scene,
             lang: (this.props.scenes.scenes[scene][lang]) ? lang : 'rus'
         })
+
+
     }
 
     setLang = (lang) => {
@@ -159,6 +173,8 @@ class ScenesContainer extends React.Component {
     componentDidMount() {
         this.getScenes();
         this.props.fetchUser();
+        this.props.setVideoFrameVisible();
+        this.props.setVideoFixed();
     }
 
     getScenes = () => {
@@ -170,7 +186,9 @@ class ScenesContainer extends React.Component {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timerId)
+        clearTimeout(this.timerId);
+        this.props.setVideoFloated();
+
     }
 
     render() {
@@ -194,6 +212,8 @@ class ScenesContainer extends React.Component {
                         setLang={this.setLang}
                         setScene={this.setScene}
                         user={user}
+                        setCurrentSceneUrl={this.props.setCurrentSceneUrl}
+
                     />
                 }
                 {
@@ -220,14 +240,21 @@ const mapStateToProps = ({ scenes, user, timers }) => {
     return {
         scenes: scenes,
         user: user,
-        timers: timers
+        timers: timers,
     }
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchScenes: fetchScenes(apiService, dispatch),
-        fetchUser: fetchUser(apiService, dispatch)
+        fetchUser: fetchUser(apiService, dispatch),
+        setVideoFrameVisible: () => dispatch(setVideoFrameVisible()),
+        setVideoFixed: () => dispatch(setVideoFixed()),
+        setVideoFloated: () => dispatch(setVideoFloated()),
+        setCurrentSceneUrl: (url) => dispatch(setCurrentSceneUrl(url)),
+
+
+
     }
 };
 
