@@ -11,6 +11,7 @@ import { fetchTimers } from '../../actions/timers-actions';
 import NotifyIndicator from '../notify-indicator';
 import { isMobile } from 'react-device-detect';
 import HeaderMobile from '../header-mobile';
+import FloatVideoTranslation from '../float-video-translation';
 
 class Frame extends React.Component {
 
@@ -19,10 +20,13 @@ class Frame extends React.Component {
             <div id="frame">
                 <Menu notifications={this.props.notifications} />
                 <div className="frame-container">
+                    <FloatVideoTranslation />
                     {
                         this.props.children
                     }
+
                 </div>
+
             </div>
         )
     }

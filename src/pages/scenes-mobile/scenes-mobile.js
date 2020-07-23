@@ -29,14 +29,36 @@ class ScenesMobile extends React.Component {
     render() {
         const { chatIsOpen } = this.state;
 
+        const {
+            /*сцены*/
+            sceneUrl,
+            scene, //порядковый номер сцены
+            scenes, //все сцены
+            setScene, //установить текущую сцену
+
+        } = this.props;
+
+        const { generalChatId, spikerChatId } = scenes[scene] || {
+            generalChatId: 0,
+            spikerChatId: 0
+        }
+
+
+
         return (
             <div id="scenes-mobile">
 
-                <ScenesChecker isVisible={!chatIsOpen} />
-                <ScenesVideo />
+                <ScenesChecker
+                    isVisible={!chatIsOpen}
+                    sceneNumber={scene}
+                    scenes={scenes}
+                    setScene={setScene}
+                />
+
+                <ScenesVideo sceneUrl={sceneUrl} />
 
                 <ScenesVideoActions isVisible={!chatIsOpen}>
-                    <ScenesReactions />
+                    <ScenesReactions sceneNumber={scene} />
                     <ScenesLangChecker />
                 </ScenesVideoActions>
 
@@ -46,6 +68,8 @@ class ScenesMobile extends React.Component {
                 <ScenesChatMobile
                     onOpen={() => this.onChangeChatIsOpenValue(true)}
                     onClose={() => this.onChangeChatIsOpenValue(false)}
+                    generalChatId={generalChatId}
+                    spikerChatId={spikerChatId}
                 />
 
             </div >

@@ -4,6 +4,7 @@ import './scenes-chat-mobile.scss';
 import RSC from "react-scrollbars-custom";
 import Spinner from '../../spinner';
 import { isMobileSafari, isIOS } from "react-device-detect";
+import api from "./../../../js/api";
 
 class ScenesChatMobile extends React.Component {
 
@@ -40,18 +41,16 @@ class ScenesChatMobile extends React.Component {
     })
   }
 
-
   render() {
 
     const { isOpen, activeInput } = this.state;
-    const { loading } = this.props;
+    const { loading, messages, setItem, sendMessage, survey } = this.props;
 
+    console.log(messages)
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
     if (activeInput && (!isIOS || !isMobileSafari)) chatMobileClasses += ' hidden';
-
-    console.log(loading + '5454');
 
     return (
       <>
@@ -61,11 +60,23 @@ class ScenesChatMobile extends React.Component {
               onOpen={this.onOpen}
               onClose={this.onClose}
               isVisible={!activeInput}
+              onChangeItem={setItem}
             />
 
-            {(isOpen && !loading) && <MessageBox isVisible={!activeInput} />}
+            {(isOpen && !loading && !survey) &&
+              <MessageBox
+                isVisible={!activeInput}
+                messages={messages}
+              />}
+
             {(isOpen && loading) && <Spinner />}
-            <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
+
+            {(!survey) && <MessageInput
+              isVisible={isOpen}
+              onFocus={this.onFocusInput}
+              onBlur={this.onBlurInput}
+              sendMessage={sendMessage}
+            />}
 
             {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
           </div >
@@ -77,11 +88,20 @@ class ScenesChatMobile extends React.Component {
               onOpen={this.onOpen}
               onClose={this.onClose}
               isVisible={true}
+              onChangeItem={setItem}
             />
 
-            {(isOpen && !loading) && <MessageBox isVisible={true} />}
+            {(isOpen && !loading && !survey) &&
+              <MessageBox
+                isVisible={true}
+                messages={messages}
+              />}
             {(isOpen && loading) && <Spinner />}
-            <MessageInput isVisible={isOpen} onFocus={this.onFocusInput} onBlur={this.onBlurInput} />
+            {(!survey) && <MessageInput
+              isVisible={isOpen}
+              onFocus={this.onFocusInput}
+              onBlur={this.onBlurInput}
+              sendMessage={sendMessage} />}
           </div >
         }
       </>
@@ -148,14 +168,14 @@ class MessageBox extends React.Component {
 
   render() {
 
-    const messages = ['1', '2', '2323232323', '1', '2', '2323232323',
-      '1', '2', '2323232323', '1', '2', '2323232323', '1', '2',
-      '2323232323', '1', '2', '2323232323', '1', '2', '2323232323',
-      '1', '2', '2323232323', '1', '2', '2323232323', '1', '2', '2323232323']
+    const { messages } = this.props;
 
     const messageList = messages.map((item, index) => {
+
+      console.log(item);
+
       return (
-        <MessageItem key={index} />
+        <MessageItem key={index} item={item} />
       )
     })
 
@@ -176,13 +196,19 @@ class MessageBox extends React.Component {
 class MessageItem extends React.Component {
 
   render() {
+
+    const { id, first_name, last_name, ad, sponsor, message, avatar } = this.props.item;
+
+    let origin = api.origin;
+    let newAvatar = origin + "/images/avatar/" + avatar;
+
     return (
 
       <div className="message-item">
-        <img alt="" src={require("../../../images/stikers/heart.svg")} />
+        <img alt="" src={newAvatar} />
         <div className='text'>
-          <span>Игнат Васильевич</span>
-          <div> Сообщение</div>
+          <span>{first_name + ' ' + last_name}</span>
+          <div className='mes-text'> {message}</div>
 
         </div>
 
@@ -205,6 +231,17 @@ class MessageInput extends React.Component {
     })
   }
 
+  onSend = () => {
+    const text = this.state.messageText;
+    if (text) this.props.sendMessage(text);
+    this.onFocusOutMessageInput();
+    this.clearText();
+  }
+
+  clearText = () => {
+    this.setState({ messageText: '' })
+  }
+
   onFocusInMessageInput = () => {
     if (this.props.onFocus) this.props.onFocus();
   }
@@ -220,16 +257,18 @@ class MessageInput extends React.Component {
 
     return (
 
-      <div className={(isVisible) ? 'message-input' : 'message-input hidden'}>
+      <div
+        className={(isVisible) ? 'message-input' : 'message-input hidden'}
+        onFocus={this.onFocusInMessageInput}
+        onBlur={this.onFocusOutMessageInput}
+      >
         <input
           value={messageText}
           onChange={this.onChangeMessage}
-          onFocus={this.onFocusInMessageInput}
-          onBlur={this.onFocusOutMessageInput}
           className="message-input"
           placeholder="Введите сообщение">
         </input>
-        <div className="send-btn"></div>
+        <button onClick={this.onSend} className="send-btn"></button>
       </div >
 
     )
@@ -272,7 +311,7 @@ class CheckChatPanel extends React.Component {
       activeItem: value,
     })
 
-    if (this.props.onChange) this.props.onChange(); //колбэк при изменении 
+    if (this.props.onChangeItem) this.props.onChangeItem(value); //колбэк при изменении 
   }
 
   componentDidUpdate(prevProps, prevState) {

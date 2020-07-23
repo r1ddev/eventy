@@ -82,9 +82,7 @@
   transition: flex-grow 200ms;
   overflow: hidden;
 
-
   flex-direction: column-reverse;
-
   position: relative;
 
 	.ScrollbarsCustom {
@@ -112,11 +110,18 @@
       text-align: left;
       padding-left: 2px;
       line-height: 1.2;
+
+      .mes-text{
+        overflow-wrap: break-word;
+      }
+
     }
 
     img{
       height: 40px;
       width: 40px;
+      object-fit: cover;
+      border-radius: 2px;
     }
 
     }
@@ -162,6 +167,8 @@
     background-position: center center;
     background-repeat: no-repeat;
     margin-right: 5px;
+    border: 0px;
+    outline: none;
   }
 
 }
