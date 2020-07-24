@@ -10,192 +10,165 @@ import { Link } from "react-router-dom";
 
 import ErrorIndicator from "../../components/error-indicator";
 
+import { withTranslation } from "react-i18next";
+
 class Registration extends React.Component {
-	state = {
-		name: "",
-		lastName: "",
-		avatar: "",
-		company: "",
-		position: "",
-		phone: "",
-		email: "",
-		soc: "",
-		isLoading: false,
-		isEditable: false,
-	};
+  state = {
+    name: "",
+    lastName: "",
+    avatar: "",
+    company: "",
+    position: "",
+    phone: "",
+    email: "",
+    soc: "",
+    isLoading: false,
+    isEditable: false,
+  };
 
-	componentDidMount() {
-		this.fetchData();
+  componentDidMount() {
+    this.fetchData();
+  }
 
-		console.log("history", this.props.history);
-		console.log("history", this.props.history.length);
-	}
+  goBack = () => {
+    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
+  };
 
-	goBack = () => {
-		this.props.history.length == 1
-			? window.close()
-			: this.props.history.goBack();
-	};
+  fetchData = async () => {
+    const t = this.props.t;
+    if (window.localStorage.token !== undefined) {
+      if (this.props.match.params.id) {
+        if (this.props.match.params.id === this.props.user.id) {
+          this.setState({
+            isEditable: true,
+          });
+        }
 
-	fetchData = async () => {
-		if (window.localStorage.token !== undefined) {
-			if (this.props.match.params.id) {
-				if (this.props.match.params.id === this.props.user.id) {
-					this.setState({
-						isEditable: true,
-					});
-				}
+        this.setLoading(true);
+        api.account
+          .getUserDataById(this.props.match.params.id)
+          .then((res) => {
+            this.setState({
+              avatar: res.user.avatar,
+              name: res.user.first_name,
+              lastName: res.user.last_name,
+              company: res.user.company,
+              position: res.user.position,
+              phone: res.user.phone,
+              email: res.user.mail,
+              soc: res.user.social_site,
+            });
 
-				this.setLoading(true);
-				api.account
-					.getUserDataById(this.props.match.params.id)
-					.then((res) => {
-						this.setState({
-							avatar: res.user.avatar,
-							name: res.user.first_name,
-							lastName: res.user.last_name,
-							company: res.user.company,
-							position: res.user.position,
-							phone: res.user.phone,
-							email: res.user.mail,
-							soc: res.user.social_site,
-						});
+            this.setLoading(false);
+          })
+          .catch((e) => {
+            api.errorHandler(e, {
+              public_user_not_found: () => {
+                this.setLoading(false);
+                ErrorIndicator(t("Пользователь не найден"));
+                this.props.history.push("/error");
+              },
+            });
+          });
+      } else {
+        this.setLoading(true);
+        api.account
+          .getUserData()
+          .then((res) => {
+            this.setState({
+              avatar: res.user.avatar,
+              name: res.user.first_name || "",
+              lastName: res.user.last_name || "",
+              company: res.user.company || "",
+              position: res.user.position || "",
+              phone: res.user.phone || "",
+              email: res.user.mail || "",
+              soc: res.user.social_site || "",
+              isEditable: true,
+            });
 
-						this.setLoading(false);
-					})
-					.catch((e) => {
-						api.errorHandler(e, {
-							public_user_not_found: () => {
-								this.setLoading(false);
-								ErrorIndicator("Пользователь не найден");
-								this.props.history.push("/error");
-							},
-						});
-					});
-			} else {
-				this.setLoading(true);
-				api.account
-					.getUserData()
-					.then((res) => {
-						this.setState({
-							avatar: res.user.avatar,
-							name: res.user.first_name || "",
-							lastName: res.user.last_name || "",
-							company: res.user.company || "",
-							position: res.user.position || "",
-							phone: res.user.phone || "",
-							email: res.user.mail || "",
-							soc: res.user.social_site || "",
-							isEditable: true,
-						});
+            this.setLoading(false);
+          })
+          .catch((e) => {
+            api.errorHandler(e, {
+              user_not_found: () => {
+                this.setLoading(false);
+                ErrorIndicator(t("Пользователь не найден"));
+                this.props.history.push("/error");
+              },
+            });
+          });
+      }
+    } else {
+      this.props.history.push("/error");
+    }
+  };
 
-						this.setLoading(false);
-					})
-					.catch((e) => {
-						api.errorHandler(e, {
-							user_not_found: () => {
-								this.setLoading(false);
-								ErrorIndicator("Пользователь не найден");
-								this.props.history.push("/error");
-							},
-						});
-					});
-			}
-		} else {
-			this.props.history.push("/error");
-		}
-	};
+  setLoading = (status) => {
+    this.setState({
+      isLoading: status,
+    });
+  };
 
-	setLoading = (status) => {
-		this.setState({
-			isLoading: status,
-		});
-	};
+  render() {
+    const t = this.props.t;
+    const { isLoading, name, lastName, avatar, company, position, phone, email, soc, isEditable } = this.state;
 
-	render() {
-		const {
-			isLoading,
-			name,
-			lastName,
-			avatar,
-			company,
-			position,
-			phone,
-			email,
-			soc,
-			isEditable,
-		} = this.state;
+    let userAvatar = require("../../images/default-avatar.svg");
+    if (avatar) {
+      userAvatar = api.auth.getAvatarLocation() + avatar;
+    }
 
-		let userAvatar = require("../../images/default-avatar.svg");
-		if (avatar) {
-			userAvatar = api.auth.getAvatarLocation() + avatar;
-		}
+    return (
+      <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
+        <div className="bg-light flex-center min-vh-100">
+          <div className="container" id="profile">
+            <div className="back" onClick={() => this.goBack()}></div>
+            <div className="profile-wrap">
+              <div className="row m-0">
+                <div className="col-md-5 left p-5">
+                  <div className="ava p-3 flex-center">
+                    <img src={userAvatar} alt="" />
+                  </div>
 
-		return (
-			<LoadingOverlay
-				active={isLoading}
-				spinner
-				text="Загрузка"
-				className="">
-				<div className="bg-light flex-center min-vh-100">
-					<div className="container" id="profile">
-						<div
-							className="back"
-							onClick={() => this.goBack()}></div>
-						<div className="profile-wrap">
-							<div className="row m-0">
-								<div className="col-md-5 left p-5">
-									<div className="ava p-3 flex-center">
-										<img src={userAvatar} alt="" />
-									</div>
+                  <div className="field mt-3">{name}</div>
+                  <div className="field mt-3">{lastName}</div>
+                </div>
 
-									<div className="field mt-3">{name}</div>
-									<div className="field mt-3">{lastName}</div>
-								</div>
+                {!isLoading && (
+                  <div className="col-md-7 right p-5">
+                    <div className="title">{position + " в " + company}</div>
+                    <div className="title mt-2">{t("Контакты")}:</div>
+                    <div className="text">{email}</div>
+                    <div className="text">{phone}</div>
+                    <div className="text">{soc}</div>
 
-								{!isLoading && (
-									<div className="col-md-7 right p-5">
-										<div className="title">
-											{position + " в " + company}
-										</div>
-										<div className="title mt-2">
-											Контакты:
-										</div>
-										<div className="text">{email}</div>
-										<div className="text">{phone}</div>
-										<div className="text">{soc}</div>
-
-										{isEditable && (
-											<div className="field mt-3 flex-center">
-												<Link
-													to="/profile/edit"
-													className="flex-center btn-submit text-center">
-													Изменить профиль
-												</Link>
-											</div>
-										)}
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
-				</div>
-			</LoadingOverlay>
-		);
-	}
+                    {isEditable && (
+                      <div className="field mt-3 flex-center">
+                        <Link to="/profile/edit" className="flex-center btn-submit text-center">
+                          {t("Изменить профиль")}
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </LoadingOverlay>
+    );
+  }
 }
 
 const mapStateToProps = ({ user }) => {
-	return {
-		user,
-	};
+  return {
+    user,
+  };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+  return {};
 };
 
-export default compose(
-	withApiService(),
-	connect(mapStateToProps, mapDispatchToProps)
-)(Registration);
+export default compose(withTranslation(), withApiService(), connect(mapStateToProps, mapDispatchToProps))(Registration);
