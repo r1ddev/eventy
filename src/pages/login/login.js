@@ -54,6 +54,7 @@ class Login extends React.Component {
 	onSubmit = (e) => {
 		e.preventDefault();
 
+		let t = this.props.t;
 		let user = {
 			email: this.state.email,
 			password: this.state.password,
@@ -77,7 +78,7 @@ class Login extends React.Component {
 			})
 			.catch((err) => {
 				if (err.response.data.error == "user_not_found") {
-					ErrorIndicator("Пользователя с этими данными не существует");
+					ErrorIndicator(t("Пользователя с этими данными не существует"));
 				}
 
 				this.onLoading(false);
@@ -86,6 +87,7 @@ class Login extends React.Component {
 	};
 
 	onLoginGuest = () => {
+		let t = this.props.t;
 		this.props
 			.addGuestUser()
 			.then((res) => {
@@ -93,12 +95,12 @@ class Login extends React.Component {
 				this.props.history.push("/desk");
 			})
 			.catch((err) => {
-				ErrorIndicator("Пользователя с этими данными не существует");
+				ErrorIndicator(t("Пользователя с этими данными не существует"));
 			});
 	};
 
 	render() {
-		console.log("this.props.t", this.props);
+		// console.log("this.props.t", this.props);
 
 		const t = this.props.t;
 		const { email, password, disableForm, loading } = this.state;
@@ -107,7 +109,7 @@ class Login extends React.Component {
 			<div id="login">
 				<form onSubmit={this.onSubmit} className="login-form">
 					<div className="login-form--wrapper">
-						<div className="login-form--caption">Авторизация</div>
+						<div className="login-form--caption">{t("Авторизация")}</div>
 						<input
 							required
 							type="email"
@@ -121,19 +123,19 @@ class Login extends React.Component {
 							value={password}
 							onChange={this.onChangePassword}
 							className="password-input"
-							placeholder="Пароль"></input>
+							placeholder={t("Пароль")}></input>
 						<button
 							disabled={email == "" || password == "" || disableForm}
 							className="white-button login-btn">
-							{loading ? <Spinner /> : "ВОЙТИ"}
+							{loading ? <Spinner /> : t("ВОЙТИ")}
 						</button>
 
 						<button type="button" className="white-button guest-btn" onClick={this.onLoginGuest}>
-							ВОЙТИ КАК ГОСТЬ
+							{t("ВОЙТИ КАК ГОСТЬ")}
 						</button>
 
 						<Link className="reg-link" to="/registration">
-							Зарегистрироваться
+							{t("Зарегистрироваться")}
 						</Link>
 
 						<button onClick={() => this.setLang("en")} type="button">
@@ -146,7 +148,7 @@ class Login extends React.Component {
 						{t("Introduction")}
 					</div>
 					<Link className="passrec-link" to="/password-recovery">
-						забыли пароль?
+						{t("забыли пароль?")}
 					</Link>
 				</form>
 			</div>
@@ -173,6 +175,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 	};
 };
 
-export default withTranslation()(
-	compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(LoginContainer)
-);
+export default compose(
+	withTranslation(),
+	withApiService(),
+	connect(mapStateToProps, mapDispatchToProps)
+)(LoginContainer);

@@ -29,33 +29,33 @@ const apiService = new IdeaFirstApiService();
 class Index extends React.Component {
 	render() {
 		return (
-			<Provider store={store}>
-				<ApiServiceProvider value={apiService}>
-					<ToastContainer />
-					<Router>
-						<Switch>
-							<Route path="/profile/edit" component={EditProfile} />
-							<Route path="/profile/:id" component={Profile} />
-							<Route path="/profile" component={Profile} />
-							<Route path="/login" component={Login} />
-							<Route path="/registration" component={Registration} />
-							<Route path="/registration-acception" component={RegistrationAcception} />
-							<Route path="/password-recovery" component={PasswordRecovery} />
+			<I18nextProvider i18n={i18nLocales}>
+				<Provider store={store}>
+					<ApiServiceProvider value={apiService}>
+						<ToastContainer />
+						<Router>
+							<Switch>
+								<Route path="/profile/edit" component={EditProfile} />
+								<Route path="/profile/:id" component={Profile} />
+								<Route path="/profile" component={Profile} />
+								<Route path="/login" component={Login} />
+								<Route path="/registration" component={Registration} />
+								<Route path="/registration-acception" component={RegistrationAcception} />
+								<Route path="/password-recovery" component={PasswordRecovery} />
 
-							<Route path="/error" component={Error} />
-							<Route path="/" component={App} />
-						</Switch>
-					</Router>
-				</ApiServiceProvider>
-			</Provider>
+								<Route path="/error" component={Error} />
+								<Route path="/" component={App} />
+							</Switch>
+						</Router>
+					</ApiServiceProvider>
+				</Provider>
+			</I18nextProvider>
 		);
 	}
 }
 
 ReactDOM.render(
-	<I18nextProvider i18n={i18nLocales}>
-		<Index />
-	</I18nextProvider>,
+	<Index />,
 
 	document.getElementById("root")
 );
