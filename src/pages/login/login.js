@@ -144,8 +144,6 @@ class Login extends React.Component {
 						<button onClick={() => this.setLang("ru")} type="button">
 							set RU
 						</button>
-
-						{t("Introduction")}
 					</div>
 					<Link className="passrec-link" to="/password-recovery">
 						{t("забыли пароль?")}
