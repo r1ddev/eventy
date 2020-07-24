@@ -21,8 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PasswordRecovery from "./pages/password-recovery";
 
 import { I18nextProvider } from "react-i18next";
-import i18n from "i18next";
-import i18nLocales from "./i18n";
+import i18nLocales from "./utils/i18n";
 
 const apiService = new IdeaFirstApiService();
 
