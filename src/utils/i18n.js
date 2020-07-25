@@ -38,6 +38,7 @@ i18n.use(LanguageDetector).init({
         "Ссылка на соц. сеть": "Ссылка на соц. сеть",
         "Хочу ли я делиться контактами?": "Хочу ли я делиться контактами?",
         "Изменить профиль": "Изменить профиль",
+        "Добро пожаловать на digital Stand-up Smit.Studio": `Добро пожаловать на <br />digital Stand-up Smit.Studio`,
       },
     },
     en: {
@@ -74,6 +75,7 @@ i18n.use(LanguageDetector).init({
         "Ссылка на соц. сеть": "Link to social network",
         "Хочу ли я делиться контактами?": "Do I want to share my contacts?",
         "Изменить профиль": "Change profile",
+        "Добро пожаловать на digital Stand-up Smit.Studio": `Welcome to <br />digital Stand-up Smit.Studio`,
       },
     },
   },
