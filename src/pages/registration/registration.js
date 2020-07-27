@@ -9,7 +9,6 @@ import ErrorIndicator from "../../components/error-indicator";
 import Select from "react-select";
 
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 
 class Registration extends React.Component {
   state = {
@@ -17,15 +16,20 @@ class Registration extends React.Component {
     password: "",
     passwordRepeated: "",
     company: "",
-    regTag: ["Компания"],
+    regTag: [this.props.t("Компания")],
     passwordRepeatedError: false,
     disableForm: false,
   };
 
   regOptions = [
-    { value: "Компания", label: "Компания" },
-    { value: "Агентство", label: "Агентство" },
+    { value: this.props.t("Компания"), label: this.props.t("Компания") },
+    { value: this.props.t("Агентство"), label: this.props.t("Агентство") },
   ];
+
+  //   constructor() {
+  //     super();
+  //     console.log("regOptions", this.regOptions);
+  //   }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +56,6 @@ class Registration extends React.Component {
       this.props
         .addUser(user)
         .then((res) => {
-          if (res.status) console.log("регистрация успешна");
           this.props.history.push("/registration-acception");
         })
         .catch((err) => {
