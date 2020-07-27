@@ -7,6 +7,8 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 
+import Translit from "../translit";
+
 class MessagesMobile extends React.Component {
   scrollToBottom = (upd) => {
     //this.refs.scenesChat.onUpdate(true);
@@ -38,7 +40,9 @@ class MessagesMobile extends React.Component {
                     <img className="img-fluid" src={api.auth.getAvatarLocation() + user.avatar} alt="" srcSet="" />
                   </div>
                 </div>
-                <div className="col">{user.first_name + " " + user.last_name}</div>
+                <div className="col">
+                  <Translit value={user.first_name + " " + user.last_name} />
+                </div>
               </Link>
             );
           })}
