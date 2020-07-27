@@ -5,96 +5,85 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import Header from "../../components/header";
-import { isMobile } from 'react-device-detect';
+import { isMobile } from "react-device-detect";
 
 const folders = [
-	{
-		folder: "day1",
-		files: [
-			{
-				name: "Презентация Smit.studio",
-				weight: "",
-				link: "https://drive.google.com/drive/folders/1K9EdTVHS-WIDND31GK5oCYcvqHr7ZQzW?usp=sharing",
-			},
-		],
-	},
-	{
-		folder: "day2",
-		files: [
-			{
-				name:
-					"Сцена 1 “Big Marketing Talks”",
-				weight: "",
-				link: "https://drive.google.com/drive/folders/1-TdHihBjquDLxfzBZ-chhJh05lXmzz84?usp=sharing",
-			},
-			{
-				name: "Сцена 2 “Кабинет маркетинг-директора”",
-				weight: "",
-				link: "https://drive.google.com/drive/folders/1i627qExXrXdKhN_x7pcsMxfYT6xxjhLQ?usp=sharing",
-			}, {
-				name: "Сцена 3 “Expert's Corner”",
-				weight: "",
-				link: "https://drive.google.com/drive/folders/1lL1gco6pPfYZ0h0W6lqHxdf7EPz82872?usp=sharing",
-			}
-		],
-	},
+  {
+    folder: "day1",
+    files: [
+      {
+        name: "Презентация Smit.studio",
+        weight: "",
+        link: "https://drive.google.com/drive/folders/1K9EdTVHS-WIDND31GK5oCYcvqHr7ZQzW?usp=sharing",
+      },
+    ],
+  },
+  {
+    folder: "day2",
+    files: [
+      {
+        name: "Сцена 1 “Big Marketing Talks”",
+        weight: "",
+        link: "https://drive.google.com/drive/folders/1-TdHihBjquDLxfzBZ-chhJh05lXmzz84?usp=sharing",
+      },
+      {
+        name: "Сцена 2 “Кабинет маркетинг-директора”",
+        weight: "",
+        link: "https://drive.google.com/drive/folders/1i627qExXrXdKhN_x7pcsMxfYT6xxjhLQ?usp=sharing",
+      },
+      {
+        name: "Сцена 3 “Expert's Corner”",
+        weight: "",
+        link: "https://drive.google.com/drive/folders/1lL1gco6pPfYZ0h0W6lqHxdf7EPz82872?usp=sharing",
+      },
+    ],
+  },
 ];
 
 class PresentationsList extends React.Component {
-	componentDidMount() { }
+  componentDidMount() {}
 
-	render() {
-		const { data } = this.props.user;
+  render() {
+    const { data } = this.props.user;
 
-		return (
-			<div id="presentations-list">
+    return (
+      <div id="presentations-list">
+        {!isMobile && (
+          <Header data={data}>
+            <></>
+          </Header>
+        )}
 
-				{(!isMobile) && < Header data={data}>
-					<></>
-					<div className="col d-flex align-items-center p-0">
-						<Link to="/messages/5" className="action-link">
-							Связь <br />с организаторами
-						</Link>
-					</div>
-				</Header>}
-
-				<div className="container pt-3">
-					{(
-						(
-							folders.find(
-								(folder) => folder.folder == this.props.match.params.folder
-							) || []
-						).files || []
-					).map((file, index) => {
-						return (
-							<a href={file.link} target="_blank" className="file-link">
-								<div className="file row" key={index}>
-									<div className="col-md">{file.name}</div>
-									<div className="col-md-auto">{file.weight}</div>
-								</div>
-							</a>
-						);
-					})}
-				</div>
-			</div >
-		);
-	}
+        <div className="container pt-3">
+          {((folders.find((folder) => folder.folder == this.props.match.params.folder) || []).files || []).map(
+            (file, index) => {
+              return (
+                <a href={file.link} target="_blank" className="file-link">
+                  <div className="file row" key={index}>
+                    <div className="col-md">{file.name}</div>
+                    <div className="col-md-auto">{file.weight}</div>
+                  </div>
+                </a>
+              );
+            }
+          )}
+        </div>
+      </div>
+    );
+  }
 }
 class PresentationsListContainer extends React.Component {
-	render() {
-		return <PresentationsList {...this.props} />;
-	}
+  render() {
+    return <PresentationsList {...this.props} />;
+  }
 }
 
 const mapStateToProps = ({ user }) => {
-	return { user };
+  return { user };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+  return {};
 };
 
-export default compose(
-	withApiService(),
-	connect(mapStateToProps, mapDispatchToProps)
-)(PresentationsListContainer);
+export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(PresentationsListContainer);
