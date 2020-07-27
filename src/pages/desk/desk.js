@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { fetchUser } from '../../actions/user-actions';
 import IdeaFirstApiService from '../../services/idea-first-api-service';
 import { isMobile } from 'react-device-detect';
+import LangChecker from '../../components/lang-checker';
 
 
 class Desk extends React.Component {
@@ -31,7 +32,13 @@ class Desk extends React.Component {
                     <div className='lobby-text'>
                         Добро пожаловать на<br />
                         digital Stand-up Smit.Studio
+
+                        <div className='lobby-lang-checker'>
+                            <LangChecker />
+                        </div>
                     </div>
+
+
 
                     {/* <div className="first-svg">
                         <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">

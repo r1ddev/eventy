@@ -2,6 +2,7 @@ import React from 'react';
 import './header.scss'
 import { Link } from 'react-router-dom';
 import api from './../../js/api';
+import LangChecker from '../lang-checker';
 
 class Header extends React.Component {
 
@@ -28,6 +29,8 @@ class Header extends React.Component {
 
 						<div className="col-md-auto profile row m-0">
 							{this.props.children && this.props.children[1]}
+							<div className="d-flex col-auto align-items-center">
+							</div>
 							<div className="col-auto ava">
 								<Link to="/profile">
 									<img

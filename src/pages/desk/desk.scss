@@ -27,8 +27,16 @@
     font-weight: 500;
     font-size: 4vw;
     line-height: 1.5;
-    margin: 10vmin 5vmin;
+		margin: 10vmin 5vmin;
+		
+		.lobby-lang-checker{
+			margin-top:40px;
+			font-size: 20px;
+			color: black;
+		}
 	}
+
+	
 
 	.first-svg {
 		position: absolute;
