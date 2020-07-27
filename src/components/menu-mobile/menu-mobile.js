@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { fetchUser } from '../../actions/user-actions';
 import IdeaFirstApiService from "../../services/idea-first-api-service";
+import { withTranslation } from "react-i18next";
+
 
 const logo = require("../../images/icons/logo.svg");
 const closebtn = require("../../images/menu/close-icon.svg");
@@ -18,6 +20,8 @@ const messages = require("../../images/icons/messages.svg");
 const conversations = require("../../images/icons/conversations.svg");
 const exposure = require("../../images/icons/exposure.svg");
 const presentations = require("../../images/icons/presentations.svg");
+
+
 
 class MenuMobile extends React.Component {
 
@@ -51,8 +55,7 @@ class MenuMobile extends React.Component {
 
 	render() {
 		const { open } = this.state;
-
-
+		const t = this.props.t;
 
 		return (
 			<div className="menu-mobile">
@@ -68,14 +71,14 @@ class MenuMobile extends React.Component {
 					className={(open) ? "menu-mobile--item-container active" : "menu-mobile--item-container"}
 				>
 					<div className="icon-list">
-						<MenuItemMobile link='/desk' icon={desk} label='Лобби' onClose={this.onClose} />
-						<MenuItemMobile link='/scenes' icon={scenes} label='Сцены' onClose={this.onClose} />
-						<MenuItemMobile link='/networking' icon={networking} label='Нетворкинг' onClose={this.onClose} />
-						<MenuItemMobile link='/messages' icon={messages} label='Сообщения' onClose={this.onClose} />
+						<MenuItemMobile link='/desk' icon={desk} label={t('Лобби')} onClose={this.onClose} />
+						<MenuItemMobile link='/scenes' icon={scenes} label={t('Сцены')} onClose={this.onClose} />
+						<MenuItemMobile link='/networking' icon={networking} label={t('Нетворкинг')} onClose={this.onClose} />
+						<MenuItemMobile link='/messages' icon={messages} label={t('Сообщения')} onClose={this.onClose} />
 						<div className="icon-item"></div>
-						<MenuItemMobile link='/conversations' icon={conversations} label='Переговорки' onClose={this.onClose} />
-						<MenuItemMobile link='/exposure' icon={exposure} label='Партнеры' onClose={this.onClose} />
-						<MenuItemMobile link='/presentations/day1' icon={presentations} label='Презентации' onClose={this.onClose} />
+						<MenuItemMobile link='/conversations' icon={conversations} label={t('Переговорки')} onClose={this.onClose} />
+						<MenuItemMobile link='/exposure' icon={exposure} label={t('Партнеры')} onClose={this.onClose} />
+						<MenuItemMobile link='/presentations/day1' icon={presentations} label={t('Презентации')} onClose={this.onClose} />
 						<div className="icon-item" onClick={this.onClose} style={{ backgroundImage: `url(${closebtn})`, backgroundPosition: 'center' }}></div>
 
 					</div>
@@ -136,5 +139,6 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+	withTranslation(),
 	withApiService(),
 	connect(mapStateToProps, mapDispatchToProps))(MenuMobileContainer);
