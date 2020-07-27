@@ -10,194 +10,150 @@ import posed from "react-pose";
 import { isMobile } from "react-device-detect";
 
 class Networking extends React.Component {
-	state = {
-		searchText: "",
-		searchFilter: "",
-		lazyLoad: false,
-		superLazyLoad: false,
-		users: [],
-	};
+  state = {
+    searchText: "",
+    searchFilter: "",
+    lazyLoad: false,
+    superLazyLoad: false,
+    users: [],
+  };
 
-	searchSubmit = async (e) => {
-		this.setState({
-			searchFilter: this.state.searchText,
-		});
-		e.preventDefault();
-	};
+  searchSubmit = async (e) => {
+    this.setState({
+      searchFilter: this.state.searchText,
+    });
+    e.preventDefault();
+  };
 
-	componentDidMount() {
-		this.fetchData();
-		setTimeout(() => {
-			this.setState({
-				lazyLoad: true,
-			});
-		}, 500);
-		setTimeout(() => {
-			this.setState({
-				superLazyLoad: true,
-			});
-		}, 2000);
-	}
+  componentDidMount() {
+    this.fetchData();
+    setTimeout(() => {
+      this.setState({
+        lazyLoad: true,
+      });
+    }, 500);
+    setTimeout(() => {
+      this.setState({
+        superLazyLoad: true,
+      });
+    }, 2000);
+  }
 
-	fetchData = async () => {
-		api.account
-			.getNetworking()
-			.then((res) => {
-				res.users = res.users.map((user) => {
-					user.avatar = user.avatar || "";
-					user.company = user.company || "";
-					user.first_name = user.first_name || "";
-					user.last_name = user.last_name || "";
-					user.mail = user.mail || "";
-					user.phone = user.phone || "";
-					user.position = user.position || "";
-					user.range = user.range || "";
-					user.read = user.read || "";
-					user.social_site = user.social_site || "";
-					user.user_id = user.user_id || "";
-					user.what_looking = user.what_looking || "";
-					user.what_offer = user.what_offer || "";
+  fetchData = async () => {
+    api.account
+      .getNetworking()
+      .then((res) => {
+        res.users = res.users.map((user) => {
+          user.avatar = user.avatar || "";
+          user.company = user.company || "";
+          user.first_name = user.first_name || "";
+          user.last_name = user.last_name || "";
+          user.mail = user.mail || "";
+          user.phone = user.phone || "";
+          user.position = user.position || "";
+          user.range = user.range || "";
+          user.read = user.read || "";
+          user.social_site = user.social_site || "";
+          user.user_id = user.user_id || "";
+          user.what_looking = user.what_looking || "";
+          user.what_offer = user.what_offer || "";
 
-					return user;
-				});
+          return user;
+        });
 
-				this.setState({
-					users: res.users,
-				});
-			})
-			.catch((e) => console.log(e));
-	};
+        this.setState({
+          users: res.users,
+        });
+      })
+      .catch((e) => console.log(e));
+  };
 
-	filterUsers = () => {
-		return this.state.users.filter((user) => {
-			let userStr =
-				user.first_name +
-				" " +
-				user.last_name +
-				" " +
-				user.position +
-				" " +
-				user.company;
+  filterUsers = () => {
+    return this.state.users.filter((user) => {
+      let userStr = user.first_name + " " + user.last_name + " " + user.position + " " + user.company;
 
-			return ~userStr
-				.toLowerCase()
-				.indexOf(this.state.searchFilter.toLowerCase());
-		});
-	};
+      return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase());
+    });
+  };
 
-	render() {
-		const { users, searchText, searchFilter } = this.state;
-		const { data } = this.props.user;
+  render() {
+    const { users, searchText, searchFilter } = this.state;
+    const { data } = this.props.user;
 
-		const cards = this.filterUsers().map((user, index) => {
-			return (
-				<div className="card" key={index}>
-					<Link className="card-link2" to={"/messages/" + user.id}>
-						<div className="row">
-							<div className="col-4">
-								<div className="ava">
-									{user.avatar && (
-										<img
-											src={
-												api.auth.getAvatarLocation() +
-												user.avatar
-											}
-											alt=""
-										/>
-									)}
-									{!user.avatar && (
-										<img
-											src={require("../../images/default-avatar.svg")}
-											alt=""
-										/>
-									)}
-								</div>
-							</div>
+    const cards = this.filterUsers().map((user, index) => {
+      return (
+        <div className="card" key={index}>
+          <Link className="card-link2" to={"/messages/" + user.id}>
+            <div className="row">
+              <div className="col-4">
+                <div className="ava">
+                  {user.avatar && <img src={api.auth.getAvatarLocation() + user.avatar} alt="" />}
+                  {!user.avatar && <img src={require("../../images/default-avatar.svg")} alt="" />}
+                </div>
+              </div>
 
-							<div className="col d-flex justify-content-center flex-column">
-								<div className="name">
-									{user.first_name + " " + user.last_name}
-								</div>
-								<div className="desc">
-									{user.position + " в " + user.company}
-								</div>
-							</div>
-						</div>
-						{/* 
+              <div className="col d-flex justify-content-center flex-column">
+                <div className="name">{user.first_name + " " + user.last_name}</div>
+                <div className="desc">{user.position + " в " + user.company}</div>
+              </div>
+            </div>
+            {/* 
 						<div className="title">Что предлагаю:</div>
 						<div className="text">{user.what_offer}</div>
 						<div className="title mt-5">Что ищу:</div>
 						<div className="text">{user.what_looking}</div> */}
-					</Link>
-				</div>
-			);
-		});
+          </Link>
+        </div>
+      );
+    });
 
-		const search = (
-			<div className="search">
-				<form
-					method="post"
-					className="row m-0"
-					onSubmit={this.searchSubmit}>
-					<input
-						type="text"
-						className="inp-search col"
-						placeholder="Search"
-						onChange={(e) => {
-							this.setState({ searchText: e.target.value });
-						}}
-					/>
-					<input type="submit" value="" className="btn-search" />
-				</form>
-			</div>
-		);
+    const search = (
+      <div className="search">
+        <form method="post" className="row m-0" onSubmit={this.searchSubmit}>
+          <input
+            type="text"
+            className="inp-search col"
+            placeholder="Search"
+            onChange={(e) => {
+              this.setState({ searchText: e.target.value });
+            }}
+          />
+          <input type="submit" value="" className="btn-search" />
+        </form>
+      </div>
+    );
 
-		return (
-			<div id="networking">
-				{!isMobile && (
-					<Header data={data}>
-						{search}
+    return (
+      <div id="networking">
+        {!isMobile && <Header data={data}>{search}</Header>}
 
-						<div className="col d-flex align-items-center p-0">
-							<Link to="/messages/5" className="action-link">
-								Связь <br />с организаторами
-							</Link>
-						</div>
-					</Header>
-				)}
+        {isMobile && <>{search}</>}
 
-				{isMobile && <>{search}</>}
-
-				<div className="container">
-					<div className="card-list">
-						{cards.slice(0, 12)}
-						{this.state.lazyLoad &&
-							cards.slice(13, 13 + cards.length / 3)}
-						{this.state.superLazyLoad &&
-							cards.slice(13 + cards.length / 3, cards.length)}
-					</div>
-				</div>
-			</div>
-		);
-	}
+        <div className="container">
+          <div className="card-list">
+            {cards.slice(0, 12)}
+            {this.state.lazyLoad && cards.slice(13, 13 + cards.length / 3)}
+            {this.state.superLazyLoad && cards.slice(13 + cards.length / 3, cards.length)}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 class NetworkingContainer extends React.Component {
-	render() {
-		return <Networking {...this.props} />;
-	}
+  render() {
+    return <Networking {...this.props} />;
+  }
 }
 
 const mapStateToProps = ({ user }) => {
-	return {
-		user,
-	};
+  return {
+    user,
+  };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+  return {};
 };
 
-export default compose(
-	withApiService(),
-	connect(mapStateToProps, mapDispatchToProps)
-)(NetworkingContainer);
+export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(NetworkingContainer);

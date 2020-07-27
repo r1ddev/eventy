@@ -1,0 +1,32 @@
+#lang-checker{
+	height: 56px;
+	width: 300px;
+
+	@media screen and (max-width: 500px) {
+		width: auto;
+	}
+
+	.css-yk16xz-control {
+		background-color: unset;
+		color: white;
+	}
+
+	.css-1pahdxg-control{
+		background-color: rgba(0, 0,0, 0.1);
+		color: white;
+		border-color: #22d671;
+		box-shadow: 0 0 0 1px  #22d671;
+
+		&:hover{
+			border-color: #22d671;
+			box-shadow: 0 0 0 1px  #22d671;
+
+
+		}
+	}
+
+	.css-1uccc91-singleValue{
+		color: white;
+	}
+}
+
