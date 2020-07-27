@@ -1,64 +1,51 @@
-import React from 'react';
-import './scenes.css'
-import withApiService from '../../components/hoc/with-api-service'
-import { connect } from 'react-redux';
-import { compose } from '../../utils';
-import ScenesChat from './scenes-chat-container';
-import Stikers from '../../components/stikers';
-import { fetchScenes } from '../../actions/scenes-actions';
-import { fetchUser } from '../../actions/user-actions';
+import React from "react";
+import "./scenes.css";
+import withApiService from "../../components/hoc/with-api-service";
+import { connect } from "react-redux";
+import { compose } from "../../utils";
+import ScenesChat from "./scenes-chat-container";
+import Stikers from "../../components/stikers";
+import { fetchScenes } from "../../actions/scenes-actions";
+import { fetchUser } from "../../actions/user-actions";
 
-import { setVideoFrameVisible } from '../../actions/floatvideo-actions';
-import { setVideoFixed } from '../../actions/floatvideo-actions';
-import { setVideoFloated } from '../../actions/floatvideo-actions';
-import { setCurrentSceneUrl } from '../../actions/floatvideo-actions';
+import { setVideoFrameVisible } from "../../actions/floatvideo-actions";
+import { setVideoFixed } from "../../actions/floatvideo-actions";
+import { setVideoFloated } from "../../actions/floatvideo-actions";
+import { setCurrentSceneUrl } from "../../actions/floatvideo-actions";
 
-
-
-import Spinner from '../../components/spinner';
-import { Link } from 'react-router-dom';
-import api from './../../js/api';
-import Header from '../../components/header/header';
-import { isMobile } from 'react-device-detect';
-import ScenesMobile from '../scenes-mobile';
-
+import Spinner from "../../components/spinner";
+import { Link } from "react-router-dom";
+import api from "./../../js/api";
+import Header from "../../components/header/header";
+import { isMobile } from "react-device-detect";
+import ScenesMobile from "../scenes-mobile";
 
 class Scenes extends React.Component {
+  componentDidMount() {
+    this.props.setCurrentSceneUrl(this.props.sceneUrl);
+  }
 
-    componentDidMount() {
-        this.props.setCurrentSceneUrl(this.props.sceneUrl);
-    }
+  render() {
+    const { sceneUrl, scene, lang, setLang, setScene, scenes, user } = this.props;
 
-    render() {
+    const { generalChatId, sponsorChatId, spikerChatId } = scenes[scene] || {
+      generalChatId: 0,
+      sponsorChatId: 0,
+      spikerChatId: 0,
+    };
 
-        const {
-            sceneUrl,
-            scene,
-            lang,
-            setLang,
-            setScene,
-            scenes,
-            user
-        } = this.props;
+    let origin = api.origin;
+    let newAvatar = origin + "/images/avatar/" + user.avatar;
 
-        const { generalChatId, sponsorChatId, spikerChatId } = scenes[scene] || {
-            generalChatId: 0,
-            sponsorChatId: 0,
-            spikerChatId: 0
-        }
+    console.log(user);
 
-        let origin = api.origin;
-        let newAvatar = origin + "/images/avatar/" + user.avatar;
-
-        console.log(user);
-
-        return (
-            <div id="scenes">
-                <div className="scenes-translation">
-                    <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} />
-                    <div className="translation-content">
-                        <div className="video-container">
-                            {/* <iframe
+    return (
+      <div id="scenes">
+        <div className="scenes-translation">
+          <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} />
+          <div className="translation-content">
+            <div className="video-container">
+              {/* <iframe
                                 title="translation"
                                 src={sceneUrl}
                                 width="640"
@@ -68,59 +55,53 @@ class Scenes extends React.Component {
                                 mozallowfullscreen="1"
                                 allowFullScreen="1">
                             </iframe> */}
-                        </div>
-                    </div>
-                    <div className="translation-footer">
-                        <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
-                    </div>
-                </div>
-                <div className="scenes-chat">
-                    <div className="chat-header">
-
-                        <Header data={user}>
-                            <></>
-                            <div className="col d-flex align-items-center p-0">
-                                <Link to="/messages/5" className="action-link">
-                                    Связь <br />с организаторами
-                            </Link>
-                            </div>
-                        </Header>
-                        {/* <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link> */}
-                    </div>
-                    <div className="chat-content">
-                        <ScenesChat
-                            sponsorChatId={sponsorChatId}
-                            generalChatId={generalChatId}
-                            spikerChatId={spikerChatId}
-                            user={user}
-                        />
-                    </div>
-                </div>
-            </div >
-        )
-    }
-
+            </div>
+          </div>
+          <div className="translation-footer">
+            <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
+          </div>
+        </div>
+        <div className="scenes-chat">
+          <div className="chat-header">
+            <Header data={user}>
+              <></>
+            </Header>
+            {/* <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link> */}
+          </div>
+          <div className="chat-content">
+            <ScenesChat
+              sponsorChatId={sponsorChatId}
+              generalChatId={generalChatId}
+              spikerChatId={spikerChatId}
+              user={user}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 class TranslationHeader extends React.Component {
+  render() {
+    const { setScene, scene, scenes } = this.props;
 
+    console.log(scenes);
 
-    render() {
-        const { setScene, scene, scenes } = this.props;
+    return (
+      <div className="translation-header">
+        <div className="scene-item">
+          <div>
+            <div className={scene === 0 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(0)}>
+              СЦЕНА 1
+            </div>
+            <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
+              идет
+            </div>
+          </div>
+        </div>
 
-        console.log(scenes);
-
-        return (
-            <div className="translation-header">
-
-                <div className="scene-item">
-                    <div>
-                        <div className={(scene === 0) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(0)}>СЦЕНА 1</div>
-                        <div className="scene-status" style={{ visibility: (scenes[0].status ? 'visible' : 'hidden') }}>идет</div>
-                    </div>
-                </div>
-
-                {/* <div className="scene-item">
+        {/* <div className="scene-item">
                     <div>
                         <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
                         <div className="scene-status" style={{ visibility: (scenes[1].status ? 'visible' : 'hidden') }}>идет</div>
@@ -133,131 +114,113 @@ class TranslationHeader extends React.Component {
                         <div className="scene-status" style={{ visibility: (scenes[2].status ? 'visible' : 'hidden') }}>идет</div>
                     </div>
                 </div> */}
-
-            </div>
-        )
-    }
-
+      </div>
+    );
+  }
 }
 
 class ScenesContainer extends React.Component {
+  state = {
+    scene: 0,
+    lang: "rus",
+  };
 
-    state = {
-        scene: 0,
-        lang: 'rus'
-    }
+  timerId = null;
 
-    timerId = null
+  setScene = (scene) => {
+    const { lang } = this.state;
 
-    setScene = (scene) => {
+    this.setState({
+      scene: scene,
+      lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
+    });
+  };
 
-        const { lang } = this.state
+  setLang = (lang) => {
+    const { scene } = this.state;
 
-        this.setState({
-            scene: scene,
-            lang: (this.props.scenes.scenes[scene][lang]) ? lang : 'rus'
-        })
+    this.setState({
+      lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
+    });
+  };
 
+  componentDidMount() {
+    this.getScenes();
+    this.props.fetchUser();
+    this.props.setVideoFrameVisible();
+    this.props.setVideoFixed();
+  }
 
-    }
+  getScenes = () => {
+    this.props.fetchScenes();
 
-    setLang = (lang) => {
+    this.timerId = setTimeout(() => {
+      this.getScenes();
+    }, this.props.timers.sceneTime);
+  };
 
-        const { scene } = this.state
+  componentWillUnmount() {
+    clearTimeout(this.timerId);
+    this.props.setVideoFloated();
+  }
 
-        this.setState({
-            lang: this.props.scenes.scenes[scene][lang] ? lang : 'rus'
-        })
-    }
+  render() {
+    const { scenes } = this.props.scenes;
+    const { scene, lang } = this.state;
+    const { user } = this.props.user;
+    const scenesLoading = this.props.scenes.loading;
+    const userLoading = this.props.user.loading;
 
-    componentDidMount() {
-        this.getScenes();
-        this.props.fetchUser();
-        this.props.setVideoFrameVisible();
-        this.props.setVideoFixed();
-    }
+    const loading = userLoading || scenes.length === 0;
 
-    getScenes = () => {
-        this.props.fetchScenes();
-
-        this.timerId = setTimeout(() => {
-            this.getScenes()
-        }, this.props.timers.sceneTime)
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.timerId);
-        this.props.setVideoFloated();
-
-    }
-
-    render() {
-        const { scenes } = this.props.scenes
-        const { scene, lang } = this.state;
-        const { user } = this.props.user
-        const scenesLoading = this.props.scenes.loading;
-        const userLoading = this.props.user.loading;
-
-
-        const loading = ((userLoading) || scenes.length === 0)
-
-        return (
-            <div style={{ height: '100%', width: '100%' }}>
-                {
-                    (!loading && !isMobile) && <Scenes
-                        sceneUrl={scenes[scene][lang]}
-                        scenes={scenes}
-                        scene={scene}
-                        lang={lang}
-                        setLang={this.setLang}
-                        setScene={this.setScene}
-                        user={user}
-                        setCurrentSceneUrl={this.props.setCurrentSceneUrl}
-
-                    />
-                }
-                {
-                    (!loading && isMobile) && <ScenesMobile
-                        sceneUrl={scenes[scene][lang]}
-                        scenes={scenes}
-                        scene={scene}
-                        lang={lang}
-                        setLang={this.setLang}
-                        setScene={this.setScene}
-                        user={user}
-                    />
-                }
-                {
-                    (loading) && <Spinner big={1} />
-                }
-            </div>
-        )
-    }
-
+    return (
+      <div style={{ height: "100%", width: "100%" }}>
+        {!loading && !isMobile && (
+          <Scenes
+            sceneUrl={scenes[scene][lang]}
+            scenes={scenes}
+            scene={scene}
+            lang={lang}
+            setLang={this.setLang}
+            setScene={this.setScene}
+            user={user}
+            setCurrentSceneUrl={this.props.setCurrentSceneUrl}
+          />
+        )}
+        {!loading && isMobile && (
+          <ScenesMobile
+            sceneUrl={scenes[scene][lang]}
+            scenes={scenes}
+            scene={scene}
+            lang={lang}
+            setLang={this.setLang}
+            setScene={this.setScene}
+            user={user}
+          />
+        )}
+        {loading && <Spinner big={1} />}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ scenes, user, timers }) => {
-    return {
-        scenes: scenes,
-        user: user,
-        timers: timers,
-    }
+  return {
+    scenes: scenes,
+    user: user,
+    timers: timers,
+  };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-    return {
-        fetchScenes: fetchScenes(apiService, dispatch),
-        fetchUser: fetchUser(apiService, dispatch),
-        setVideoFrameVisible: () => dispatch(setVideoFrameVisible()),
-        setVideoFixed: () => dispatch(setVideoFixed()),
-        setVideoFloated: () => dispatch(setVideoFloated()),
-        setCurrentSceneUrl: (url) => dispatch(setCurrentSceneUrl(url)),
-
-
-
-    }
+  return {
+    fetchScenes: fetchScenes(apiService, dispatch),
+    fetchUser: fetchUser(apiService, dispatch),
+    setVideoFrameVisible: () => dispatch(setVideoFrameVisible()),
+    setVideoFixed: () => dispatch(setVideoFixed()),
+    setVideoFloated: () => dispatch(setVideoFloated()),
+    setCurrentSceneUrl: (url) => dispatch(setCurrentSceneUrl(url)),
+  };
 };
 
-export default compose(
-    withApiService(),
-    connect(mapStateToProps, mapDispatchToProps))(ScenesContainer);
+export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(ScenesContainer);
