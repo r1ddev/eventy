@@ -47,6 +47,8 @@ i18n.use(LanguageDetector).init({
 
         "Открытые комнаты": "Открытые комнаты",
         человек: "человек",
+
+        в: "в",
       },
     },
     en: {
@@ -92,6 +94,8 @@ i18n.use(LanguageDetector).init({
 
         "Открытые комнаты": "Open rooms",
         человек: "people",
+
+        в: "in",
       },
     },
   },

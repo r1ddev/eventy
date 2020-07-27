@@ -8,6 +8,8 @@ import api from "./../../js/api";
 import Header from "./../../components/header/index";
 import posed from "react-pose";
 import { isMobile } from "react-device-detect";
+import { withTranslation } from "react-i18next";
+import Translit from "../../components/translit";
 
 class Networking extends React.Component {
   state = {
@@ -79,6 +81,7 @@ class Networking extends React.Component {
   render() {
     const { users, searchText, searchFilter } = this.state;
     const { data } = this.props.user;
+    const t = this.props.t;
 
     const cards = this.filterUsers().map((user, index) => {
       return (
@@ -93,8 +96,10 @@ class Networking extends React.Component {
               </div>
 
               <div className="col d-flex justify-content-center flex-column">
-                <div className="name">{user.first_name + " " + user.last_name}</div>
-                <div className="desc">{user.position + " в " + user.company}</div>
+                <div className="name">
+                  <Translit value={user.first_name + " " + user.last_name} />
+                </div>
+                <div className="desc">{user.position + " " + t("в") + " " + user.company}</div>
               </div>
             </div>
             {/* 
@@ -156,4 +161,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   return {};
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(NetworkingContainer);
+export default compose(
+  withTranslation(),
+  withApiService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(NetworkingContainer);
