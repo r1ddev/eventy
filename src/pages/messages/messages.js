@@ -345,6 +345,8 @@ class MessagesContainer extends React.Component {
       users.push(this.state.newUser);
     }
 
+    const t = this.props.t;
+
     return (
       <>
         {isMobile && (
