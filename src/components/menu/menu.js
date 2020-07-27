@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "../../utils";
 import { fetchUser } from '../../actions/user-actions';
 import IdeaFirstApiService from "../../services/idea-first-api-service";
+import { withTranslation } from "react-i18next";
 
 class Menu extends React.Component {
 
@@ -27,7 +28,8 @@ class Menu extends React.Component {
 		const { range, notifications } = this.props;
 
 		const { newMessages, newVipMessages } = notifications;
-		console.log(this.props)
+		const t = this.props.t;
+
 
 
 
@@ -36,13 +38,13 @@ class Menu extends React.Component {
 				<div className="flex-center" style={{ padding: "20px" }}>
 					<img alt="" src={logo} />
 				</div>
-				<MenuItem icon={desk} label="Лобби" link="/desk"></MenuItem>
-				<MenuItem icon={scenes} label="Сцены" link="/scenes"></MenuItem>
-				<MenuItem icon={networking} label="Нетворкинг" link="/networking"></MenuItem>
-				<MenuItem icon={messages} label="Cообщения" link="/messages" notifications={newMessages}></MenuItem>
-				<MenuItem icon={conversations} label="Переговорки" link="/conversations"></MenuItem>
-				<MenuItem icon={exposure} label="Партнеры" link="/exposure"></MenuItem>
-				<MenuItem icon={presentations} label="Презентации" link="/presentations/day1"></MenuItem>
+				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
+				<MenuItem icon={scenes} label={t("Сцены")} link="/scenes"></MenuItem>
+				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>
+				<MenuItem icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
+				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
+				<MenuItem icon={exposure} label={t("Партнеры")} link="/exposure"></MenuItem>
+				<MenuItem icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
 
 
 			</div>
@@ -109,5 +111,6 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+	withTranslation(),
 	withApiService(),
 	connect(mapStateToProps, mapDispatchToProps))(MenuContainer);
