@@ -3,85 +3,73 @@ import "./lang-checker.scss";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { compose } from "../../utils";
-import Select from 'react-select'
+import Select from "react-select";
 import i18n from "../../utils/i18n";
 
 const colourStyles = {
-	option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-		const color = '#22d671';
-		return {
-			...styles,
-			backgroundColor: isDisabled
-				? null
-				: isSelected
-					? '#22d6718a'
-					: isFocused
-						? color
-						: null,
-			color: isDisabled
-				? '#ccc'
-				: isSelected
-					? color
-						? 'black'
-						: 'black'
-					: data.color,
-			cursor: isDisabled ? 'not-allowed' : 'default',
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    const color = "#22d671";
+    return {
+      ...styles,
+      backgroundColor: isDisabled ? null : isSelected ? "#22d6718a" : isFocused ? color : null,
+      color: isDisabled ? "#ccc" : isSelected ? (color ? "black" : "black") : data.color,
+      cursor: isDisabled ? "not-allowed" : "default",
 
-			':active': {
-				...styles[':active'],
-				backgroundColor: !isDisabled && (isSelected ? data.color : color)
-			},
-		};
-	},
-
+      ":active": {
+        ...styles[":active"],
+        backgroundColor: !isDisabled && (isSelected ? data.color : color),
+      },
+    };
+  },
 };
 
 class LangChecker extends React.Component {
+  state = {
+    lang: "EN",
+  };
 
-	state = {
-		lang: 'EN',
+  options = [
+    { value: "EN", label: "English" },
+    { value: "RU", label: "Русский" },
+  ];
 
-	}
+  onChangeLang = (e) => {
+    this.setState({ lang: e.value });
+    this.setLang(e.value);
+  };
 
-	options = [
-		{ value: 'EN', label: 'Английский' },
-		{ value: 'RU', label: 'Русский' },
+  setLang = (lang) => {
+    i18next.changeLanguage(lang);
+  };
 
-	]
+  componentDidMount() {
+    console.log("i18n.language", i18n.language);
+    if (~i18n.language.indexOf("EN")) {
+      this.setState({
+        lang: "EN",
+      });
+    } else {
+      this.setState({
+        lang: "RU",
+      });
+    }
+  }
 
-	onChangeLang = (e) => {
-		this.setState({ lang: e.value });
-	}
+  render() {
+    const { lang } = this.state;
+    console.log("lang", lang);
+    console.log("this.options", this.options);
 
-	componentDidMount() {
-		if (i18n.language.indexOf('EN') !== -1) {
-			this.setState({
-				lang: 'EN'
-			})
-		} else {
-			this.setState({
-				lang: 'RU'
-			})
-		}
-	}
+    const def = lang == "EN" ? this.options[0] : this.options[1];
 
-	render() {
-		const { lang } = this.state;
-		console.log(lang)
+    console.log("def", def);
 
-		return (
-			<div id="lang-checker">
-				<Select
-					options={this.options}
-					styles={colourStyles}
-					onChange={this.onChangeLang}
-					defaultValue={(lang == 'EN') ? this.options[0] : this.options[1]} />
-			</div>
-		);
-	}
+    return (
+      <div id="lang-checker">
+        <Select options={this.options} styles={colourStyles} onChange={this.onChangeLang} defaultValue={def} />
+      </div>
+    );
+  }
 }
 
-
-export default compose(
-	withTranslation(),
-)(LangChecker);
+export default compose(withTranslation())(LangChecker);
