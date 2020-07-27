@@ -25,12 +25,12 @@ const colourStyles = {
 
 class LangChecker extends React.Component {
   state = {
-    lang: "EN",
+    lang: "en",
   };
 
   options = [
-    { value: "EN", label: "English" },
-    { value: "RU", label: "Русский" },
+    { value: "en", label: "English" },
+    { value: "ru", label: "Русский" },
   ];
 
   onChangeLang = (e) => {
@@ -44,29 +44,24 @@ class LangChecker extends React.Component {
 
   componentDidMount() {
     console.log("i18n.language", i18n.language);
-    if (~i18n.language.indexOf("EN")) {
+    if (~i18n.language.indexOf("en")) {
       this.setState({
-        lang: "EN",
+        lang: "en",
       });
     } else {
       this.setState({
-        lang: "RU",
+        lang: "ru",
       });
     }
   }
 
   render() {
     const { lang } = this.state;
-    console.log("lang", lang);
-    console.log("this.options", this.options);
-
-    const def = lang == "EN" ? this.options[0] : this.options[1];
-
-    console.log("def", def);
+    const def = lang == "en" ? this.options[0] : this.options[1];
 
     return (
       <div id="lang-checker">
-        <Select options={this.options} styles={colourStyles} onChange={this.onChangeLang} defaultValue={def} />
+        <Select options={this.options} styles={colourStyles} onChange={this.onChangeLang} value={def} />
       </div>
     );
   }
