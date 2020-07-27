@@ -12,7 +12,9 @@ import { isMobile } from "react-device-detect";
 import { fetchUser } from "../../actions/user-actions";
 import { conversationRoomsLoading, conversationRoomsLoaded } from "../../actions/conversations-actions";
 
-const Room = ({ name, currentPeople, maxPeople }) => {
+import { withTranslation } from "react-i18next";
+
+const Room = ({ t, name, currentPeople, maxPeople }) => {
   return (
     <div className="row room">
       <div className="col-auto">
@@ -21,7 +23,7 @@ const Room = ({ name, currentPeople, maxPeople }) => {
       <div className="col-lg name">{name}</div>
       <div className="col-auto">
         <div className={"space" + (currentPeople == maxPeople ? " full" : "")}>
-          {currentPeople + "/" + maxPeople} человек
+          {currentPeople + "/" + maxPeople} {t("человек")}
         </div>
       </div>
     </div>
@@ -31,6 +33,7 @@ const Room = ({ name, currentPeople, maxPeople }) => {
 class Сonversations extends React.Component {
   render() {
     const { data } = this.props.user;
+    const t = this.props.t;
 
     return (
       <div id="conversations">
@@ -41,7 +44,7 @@ class Сonversations extends React.Component {
         )}
 
         <div className="container">
-          <div className="title">Открытые комнаты:</div>
+          <div className="title">{t("Открытые комнаты")}:</div>
 
           <div className="room-list pb-4">
             {this.props.rooms.map((room, index) => {
@@ -49,7 +52,7 @@ class Сonversations extends React.Component {
                 <div key={index}>
                   {room.current_people < room.max_people && (
                     <Link to={"/conversations/" + room.room_id} className="link">
-                      <Room name={room.name} currentPeople={room.current_people} maxPeople={room.max_people} />
+                      <Room t={t} name={room.name} currentPeople={room.current_people} maxPeople={room.max_people} />
                     </Link>
                   )}
 
@@ -58,20 +61,6 @@ class Сonversations extends React.Component {
                       <Room name={room.name} currentPeople={room.current_people} maxPeople={room.max_people} />
                     </div>
                   )}
-
-                  {/* <RenderIsFull current={25} max={25} /> */}
-
-                  {/* {room.current_people == room.max_people && (
-										<div className="link" key={index}>
-									)} */}
-
-                  {/* {room.current_people < room.max_people && (
-										</Link>
-									)}
-
-									{room.current_people == room.max_people && (
-										</div>
-									)} */}
                 </div>
               );
             })}
@@ -126,4 +115,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   };
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(СonversationsContainer);
+export default compose(
+  withTranslation(),
+  withApiService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(СonversationsContainer);

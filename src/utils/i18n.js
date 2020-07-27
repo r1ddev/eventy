@@ -44,6 +44,9 @@ i18n.use(LanguageDetector).init({
           "Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться",
 
         "Связь с организаторами": `Связь <br />с организаторами`,
+
+        "Открытые комнаты": "Открытые комнаты",
+        человек: "человек",
       },
     },
     en: {
@@ -86,6 +89,9 @@ i18n.use(LanguageDetector).init({
           "Go to Networking and select a person to start chatting with",
 
         "Связь с организаторами": `Contact <br />with organizers`,
+
+        "Открытые комнаты": "Open rooms",
+        человек: "people",
       },
     },
   },
