@@ -3,11 +3,13 @@ import "./header.scss";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
 
+import { Trans, withTranslation } from "react-i18next";
+
 class Header extends React.Component {
   state = {};
 
   render() {
-    const { data, className } = this.props;
+    const { data, className, t } = this.props;
 
     let userAvatar = require("../../images/default-avatar.svg");
     if (data) {
@@ -25,7 +27,7 @@ class Header extends React.Component {
             <div className="col-md-auto profile row m-0">
               <div className="col d-flex align-items-center p-0">
                 <Link to="/messages/5" className="action-link">
-                  Связь <br />с организаторами
+                  <Trans t={t}>Связь с организаторами</Trans>
                 </Link>
               </div>
               <div className="col-auto ava">
@@ -41,4 +43,6 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withTranslation()(Header);
+
+// export default Header;
