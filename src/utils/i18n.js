@@ -39,6 +39,9 @@ i18n.use(LanguageDetector).init({
         "Хочу ли я делиться контактами?": "Хочу ли я делиться контактами?",
         "Изменить профиль": "Изменить профиль",
         "Добро пожаловать на digital Stand-up Smit.Studio": `Добро пожаловать на <br />digital Stand-up Smit.Studio`,
+
+        "Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться":
+          "Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться",
       },
     },
     en: {
@@ -76,6 +79,9 @@ i18n.use(LanguageDetector).init({
         "Хочу ли я делиться контактами?": "Do I want to share my contacts?",
         "Изменить профиль": "Change profile",
         "Добро пожаловать на digital Stand-up Smit.Studio": `Welcome to <br />digital Stand-up Smit.Studio`,
+
+        "Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться":
+          "Go to Networking and select a person to start chatting with",
       },
     },
   },

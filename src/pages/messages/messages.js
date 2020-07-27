@@ -16,6 +16,8 @@ import CryptoJS from "crypto-js";
 import MessagesMobile from "../../components/messages-mobile";
 import DialogMobile from "../dialog-mobile/dialog-mobile";
 
+import { withTranslation } from "react-i18next";
+
 class Messages extends React.Component {
   scrollToBottom = (upd = true) => {
     this.refs.scenesChat.onUpdate(true);
@@ -32,6 +34,7 @@ class Messages extends React.Component {
       onIdle,
       setUser,
       sendMessage,
+      t,
     } = this.props;
 
     var isChatAvailable = Object.entries(activeUser).length > 0;
@@ -99,7 +102,7 @@ class Messages extends React.Component {
                     )}
                     {!isChatAvailable && (
                       <div className="flex-center h-100 text-black-50 text-center">
-                        Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться
+                        {t("Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться")}
                       </div>
                     )}
                   </div>
@@ -122,7 +125,7 @@ class Messages extends React.Component {
 
                     {isContactAvailable && (
                       <div className="card card-contacts flex-center p-4 px-5 mt-3">
-                        <div className="title">Контакты:</div>
+                        <div className="title">{t("Контакты")}:</div>
                         <div className="desc">{activeUser.mail}</div>
                         <div className="desc">{activeUser.phone}</div>
                         <div className="desc">{activeUser.social_site}</div>
@@ -355,7 +358,9 @@ class MessagesContainer extends React.Component {
                 sendMessage={this.sendMessage}
               />
             )}
-            {!this.props.match.params.id && <MessagesMobile ref="messages" users={users} setUser={this.setUser} />}
+            {!this.props.match.params.id && (
+              <MessagesMobile ref="messages" users={users} setUser={this.setUser} t={t} />
+            )}
           </>
         )}
         {!isMobile && (
@@ -387,4 +392,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   };
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(MessagesContainer);
+export default compose(
+  withTranslation(),
+  withApiService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(MessagesContainer);
