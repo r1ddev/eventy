@@ -218,10 +218,10 @@ class EditProfile extends React.Component {
                       />
                     </div>
 
-                    <div className="field mt-4">
+                    <div className="field">
                       <div className="row">
-                        <div className="col d-flex align-items-center">{t("Хочу ли я делиться контактами?")}</div>
-                        <div className="col-auto">
+                        <div className="col-lg d-flex align-items-center mt-4">{t("Хочу ли я делиться контактами?")}</div>
+                        <div className="col-lg-auto mt-lg-4 mt-2">
                           <div className="row">
                             <div className="col">
                               <div
@@ -247,7 +247,7 @@ class EditProfile extends React.Component {
                             </div>
                           </div>
                         </div>
-                        <div className="col">
+                        <div className="col-lg mt-4">
                           <LangChecker type={'mini'} />
                         </div>
                       </div>
