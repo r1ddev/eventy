@@ -31,9 +31,7 @@ class Desk extends React.Component {
                     <div className="lobby-text">
                         {/* {t(`Добро пожаловать на digital Stand-up Smit.Studio`)} */}
                         <Trans t={t}>Добро пожаловать на digital Stand-up Smit.Studio</Trans>
-                        <div className='lobby-lang-checker'>
-                            <LangChecker />
-                        </div>
+
                     </div>
 
                     {/* <div className="first-svg">
