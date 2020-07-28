@@ -19,13 +19,15 @@ class ScenesChatMobileContainer extends React.Component {
     }
 
     setChat = (chat) => {
-        console.log(chat)
+
+        const cashChat = chat === this.state.activeChat;
+
         this.setState({
             activeChat: chat,
             survey: false,
             currentChatId: (chat === 'general' ? this.state.generalChatId : this.state.spikerChatId)
         }, () => {
-            this.props.fetchMessages(this.state.currentChatId)
+            if (!cashChat) this.props.fetchMessages(this.state.currentChatId)
         })
     }
 
@@ -61,7 +63,7 @@ class ScenesChatMobileContainer extends React.Component {
         },
             () => {
 
-                setTimeout(this.props.fetchMessages(this.state.currentChatId), 500);
+                setTimeout(this.props.fetchMessages(this.state.currentChatId), 1000);
                 this.updateMessages();
             }
         )
