@@ -137,7 +137,7 @@ class Registration extends React.Component {
 
                 {!isLoading && (
                   <div className="col-md-7 right p-5">
-                    <div className="title">{position + " в " + company}</div>
+                    <div className="title">{position + " " + t("в") + " " + company}</div>
                     <div className="title mt-2">{t("Контакты")}:</div>
                     <div className="text">{email}</div>
                     <div className="text">{phone}</div>

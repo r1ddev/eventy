@@ -230,7 +230,7 @@ class EditProfile extends React.Component {
                                     shareContact: true,
                                   });
                                 }}>
-                                да
+                                {t("да")}
                               </div>
                             </div>
                             <div className="col">
@@ -241,7 +241,7 @@ class EditProfile extends React.Component {
                                     shareContact: false,
                                   });
                                 }}>
-                                нет
+                                {t("нет")}
                               </div>
                             </div>
                           </div>

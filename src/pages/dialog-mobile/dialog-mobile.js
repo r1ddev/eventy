@@ -10,7 +10,7 @@ class DialogMobile extends React.Component {
     this.refs.scenesChat.onUpdate(force);
   };
   render() {
-    const { activeUser, messages, loading, sendMessage } = this.props;
+    const { activeUser, messages, loading, sendMessage, t } = this.props;
     const userIsLoaded = Object.entries(activeUser).length > 0;
 
     return (
@@ -39,6 +39,7 @@ class DialogMobile extends React.Component {
           </div>
         </div>
         <ScenesChat
+          t={t}
           loading={loading}
           messages={messages}
           sendMessage={sendMessage}
