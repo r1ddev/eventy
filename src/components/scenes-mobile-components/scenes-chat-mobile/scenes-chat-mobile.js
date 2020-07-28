@@ -44,9 +44,7 @@ class ScenesChatMobile extends React.Component {
   render() {
 
     const { isOpen, activeInput } = this.state;
-    const { loading, messages, setItem, sendMessage, survey } = this.props;
-
-    console.log(messages)
+    const { loading, messages, setItem, sendMessage, survey, t } = this.props;
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
@@ -61,6 +59,7 @@ class ScenesChatMobile extends React.Component {
               onClose={this.onClose}
               isVisible={!activeInput}
               onChangeItem={setItem}
+              t={t}
             />
 
             {(isOpen && !loading && !survey) &&
@@ -76,6 +75,7 @@ class ScenesChatMobile extends React.Component {
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
               sendMessage={sendMessage}
+              t={t}
             />}
 
             {<div style={(activeInput) ? { flexGrow: 1, transition: '10ms' } : { flexGrow: 0, height: 0, transition: '10ms' }}></div>}
@@ -89,6 +89,7 @@ class ScenesChatMobile extends React.Component {
               onClose={this.onClose}
               isVisible={true}
               onChangeItem={setItem}
+              t={t}
             />
 
             {(isOpen && !loading && !survey) &&
@@ -101,7 +102,9 @@ class ScenesChatMobile extends React.Component {
               isVisible={isOpen}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
-              sendMessage={sendMessage} />}
+              sendMessage={sendMessage}
+              t={t}
+            />}
           </div >
         }
       </>
@@ -252,7 +255,7 @@ class MessageInput extends React.Component {
 
   render() {
 
-    const { isVisible } = this.props;
+    const { isVisible, t } = this.props;
     const { messageText } = this.state;
 
     return (
@@ -266,7 +269,7 @@ class MessageInput extends React.Component {
           value={messageText}
           onChange={this.onChangeMessage}
           className="message-input"
-          placeholder="Введите сообщение">
+          placeholder={t("Введите сообщение")}>
         </input>
         <button onClick={this.onSend} className="send-btn"></button>
       </div >
@@ -329,7 +332,7 @@ class CheckChatPanel extends React.Component {
   render() {
 
     const { isOpen, activeItem, itemList } = this.state;
-    const { isVisible } = this.props;
+    const { isVisible, t } = this.props;
 
 
     return (
@@ -339,20 +342,20 @@ class CheckChatPanel extends React.Component {
           className={(activeItem === itemList[0]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[0])}
         >
-          Опросы
+          {t('Опросы')}
         </div>   {/*active - активная вкладка */}
 
         <div
           className={(activeItem === itemList[1]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[1])}
         >
-          Чат со спикером
+          {t('Чат со спикером')}
         </div>
 
         <div className={(activeItem === itemList[2]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[2])}
         >
-          Чат
+          {t('Чат')}
         </div>
 
         <div

@@ -7,6 +7,7 @@ import ScenesChat from "./scenes-chat-container";
 import Stikers from "../../components/stikers";
 import { fetchScenes } from "../../actions/scenes-actions";
 import { fetchUser } from "../../actions/user-actions";
+import { withTranslation } from "react-i18next";
 
 import { setVideoFrameVisible } from "../../actions/floatvideo-actions";
 import { setVideoFixed } from "../../actions/floatvideo-actions";
@@ -14,11 +15,11 @@ import { setVideoFloated } from "../../actions/floatvideo-actions";
 import { setCurrentSceneUrl } from "../../actions/floatvideo-actions";
 
 import Spinner from "../../components/spinner";
-import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import Header from "../../components/header/header";
 import { isMobile } from "react-device-detect";
 import ScenesMobile from "../scenes-mobile";
+
 
 class Scenes extends React.Component {
   componentDidMount() {
@@ -26,7 +27,7 @@ class Scenes extends React.Component {
   }
 
   render() {
-    const { sceneUrl, scene, lang, setLang, setScene, scenes, user } = this.props;
+    const { sceneUrl, scene, lang, setLang, setScene, scenes, user, t } = this.props;
 
     const { generalChatId, sponsorChatId, spikerChatId } = scenes[scene] || {
       generalChatId: 0,
@@ -42,7 +43,7 @@ class Scenes extends React.Component {
     return (
       <div id="scenes">
         <div className="scenes-translation">
-          <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} />
+          <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} t={t} />
           <div className="translation-content">
             <div className="video-container">
               {/* <iframe
@@ -63,7 +64,7 @@ class Scenes extends React.Component {
         </div>
         <div className="scenes-chat">
           <div className="chat-header">
-            <Header data={user}>
+            <Header data={user} >
               <></>
             </Header>
             {/* <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link> */}
@@ -84,19 +85,17 @@ class Scenes extends React.Component {
 
 class TranslationHeader extends React.Component {
   render() {
-    const { setScene, scene, scenes } = this.props;
-
-    console.log(scenes);
+    const { setScene, scene, scenes, t } = this.props;
 
     return (
       <div className="translation-header">
         <div className="scene-item">
           <div>
             <div className={scene === 0 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(0)}>
-              СЦЕНА 1
+              {t('СЦЕНА') + ' 1'}
             </div>
             <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
-              идет
+              {t('Идет')}
             </div>
           </div>
         </div>
@@ -170,6 +169,8 @@ class ScenesContainer extends React.Component {
     const { user } = this.props.user;
     const scenesLoading = this.props.scenes.loading;
     const userLoading = this.props.user.loading;
+    const t = this.props.t;
+
 
     const loading = userLoading || scenes.length === 0;
 
@@ -184,6 +185,7 @@ class ScenesContainer extends React.Component {
             setLang={this.setLang}
             setScene={this.setScene}
             user={user}
+            t={t}
             setCurrentSceneUrl={this.props.setCurrentSceneUrl}
           />
         )}
@@ -196,6 +198,7 @@ class ScenesContainer extends React.Component {
             setLang={this.setLang}
             setScene={this.setScene}
             user={user}
+            t={t}
           />
         )}
         {loading && <Spinner big={1} />}
@@ -223,4 +226,4 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   };
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(ScenesContainer);
+export default compose(withTranslation(), withApiService(), connect(mapStateToProps, mapDispatchToProps))(ScenesContainer);

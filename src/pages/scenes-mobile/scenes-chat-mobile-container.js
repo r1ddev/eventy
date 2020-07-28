@@ -3,10 +3,8 @@ import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
-import ScenesChat from '../../components/scenes-chat';
 
 import ScenesChatMobile from '../../components/scenes-mobile-components/scenes-chat-mobile';
-import { ThemeConsumer } from 'styled-components';
 
 
 class ScenesChatMobileContainer extends React.Component {
@@ -63,7 +61,7 @@ class ScenesChatMobileContainer extends React.Component {
         },
             () => {
 
-                this.props.fetchMessages(this.state.currentChatId);
+                setTimeout(this.props.fetchMessages(this.state.currentChatId), 500);
                 this.updateMessages();
             }
         )

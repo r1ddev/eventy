@@ -5,7 +5,7 @@ class ScenesChecker extends React.Component {
 
   render() {
 
-    const { isVisible = true, sceneNumber, scenes, setScene } = this.props;
+    const { isVisible = true, sceneNumber, scenes, setScene, t } = this.props;
 
 
     return (
@@ -16,7 +16,7 @@ class ScenesChecker extends React.Component {
           ((scenes[0].status) ? " inprogress" : "")}
           onClick={() => setScene(0)}
         >
-          Сцена 1
+          {t('Сцена')} 1
         </div>
 
         <div className={"scenes-checker--item" +
@@ -24,7 +24,7 @@ class ScenesChecker extends React.Component {
           ((scenes[1].status) ? " inprogress" : "")}
           onClick={() => setScene(1)}
         >
-          Сцена 2
+          {t('Сцена')} 2
         </div>
 
       </div >
