@@ -1,6 +1,24 @@
 #lang-checker{
 	height: 56px;
 	width: 300px;
+	margin-top: 20px;
+
+	&.mini{
+		height: unset;
+	width: unset;
+	margin-top: 0px;
+
+
+	.css-1uccc91-singleValue{
+		// color: white;
+		font-size: 16px;
+	}
+	}
+
+	input{
+		margin-top: 5px!important;
+		height: unset!important;
+	}
 
 	@media screen and (max-width: 500px) {
 		width: auto;
@@ -16,6 +34,7 @@
 		color: white;
 		border-color: #22d671;
 		box-shadow: 0 0 0 1px  #22d671;
+		border-radius: 8px;
 
 		&:hover{
 			border-color: #22d671;
@@ -26,7 +45,8 @@
 	}
 
 	.css-1uccc91-singleValue{
-		color: white;
+		// color: white;
+		font-size: 20px;
 	}
 }
 

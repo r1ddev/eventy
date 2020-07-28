@@ -12,6 +12,7 @@ import api from "../../js/api";
 import ErrorIndicator from "../../components/error-indicator";
 
 import { withTranslation } from "react-i18next";
+import LangChecker from "../../components/lang-checker";
 
 class EditProfile extends React.Component {
   state = {
@@ -245,6 +246,9 @@ class EditProfile extends React.Component {
                               </div>
                             </div>
                           </div>
+                        </div>
+                        <div className="col">
+                          <LangChecker type={'mini'} />
                         </div>
                       </div>
                     </div>
