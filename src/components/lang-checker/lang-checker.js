@@ -18,6 +18,7 @@ const colourStyles = {
       ":active": {
         ...styles[":active"],
         backgroundColor: !isDisabled && (isSelected ? data.color : color),
+
       },
     };
   },
@@ -58,10 +59,27 @@ class LangChecker extends React.Component {
   render() {
     const { lang } = this.state;
     const def = lang == "en" ? this.options[0] : this.options[1];
+    const { type } = this.props;
 
     return (
-      <div id="lang-checker">
-        <Select options={this.options} styles={colourStyles} onChange={this.onChangeLang} value={def} />
+      <div id="lang-checker" className={(type == 'mini') ? 'mini' : ''}>
+        <Select
+          isSearchable={false}
+          options={this.options}
+          styles={colourStyles}
+          onChange={this.onChangeLang}
+          value={def}
+          theme={theme => ({
+            ...theme,
+            borderRadius: 8,
+            colors: {
+              ...theme.colors,
+              primary: '#1dd673',
+            },
+          })} />
+
+
+
       </div>
     );
   }
