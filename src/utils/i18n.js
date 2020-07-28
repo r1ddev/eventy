@@ -148,7 +148,7 @@ i18n.use(LanguageDetector).init({
 
         Партнеры: "Expo",
         expo_smit:
-          "SMIT.studio - Experts in Interactive Marketing <br /> Grow your community with loyal players, whom you will convert into brand advocates in the future",
+          "SMIT.studio - Experts in Interactive Marketing <br /> Grow your community with loyal players and convert them into brand advocates in the future",
         expo_smitscreen: "A project that opens up new opportunities for business in the world of outdoor advertising",
 
         Презентации: "Files",
