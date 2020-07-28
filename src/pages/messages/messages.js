@@ -18,6 +18,8 @@ import DialogMobile from "../dialog-mobile/dialog-mobile";
 
 import { withTranslation } from "react-i18next";
 
+import Translit from "../../components/translit";
+
 class Messages extends React.Component {
   scrollToBottom = (upd = true) => {
     this.refs.scenesChat.onUpdate(true);
@@ -80,7 +82,9 @@ class Messages extends React.Component {
                                   <img src={api.auth.getAvatarLocation() + user.avatar} />
                                 </div>
                               </div>
-                              <div className="col p-0 name">{user.first_name + " " + user.last_name}</div>
+                              <div className="col p-0 name">
+                                <Translit value={user.first_name + " " + user.last_name} />
+                              </div>
                             </div>
                           </div>
                         </Link>
@@ -119,8 +123,10 @@ class Messages extends React.Component {
                           <img src={api.auth.getAvatarLocation() + activeUser.avatar} />
                         </Link>
                       </div>
-                      <div className="title">{activeUser.first_name + " " + activeUser.last_name}</div>
-                      <div className="desc">{activeUser.position + " в " + activeUser.company}</div>
+                      <div className="title">
+                        <Translit value={activeUser.first_name + " " + activeUser.last_name} />
+                      </div>
+                      <div className="desc">{activeUser.position + " " + t("в") + " " + activeUser.company}</div>
                     </div>
 
                     {isContactAvailable && (
