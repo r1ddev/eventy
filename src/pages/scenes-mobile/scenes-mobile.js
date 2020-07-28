@@ -3,6 +3,7 @@ import './scenes-mobile.scss'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
+import { withTranslation } from "react-i18next";
 
 import ScenesChecker from '../../components/scenes-mobile-components/scenes-checker';
 import ScenesVideo from '../../components/scenes-mobile-components/scenes-video';
@@ -36,6 +37,8 @@ class ScenesMobile extends React.Component {
             scenes, //все сцены
             setScene, //установить текущую сцену
 
+            t, //локализация
+
         } = this.props;
 
         const { generalChatId, spikerChatId } = scenes[scene] || {
@@ -53,6 +56,7 @@ class ScenesMobile extends React.Component {
                     sceneNumber={scene}
                     scenes={scenes}
                     setScene={setScene}
+                    t={t}
                 />
 
                 <ScenesVideo sceneUrl={sceneUrl} />
@@ -63,13 +67,14 @@ class ScenesMobile extends React.Component {
                 </ScenesVideoActions>
 
                 <ScenesBanner isVisible={!chatIsOpen} />
-                <ScenesTimetable isVisible={!chatIsOpen} />
+                <ScenesTimetable isVisible={!chatIsOpen} t={t} />
 
                 <ScenesChatMobile
                     onOpen={() => this.onChangeChatIsOpenValue(true)}
                     onClose={() => this.onChangeChatIsOpenValue(false)}
                     generalChatId={generalChatId}
                     spikerChatId={spikerChatId}
+                    t={t}
                 />
 
             </div >
@@ -109,5 +114,6 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+
     withApiService(),
     connect(mapStateToProps, mapDispatchToProps))(ScenesMobileContainer);

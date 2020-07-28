@@ -4,6 +4,7 @@ import IdeaFirstApiService from '../../services/idea-first-api-service';
 import posed from 'react-pose';
 import { fetchTimers } from '../../actions/timers-actions';
 import withApiService from "../../components/hoc/with-api-service";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 
@@ -87,7 +88,7 @@ class Stikers extends React.Component {
 
     render() {
 
-        const { lang, setLang, scenes, scene } = this.props;
+        const { lang, setLang, scenes, scene, t } = this.props;
         const { banner, bannerurl } = this.state;
 
         let engExists = 1;
@@ -133,8 +134,8 @@ class Stikers extends React.Component {
                     <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
                         <div className="language-stikers">
                             <div className="language-stikers-caption">
-                                язык трансляции
-                        </div>
+                                {t('язык трансляции')}
+                            </div>
                             <div className="language-stikers-list">
                                 <div className="language-stikers-item" onClick={() => setLang('rus')}>
                                     {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
@@ -174,6 +175,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+    withTranslation(),
     withApiService(),
     connect(mapStateToProps, mapDispatchToProps)
 )(Stikers);
