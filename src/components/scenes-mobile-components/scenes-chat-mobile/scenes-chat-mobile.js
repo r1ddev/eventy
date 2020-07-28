@@ -5,6 +5,7 @@ import RSC from "react-scrollbars-custom";
 import Spinner from '../../spinner';
 import { isMobileSafari, isIOS } from "react-device-detect";
 import api from "./../../../js/api";
+import Translit from "../../../components/translit";
 
 class ScenesChatMobile extends React.Component {
 
@@ -210,7 +211,7 @@ class MessageItem extends React.Component {
       <div className="message-item">
         <img alt="" src={newAvatar} />
         <div className='text'>
-          <span>{first_name + ' ' + last_name}</span>
+          <span><Translit value={first_name + ' ' + last_name} /></span>
           <div className='mes-text'> {message}</div>
 
         </div>

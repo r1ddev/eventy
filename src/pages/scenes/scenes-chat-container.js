@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { compose } from '../../utils';
 import { fetchMessages, updateMessages, fetchAddMessage } from '../../actions/chat-actions';
 import ScenesChat from '../../components/scenes-chat';
+import { withTranslation } from "react-i18next";
+
 
 class ScenesChatContainer extends React.Component {
 
@@ -136,6 +138,7 @@ class ScenesChatContainer extends React.Component {
                 sendMessage={this.sendMessage}
                 isPrivate={false}
                 ref="scenesChat"
+                t={this.props.t}
             />
         )
     }
@@ -156,5 +159,6 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+    withTranslation(),
     withApiService(),
     connect(mapStateToProps, mapDispatchToProps))(ScenesChatContainer);

@@ -3,7 +3,6 @@ import './scenes-mobile.scss'
 import withApiService from '../../components/hoc/with-api-service'
 import { connect } from 'react-redux';
 import { compose } from '../../utils';
-import { withTranslation } from "react-i18next";
 
 import ScenesChecker from '../../components/scenes-mobile-components/scenes-checker';
 import ScenesVideo from '../../components/scenes-mobile-components/scenes-video';

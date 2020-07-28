@@ -12,6 +12,7 @@ import NotifyIndicator from '../notify-indicator';
 import { isMobile } from 'react-device-detect';
 import HeaderMobile from '../header-mobile';
 import FloatVideoTranslation from '../float-video-translation';
+import { withTranslation } from "react-i18next";
 
 class Frame extends React.Component {
 
@@ -24,9 +25,7 @@ class Frame extends React.Component {
                     {
                         this.props.children
                     }
-
                 </div>
-
             </div>
         )
     }
@@ -89,12 +88,15 @@ class FrameContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+
+        const { t } = this.props;
+
         if (prevProps.notifications.newMessages !== this.props.notifications.newMessages && this.props.notifications.newMessages) {
-            NotifyIndicator('У вас новое сообщение!', '/messages');
+            NotifyIndicator(t('У вас новое сообщение!'), '/messages');
         }
 
         if (prevProps.notifications.newVipMessages !== this.props.notifications.newVipMessages && this.props.notifications.newVipMessages) {
-            NotifyIndicator('У вас новое сообщение от персонального ассистента!', '/vip-assistent');
+            NotifyIndicator(t('У вас новое сообщение от персонального ассистента!'), '/vip-assistent');
         }
 
         if (prevProps.timers !== this.props.timers) {
@@ -128,6 +130,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 };
 
 export default compose(
+    withTranslation(),
     withApiService(),
     connect(mapStateToProps, mapDispatchToProps)
 )(FrameContainer);
