@@ -10,6 +10,7 @@ import Spinner from "../../components/spinner";
 
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
+import LangChecker from "../../components/lang-checker";
 
 class Login extends React.Component {
   state = {
@@ -120,9 +121,13 @@ class Login extends React.Component {
               onChange={this.onChangePassword}
               className="password-input"
               placeholder={t("Пароль")}></input>
+            <LangChecker />
+
             <button disabled={email == "" || password == "" || disableForm} className="white-button login-btn">
               {loading ? <Spinner /> : t("ВОЙТИ")}
             </button>
+
+
 
             <button type="button" className="white-button guest-btn" onClick={this.onLoginGuest}>
               {t("ВОЙТИ КАК ГОСТЬ")}
