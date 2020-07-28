@@ -6,6 +6,8 @@ import Spinner from "../spinner";
 import Linkify from "react-linkify";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
+import Translit from "../../components/translit";
+
 
 class ScenesChat extends React.Component {
 	state = {
@@ -57,6 +59,7 @@ class ScenesChat extends React.Component {
 			setChat,
 			loading,
 			isPrivate,
+			t = (val) => val //перевод
 		} = this.props;
 
 		const { message } = this.state;
@@ -86,7 +89,7 @@ class ScenesChat extends React.Component {
 									? "chat-tab-item-active col"
 									: "chat-tab-item col"
 							}>
-							<div className="tab-label">Общий чат</div>
+							<div className="tab-label">{t('Общий чат')}</div>
 						</div>
 						<div
 							onClick={() => setChat("sponsor")}
@@ -96,7 +99,7 @@ class ScenesChat extends React.Component {
 									: "chat-tab-item col"
 							}>
 							<div className="tab-label">
-								Чат с организаторами
+								{t('Чат с организаторами')}
 							</div>
 						</div>
 						<div
@@ -106,7 +109,7 @@ class ScenesChat extends React.Component {
 									? "chat-tab-item-active col"
 									: "chat-tab-item col"
 							}>
-							<div className="tab-label">Вопрос спикеру</div>
+							<div className="tab-label">{t('Вопрос спикеру')}</div>
 						</div>
 					</div>
 				)}
@@ -127,7 +130,7 @@ class ScenesChat extends React.Component {
 								onChange={this.onChangeMessageValue}
 								cleanOnEnter
 								className="chat-input"
-								placeholder="Введите ваше сообщение"
+								placeholder={t("Введите ваше сообщение")}
 								onEnter={this.onSubmit}
 								borderRadius={10}
 								ref="chatInput"
@@ -181,7 +184,7 @@ class MessageItem extends React.Component {
 						to={"/profile/" + id}
 						target="_blank"
 						className="mes-info-name">
-						{name}
+						<Translit value={name} />
 
 						<span
 							className="mes-info-status"
@@ -189,7 +192,7 @@ class MessageItem extends React.Component {
 								padding: `${sponsor ? "5px" : "0px"}`,
 								backgroundColor: `${
 									sponsor ? "#22D671" : "white"
-								}`,
+									}`,
 							}}>
 							{sponsor ? "UMF" : ""}
 						</span>
