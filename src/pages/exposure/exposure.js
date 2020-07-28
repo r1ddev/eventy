@@ -6,34 +6,34 @@ import { compose } from "../../utils";
 import Header from "../../components/header";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-
-const partners = [
-  {
-    logo: require("../../images/partners/smitstudio.png"),
-    background: require("../../images/partners/smitstudio-bg.png"),
-    backgroundPosition: "top",
-    name: "Smit.Studio",
-    desc: (
-      <p>
-        "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых
-        в будущем конвертируете в адвокатов бренда"
-      </p>
-    ),
-    link: "https://smit.studio/",
-  },
-  {
-    logo: require("../../images/partners/smitscreen.png"),
-    background: require("../../images/partners/smitscreen-bg.png"),
-    backgroundPosition: "center",
-    name: "Smit.Screen",
-    desc: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
-    link: "https://smitscreen.ru",
-  },
-];
+import { Trans, withTranslation } from "react-i18next";
 
 class Exposure extends React.Component {
+  partners = [
+    {
+      logo: require("../../images/partners/smitstudio.png"),
+      background: require("../../images/partners/smitstudio-bg.png"),
+      backgroundPosition: "top",
+      name: "Smit.Studio",
+      desc: (
+        <p>
+          <Trans t={this.props.t}>expo_smit</Trans>
+        </p>
+      ),
+      link: "https://smit.studio/",
+    },
+    {
+      logo: require("../../images/partners/smitscreen.png"),
+      background: require("../../images/partners/smitscreen-bg.png"),
+      backgroundPosition: "center",
+      name: "Smit.Screen",
+      desc: (<Trans t={this.props.t}>expo_smitscreen</Trans>),
+      link: "https://smitscreen.ru",
+    },
+  ];
+
   render() {
-    let partnersList = partners.map((partner) => {
+    let partnersList = this.partners.map((partner) => {
       return (
         <a
           style={{
@@ -91,4 +91,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   };
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(ExposureContainer);
+export default compose(
+  withTranslation(),
+  withApiService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(ExposureContainer);
