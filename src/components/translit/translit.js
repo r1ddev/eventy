@@ -11,6 +11,7 @@ class Translit extends React.Component {
     if (~i18n.language.indexOf("en")) {
       return this.translit.transform(str);
     }
+    return str
   };
 
   render() {
