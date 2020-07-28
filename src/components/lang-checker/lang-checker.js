@@ -63,7 +63,8 @@ class LangChecker extends React.Component {
 
     return (
       <div id="lang-checker" className={(type == 'mini') ? 'mini' : ''}>
-        < Select
+        <Select
+          isSearchable={false}
           options={this.options}
           styles={colourStyles}
           onChange={this.onChangeLang}
@@ -71,6 +72,10 @@ class LangChecker extends React.Component {
           theme={theme => ({
             ...theme,
             borderRadius: 8,
+            colors: {
+              ...theme.colors,
+              primary: '#1dd673',
+            },
           })} />
 
 
