@@ -97,6 +97,7 @@ class Messages extends React.Component {
                   <div className="dialog">
                     {isChatAvailable && (
                       <ScenesChat
+                        t={t}
                         loading={messagesIsLoading}
                         messages={messages}
                         sendMessage={sendMessage}
@@ -359,6 +360,7 @@ class MessagesContainer extends React.Component {
           <>
             {this.props.match.params.id && (
               <DialogMobile
+                t={t}
                 ref="messages"
                 activeUser={this.state.activeUser}
                 messages={this.state.messages}
