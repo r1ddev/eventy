@@ -72,7 +72,11 @@ class Networking extends React.Component {
 
   filterUsers = () => {
     return this.state.users.filter((user) => {
+      const translit = new Translit;
+
       let userStr = user.first_name + " " + user.last_name + " " + user.position + " " + user.company;
+
+      userStr += translit.t(userStr);
 
       return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase());
     });
