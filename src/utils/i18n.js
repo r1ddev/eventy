@@ -48,24 +48,28 @@ i18n.use(LanguageDetector).init({
 
         "Связь с организаторами": `Связь <br />с организаторами`,
 
-        Переговорки: 'Переговорки',
+        Переговорки: "Переговорки",
         "Открытые комнаты": "Открытые комнаты",
         человек: "человек",
-        
-        Сцены: 'Сцены',
-        Сцена: 'Сцена',
-        Идет: 'Идет',
-        "Язык трансляции": 'Язык трансляции',
 
-        Чат: 'Чат',
-        "Общий чат": 'Общий чат',
-        "Чат с организаторами": 'Чат с организаторами',
-        "Вопрос спикеру": 'Вопрос спикеру',
+        Сцены: "Сцены",
+        Сцена: "Сцена",
+        Идет: "Идет",
+        "Язык трансляции": "Язык трансляции",
+
+        Чат: "Чат",
+        "Общий чат": "Общий чат",
+        "Чат с организаторами": "Чат с организаторами",
+        "Вопрос спикеру": "Вопрос спикеру",
         "Введите ваше сообщение": "Введите ваше сообщение",
 
         Партнеры: "Партнеры",
+        expo_smit:
+          "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда",
+        expo_smitscreen: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
 
         Презентации: "Презентации",
+        "Презентация Smit.studio": "Презентация Smit.studio",
 
         Нетворкинг: "Нетворкинг",
         в: "в",
@@ -106,33 +110,37 @@ i18n.use(LanguageDetector).init({
         "Хочу ли я делиться контактами?": "Do I want to share my contacts?",
         "Изменить профиль": "Change profile",
 
-        Лобби: 'Lobby',
+        Лобби: "Lobby",
         "Добро пожаловать на digital Stand-up Smit.Studio": `Welcome to <br />digital Stand-up Smit.Studio`,
 
-        Сообщения: 'Messages',
+        Сообщения: "Messages",
         "Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться":
           "Go to Networking and select a person to start chatting with",
 
         "Связь с организаторами": `Contact <br />with organizers`,
 
-        Переговорки: 'Meetings',
+        Переговорки: "Meetings",
         "Открытые комнаты": "Open rooms",
         человек: "people",
-        
-        Сцены: 'Stages',
-        Сцена: 'Stage',
-        Идет: 'Live',
-        "Язык трансляции": 'language',
 
-        Чат: 'Chat',
-        "Общий чат": 'Chat',
-        "Чат с организаторами": 'Host chat',
-        "Вопрос спикеру": 'speaker',
+        Сцены: "Stages",
+        Сцена: "Stage",
+        Идет: "Live",
+        "Язык трансляции": "language",
+
+        Чат: "Chat",
+        "Общий чат": "Chat",
+        "Чат с организаторами": "Host chat",
+        "Вопрос спикеру": "speaker",
         "Введите ваше сообщение": "Type something",
 
         Партнеры: "Expo",
+        expo_smit:
+          "SMIT.studio - Experts in Interactive Marketing <br /> Grow your community with loyal players, whom you will convert into brand advocates in the future",
+        expo_smitscreen: "A project that opens up new opportunities for business in the world of outdoor advertising",
 
         Презентации: "Files",
+        "Презентация Smit.studio": "Smit.studio presentation",
 
         Нетворкинг: "Networking",
         в: "in",

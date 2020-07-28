@@ -6,42 +6,41 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import Header from "../../components/header";
 import { isMobile } from "react-device-detect";
-
-const folders = [
-  {
-    folder: "day1",
-    files: [
-      {
-        name: "Презентация Smit.studio",
-        weight: "",
-        link: "https://drive.google.com/drive/folders/1K9EdTVHS-WIDND31GK5oCYcvqHr7ZQzW?usp=sharing",
-      },
-    ],
-  },
-  {
-    folder: "day2",
-    files: [
-      {
-        name: "Сцена 1 “Big Marketing Talks”",
-        weight: "",
-        link: "https://drive.google.com/drive/folders/1-TdHihBjquDLxfzBZ-chhJh05lXmzz84?usp=sharing",
-      },
-      {
-        name: "Сцена 2 “Кабинет маркетинг-директора”",
-        weight: "",
-        link: "https://drive.google.com/drive/folders/1i627qExXrXdKhN_x7pcsMxfYT6xxjhLQ?usp=sharing",
-      },
-      {
-        name: "Сцена 3 “Expert's Corner”",
-        weight: "",
-        link: "https://drive.google.com/drive/folders/1lL1gco6pPfYZ0h0W6lqHxdf7EPz82872?usp=sharing",
-      },
-    ],
-  },
-];
+import { withTranslation } from "react-i18next";
 
 class PresentationsList extends React.Component {
-  componentDidMount() {}
+  folders = [
+    {
+      folder: "day1",
+      files: [
+        {
+          name: this.props.t("Презентация Smit.studio"),
+          weight: "",
+          link: "https://drive.google.com/drive/folders/1K9EdTVHS-WIDND31GK5oCYcvqHr7ZQzW?usp=sharing",
+        },
+      ],
+    },
+    {
+      folder: "day2",
+      files: [
+        {
+          name: "Сцена 1 “Big Marketing Talks”",
+          weight: "",
+          link: "https://drive.google.com/drive/folders/1-TdHihBjquDLxfzBZ-chhJh05lXmzz84?usp=sharing",
+        },
+        {
+          name: "Сцена 2 “Кабинет маркетинг-директора”",
+          weight: "",
+          link: "https://drive.google.com/drive/folders/1i627qExXrXdKhN_x7pcsMxfYT6xxjhLQ?usp=sharing",
+        },
+        {
+          name: "Сцена 3 “Expert's Corner”",
+          weight: "",
+          link: "https://drive.google.com/drive/folders/1lL1gco6pPfYZ0h0W6lqHxdf7EPz82872?usp=sharing",
+        },
+      ],
+    },
+  ];
 
   render() {
     const { data } = this.props.user;
@@ -55,7 +54,7 @@ class PresentationsList extends React.Component {
         )}
 
         <div className="container pt-3">
-          {((folders.find((folder) => folder.folder == this.props.match.params.folder) || []).files || []).map(
+          {((this.folders.find((folder) => folder.folder == this.props.match.params.folder) || []).files || []).map(
             (file, index) => {
               return (
                 <a href={file.link} target="_blank" className="file-link">
@@ -86,4 +85,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
   return {};
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(PresentationsListContainer);
+export default compose(
+  withTranslation(),
+  withApiService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(PresentationsListContainer);
