@@ -247,9 +247,9 @@ class EditProfile extends React.Component {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg mt-4">
+                        {/* <div className="col-lg mt-4">
                           <LangChecker type={'mini'} />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
 
