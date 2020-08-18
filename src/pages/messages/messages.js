@@ -49,12 +49,13 @@ class Messages extends React.Component {
       activeUser.what_looking ||
       false;
 
+
     return (
       <div id="messages">
         <IdleTimer element={document} onActive={onActive} onIdle={onIdle} timeout={1000 * 30} />
 
         {!isMobile && (
-          <Header data={data}>
+          <Header data={data.data}>
             <></>
           </Header>
         )}
@@ -269,7 +270,7 @@ class MessagesContainer extends React.Component {
         try {
           let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
           message.text = dec.toString(CryptoJS.enc.Utf8);
-        } catch (error) {}
+        } catch (error) { }
       }
       return { ...message, message: message.text };
     });
@@ -308,7 +309,7 @@ class MessagesContainer extends React.Component {
 
     api.account.messages
       .sendMessages(this.state.activeUser.user_id, encMessage || message)
-      .then((res) => {})
+      .then((res) => { })
       .catch((e) => console.log(e));
 
     let m = this.state.messages;
