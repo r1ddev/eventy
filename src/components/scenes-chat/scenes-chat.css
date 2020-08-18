@@ -171,14 +171,15 @@ button:focus {
 a.mes-info-name{
 	text-decoration: none;
 	color: black;
+	vertical-align: inherit;
 }
 
 .mes-info-content {
 	font-family: "FuturaBookC";
 	font-style: normal;
 	font-weight: normal;
-	font-size: 19px;
-	line-height: 20px;
+	font-size: 15px;
+	line-height: 16px;
 }
 
 .mes-info-status {
@@ -189,6 +190,28 @@ a.mes-info-name{
 	line-height: 16px;
 	color: #000000;
 	margin-left: 10px;
+}
+
+.mes-options{
+	margin: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	
+}
+
+.mes-options .mes-time,
+.mes-options .mes-reply-btn{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 16px;
+	color: rgb(100, 100, 100);
+}
+
+.mes-options .mes-reply-btn{
+	cursor: pointer;
 }
 
 .chat-input-wrapper {

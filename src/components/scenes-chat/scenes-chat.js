@@ -74,6 +74,7 @@ class ScenesChat extends React.Component {
 					sponsor={mes.range === 5}
 					message={mes.message}
 					avatar={mes.avatar}
+					isPrivate={isPrivate}
 				/>
 			);
 		});
@@ -156,7 +157,7 @@ class MessageItem extends React.Component {
 	);
 
 	render() {
-		const { id, name, ad, sponsor, message, avatar } = this.props;
+		const { id, name, ad, sponsor, message, avatar, isPrivate } = this.props;
 
 		// let origin = "https://onlineshow.marketingforum.com.ua";
 		let origin = api.origin;
@@ -202,6 +203,10 @@ class MessageItem extends React.Component {
 							{message}
 						</Linkify>
 					</div>
+				</div>
+				<div className="mes-options">
+					<div className="mes-time">20:30 </div>
+					{!isPrivate && <div className="mes-reply-btn">ответить </div>}
 				</div>
 			</div>
 		);
