@@ -39,6 +39,8 @@ class ScenesChatContainer extends React.Component {
 
         const { first_name, last_name, avatar, range } = this.props.user;
 
+        const date = new Date;
+
 
         const mes = {
             user_id: 1,
@@ -47,7 +49,8 @@ class ScenesChatContainer extends React.Component {
             avatar: avatar,
             range: range,
             messages_id: 1,
-            message: message
+            message: message,
+            time: `${date.getHours()}:${date.getMinutes()}`
         }
 
         this.props.fetchAddMessage(this.state.currentChatId, mes)

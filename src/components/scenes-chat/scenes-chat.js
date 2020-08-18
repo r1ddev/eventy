@@ -75,6 +75,7 @@ class ScenesChat extends React.Component {
 					message={mes.message}
 					avatar={mes.avatar}
 					isPrivate={isPrivate}
+					time={mes.time}
 				/>
 			);
 		});
@@ -157,7 +158,7 @@ class MessageItem extends React.Component {
 	);
 
 	render() {
-		const { id, name, ad, sponsor, message, avatar, isPrivate } = this.props;
+		const { id, name, ad, sponsor, message, avatar, isPrivate, time } = this.props;
 
 		// let origin = "https://onlineshow.marketingforum.com.ua";
 		let origin = api.origin;
@@ -205,7 +206,7 @@ class MessageItem extends React.Component {
 					</div>
 				</div>
 				<div className="mes-options">
-					<div className="mes-time">20:30 </div>
+					<div className="mes-time">{time}</div>
 					{!isPrivate && <div className="mes-reply-btn">ответить </div>}
 				</div>
 			</div>
