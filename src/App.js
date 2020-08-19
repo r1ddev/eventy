@@ -50,7 +50,7 @@ class App extends React.Component {
 	}
 
 	handleLocationChange = (location) => {
-		console.log(location)
+		// console.log(location)
 		this.props.postUrl(location)
 
 	}

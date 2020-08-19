@@ -11,7 +11,7 @@ const floatvideo = (state, action) => {
 
     switch (action.type) {
         case 'SET_VIDEOFRAME_VISIBLE':
-            console.log('REDUCER')
+            // console.log('REDUCER')
             return {
                 ...state,
                 frameIsVisible: true

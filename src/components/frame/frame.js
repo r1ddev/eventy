@@ -100,7 +100,7 @@ class FrameContainer extends React.Component {
         }
 
         if (prevProps.timers !== this.props.timers) {
-            console.log('timers')
+            // console.log('timers')
             this.setState({
                 notifyTime: this.props.timers.notifyTime
             })

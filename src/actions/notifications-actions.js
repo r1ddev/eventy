@@ -19,7 +19,7 @@ const checkNotifications = (apiService, dispatch) => {
 
 	apiService.getNotify()
 		.then((data) => {
-			console.log(data)
+			// console.log(data)
 
 			dispatch(setMessagesNotifications(data.new_message));
 			dispatch(setVipMessagesNotifications(data.new_message_ass));
