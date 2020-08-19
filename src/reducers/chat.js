@@ -10,7 +10,7 @@ export const initialState = {
 
 function updateMessage(messages, lastId, newmes) {
     return [
-        ...messages.slice(0, messages.findIndex(m => m.messages_id === lastId) + 1),
+        ...messages.slice(0, messages.findIndex(m => m.id === lastId) + 1),
         ...newmes
     ]
 }
@@ -19,7 +19,7 @@ function lastMessagesId(array, defaultValue = 0) {
     if (array.length == 0) {
         return defaultValue
     }
-    return array[array.length - 1].messages_id
+    return array[array.length - 1].id
 }
 
 const chat = (state, action) => {

@@ -48,7 +48,7 @@ class ScenesChatContainer extends React.Component {
             last_name: last_name,
             avatar: avatar,
             range: range,
-            messages_id: 1,
+            id: 1,
             message: message,
             time: `${date.getHours()}:${date.getMinutes()}`
         }
