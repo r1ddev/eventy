@@ -201,7 +201,7 @@ class MessageItem extends React.Component {
 
   render() {
 
-    const { id, first_name, last_name, ad, sponsor, message, avatar } = this.props.item;
+    const { id, first_name, last_name, ad, sponsor, message, avatar, time } = this.props.item;
 
     let origin = api.origin;
     let newAvatar = origin + "/images/avatar/" + avatar;
@@ -214,6 +214,10 @@ class MessageItem extends React.Component {
           <span><Translit value={first_name + ' ' + last_name} /></span>
           <div className='mes-text'> {message}</div>
 
+        </div>
+        <div className="message-reply">
+          <div className="message-time">{time}</div>
+          <div className="message-reply-btn">ответить</div>
         </div>
 
       </div >

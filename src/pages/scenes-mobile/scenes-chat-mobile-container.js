@@ -33,6 +33,9 @@ class ScenesChatMobileContainer extends React.Component {
 
     sendMessage = (message) => {
         const { first_name, last_name, avatar, range } = this.props.user;
+
+        const date = new Date;
+
         const mes = {
             user_id: 1,
             first_name: first_name,
@@ -40,7 +43,8 @@ class ScenesChatMobileContainer extends React.Component {
             avatar: avatar,
             range: range,
             messages_id: 1,
-            message: message
+            message: message,
+            time: `${date.getHours()}:${date.getMinutes()}`
         }
         this.props.fetchAddMessage(this.state.currentChatId, mes)
     }

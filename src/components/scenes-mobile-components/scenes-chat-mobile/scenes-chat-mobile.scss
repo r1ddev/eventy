@@ -99,7 +99,7 @@
     padding: 5px;
     margin: 0 10px;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 50px 1fr 60px;
     text-align: left;
     border-radius: 2px;
     margin-bottom: 7px;
@@ -112,7 +112,7 @@
       line-height: 1.2;
 
       .mes-text{
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
       }
 
     }
@@ -122,6 +122,27 @@
       width: 40px;
       object-fit: cover;
       border-radius: 2px;
+    }
+
+    .message-reply{
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: rgb(75, 74, 74);
+      padding: 5px;
+
+      .message-time{
+       
+      padding-left: 2px;
+      line-height: 1.2;
+      }
+
+      .message-reply-btn{
+        cursor: pointer;
+        padding-left: 2px;
+      line-height: 1.2;
+      }
     }
 
     }
