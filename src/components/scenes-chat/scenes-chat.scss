@@ -4,6 +4,54 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+
+
+.close-btn{
+	cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/close-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.reply-icon{
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/reply-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.message-attachment{
+
+  background-color: #c9d0cc;
+  padding: 5px;
+
+  .reply-attachment{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .reply-name{
+      text-align: left;
+      flex-grow: 1;
+      padding-left: 10px;
+    }
+
+  }
+}
+
 }
 
 #scenes-chat .chat-tabs {
@@ -21,7 +69,7 @@
 
 #scenes-chat .chat-input-container {
 	border-top: 1px solid #c4c4c4;
-	flex-direction: row;
+	flex-direction: column;
 	display: flex;
 }
 
@@ -255,3 +303,6 @@ a.mes-info-name{
 	border-right-color: transparent;
 	border-radius: 50%;
 }
+
+
+

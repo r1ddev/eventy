@@ -1,5 +1,5 @@
 import React from "react";
-import "./scenes-chat.css";
+import "./scenes-chat.scss";
 import InputEmoji from "react-input-emoji";
 import RSC from "react-scrollbars-custom";
 import Spinner from "../spinner";
@@ -12,14 +12,22 @@ import Translit from "../../components/translit";
 class ScenesChat extends React.Component {
 	state = {
 		message: "",
+		replyAttachment: false,
+		replyAttachmentData: null
 	};
 
 	onSubmit = (e) => {
 		const { message } = this.state;
 		// e.preventDefault();
+		const replyAttachment = this.state.replyAttachment;
+		let reply_id = null;
+		if (replyAttachment) reply_id = this.state.replyAttachmentData.id;
+
+
 		if (message !== "") {
-			this.props.sendMessage(message);
+			this.props.sendMessage(message, reply_id, this.state.replyAttachmentData);
 			this.clearInput();
+			this.onClearReplyAttachment();
 		}
 	};
 
@@ -52,6 +60,20 @@ class ScenesChat extends React.Component {
 		);
 	};
 
+	onSetReplyAttachment = (attachment) => {
+		this.setState({
+			replyAttachment: true,
+			replyAttachmentData: attachment
+		})
+	}
+
+	onClearReplyAttachment = () => {
+		this.setState({
+			replyAttachment: false,
+			replyAttachmentData: null
+		})
+	}
+
 	render() {
 		const {
 			messages,
@@ -62,20 +84,24 @@ class ScenesChat extends React.Component {
 			t = (val) => val //перевод
 		} = this.props;
 
-		const { message } = this.state;
+		const { message, replyAttachment, replyAttachmentData } = this.state;
 
 		const messageList = messages.map((mes, index) => {
 			return (
 				<MessageItem
 					key={index}
-					id={mes.user_id}
+					user_id={mes.user_id}
+					id={mes.id}
 					name={mes.first_name + " " + mes.last_name}
+					first_name={mes.first_name}
+					last_name={mes.last_name}
 					ad={mes.range === 4}
 					sponsor={mes.range === 5}
 					message={mes.message}
 					avatar={mes.avatar}
 					isPrivate={isPrivate}
 					time={mes.time}
+					onSetReplyAttachment={this.onSetReplyAttachment}
 				/>
 			);
 		});
@@ -125,25 +151,38 @@ class ScenesChat extends React.Component {
 					{loading && <Spinner />}
 				</div>
 				<div className="chat-input-container">
-					<div className="chat-input-wrapper">
-						{!loading && (
-							<InputEmoji
-								value={message}
-								onChange={this.onChangeMessageValue}
-								cleanOnEnter
-								className="chat-input"
-								placeholder={t("Введите ваше сообщение")}
-								onEnter={this.onSubmit}
-								borderRadius={10}
-								ref="chatInput"
-							/>
-						)}
+					{(replyAttachment) && <div className="message-attachment">
+						<div className="reply-attachment">
+							<div className="reply-icon"></div>
+							<div className="reply-name">Игнат ведеркин</div>
+							<div className="close-btn" onClick={() => this.onClearReplyAttachment()}></div>
+						</div>
+					</div>}
+
+					<div style={{ display: 'flex', flexDirection: "row" }}>
+						<div className="chat-input-wrapper">
+							{!loading && (
+								<InputEmoji
+									value={message}
+									onChange={this.onChangeMessageValue}
+									cleanOnEnter
+									className="chat-input"
+									placeholder={t("Введите ваше сообщение")}
+									onEnter={this.onSubmit}
+									borderRadius={10}
+									ref="chatInput"
+								/>
+							)}
+
+						</div>
+
+						<button className="send-mes-btn" onClick={this.onSubmit}>
+							<div
+								className="send-mes-btn-icon"
+								onClick={this.onSubmit}></div>
+						</button>
 					</div>
-					<button className="send-mes-btn" onClick={this.onSubmit}>
-						<div
-							className="send-mes-btn-icon"
-							onClick={this.onSubmit}></div>
-					</button>
+
 				</div>
 			</div>
 		);
@@ -158,7 +197,7 @@ class MessageItem extends React.Component {
 	);
 
 	render() {
-		const { id, name, ad, sponsor, message, avatar, isPrivate, time } = this.props;
+		const { user_id, id, name, first_name, last_name, ad, sponsor, message, avatar, isPrivate, time, onSetReplyAttachment } = this.props;
 
 		// let origin = "https://onlineshow.marketingforum.com.ua";
 		let origin = api.origin;
@@ -170,7 +209,7 @@ class MessageItem extends React.Component {
 				className="message-item"
 				style={{ backgroundColor: `${ad ? "#22D671" : "white"}` }}>
 				<div className="mes-photo-wrapper">
-					<Link to={"/profile/" + id} target="_blank">
+					<Link to={"/profile/" + user_id} target="_blank">
 						<div
 							className="mes-photo"
 							style={
@@ -183,7 +222,7 @@ class MessageItem extends React.Component {
 
 				<div className="mes-info">
 					<Link
-						to={"/profile/" + id}
+						to={"/profile/" + user_id}
 						target="_blank"
 						className="mes-info-name">
 						<Translit value={name} />
@@ -207,7 +246,16 @@ class MessageItem extends React.Component {
 				</div>
 				<div className="mes-options">
 					<div className="mes-time">{time}</div>
-					{!isPrivate && <div className="mes-reply-btn">ответить </div>}
+					{!isPrivate && <div className="mes-reply-btn" onClick={
+						() => {
+							onSetReplyAttachment({
+								id: id,
+								first_name: first_name,
+								last_name: last_name,
+								message: message
+							})
+						}
+					}>ответить </div>}
 				</div>
 			</div>
 		);
