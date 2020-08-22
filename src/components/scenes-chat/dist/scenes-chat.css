@@ -1,0 +1,319 @@
+#scenes-chat {
+  width: 100%;
+  /* height: 100%; */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+#scenes-chat .ScrollbarsCustom-Content {
+  padding-left: 10px !important;
+}
+#scenes-chat .close-btn {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/close-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+#scenes-chat .reply-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/reply-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+#scenes-chat .message-attachment {
+  background-color: #c9d0cc;
+  padding: 5px;
+}
+#scenes-chat .message-attachment .reply-attachment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#scenes-chat .message-attachment .reply-attachment .reply-name {
+  text-align: left;
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+#scenes-chat .chat-tabs {
+  height: 10%;
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+}
+
+#scenes-chat .chat-message-container {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100%;
+}
+
+#scenes-chat .chat-input-container {
+  border-top: 1px solid #c4c4c4;
+  flex-direction: column;
+  display: flex;
+}
+
+#scenes-chat .chat-tabs .chat-tab-item {
+  flex-grow: 1;
+  background-color: #f1f2f5;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-right: 1px solid #d1d1d1;
+  transition: 100ms;
+}
+
+#scenes-chat .chat-tabs .chat-tab-item-active {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(1) {
+  border-top: 4px solid #c3d600;
+}
+
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(2) {
+  border-top: 4px solid #f4004d;
+}
+
+#scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(3) {
+  border-top: 4px solid #ffe800;
+}
+
+#scenes-chat .tab-label {
+  text-align: center;
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+}
+
+#scenes-chat .button.send-mes-btn {
+  align-self: center;
+  color: white;
+  padding: 0px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: unset;
+  border: 0px;
+}
+
+#scenes-chat button.send-mes-btn:active,
+button:focus {
+  outline: none;
+  border: 0;
+}
+
+#scenes-chat button.send-mes-btn::-moz-focus-inner {
+  border: 0;
+}
+
+#scenes-chat .send-mes-btn {
+  padding: 0px;
+  background-color: white;
+  font-size: 23px;
+  border: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-image: url(../../images/send.svg);
+  background-position: center bottom;
+  margin-bottom: 3px;
+  background-repeat: no-repeat;
+}
+
+#scenes-chat .chat-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#scenes-chat .send-mes-btn-icon {
+  width: 70px;
+}
+
+#scenes-chat .chat-input {
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  border: 0px;
+  outline: none;
+  font-size: 25px;
+  line-height: 21px;
+  padding: 15px;
+}
+
+.message-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 5px;
+}
+.message-item.bordered {
+  border-left: 4px solid #ccc9c9;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.message-item.bordered .mes-photo {
+  margin-left: 10px;
+}
+.message-item.replied {
+  margin-top: 15px;
+  border-left: 4px solid #ccc9c9;
+  padding-left: 10px;
+}
+.message-item.replied .mes-info {
+  width: calc(100% - 75px);
+  margin: 0px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+
+.mes-photo {
+  flex-grow: 1;
+  height: 40px;
+  width: 40px;
+  background-image: url(../../images/default-avatar.svg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+  margin: 10px 10px 0px 14px;
+}
+
+.mes-box {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.mes-info {
+  width: calc(100% - 100px);
+  overflow-wrap: break-word;
+  margin: 10px 0px;
+}
+
+.mes-info-name {
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px;
+  color: black;
+}
+
+a.mes-info-name {
+  text-decoration: none;
+  color: black;
+  vertical-align: inherit;
+}
+
+.mes-info-content {
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px;
+}
+
+.mes-info-status {
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px;
+  color: #000000;
+  margin-left: 10px;
+}
+
+.mes-options {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mes-options .mes-time,
+.mes-options .mes-reply-btn {
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px;
+  color: #646464;
+}
+
+.mes-options .mes-reply-btn {
+  cursor: pointer;
+}
+
+.chat-input-wrapper {
+  flex-grow: 1;
+  width: calc(100% - 70px);
+}
+
+.react-emoji-picker--wrapper {
+  width: 350px !important;
+}
+
+.react-input-emoji--container {
+  height: 100% !important;
+  margin: unset !important;
+}
+
+.react-input-emoji--wrapper {
+  height: 100% !important;
+}
+
+.react-emoji {
+  height: 100% !important;
+  padding: 5px 10px !important;
+}
+
+.chat-spinner {
+  height: 100%;
+  align-items: center;
+}
+
+.text-success {
+  color: #22D671 !important;
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  border: 0.2em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
