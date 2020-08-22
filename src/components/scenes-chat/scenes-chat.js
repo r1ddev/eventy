@@ -92,6 +92,8 @@ class ScenesChat extends React.Component {
 					key={index}
 					user_id={mes.user_id}
 					id={mes.id}
+					reply={mes.reply}
+					replyAttachmentData={replyAttachmentData}
 					name={mes.first_name + " " + mes.last_name}
 					first_name={mes.first_name}
 					last_name={mes.last_name}
@@ -101,6 +103,7 @@ class ScenesChat extends React.Component {
 					avatar={mes.avatar}
 					isPrivate={isPrivate}
 					time={mes.time}
+					t={t}
 					onSetReplyAttachment={this.onSetReplyAttachment}
 				/>
 			);
@@ -154,7 +157,7 @@ class ScenesChat extends React.Component {
 					{(replyAttachment) && <div className="message-attachment">
 						<div className="reply-attachment">
 							<div className="reply-icon"></div>
-							<div className="reply-name">Игнат ведеркин</div>
+							<div className="reply-name"><Translit value={replyAttachmentData.first_name + ' ' + replyAttachmentData.last_name} /> </div>
 							<div className="close-btn" onClick={() => this.onClearReplyAttachment()}></div>
 						</div>
 					</div>}
@@ -197,7 +200,7 @@ class MessageItem extends React.Component {
 	);
 
 	render() {
-		const { user_id, id, name, first_name, last_name, ad, sponsor, message, avatar, isPrivate, time, onSetReplyAttachment } = this.props;
+		const { user_id, id, name, first_name, last_name, ad, sponsor, message, avatar, isPrivate, time, onSetReplyAttachment, reply, t } = this.props;
 
 		// let origin = "https://onlineshow.marketingforum.com.ua";
 		let origin = api.origin;
@@ -205,59 +208,89 @@ class MessageItem extends React.Component {
 		let newAvatar = origin + "/images/avatar/" + avatar;
 
 		return (
-			<div
-				className="message-item"
-				style={{ backgroundColor: `${ad ? "#22D671" : "white"}` }}>
-				<div className="mes-photo-wrapper">
-					<Link to={"/profile/" + user_id} target="_blank">
-						<div
-							className="mes-photo"
-							style={
-								avatar
-									? { backgroundImage: `url(${newAvatar})` }
-									: {}
-							}></div>
-					</Link>
-				</div>
+			<>
+				{(reply) && <div className={reply ? "message-item replied" : "message-item"}>
 
-				<div className="mes-info">
-					<Link
-						to={"/profile/" + user_id}
-						target="_blank"
-						className="mes-info-name">
-						<Translit value={name} />
+					<div className="mes-info">
+						<Link
+							to={"/profile/" + user_id}
+							target="_blank"
+							className="mes-info-name">
+							<Translit value={reply.first_name + ' ' + reply.last_name} />
 
-						<span
-							className="mes-info-status"
-							style={{
-								padding: `${sponsor ? "5px" : "0px"}`,
-								backgroundColor: `${
-									sponsor ? "#22D671" : "white"
-									}`,
-							}}>
-							{sponsor ? "UMF" : ""}
-						</span>
-					</Link>
-					<div className="mes-info-content">
-						<Linkify componentDecorator={this.linkifyDecorator}>
-							{message}
-						</Linkify>
+							<span
+								className="mes-info-status"
+								style={{
+									padding: `${sponsor ? "5px" : "0px"}`,
+									backgroundColor: `${
+										sponsor ? "#22D671" : "white"
+										}`,
+								}}>
+								{sponsor ? "UMF" : ""}
+							</span>
+						</Link>
+						<div className="mes-info-content">
+							<Linkify componentDecorator={this.linkifyDecorator}>
+								{reply.message}
+							</Linkify>
+						</div>
+					</div>
+				</div>}
+
+				<div
+					className={reply ? "message-item bordered" : "message-item"}
+					style={{ backgroundColor: `${ad ? "#22D671" : "white"}` }}>
+					<div className="mes-photo-wrapper">
+						<Link to={"/profile/" + user_id} target="_blank">
+							<div
+								className="mes-photo"
+								style={
+									avatar
+										? { backgroundImage: `url(${newAvatar})` }
+										: {}
+								}></div>
+						</Link>
+					</div>
+
+					<div className="mes-info">
+						<Link
+							to={"/profile/" + user_id}
+							target="_blank"
+							className="mes-info-name">
+							<Translit value={name} />
+
+							<span
+								className="mes-info-status"
+								style={{
+									padding: `${sponsor ? "5px" : "0px"}`,
+									backgroundColor: `${
+										sponsor ? "#22D671" : "white"
+										}`,
+								}}>
+								{sponsor ? "UMF" : ""}
+							</span>
+						</Link>
+						<div className="mes-info-content">
+							<Linkify componentDecorator={this.linkifyDecorator}>
+								{message}
+							</Linkify>
+						</div>
+					</div>
+					<div className="mes-options">
+						<div className="mes-time">{time}</div>
+						{!isPrivate && <div className="mes-reply-btn" onClick={
+							() => {
+								onSetReplyAttachment({
+									id: id,
+									first_name: first_name,
+									last_name: last_name,
+									message: message
+								})
+							}
+						}>{t("ответить")} </div>}
 					</div>
 				</div>
-				<div className="mes-options">
-					<div className="mes-time">{time}</div>
-					{!isPrivate && <div className="mes-reply-btn" onClick={
-						() => {
-							onSetReplyAttachment({
-								id: id,
-								first_name: first_name,
-								last_name: last_name,
-								message: message
-							})
-						}
-					}>ответить </div>}
-				</div>
-			</div>
+			</>
 		);
 	}
 }
