@@ -297,6 +297,8 @@ a.mes-info-name{
 
 .chat-input-wrapper {
 	flex-grow: 1;
+	width: calc(100% - 70px);
+	
 }
 
 .react-emoji-picker--wrapper {
