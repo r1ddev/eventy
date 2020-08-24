@@ -38,7 +38,7 @@ class Scenes extends React.Component {
     let origin = api.origin;
     let newAvatar = origin + "/images/avatar/" + user.avatar;
 
-    console.log(user);
+    // console.log(user);
 
     return (
       <div id="scenes">

@@ -92,7 +92,7 @@ class ScenesChatMobileContainer extends React.Component {
         const { messages, loading } = this.props.chat;
         const { survey } = this.state;
 
-        console.log(messages)
+        // console.log(messages)
 
         return (
 

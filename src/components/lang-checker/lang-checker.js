@@ -44,7 +44,7 @@ class LangChecker extends React.Component {
   };
 
   componentDidMount() {
-    console.log("i18n.language", i18n.language);
+    // console.log("i18n.language", i18n.language);
     if (~i18n.language.indexOf("en")) {
       this.setState({
         lang: "en",

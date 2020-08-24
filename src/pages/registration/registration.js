@@ -46,7 +46,7 @@ class Registration extends React.Component {
         tag: JSON.stringify(this.state.regTag),
       };
 
-      console.log(user);
+      // console.log(user);
       this.setState({
         disableForm: false,
       });

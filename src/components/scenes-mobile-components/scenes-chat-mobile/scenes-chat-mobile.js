@@ -207,7 +207,7 @@ class MessageBox extends React.Component {
 
     const messageList = messages.map((item, index) => {
 
-      console.log(item);
+      // console.log(item);
 
       return (
         <MessageItem key={index} item={item} onSetReplyAttachment={onSetReplyAttachment} t={t} />

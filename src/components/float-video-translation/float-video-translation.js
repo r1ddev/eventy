@@ -15,7 +15,7 @@ class FloatVideoTranslation extends React.Component {
       currentSceneUrl
     } = this.props.floatvideo;
 
-    console.log(this.props.floatvideo)
+    // console.log(this.props.floatvideo)
 
     return (
       <div id="float-video-translation" className={(frameIsVisible ? ((frameIsFloating) ? 'floated' : '') : 'hidden')}>
