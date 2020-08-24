@@ -99,10 +99,15 @@
     padding: 5px;
     margin: 0 10px;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 50px 1fr 60px;
     text-align: left;
     border-radius: 2px;
     margin-bottom: 7px;
+
+    &.bordered{
+      border-left: 4px solid #ccc9c9
+
+    }
   
     .text{
       grid-column-start: 2;
@@ -112,7 +117,7 @@
       line-height: 1.2;
 
       .mes-text{
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
       }
 
     }
@@ -122,6 +127,46 @@
       width: 40px;
       object-fit: cover;
       border-radius: 2px;
+    }
+
+    &.replied{
+
+      border-left: 4px solid #ccc9c9;
+      margin-bottom: 0;
+      padding: 0 5px;
+      .text{
+        grid-column: 1 / 4;
+        grid-row-start: 1;
+        text-align: left;
+        line-height: 1.2;
+        font-size: 15px;
+        padding: 5px;
+        padding-left: 10px;
+        background-color: #e4e4e4;
+        border-radius: 4px;
+        
+      }
+    }
+
+    .message-reply{
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: rgb(75, 74, 74);
+      padding: 5px;
+
+      .message-time{
+       
+      padding-left: 2px;
+      line-height: 1.2;
+      }
+
+      .message-reply-btn{
+        cursor: pointer;
+        padding-left: 2px;
+      line-height: 1.2;
+      }
     }
 
     }
@@ -171,6 +216,54 @@
     outline: none;
   }
 
+  
+
+
+}
+
+.close-btn{
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../../images/menu/close-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.reply-icon{
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../../images/menu/reply-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.message-attachment{
+
+  background-color: #c9d0cc;
+  padding: 5px;
+
+  .reply-attachment{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .reply-name{
+      text-align: left;
+      flex-grow: 1;
+      padding-left: 10px;
+    }
+
+  }
 }
 
 

@@ -34,10 +34,12 @@ class ScenesChatContainer extends React.Component {
         return sponsor;
     }
 
-    sendMessage = (message) => {
+    sendMessage = (message, reply_id, replyAttachmentData) => {
 
 
         const { first_name, last_name, avatar, range } = this.props.user;
+
+        const date = new Date;
 
 
         const mes = {
@@ -46,11 +48,14 @@ class ScenesChatContainer extends React.Component {
             last_name: last_name,
             avatar: avatar,
             range: range,
-            messages_id: 1,
-            message: message
+            id: 1,
+            reply: replyAttachmentData,
+            reply_id: reply_id,
+            message: message,
+            time: `${date.getHours()}:${date.getMinutes()}`
         }
 
-        this.props.fetchAddMessage(this.state.currentChatId, mes)
+        this.props.fetchAddMessage(this.state.currentChatId, mes, reply_id)
         this.refs.scenesChat.onUpdate(true)
     }
 
@@ -154,7 +159,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchMessages: (idChat) => fetchMessages(apiService, dispatch)(idChat),
         updateMessages: (idChat, id) => updateMessages(apiService, dispatch)(idChat, id),
-        fetchAddMessage: (idChat, message) => fetchAddMessage(apiService, dispatch)(idChat, message),
+        fetchAddMessage: (idChat, message, reply_id) => fetchAddMessage(apiService, dispatch)(idChat, message, reply_id),
     }
 };
 

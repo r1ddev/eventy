@@ -54,9 +54,9 @@ const updateMessages = (apiService, dispatch) => (chatId, id) => {
         .catch((err) => { dispatch(chatError(err)) });
 };
 
-const fetchAddMessage = (apiService, dispatch) => (chatId, message) => {
+const fetchAddMessage = (apiService, dispatch) => (chatId, message, reply_id = null) => {
     dispatch(addMessage(message));
-    apiService.postMessage(chatId, message.message)
+    apiService.postMessage(chatId, message.message, reply_id)
         .then((data) => { })
         .catch((err) => dispatch(chatError(err)));
 };

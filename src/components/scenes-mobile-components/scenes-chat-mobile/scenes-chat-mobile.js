@@ -6,12 +6,15 @@ import Spinner from '../../spinner';
 import { isMobileSafari, isIOS } from "react-device-detect";
 import api from "./../../../js/api";
 import Translit from "../../../components/translit";
+import { ThemeConsumer } from 'styled-components';
 
 class ScenesChatMobile extends React.Component {
 
   state = {
     isOpen: false,
-    activeInput: false
+    activeInput: false,
+    replyAttachment: false,
+    replyAttachmentData: null
   }
 
   onOpen = () => {
@@ -42,9 +45,23 @@ class ScenesChatMobile extends React.Component {
     })
   }
 
+  onSetReplyAttachment = (attachment) => {
+    this.setState({
+      replyAttachment: true,
+      replyAttachmentData: attachment
+    })
+  }
+
+  onClearReplyAttachment = () => {
+    this.setState({
+      replyAttachment: false,
+      replyAttachmentData: null
+    })
+  }
+
   render() {
 
-    const { isOpen, activeInput } = this.state;
+    const { isOpen, activeInput, replyAttachment, replyAttachmentData } = this.state;
     const { loading, messages, setItem, sendMessage, survey, t } = this.props;
 
     let chatMobileClasses = '';
@@ -67,12 +84,18 @@ class ScenesChatMobile extends React.Component {
               <MessageBox
                 isVisible={!activeInput}
                 messages={messages}
+                onSetReplyAttachment={this.onSetReplyAttachment}
+                t={t}
               />}
 
             {(isOpen && loading) && <Spinner />}
 
             {(!survey) && <MessageInput
               isVisible={isOpen}
+              activeInput={activeInput}
+              replyAttachment={replyAttachment}
+              replyAttachmentData={replyAttachmentData}
+              onClearReplyAttachment={this.onClearReplyAttachment}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
               sendMessage={sendMessage}
@@ -97,13 +120,21 @@ class ScenesChatMobile extends React.Component {
               <MessageBox
                 isVisible={true}
                 messages={messages}
+                onSetReplyAttachment={this.onSetReplyAttachment}
+                t={t}
               />}
+
             {(isOpen && loading) && <Spinner />}
+
             {(!survey) && <MessageInput
               isVisible={isOpen}
+              activeInput={activeInput}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
               sendMessage={sendMessage}
+              replyAttachment={replyAttachment}
+              replyAttachmentData={replyAttachmentData}
+              onClearReplyAttachment={this.onClearReplyAttachment}
               t={t}
             />}
           </div >
@@ -172,14 +203,14 @@ class MessageBox extends React.Component {
 
   render() {
 
-    const { messages } = this.props;
+    const { messages, onSetReplyAttachment, t } = this.props;
 
     const messageList = messages.map((item, index) => {
 
       console.log(item);
 
       return (
-        <MessageItem key={index} item={item} />
+        <MessageItem key={index} item={item} onSetReplyAttachment={onSetReplyAttachment} t={t} />
       )
     })
 
@@ -201,23 +232,40 @@ class MessageItem extends React.Component {
 
   render() {
 
-    const { id, first_name, last_name, ad, sponsor, message, avatar } = this.props.item;
-
+    const { id, first_name, last_name, ad, sponsor, message, avatar, time, reply } = this.props.item;
+    const { onSetReplyAttachment, t } = this.props;
     let origin = api.origin;
     let newAvatar = origin + "/images/avatar/" + avatar;
 
     return (
+      <>
+        {(reply) && <div className="message-item replied">
+          <div className='text'>
+            <span><Translit value={reply.first_name + ' ' + reply.last_name} /></span>
+            <div className='mes-text'> {reply.message}</div>
 
-      <div className="message-item">
-        <img alt="" src={newAvatar} />
-        <div className='text'>
-          <span><Translit value={first_name + ' ' + last_name} /></span>
-          <div className='mes-text'> {message}</div>
+          </div>
+        </div >
+        }
+        <div className={(reply) ? "message-item bordered" : "message-item"}>
+          <img alt="" src={newAvatar} />
+          <div className='text'>
+            <span><Translit value={first_name + ' ' + last_name} /></span>
+            <div className='mes-text'> {message}</div>
 
-        </div>
+          </div>
+          <div className="message-reply">
+            <div className="message-time">{time}</div>
+            <div className="message-reply-btn" onClick={() => onSetReplyAttachment({
+              id: id,
+              first_name: first_name,
+              last_name: last_name,
+              message: message
+            })}>{t("ответить")}</div>
+          </div>
 
-      </div >
-
+        </div >
+      </>
     )
   }
 }
@@ -237,9 +285,14 @@ class MessageInput extends React.Component {
 
   onSend = () => {
     const text = this.state.messageText;
-    if (text) this.props.sendMessage(text);
+    const replyAttachment = this.props.replyAttachment;
+    let reply_id = null;
+    if (replyAttachment) reply_id = this.props.replyAttachmentData.id;
+
+    if (text) this.props.sendMessage(text, reply_id, this.props.replyAttachmentData);
     this.onFocusOutMessageInput();
     this.clearText();
+    this.props.onClearReplyAttachment();
   }
 
   clearText = () => {
@@ -256,25 +309,35 @@ class MessageInput extends React.Component {
 
   render() {
 
-    const { isVisible, t } = this.props;
-    const { messageText } = this.state;
+    const { isVisible, t, activeInput, replyAttachment, replyAttachmentData, onClearReplyAttachment } = this.props;
+    const { messageText, } = this.state;
 
     return (
+      <>
+        {(isVisible && replyAttachment && !(activeInput && !isMobileSafari && !isIOS)) && <div className='message-attachment'>
 
-      <div
-        className={(isVisible) ? 'message-input' : 'message-input hidden'}
-        onFocus={this.onFocusInMessageInput}
-        onBlur={this.onFocusOutMessageInput}
-      >
-        <input
-          value={messageText}
-          onChange={this.onChangeMessage}
-          className="message-input"
-          placeholder={t("Введите сообщение")}>
-        </input>
-        <button onClick={this.onSend} className="send-btn"></button>
-      </div >
+          <div className="reply-attachment">
+            <div className="reply-icon"></div>
+            <div className="reply-name"><Translit value={replyAttachmentData.first_name + ' ' + replyAttachmentData.last_name} /></div>
+            <div className="close-btn" onClick={() => onClearReplyAttachment()}></div>
+          </div>
 
+        </div>}
+        <div
+          className={(isVisible) ? 'message-input' : 'message-input hidden'}
+          onFocus={this.onFocusInMessageInput}
+          onBlur={this.onFocusOutMessageInput}
+        >
+
+          <input
+            value={messageText}
+            onChange={this.onChangeMessage}
+            className="message-input"
+            placeholder={t("Введите сообщение")}>
+          </input>
+          <button onClick={this.onSend} className="send-btn"></button>
+        </div >
+      </>
     )
   }
 }
