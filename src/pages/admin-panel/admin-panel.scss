@@ -1,0 +1,105 @@
+#admin-panel {
+	font-family: "FuturaBookC";
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  font-size: 1.2rem; 
+  color: gray;
+
+  .search{
+    form{
+      margin: 15px 15px;
+      min-width: 300px;
+
+      input.input-search{
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid white;
+        box-shadow: chartreuse;
+        box-shadow: 1px 1px 5px 0px #ececec;
+      }
+
+      input.btn-search{
+        vertical-align: top;
+        border: none;
+        background: url(../../images/search.svg) center center no-repeat;
+        background-color: #bdbdbd;
+        height: 32px;
+        width: 32px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .header{
+    background-color: white;
+    min-height: 50px;
+    p{
+      padding: 15px;
+    }
+  }
+
+  .content{
+    flex-grow: 1;
+    background-color: rgb(236, 236, 236);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: max-content;
+
+    .user-list{
+      flex-grow:1;
+      overflow: auto;
+
+      .user-item{
+        display: grid;
+        grid-template-columns: 100px 30px 1fr 1fr 200px;
+        grid-template-rows: 30px;
+        width: 100%;
+
+        div{
+          text-align: left;
+          
+        }
+
+        .id{
+          padding-left: 15px;
+        }
+        .avatar{
+          height: 25px;
+          width: 25px;
+          overflow: hidden;
+          border-radius: 50%;
+
+          img{
+            width: 100%;
+          }
+        }
+
+        .block-btn{
+          outline: none;
+          background: transparent;
+          border: 0px;
+          text-decoration: none;
+          color: gray;
+          text-align: left;
+          padding: 0px;
+
+          span{
+            text-decoration: underline;
+            cursor: pointer;
+           
+          }
+        }
+      }
+    }
+  }
+
+  .footer{
+    background-color: white;
+    min-height: 50px;
+  }
+}
+
+	
