@@ -53,8 +53,10 @@ const fetchAdminUsers = (apiService, dispatch) => () => {
 
 const fetchAdminBan = (apiService, dispatch) => (userId, banned) => {
 	dispatch(adminUserBanRequested(userId, banned));
-	apiService.adminUserBanUser(userId, banned)
-		.then(() => dispatch(adminUserBanSuccess(chatId)))
+	apiService.adminBanUser(userId, banned)
+		.then(() => {
+			dispatch(adminUserBanSuccess(userId, banned))
+		})
 		.catch((error) => dispatch(adminUserBanError(error)));
 };
 

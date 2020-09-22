@@ -285,9 +285,9 @@ export default class IdeaFirstApiService {
 
     adminBanUser(user_id, banned) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + `/v3/users/${user_id}/chat`, JSON.stringify({
+            axios.put(this.host + `/v3/users/${user_id}/chat`, {
                 banned: banned,
-            }), this.useAuth())
+            }, this.useAuth())
                 .then(res => {
                     resolve(res);
                 })

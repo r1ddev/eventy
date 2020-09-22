@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 import "./admin-panel.scss";
 import { withTranslation } from "react-i18next";
 import { fetchUser } from "../../actions/user-actions";
-import { fetchAdminUsers } from "../../actions/adminusers-actions";
+import { fetchAdminUsers, fetchAdminBan } from "../../actions/adminusers-actions";
 import Spinner from "../../components/spinner";
 import api from "./../../js/api";
 
@@ -15,7 +15,6 @@ class AdminPanel extends React.Component {
 
 	render() {
 		const { users } = this.props.adminusers;
-		console.log(this.props);
 
 		let userlist = null;
 		let origin = api.origin;
@@ -27,8 +26,14 @@ class AdminPanel extends React.Component {
 					<div className="avatar"><img src={origin + "/images/avatar/" + item.avatar}></img></div>
 					<div className="name">{`| ${item.first_name} ${item.last_name}`}</div>
 					<div className="email">{`| ${item.mail}`}</div>
-					{(!item.chat_ban) && <button className="block-btn">| <span>Заблокировать</span></button>}
-					{(!!item.chat_ban) && <button className="block-btn">| <span>Разблокировать</span></button>}
+
+					{(!item.chat_ban) && <button className="block-btn" onClick={() => this.props.fetchAdminBan(item.id, 1)}>
+						| <span>Заблокировать</span>
+					</button>}
+
+					{(!!item.chat_ban) && <button className="block-btn" onClick={() => this.props.fetchAdminBan(item.id, 0)}>
+						| <span>Разблокировать</span>
+					</button>}
 				</div>
 			)
 		});
@@ -124,6 +129,7 @@ const mapStateToProps = ({ user, adminusers }) => {
 const mapDispatchToProps = (dispatch, { apiService }) => {
 	return {
 		fetchUser: fetchUser(apiService, dispatch),
+		fetchAdminBan: (userId, banned) => fetchAdminBan(apiService, dispatch)(userId, banned),
 		fetchAdminUsers: fetchAdminUsers(apiService, dispatch),
 	};
 };

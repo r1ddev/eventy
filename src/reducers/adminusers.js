@@ -45,6 +45,8 @@ const adminusers = (state, action) => {
             };
 
         case 'FETCH_ADMIN_USER_BAN_SUCCESS':
+
+            console.log(action.payload)
             return {
                 ...state,
                 users: updateUser(action.payload.userId, action.payload.banned, state),
@@ -55,7 +57,7 @@ const adminusers = (state, action) => {
 
         case 'FETCH_ADMIN_USER_BAN_ERROR':
             return {
-                users: updateUser(action.payload.userId, action.payload.banned, state),
+                ...state,
                 banUserId: null,
                 banLoading: false,
                 banError: action.payload
@@ -69,10 +71,11 @@ const adminusers = (state, action) => {
 const updateUser = (userId, banned, state) => {
 
     const { users } = state;
+    console.log(users);
     const userIndex = users.findIndex(({ id }) => id === userId);
 
-    const user = user.userIndex;
-    user.banned - banned;
+    const user = users[userIndex];
+    user.chat_ban = banned;
 
     return [
         ...users.slice(0, userIndex),
