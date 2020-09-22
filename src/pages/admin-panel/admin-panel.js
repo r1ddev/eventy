@@ -10,8 +10,48 @@ import { fetchUser } from "../../actions/user-actions";
 import { fetchAdminUsers, fetchAdminBan } from "../../actions/adminusers-actions";
 import Spinner from "../../components/spinner";
 import api from "./../../js/api";
+import Translit from "../../components/translit";
 
 class AdminPanel extends React.Component {
+
+	state = {
+		searchText: "",
+		searchFilter: "",
+		lazyLoad: false,
+		superLazyLoad: false,
+		users: [],
+	};
+
+
+	componentDidUpdate(prevProps) {
+		if (this.props.adminusers.users !== prevProps.adminusers.users && this.props.adminusers.users) {
+			this.setState({
+				users: this.props.adminusers.users,
+			});
+		}
+	}
+
+
+	searchSubmit = async (e) => {
+		this.setState({
+			searchFilter: this.state.searchText,
+		});
+		e.preventDefault();
+	};
+
+
+
+	filterUsers = () => {
+		return this.state.users.filter((user) => {
+			const translit = new Translit;
+
+			let userStr = user.first_name + " " + user.last_name + " " + user.position + " " + user.company;
+
+			userStr += translit.t(userStr);
+
+			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase());
+		});
+	};
 
 	render() {
 		const { users } = this.props.adminusers;
@@ -19,7 +59,7 @@ class AdminPanel extends React.Component {
 		let userlist = null;
 		let origin = api.origin;
 
-		if (users) userlist = users.map((item) => {
+		if (users) userlist = this.filterUsers().map((item) => {
 			return (
 				<div className={(item.chat_ban) ? "user-item blocked" : "user-item"} key={item.id}>
 					<div className="id">{item.id}</div>
@@ -46,7 +86,7 @@ class AdminPanel extends React.Component {
 						className="input-search"
 						placeholder="Search"
 						onChange={(e) => {
-							// this.setState({ searchText: e.target.value });
+							this.setState({ searchText: e.target.value });
 						}}
 					/>
 					<input type="submit" value="" className="btn-search" />
@@ -69,19 +109,7 @@ class AdminPanel extends React.Component {
 					}
 				</div>
 				<div className="footer">
-					<ReactPaginate
-						previousLabel={'previous'}
-						nextLabel={'next'}
-						breakLabel={'...'}
-						breakClassName={'break-me'}
-						pageCount={4}
-						marginPagesDisplayed={2}
-						pageRangeDisplayed={5}
-						onPageChange={() => { }}
-						containerClassName={'pagination'}
-						subContainerClassName={'pages pagination'}
-						activeClassName={'active'}
-					/>
+
 				</div>
 			</div>
 		);
