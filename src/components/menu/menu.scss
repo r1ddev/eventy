@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #menu {
 	/* height: 100%; */
 	/* width: 10vw; */
@@ -30,7 +32,7 @@
 	padding: 0px 10px;
 	flex-direction: column;
 	text-align: center;
-	border-left: 0px solid #22D671;
+	border-left: 0px solid $base-color;
 	transition: 100ms;
 	background-color: white;
 
@@ -38,7 +40,7 @@
 
 .menu-item:hover {
 	background-color:#e3ffef;
-	border-left: 3px solid #22D671;
+	border-left: 3px solid $base-color;
 	transition:100ms;
 	text-decoration: none;
 	color: black;

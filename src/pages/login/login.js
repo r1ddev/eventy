@@ -129,16 +129,17 @@ class Login extends React.Component {
 
 
 
-            <button type="button" className="white-button guest-btn" onClick={this.onLoginGuest}>
+            {/* <button type="button" className="white-button guest-btn" onClick={this.onLoginGuest}>
               {t("ВОЙТИ КАК ГОСТЬ")}
-            </button>
+            </button> */}
 
             <Link className="reg-link" to="/registration">
               {t("Зарегистрироваться")}
             </Link>
+            
           </div>
           <Link className="passrec-link" to="/password-recovery">
-            {t("забыли пароль?")}
+            {t("Забыли пароль?")}
           </Link>
         </form>
       </div>

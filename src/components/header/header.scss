@@ -1,3 +1,6 @@
+
+@import "../../variables.scss";
+
 .profile-header {
 	border-bottom: 1px solid #c4c4c4;
 	background-color: white;
@@ -17,8 +20,8 @@
 
 		.action-link {
 			width: 136px;
-			background: #22D671;
-			border: 1px solid #22D671;
+			background: $base-color;
+			border: 1px solid $base-color;
 			box-sizing: border-box;
 			border-radius: 10px;
 			font-family: 'FuturaBookC';

@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #presentations {
 	.folder {
 		display: flex;
@@ -12,7 +14,7 @@
 
 		&:hover {
 			color: #fff;
-			background: #22D671;
+			background: $base-color;
 		}
 	}
 }
