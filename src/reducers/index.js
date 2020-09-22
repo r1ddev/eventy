@@ -7,7 +7,7 @@ import conversations from './conversations';
 import notifications from './notifications';
 import timers from './timers';
 import floatvideo from './floatvideo';
-
+import adminusers from './adminusers';
 
 
 export default combineReducers({
@@ -18,5 +18,6 @@ export default combineReducers({
     conversations,
     notifications,
     timers,
-    floatvideo
+    floatvideo,
+    adminusers,
 })

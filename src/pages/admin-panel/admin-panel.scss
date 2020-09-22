@@ -58,6 +58,10 @@
         grid-template-rows: 30px;
         width: 100%;
 
+        &.blocked{
+          background-color: rgb(245, 210, 245);
+        }
+
         div{
           text-align: left;
           

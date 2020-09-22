@@ -6,11 +6,32 @@ import ReactPaginate from 'react-paginate';
 
 import "./admin-panel.scss";
 import { withTranslation } from "react-i18next";
+import { fetchUser } from "../../actions/user-actions";
+import { fetchAdminUsers } from "../../actions/adminusers-actions";
+import Spinner from "../../components/spinner";
+import api from "./../../js/api";
 
 class AdminPanel extends React.Component {
 
-
 	render() {
+		const { users } = this.props.adminusers;
+		console.log(this.props);
+
+		let userlist = null;
+		let origin = api.origin;
+
+		if (users) userlist = users.map((item) => {
+			return (
+				<div className={(item.chat_ban) ? "user-item blocked" : "user-item"} key={item.id}>
+					<div className="id">{item.id}</div>
+					<div className="avatar"><img src={origin + "/images/avatar/" + item.avatar}></img></div>
+					<div className="name">{`| ${item.first_name} ${item.last_name}`}</div>
+					<div className="email">{`| ${item.mail}`}</div>
+					{(!item.chat_ban) && <button className="block-btn">| <span>Заблокировать</span></button>}
+					{(!!item.chat_ban) && <button className="block-btn">| <span>Разблокировать</span></button>}
+				</div>
+			)
+		});
 
 		const search = (
 			<div className="search">
@@ -37,25 +58,10 @@ class AdminPanel extends React.Component {
 					<div>
 						{search}
 					</div>
-					<div className="user-list">
-
-						<div className="user-item">
-							<div className="id">1223</div>
-							<div className="avatar"><img src="https://sun9-43.userapi.com/c9991/u132322200/a_ebbda311.jpg?ava=1"></img></div>
-							<div className="name">| Харитон Мельников</div>
-							<div className="email">| HV@gmail.com </div>
-							<button className="block-btn">| <span>Заблокировать</span></button>
-						</div>
-
-						<div className="user-item">
-							<div className="id">1223</div>
-							<div className="avatar"><img src="https://sun9-43.userapi.com/c9991/u132322200/a_ebbda311.jpg?ava=1"></img></div>
-							<div className="name">| Харитон Мельников</div>
-							<div className="email">| HV@gmail.com </div>
-							<button className="block-btn">| <span>Заблокировать</span></button>
-						</div>
-
+					{(!!users) && <div className="user-list">
+						{userlist}
 					</div>
+					}
 				</div>
 				<div className="footer">
 					<ReactPaginate
@@ -79,23 +85,47 @@ class AdminPanel extends React.Component {
 
 class AdminPanelContainer extends React.Component {
 
+	componentDidMount() {
+		this.props.fetchUser();
+		this.props.fetchAdminUsers();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.user.user !== prevProps.user.user && this.props.user.user) {
+			if (this.props.user.user.range !== 8) {
+				this.props.history.push("/error");
+			}
+		}
+	}
 	render() {
+		const { loading, user, error } = this.props.user;
+		const { users } = this.props.adminusers;
+		let errorUserPermissions = false;
+		if (user) errorUserPermissions = error || user.range !== 8; //moderator
+		console.log(users);
 
 		return (
-			<AdminPanel {...this.props} />
+			<div style={{ height: "100vh", width: "100%" }}>
+				{!loading && !errorUserPermissions && <AdminPanel {...this.props} loading={loading} />}
+				{loading || errorUserPermissions && <Spinner big={1} />}
+			</div>
 		);
 	}
 }
 
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, adminusers }) => {
 	return {
 		user,
+		adminusers,
 	};
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		fetchUser: fetchUser(apiService, dispatch),
+		fetchAdminUsers: fetchAdminUsers(apiService, dispatch),
+	};
 };
 
 export default compose(
