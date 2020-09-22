@@ -12,14 +12,19 @@ import Spinner from "../../components/spinner";
 import api from "./../../js/api";
 import Translit from "../../components/translit";
 
+import Pagination from "rc-pagination";
+import "rc-pagination/assets/index.css";
+
 class AdminPanel extends React.Component {
 
 	state = {
 		searchText: "",
 		searchFilter: "",
-		lazyLoad: false,
-		superLazyLoad: false,
 		users: [],
+		pagination: {
+			currentPage: 1,
+			itemsOnPage: 15,
+		},
 	};
 
 
@@ -37,6 +42,24 @@ class AdminPanel extends React.Component {
 			searchFilter: this.state.searchText,
 		});
 		e.preventDefault();
+	};
+
+
+	onPageChange = (data) => {
+		this.setState((prevState) => ({
+			pagination: { ...prevState.pagination, currentPage: data },
+		}));
+	};
+
+	paginateUsers = () => {
+		console.log(this.filterUsers().slice(
+			this.state.pagination.itemsOnPage * (this.state.pagination.currentPage - 1),
+			this.state.pagination.itemsOnPage * this.state.pagination.currentPage
+		).length)
+		return this.filterUsers().slice(
+			this.state.pagination.itemsOnPage * (this.state.pagination.currentPage - 1),
+			this.state.pagination.itemsOnPage * this.state.pagination.currentPage
+		);
 	};
 
 
@@ -59,7 +82,7 @@ class AdminPanel extends React.Component {
 		let userlist = null;
 		let origin = api.origin;
 
-		if (users) userlist = this.filterUsers().map((item) => {
+		if (users) userlist = this.paginateUsers().map((item) => {
 			return (
 				<div className={(item.chat_ban) ? "user-item blocked" : "user-item"} key={item.id}>
 					<div className="id">{item.id}</div>
@@ -109,7 +132,14 @@ class AdminPanel extends React.Component {
 					}
 				</div>
 				<div className="footer">
-
+					{(this.paginateUsers().length > 0) && <Pagination
+						pageSize={this.state.pagination.itemsOnPage}
+						onChange={this.onPageChange}
+						current={this.state.pagination.currentPage}
+						total={this.filterUsers().length}
+						itemRender={this.textItemRender}
+						locale={"ru"}
+					/>}
 				</div>
 			</div>
 		);
