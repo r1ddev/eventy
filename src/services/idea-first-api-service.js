@@ -196,11 +196,12 @@ export default class IdeaFirstApiService {
     }
 
 
-    postMessage(chatId, text) {
+    postMessage(chatId, text, reply_id = null) {
         return new Promise((resolve, reject) => {
             axios.post(this.host + "/group/messages", this.toFormData({
                 chat_id: chatId,
-                text: text
+                text: text,
+                reply_id: reply_id
             }), this.useAuth())
                 .then(res => {
                     if (res.data.status) {

@@ -69,6 +69,7 @@ i18n.use(LanguageDetector).init({
         "Опросы": 'Опросы',
         "Введите ваше сообщение": "Введите ваше сообщение",
         "Введите сообщение": "Введите сообщение",
+        "ответить": "ответить",
 
 
         Партнеры: "Партнеры",
@@ -152,6 +153,7 @@ i18n.use(LanguageDetector).init({
         "Опросы": 'Polls',
         "Введите ваше сообщение": "Type something",
         "Введите сообщение": "Type something",
+        "ответить": "reply",
 
 
         Партнеры: "Expo",
@@ -173,7 +175,7 @@ i18n.use(LanguageDetector).init({
     },
   },
   fallbackLng: "ru",
-  debug: true,
+  debug: false,
 
   // have a common namespace used around the full app
   ns: ["translations"],

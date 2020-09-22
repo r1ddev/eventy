@@ -4,6 +4,60 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+
+	
+.ScrollbarsCustom-Content{
+	padding-left: 10px !important;
+}
+
+
+.close-btn{
+	cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/close-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.reply-icon{
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #c9d0cc;
+  background-image: url(../../images/menu/reply-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 0px;
+  outline: none;
+}
+
+.message-attachment{
+
+  background-color: #c9d0cc;
+  padding: 5px;
+
+  .reply-attachment{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .reply-name{
+      text-align: left;
+      flex-grow: 1;
+      padding-left: 10px;
+    }
+
+  }
+}
+
+
 }
 
 #scenes-chat .chat-tabs {
@@ -21,7 +75,7 @@
 
 #scenes-chat .chat-input-container {
 	border-top: 1px solid #c4c4c4;
-	flex-direction: row;
+	flex-direction: column;
 	display: flex;
 }
 
@@ -43,7 +97,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	cursor: pointer;
 }
 
@@ -131,6 +185,33 @@ button:focus {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	margin-top: 5px;
+
+	&.bordered{
+		border-left: 4px solid #ccc9c9;
+		margin-top: 0px;
+		margin-bottom: 5px;
+
+		.mes-photo{
+			margin-left: 10px;
+		}
+
+	}
+
+	&.replied{
+		margin-top: 15px;
+		border-left: 4px solid #ccc9c9;
+		padding-left: 10px;
+		
+
+		.mes-info{
+			width: calc(100% - 75px);
+			margin: 0px;
+			padding: 5px 10px;
+			border-radius: 4px;
+			background-color: rgb(224, 224, 224);
+		}
+	}
 }
 
 .mes-photo {
@@ -141,7 +222,7 @@ button:focus {
 	background-position: center;
 	background-size: cover;
 	border-radius: 15px;
-	margin: 10px 10px 0px 24px;
+	margin: 10px 10px 0px 14px;
 }
 
 .mes-box {
@@ -171,14 +252,15 @@ button:focus {
 a.mes-info-name{
 	text-decoration: none;
 	color: black;
+	vertical-align: inherit;
 }
 
 .mes-info-content {
 	font-family: "FuturaBookC";
 	font-style: normal;
 	font-weight: normal;
-	font-size: 19px;
-	line-height: 20px;
+	font-size: 15px;
+	line-height: 16px;
 }
 
 .mes-info-status {
@@ -191,8 +273,32 @@ a.mes-info-name{
 	margin-left: 10px;
 }
 
+.mes-options{
+	margin: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	
+}
+
+.mes-options .mes-time,
+.mes-options .mes-reply-btn{
+	font-family: "FuturaBookC";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 16px;
+	color: rgb(100, 100, 100);
+}
+
+.mes-options .mes-reply-btn{
+	cursor: pointer;
+}
+
 .chat-input-wrapper {
 	flex-grow: 1;
+	width: calc(100% - 70px);
+	
 }
 
 .react-emoji-picker--wrapper {
@@ -232,3 +338,6 @@ a.mes-info-name{
 	border-right-color: transparent;
 	border-radius: 50%;
 }
+
+
+

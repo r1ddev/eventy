@@ -23,7 +23,7 @@ class ScenesMobile extends React.Component {
 
     onChangeChatIsOpenValue = (value) => {
         this.setState({ chatIsOpen: value })
-        console.log(value);
+        // console.log(value);
     }
 
     render() {

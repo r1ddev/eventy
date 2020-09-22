@@ -34,7 +34,7 @@ class PasswordRecovery extends React.Component {
         this.props.history.push("/login");
       })
       .catch((err) => {
-        console.log(err.message);
+        // console.log(err.message);
         this.setState({
           disableForm: false,
         });

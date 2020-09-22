@@ -46,7 +46,7 @@ class Registration extends React.Component {
         tag: JSON.stringify(this.state.regTag),
       };
 
-      console.log(user);
+      // console.log(user);
       this.setState({
         disableForm: false,
       });
@@ -59,7 +59,7 @@ class Registration extends React.Component {
           this.props.history.push("/registration-acception");
         })
         .catch((err) => {
-          console.log(err.message);
+          // console.log(err.message);
           this.setState({
             disableForm: false,
           });

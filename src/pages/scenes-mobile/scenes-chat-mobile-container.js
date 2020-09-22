@@ -31,18 +31,24 @@ class ScenesChatMobileContainer extends React.Component {
         })
     }
 
-    sendMessage = (message) => {
+    sendMessage = (message, reply_id, replyAttachmentData) => {
         const { first_name, last_name, avatar, range } = this.props.user;
+
+        const date = new Date;
+
         const mes = {
             user_id: 1,
             first_name: first_name,
             last_name: last_name,
             avatar: avatar,
             range: range,
-            messages_id: 1,
-            message: message
+            id: 1,
+            reply: replyAttachmentData,
+            reply_id: reply_id,
+            message: message,
+            time: `${date.getHours()}:${date.getMinutes()}`
         }
-        this.props.fetchAddMessage(this.state.currentChatId, mes)
+        this.props.fetchAddMessage(this.state.currentChatId, mes, reply_id)
     }
 
     setItem = (item) => {
@@ -86,7 +92,7 @@ class ScenesChatMobileContainer extends React.Component {
         const { messages, loading } = this.props.chat;
         const { survey } = this.state;
 
-        console.log(messages)
+        // console.log(messages)
 
         return (
 
@@ -112,7 +118,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchMessages: (idChat) => fetchMessages(apiService, dispatch)(idChat),
         updateMessages: (idChat, id) => updateMessages(apiService, dispatch)(idChat, id),
-        fetchAddMessage: (idChat, message) => fetchAddMessage(apiService, dispatch)(idChat, message),
+        fetchAddMessage: (idChat, message, reply_id) => fetchAddMessage(apiService, dispatch)(idChat, message, reply_id),
     }
 };
 

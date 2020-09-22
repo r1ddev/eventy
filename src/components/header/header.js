@@ -19,7 +19,7 @@ class Header extends React.Component {
       }
     }
 
-    console.log("this.props.children", this.props.children);
+    // console.log("this.props.children", this.props.children);
 
     return (
       <div className={className + " header profile-header"}>
