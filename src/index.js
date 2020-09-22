@@ -15,6 +15,7 @@ import Error from "./pages/error";
 import Login from "./pages/login";
 import Registration from "./pages/registration";
 import RegistrationAcception from "./pages/registration-acception";
+import AdminPanel from "./pages/admin-panel";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,6 +39,7 @@ class Index extends React.Component {
 								<Route path="/profile/:id" component={Profile} />
 								<Route path="/profile" component={Profile} />
 								<Route path="/login" component={Login} />
+								<Route path="/admin-panel" component={AdminPanel} />
 								<Route path="/registration" component={Registration} />
 								<Route path="/registration-acception" component={RegistrationAcception} />
 								<Route path="/password-recovery" component={PasswordRecovery} />
