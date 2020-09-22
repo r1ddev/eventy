@@ -1,5 +1,5 @@
 import React from "react";
-import "./scenes.css";
+import "./scenes.scss";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";

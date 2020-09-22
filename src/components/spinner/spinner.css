@@ -4,7 +4,7 @@
 }
 
 .text-success {
-	color: #22D671!important;
+	color: $base-color + '!important';
 }
 
 .my-spinner .spinner-border {

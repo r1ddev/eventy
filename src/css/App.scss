@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import "../variables.scss";
 
 .flex-center {
 	display: flex;
@@ -7,7 +8,7 @@
 }
 
 .r1-inp {
-	border: 2px solid #22D671;
+	border: 2px solid $base-color;
 	padding: 5px 20px;
 	border-radius: 10px;
 }

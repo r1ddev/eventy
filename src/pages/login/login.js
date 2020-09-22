@@ -136,9 +136,10 @@ class Login extends React.Component {
             <Link className="reg-link" to="/registration">
               {t("Зарегистрироваться")}
             </Link>
+            
           </div>
           <Link className="passrec-link" to="/password-recovery">
-            {t("забыли пароль?")}
+            {t("Забыли пароль?")}
           </Link>
         </form>
       </div>
