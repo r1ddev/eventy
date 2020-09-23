@@ -44,7 +44,10 @@ const api = {
 			phone,
 			email,
 			shareContact,
-			soc
+			soc,
+			telegram,
+			what_looking,
+			what_offer
 		) => {
 			let response = await axios.post(
 				api.proxy + api.host + "/users/edit",
@@ -56,8 +59,9 @@ const api = {
 					phone: phone,
 					mail: email,
 					social_site: soc,
-					what_looking: "",
-					what_offer: "",
+					social_telegram: telegram,
+					what_looking: what_looking,
+					what_offer: what_offer,
 					view_contact: shareContact - 0,
 				}),
 				api.useAuth()
