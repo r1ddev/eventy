@@ -268,6 +268,18 @@ class EditProfile extends React.Component {
                       </textarea>
                     </div>
 
+                    <div className="field mt-4">
+                      <input
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Город")}
+                        value={soc}
+                        onChange={(e) => {
+                          
+                        }}
+                      />
+                    </div>
+
                     <div className="field">
                       <div className="row">
                         <div className="col-lg d-flex align-items-center mt-4">{t("Хочу ли я делиться контактами?")}</div>
