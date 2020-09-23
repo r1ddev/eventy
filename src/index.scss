@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -74,8 +76,8 @@ body {
 
 .white-button{
   padding:8px;
-  background-color: white;
-  color:  #18BA5A;
+  background-color: #FD5A1F;
+  color:  #fff;
   border-radius: 12px;
   font-size: 23px;
   display: flex;
@@ -85,11 +87,11 @@ body {
 }
 
 .white-button:hover{
-  background-color: rgb(221, 253, 223);
+  background-color: #fa5012;
 }
 
 .white-button:active{
-  background-color: rgb(179, 255, 189);
+  background-color: #ff4400;
 }
 
 button.white-button{
@@ -98,6 +100,12 @@ button.white-button{
   border: none;
   text-align: center;
   text-decoration: none;
+
+  &:disabled {
+	cursor: auto;
+	background-color: #ffd7c8;
+	color: #fff;
+  }
 }
 
 button.white-button:active, button:focus {
@@ -108,13 +116,7 @@ button.white-button::-moz-focus-inner {
   border: 0;
 }
 
-button.white-button:disabled {
-	cursor: auto;
-	background-color: #eaeaead9;
-	color: #a3bbad;
-}
-
 button.white-button:disabled:hover {
-	background-color: #eaeaead9;
-	color: #a3bbad;
+	background-color: #ffd7c8;
+	color: #fff;
 }

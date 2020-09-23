@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #edit-profile {
 	.registration-wrap,
 	.edit-wrap,
@@ -9,7 +11,7 @@
 		// overflow: hidden;
 
 		.left {
-			background-color: #22d671;
+			background-color: $base-color;
 			border-top-left-radius: 20px;
 			border-bottom-left-radius: 20px;
 
@@ -41,7 +43,7 @@
 				transition: 0.2s;
 				cursor: pointer;
 				color: #000;
-				border: 2px solid #22d671;
+				border: 2px solid $base-color;
 				background: #fff;
 				border-radius: 10px;
 				padding: 5px 20px;
@@ -49,17 +51,17 @@
 
 				&-selected {
 					color: #fff;
-					background: #22d671;
+					background: $base-color;
 				}
 
 				&:hover {
-					background: #1dd6737a;
+					background: rgba($base-color, 0.4);
 				}
 			}
 
 			.css-vndh9s-control {
-				border: 1px solid #22d671;
-				box-shadow: 0 0 0px 1px #22d671;
+				border: 1px solid $base-color;
+				box-shadow: 0 0 0px 1px $base-color;
 			}
 			// .css-1pahdxg-control {
 			// 	box-shadow: 0 0 0 1px #f4004d;
@@ -71,7 +73,7 @@
 			// 	// border: 3px solid #f4004d;
 			// }
 			.btn-submit {
-				color: #18ba5a;
+				color: $btn-border-color;
 				font-family: IBM Plex Mono;
 				font-weight: bold;
 				font-size: 30px;
@@ -79,29 +81,30 @@
 				border: 3px solid #19b75e;
 				border-radius: 10px;
 				padding: 5px 30px;
+				user-select: none;
 			}
 		}
 	}
 	.edit-wrap {
 		.left {
-			background-color: #1dd673;
+			background-color: $base-color;
 		}
 
 		.r1-inp {
-			border: 2px solid #1dd673;
+			border: 2px solid $base-color;
 		}
 
 		.right {
 			.radio {
-				border: 2px solid #1dd673;
+				border: 2px solid $base-color;
 
 				&-selected {
-					background: #1dd673;
+					background: $base-color;
 				}
 			}
 			.css-vndh9s-control {
-				border: 1px solid #1dd673;
-				box-shadow: 0 0 0px 1px #1dd673;
+				border: 1px solid $base-color;
+				box-shadow: 0 0 0px 1px $base-color;
 			}
 		}
 	}

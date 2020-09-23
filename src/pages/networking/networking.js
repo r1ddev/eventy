@@ -166,8 +166,8 @@ class Networking extends React.Component {
 							type="text"
 							className="inp-search col"
 							placeholder="Search"
-              onChange={this.onSerchTextChange}
-              value={this.state.searchText}
+							onChange={this.onSerchTextChange}
+							value={this.state.searchText}
 						/>
 						{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
 					</div>

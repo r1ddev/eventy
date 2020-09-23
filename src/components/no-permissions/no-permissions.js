@@ -1,5 +1,5 @@
 import React from 'react';
-import "./no-permissions.css"
+import "./no-permissions.scss"
 class NoPermissions extends React.Component {
 
     render() {

@@ -25,17 +25,20 @@ class EditProfile extends React.Component {
     email: "",
     shareContact: true,
     soc: "",
+    telegram: "",
+    what_looking: "",
+    what_offer: "",
 
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .registration(name, lastName, company, position, phone, email, shareContact, soc)
+      .registration(name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -74,6 +77,9 @@ class EditProfile extends React.Component {
           email: res.user.mail || "",
           shareContact: !!res.user.view_contact,
           soc: res.user.social_site || "",
+          telegram: res.user.social_telegram || "",
+          what_looking: res.user.what_looking || "",
+          what_offer: res.user.what_offer || "",
         });
 
         this.setLoading(false);
@@ -97,7 +103,7 @@ class EditProfile extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc } = this.state;
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer } = this.state;
 
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
@@ -208,12 +214,68 @@ class EditProfile extends React.Component {
                       <input
                         type="text"
                         className="form-control r1-inp"
-                        placeholder={t("Ссылка на соц. сеть")}
+                        placeholder={t("Ссылка на вконтакте")}
                         value={soc}
                         onChange={(e) => {
                           this.setState({
                             soc: e.target.value,
                           });
+                        }}
+                      />
+                    </div>
+
+                    <div className="field mt-4">
+                      <input
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Никнейм в телеграм")}
+                        value={soc}
+                        onChange={(e) => {
+                          this.setState({
+                            telegram: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что ищете?")}
+                        value={what_looking}
+                        onChange={(e) => {
+                          this.setState({
+                            what_looking: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
+                    </div>
+
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что предлагаете?")}
+                        value={what_offer}
+                        onChange={(e) => {
+                          this.setState({
+                            what_offer: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
+                    </div>
+
+                    <div className="field mt-4">
+                      <input
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Город")}
+                        value={soc}
+                        onChange={(e) => {
+                          
                         }}
                       />
                     </div>
