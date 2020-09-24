@@ -58,9 +58,9 @@ class Scenes extends React.Component {
                             </iframe> */}
             </div>
           </div>
-          <div className="translation-footer">
+          {/* <div className="translation-footer">
             <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
-          </div>
+          </div> */}
         </div>
         <div className="scenes-chat">
           <div className="chat-header">
@@ -95,6 +95,17 @@ class TranslationHeader extends React.Component {
               {t('СЦЕНА') + ' 1'}
             </div>
             <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
+              {t('Идет')}
+            </div>
+          </div>
+        </div>
+
+        <div className="scene-item">
+          <div>
+            <div className={scene === 1 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(1)}>
+              {t('СЦЕНА') + ' 2'}
+            </div>
+            <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
               {t('Идет')}
             </div>
           </div>

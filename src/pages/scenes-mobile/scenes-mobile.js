@@ -18,7 +18,7 @@ import ScenesChatMobile from './scenes-chat-mobile-container';
 class ScenesMobile extends React.Component {
 
     state = {
-        chatIsOpen: false,
+        chatIsOpen: true,
     }
 
     onChangeChatIsOpenValue = (value) => {
@@ -60,12 +60,12 @@ class ScenesMobile extends React.Component {
 
                 <ScenesVideo sceneUrl={sceneUrl} />
 
-                <ScenesVideoActions isVisible={!chatIsOpen}>
+                {/*<ScenesVideoActions isVisible={!chatIsOpen}>
                     <ScenesReactions sceneNumber={scene} />
                     <ScenesLangChecker />
-                </ScenesVideoActions>
+                </ScenesVideoActions> */}
 
-                <ScenesBanner isVisible={!chatIsOpen} />
+                <ScenesBanner isVisible={!chatIsOpen || 1} />
                 <ScenesTimetable isVisible={!chatIsOpen} t={t} />
 
                 <ScenesChatMobile

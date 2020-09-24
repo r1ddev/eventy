@@ -11,7 +11,7 @@ import { ThemeConsumer } from 'styled-components';
 class ScenesChatMobile extends React.Component {
 
   state = {
-    isOpen: false,
+    isOpen: true,
     activeInput: false,
     replyAttachment: false,
     replyAttachmentData: null
@@ -356,7 +356,7 @@ class MessageInput extends React.Component {
 class CheckChatPanel extends React.Component {
 
   state = {
-    isOpen: false,
+    isOpen: true,
     itemList: ['survey', 'spiker', 'general'],
     activeItem: '',
   }
