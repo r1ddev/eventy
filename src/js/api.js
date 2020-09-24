@@ -54,7 +54,7 @@ const api = {
 					company: company,
 					position: position,
 					phone: phone,
-					mail: email,
+					email: email,
 					social_site: soc,
 					what_looking: "",
 					what_offer: "",
