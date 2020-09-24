@@ -62,7 +62,7 @@ class ScenesChatMobile extends React.Component {
   render() {
 
     const { isOpen, activeInput, replyAttachment, replyAttachmentData } = this.state;
-    const { loading, messages, setItem, sendMessage, survey, t } = this.props;
+    const { loading, messages, setItem, sendMessage, survey, t, userbanned } = this.props;
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
@@ -95,6 +95,7 @@ class ScenesChatMobile extends React.Component {
               activeInput={activeInput}
               replyAttachment={replyAttachment}
               replyAttachmentData={replyAttachmentData}
+              userbanned={userbanned}
               onClearReplyAttachment={this.onClearReplyAttachment}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
@@ -131,6 +132,7 @@ class ScenesChatMobile extends React.Component {
               activeInput={activeInput}
               onFocus={this.onFocusInput}
               onBlur={this.onBlurInput}
+              userbanned={userbanned}
               sendMessage={sendMessage}
               replyAttachment={replyAttachment}
               replyAttachmentData={replyAttachmentData}
@@ -309,12 +311,12 @@ class MessageInput extends React.Component {
 
   render() {
 
-    const { isVisible, t, activeInput, replyAttachment, replyAttachmentData, onClearReplyAttachment } = this.props;
+    const { isVisible, t, activeInput, replyAttachment, replyAttachmentData, onClearReplyAttachment, userbanned } = this.props;
     const { messageText, } = this.state;
 
     return (
       <>
-        {(isVisible && replyAttachment && !(activeInput && !isMobileSafari && !isIOS)) && <div className='message-attachment'>
+        {(isVisible && replyAttachment && !userbanned && !(activeInput && !isMobileSafari && !isIOS)) && <div className='message-attachment'>
 
           <div className="reply-attachment">
             <div className="reply-icon"></div>
@@ -323,7 +325,7 @@ class MessageInput extends React.Component {
           </div>
 
         </div>}
-        <div
+        {(!userbanned) && <div
           className={(isVisible) ? 'message-input' : 'message-input hidden'}
           onFocus={this.onFocusInMessageInput}
           onBlur={this.onFocusOutMessageInput}
@@ -337,6 +339,14 @@ class MessageInput extends React.Component {
           </input>
           <button onClick={this.onSend} className="send-btn"></button>
         </div >
+        }
+
+        {(!!userbanned) && <div
+          className={(isVisible) ? 'message-input banned' : 'message-input hidden banned'}
+        >
+          Доступ к чату ограничен
+        </div >
+        }
       </>
     )
   }

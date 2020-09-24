@@ -179,6 +179,14 @@
   overflow: hidden;
   transition: height 200ms; 
 
+  &.banned{
+    background-color: #c9d0cc;
+    padding: 10px 15px
+  }
+
+  &.hidden.banned{
+    padding: 0px;
+  }
 
   &.hidden{
     height: 0;
