@@ -189,6 +189,10 @@ button:focus {
 	width: 100%;
 	margin-top: 5px;
 
+	.mes-photo-wrapper{
+		flex: 0 0 auto;
+	}
+
 	&.bordered{
 		border-left: 4px solid #ccc9c9;
 		margin-top: 0px;
@@ -209,6 +213,7 @@ button:focus {
 		.mes-info{
 			width: calc(100% - 75px);
 			margin: 0px;
+			margin-right: 5px;
 			padding: 5px 10px;
 			border-radius: 4px;
 			background-color: rgb(224, 224, 224);
@@ -238,7 +243,9 @@ button:focus {
 }
 
 .mes-info {
-	width: calc(100% - 100px);
+	flex-basis: 0;
+	flex-grow: 1;
+	min-width: 0;
 	overflow-wrap: break-word;
 	margin: 10px 0px;
 }
@@ -278,6 +285,7 @@ a.mes-info-name{
 .mes-options{
 	margin: 10px 10px;
 	display: flex;
+	flex: 0 0 auto;
 	flex-direction: column;
 	justify-content: space-between;
 	
@@ -301,6 +309,15 @@ a.mes-info-name{
 	flex-grow: 1;
 	width: calc(100% - 70px);
 	
+}
+
+.chat-input-wrapper-banned {
+	flex-grow: 1;
+	width: calc(100% - 70px);
+	padding:10px 25px; 
+	background-color: whitesmoke;
+	font-family: "FuturaBookC";
+
 }
 
 .react-emoji-picker--wrapper {

@@ -81,6 +81,7 @@ class ScenesChat extends React.Component {
 			setChat,
 			loading,
 			isPrivate,
+			userbanned,
 			t = (val) => val //перевод
 		} = this.props;
 
@@ -162,7 +163,7 @@ class ScenesChat extends React.Component {
 						</div>
 					</div>}
 
-					<div style={{ display: 'flex', flexDirection: "row" }}>
+					{(!userbanned) && <div style={{ display: 'flex', flexDirection: "row" }}>
 						<div className="chat-input-wrapper">
 							{!loading && (
 								<InputEmoji
@@ -176,7 +177,6 @@ class ScenesChat extends React.Component {
 									ref="chatInput"
 								/>
 							)}
-
 						</div>
 
 						<button className="send-mes-btn" onClick={this.onSubmit}>
@@ -185,9 +185,16 @@ class ScenesChat extends React.Component {
 								onClick={this.onSubmit}></div>
 						</button>
 					</div>
+					}
 
+					{(!!userbanned) && <div style={{ display: 'flex', flexDirection: "row" }}>
+						<div className="chat-input-wrapper-banned">
+							Доступ к чату ограничен
+						</div>
+					</div>
+					}
 				</div>
-			</div>
+			</div >
 		);
 	}
 }
@@ -222,8 +229,7 @@ class MessageItem extends React.Component {
 								className="mes-info-status"
 								style={{
 									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${
-										sponsor ? "#22D671" : "white"
+									backgroundColor: `${sponsor ? "#22D671" : "white"
 										}`,
 								}}>
 								{sponsor ? "UMF" : ""}
@@ -263,8 +269,7 @@ class MessageItem extends React.Component {
 								className="mes-info-status"
 								style={{
 									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${
-										sponsor ? "#22D671" : "white"
+									backgroundColor: `${sponsor ? "#22D671" : "white"
 										}`,
 								}}>
 								{sponsor ? "UMF" : ""}

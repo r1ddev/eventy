@@ -270,6 +270,35 @@ export default class IdeaFirstApiService {
         })
     }
 
+    //--admin-panel
+
+    getAdminUsers() {
+
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/v3/users`, this.useAuth())
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(error => { reject(error); console.log('Bll3'); }
+
+                )
+        })
+    }
+
+    adminBanUser(user_id, banned) {
+        return new Promise((resolve, reject) => {
+            axios.put(this.host + `/v3/users/${user_id}/chat`, {
+                banned: banned,
+            }, this.useAuth())
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+
     //--Заглушки--//
 
     _ScenesResponse() {
