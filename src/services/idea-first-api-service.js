@@ -4,7 +4,8 @@ export default class IdeaFirstApiService {
 
 
     origin = window.location.protocol + "//demo.smit.events";
-    host = window.location.protocol + "//demo.smit.events/api";
+    host = window.location.protocol + "//api.smit.events/api";
+    staticHost = window.location.protocol + "//demo.smit.events/static-api";
 
     // origin = window.location.origin;
     // host = window.location.origin + "/api";
@@ -152,7 +153,7 @@ export default class IdeaFirstApiService {
 
     getBanner(sceneId) {
         return new Promise((resolve, reject) => {
-            axios.get(this.origin + `/static-api/banners/${sceneId}`, this.useAuth())
+            axios.get(`${this.staticHost}/banners/${sceneId}`, this.useAuth())
                 .then(res => {
                     if (res.data.status) {
                         resolve(res.data);
