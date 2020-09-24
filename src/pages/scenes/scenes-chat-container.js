@@ -134,8 +134,8 @@ class ScenesChatContainer extends React.Component {
             error
         } = this.props.chat
 
-        let userbanned = false;
-        if (error) userbanned = (error.response.data.error == 'user_banned') ? true : false;
+        let userbanned = this.props.user.chat_ban;
+        if (error) userbanned = (error.response.data.error == 'user_banned' || this.props.user.chat_ban) ? true : false;
 
         return (
 

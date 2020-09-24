@@ -309,6 +309,15 @@ a.mes-info-name{
 	
 }
 
+.chat-input-wrapper-banned {
+	flex-grow: 1;
+	width: calc(100% - 70px);
+	padding:10px 25px; 
+	background-color: whitesmoke;
+	font-family: "FuturaBookC";
+
+}
+
 .react-emoji-picker--wrapper {
 	width: 350px !important;
 }
