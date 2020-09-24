@@ -3,14 +3,9 @@ import axios from "axios";
 const api = {
 	// proxy: "https://cors-anywhere.herokuapp.com/",
 	proxy: "",
-	// origin: "https://onlineshow.marketingforum.com.ua",
-	// host: "https://onlineshow.marketingforum.com.ua/api",
 
 	origin: window.location.protocol + "//demo.smit.events",
-	host: window.location.protocol + "//demo.smit.events/api",
-
-	// origin: window.location.origin,
-	// host: window.location.origin + "/api",
+	host: window.location.protocol + "//api.smit.events/api",
 
 	useAuth: () => {
 		return {
@@ -141,13 +136,19 @@ const api = {
 	},
 
 	errorHandler: (e, errors) => {
+		if (!errors.hasOwnProperty("404")) {
+			errors['404'] = () => alert("something сломалось")
+		}
+
+		console.log("errors", errors);
 		if (!e.response) {
 			console.log("Ошибка Интернета");
 		} else {
 			Object.keys(errors).map(function (key) {
-				e.response.data.error = String(e.response.data.error);
-
-				if (e.response.data.error === key) {
+				let error = String(e.response.data.error || "");
+				let status = String(e.response.status || "");
+			
+				if (error === key || status === key) {
 					errors[key]();
 				}
 			});
