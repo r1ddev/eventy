@@ -52,7 +52,7 @@ const api = {
 					company: company,
 					position: position,
 					phone: phone,
-					mail: email,
+					email: email,
 					social_site: soc,
 					social_telegram: telegram,
 					what_looking: what_looking,

@@ -46,7 +46,7 @@ class Networking extends React.Component {
 					user.company = user.company || "";
 					user.first_name = user.first_name || "";
 					user.last_name = user.last_name || "";
-					user.mail = user.mail || "";
+					user.email = user.email || "";
 					user.phone = user.phone || "";
 					user.position = user.position || "";
 					user.range = user.range || "";

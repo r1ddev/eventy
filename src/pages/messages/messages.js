@@ -42,7 +42,7 @@ class Messages extends React.Component {
     var isChatAvailable = Object.entries(activeUser).length > 0;
 
     const isContactAvailable =
-      activeUser.mail ||
+      activeUser.email ||
       activeUser.phone ||
       activeUser.social_site ||
       activeUser.what_offer ||
@@ -225,7 +225,7 @@ class MessagesContainer extends React.Component {
         user_id: userId,
         company: userData.user.company,
         position: userData.user.position,
-        mail: userData.user.mail || "",
+        email: userData.user.email || "",
         phone: userData.user.phone || "",
         social_site: userData.user.social_site || "",
         what_looking: userData.user.what_looking || "",
