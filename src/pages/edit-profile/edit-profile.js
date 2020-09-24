@@ -14,6 +14,23 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
 
+const specializations = [
+  { value: '1', label: 'Представители площадок' },
+  { value: '2', label: 'Ведущие и модераторы' },
+  { value: '3', label: 'Поставщики оборудования' },
+  { value: '4', label: 'Ведущие' },
+  { value: '5', label: 'Артисты и музыканты' },
+  { value: '6', label: 'Представители Event-агентств' },
+  { value: '7', label: 'Разработчики сервисов для организаторов' },
+  { value: '8', label: 'Реклама и продвижение событий' },
+  { value: '9', label: 'Фотографы, видеографы' },
+  { value: '10', label: 'Режиссеры событий' },
+  { value: '11', label: 'Сценографы, дизайнеры и декораторы' },
+  { value: '12', label: 'Специалист по свету и звуку' },
+  { value: '13', label: 'Организаторы трансляций' },
+  { value: '14', label: 'Event-агентства' },
+]
+
 class EditProfile extends React.Component {
   state = {
     avatar: "",
@@ -28,17 +45,18 @@ class EditProfile extends React.Component {
     telegram: "",
     what_looking: "",
     what_offer: "",
-
+    specialization: undefined,
+    town: "",
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer, specialization, town } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .registration(name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer)
+      .editProfile(name, lastName, company, position, specialization, phone, email, shareContact, soc, telegram, what_looking, what_offer, town)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -80,6 +98,8 @@ class EditProfile extends React.Component {
           telegram: res.user.social_telegram || "",
           what_looking: res.user.what_looking || "",
           what_offer: res.user.what_offer || "",
+          town: res.user.town || "",
+          specialization: res.user.specialization || 0
         });
 
         this.setLoading(false);
@@ -101,10 +121,17 @@ class EditProfile extends React.Component {
     });
   };
 
+  onChangeSpecialization = (e) => {
+    this.setState({
+      specialization: e.value
+    })
+  }
+
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer } = this.state;
-
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer, town, specialization } = this.state;
+    const currentSpecialization = specializations.find(s => s.value == specialization)
+    
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
         <div className="bg-light flex-center min-vh-100">
@@ -179,6 +206,23 @@ class EditProfile extends React.Component {
                         required
                       />
                     </div>
+
+                    <div className="field mt-3">
+
+                    <Select
+                      value={currentSpecialization}
+                      options={specializations}
+                      onChange={this.onChangeSpecialization}
+                      className="form-control r1-inp p-0"
+                      placeholder={t("Специализация")}
+                      theme={theme => ({
+                        ...theme,
+                        borderRadius: 8,
+                      })}
+                      required={true}
+                    />
+
+                    </div>
                   </div>
 
                   <div className="col-md-7 right p-5">
@@ -229,7 +273,7 @@ class EditProfile extends React.Component {
                         type="text"
                         className="form-control r1-inp"
                         placeholder={t("Никнейм в телеграм")}
-                        value={soc}
+                        value={telegram}
                         onChange={(e) => {
                           this.setState({
                             telegram: e.target.value,
@@ -273,9 +317,11 @@ class EditProfile extends React.Component {
                         type="text"
                         className="form-control r1-inp"
                         placeholder={t("Город")}
-                        value={soc}
+                        value={town}
                         onChange={(e) => {
-                          
+                          this.setState({
+                            town: e.target.value
+                          })
                         }}
                       />
                     </div>
@@ -316,8 +362,8 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-3 flex-center">
-                      <button type="submit" className="btn-submit mt-3" disabled={isLoading}>
-                        {t("Изменить профиль")}
+                      <button type="submit" className="btn btn-submit mt-3" disabled={isLoading}>
+                        {t("Сохранить")}
                       </button>
                     </div>
                   </div>
