@@ -14,8 +14,12 @@ import Translit from "../../components/translit";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 
-import Popover from 'react-awesome-popover'
-import { Motion, spring } from "react-motion";
+import { Collapse } from "react-collapse";
+
+import specializations from "../../consts/specializations-list";
+import Select from "react-select";
+
+import OutsideClickHandler from "react-outside-click-handler";
 
 class Networking extends React.Component {
 	state = {
@@ -26,15 +30,19 @@ class Networking extends React.Component {
 			currentPage: 1,
 			itemsOnPage: 9,
 		},
-		filterOpen: false
+		filterOptions: {
+			specialization: undefined,
+			onlyWhatLooking: false,
+			hasWhatOffer: false,
+		},
+		filterOpen: false,
 	};
 
 	searchSubmit = async (e) => {
 		this.setState({
 			searchFilter: this.state.searchText,
 		});
-		if (e)
-			e.preventDefault();
+		if (e) e.preventDefault();
 	};
 
 	componentDidMount() {
@@ -79,7 +87,14 @@ class Networking extends React.Component {
 
 			userStr += translit.t(userStr);
 
-			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase());
+			let filterSpecialization = this.state.filterOptions.specialization ? (user.specialization == this.state.filterOptions.specialization) : true;
+			let filterHasWhatOffer = this.state.filterOptions.hasWhatOffer ? user.what_offer.length > 0 : true;
+			let filterOnlyWhatLooking = this.state.filterOptions.onlyWhatLooking ? (user.what_looking.length > 0 && user.what_offer.length == 0) : true;
+
+			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase()) && 
+				filterSpecialization &&
+				filterHasWhatOffer &&
+				filterOnlyWhatLooking;
 		});
 	};
 
@@ -95,7 +110,7 @@ class Networking extends React.Component {
 
 	onSerchTextClear = (e) => {
 		this.setState({ searchText: "" }, () => {
-			this.searchSubmit()
+			this.searchSubmit();
 		});
 	};
 
@@ -116,8 +131,46 @@ class Networking extends React.Component {
 		return element;
 	};
 
+	toggleFilterOpen = () => {
+		this.setState((prev) => ({
+			filterOpen: !prev.filterOpen,
+		}));
+	};
+
+	onOnlyWhatLookingChange = (e) => {
+
+		let filterOptions = this.state.filterOptions
+		filterOptions.onlyWhatLooking = e.target.checked
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
+	onHasWhatOfferChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		filterOptions.hasWhatOffer = e.target.checked
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
+	onSpecializationChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		if (e) {
+			filterOptions.specialization = e.value
+		} else {
+			filterOptions.specialization = undefined
+		}
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
 	render() {
-		const { users, searchText, searchFilter, filterOpen } = this.state;
+		const { users, searchText, searchFilter, filterOpen, filterOptions } = this.state;
 		const { data } = this.props.user;
 		const t = this.props.t;
 
@@ -162,6 +215,55 @@ class Networking extends React.Component {
 			);
 		});
 
+		const currentSpecialization = specializations.find(s => s.value == filterOptions.specialization)
+
+		const filterContainer = (
+			<div
+				className={"filter-container" + (isMobile ? " filter-container-mobile" : "")}
+				style={filterOpen && !isMobile ? { position: "absolute" } : {}}>
+				<div className="row">
+					<div className="col-md-auto d-flex align-items-center">Специализация:</div>
+					<div className="col-md">
+						<Select
+							isClearable={true}
+							onChange={this.onSpecializationChange}
+							value={currentSpecialization}
+							options={specializations}
+							className="p-0"
+							placeholder={t("Специализация")}
+							required={true}
+						/>
+					</div>
+				</div>
+
+				<div className="custom-control custom-checkbox my-3">
+					<input
+						type="checkbox"
+						className="custom-control-input"
+						id="filter1"
+						checked={this.state.filterOptions.onlyWhatLooking}
+						onChange={this.onOnlyWhatLookingChange}
+					/>
+					<label className="custom-control-label" htmlFor="filter1">
+						Только ищу
+					</label>
+				</div>
+
+				<div className="custom-control custom-checkbox my-3">
+					<input
+						type="checkbox"
+						className="custom-control-input"
+						id="filter2"
+						checked={this.state.filterOptions.hasWhatOffer}
+						onChange={this.onHasWhatOfferChange}
+					/>
+					<label className="custom-control-label" htmlFor="filter2">
+						Что-то предлагаю
+					</label>
+				</div>
+			</div>
+		);
+
 		const search = (
 			<div className="search">
 				<form method="post" className="form-search" onSubmit={this.searchSubmit}>
@@ -169,39 +271,42 @@ class Networking extends React.Component {
 						<div className="inp-search-wrap">
 							<input
 								type="text"
-								className="inp-search col"
+								className="form-control inp-search col"
 								placeholder="Search"
 								onChange={this.onSerchTextChange}
 								value={this.state.searchText}
 							/>
-							{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
+							{searchText && (
+								<span
+									className="clear-search"
+									onClick={this.onSerchTextClear}></span>
+							)}
 						</div>
 
-						<input type="submit" value="" className="btn-search" />
+						<input type="submit" value="" className="btn btn-search" />
 					</div>
 
-					
-
-					<Popover
-						placement="bottom-center"
-						overlayColor="rgba(0,0,0,0.1)"
-						>
-						<button className="btn-filter"></button>
-						<Motion defaultStyle={{ opacity: 0 }} style={{ opacity: spring(1) }}>
-							{style => {
-								return (
-									<div style={style}>
-										<div className="filter-container">
-											<div className="row">
-												<div className="col-auto">Специализация:</div>
-											</div>
-										</div>
-									</div>
-								);
-							}}
-						</Motion>
-					</Popover>
+					<button className="btn btn-filter" onClick={this.toggleFilterOpen}></button>
 				</form>
+
+				{isMobile && (
+					<Collapse isOpened={filterOpen} className="filter-container-wrap">
+						{filterContainer}
+					</Collapse>
+				)}
+
+				{!isMobile && (
+					<OutsideClickHandler
+						onOutsideClick={() => {
+							this.setState({
+								filterOpen: false,
+							});
+						}}>
+						<Collapse isOpened={filterOpen} className="filter-container-wrap">
+							{filterContainer}
+						</Collapse>
+					</OutsideClickHandler>
+				)}
 			</div>
 		);
 
@@ -212,7 +317,6 @@ class Networking extends React.Component {
 				{isMobile && <>{search}</>}
 
 				<div className="container">
-
 					<div className="card-list">{cards}</div>
 
 					<Pagination
