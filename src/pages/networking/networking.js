@@ -17,9 +17,31 @@ import "rc-pagination/assets/index.css";
 import { Collapse } from "react-collapse";
 
 import specializations from "../../consts/specializations-list";
+import towns from "../../consts/towns-list";
 import Select from "react-select";
 
 import OutsideClickHandler from "react-outside-click-handler";
+
+import { FixedSizeList as List } from "react-window";
+
+class MenuList extends React.Component {
+	render() {
+		const { options, children, maxHeight, getValue } = this.props;
+		const [value] = getValue();
+		const initialOffset = options.indexOf(value) * 35;
+  
+		return (
+			<List
+				height={maxHeight}
+				itemCount={children.length}
+				itemSize={35}
+				initialScrollOffset={initialOffset}
+			>
+				{({ index, style }) => <div style={style}>{children[index]}</div>}
+			</List>
+		);
+	}
+}
 
 class Networking extends React.Component {
 	state = {
@@ -32,6 +54,7 @@ class Networking extends React.Component {
 		},
 		filterOptions: {
 			specialization: undefined,
+			town: undefined,
 			onlyWhatLooking: false,
 			hasWhatOffer: false,
 		},
@@ -67,6 +90,7 @@ class Networking extends React.Component {
 					user.user_id = user.user_id || "";
 					user.what_looking = user.what_looking || "";
 					user.what_offer = user.what_offer || "";
+					user.town = user.town || "";
 
 					return user;
 				});
@@ -87,11 +111,15 @@ class Networking extends React.Component {
 
 			userStr += translit.t(userStr);
 
+			console.log(this.state.filterOptions.town);
+
+			let filterTown = this.state.filterOptions.town ? (user.town === this.state.filterOptions.town) : true;
 			let filterSpecialization = this.state.filterOptions.specialization ? (user.specialization == this.state.filterOptions.specialization) : true;
 			let filterHasWhatOffer = this.state.filterOptions.hasWhatOffer ? user.what_offer.length > 0 : true;
 			let filterOnlyWhatLooking = this.state.filterOptions.onlyWhatLooking ? (user.what_looking.length > 0 && user.what_offer.length == 0) : true;
 
 			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase()) && 
+				filterTown &&
 				filterSpecialization &&
 				filterHasWhatOffer &&
 				filterOnlyWhatLooking;
@@ -168,6 +196,19 @@ class Networking extends React.Component {
 			filterOptions: filterOptions
 		});
 	};
+	
+	onTownChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		if (e) {
+			filterOptions.town = e.value
+		} else {
+			filterOptions.town = undefined
+		}
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
 
 	render() {
 		const { users, searchText, searchFilter, filterOpen, filterOptions } = this.state;
@@ -216,6 +257,7 @@ class Networking extends React.Component {
 		});
 
 		const currentSpecialization = specializations.find(s => s.value == filterOptions.specialization)
+		const currenTown = towns.find(s => s.value == filterOptions.town)
 
 		const filterContainer = (
 			<div
@@ -231,7 +273,22 @@ class Networking extends React.Component {
 							options={specializations}
 							className="p-0"
 							placeholder={t("Специализация")}
-							required={true}
+						/>
+					</div>
+				</div>
+				
+				<div className="row mt-3">
+					<div className="col-md-auto d-flex align-items-center">Город:</div>
+					<div className="col-md">
+
+						<Select
+							components={{ MenuList }}
+							isClearable={true}
+							onChange={this.onTownChange}
+							value={currenTown}
+							options={towns}
+							className="p-0"
+							placeholder={t("Город")}
 						/>
 					</div>
 				</div>

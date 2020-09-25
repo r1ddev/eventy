@@ -48,6 +48,7 @@
 		"react-select": "^3.1.0",
 		"react-toastify": "^5.4.1",
 		"react-virtualized": "^9.21.2",
+		"react-window": "^1.8.5",
 		"redux": "^4.0.1",
 		"ssh-deploy-release": "^3.0.4",
 		"styled-components": "^5.1.0"
