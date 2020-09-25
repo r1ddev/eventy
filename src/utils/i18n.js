@@ -34,6 +34,7 @@ i18n.use(LanguageDetector).init({
         Имя: "Имя",
         Фамилия: "Фамилия",
         Должность: "Должность",
+        Специализация: "Специализация",
         Телефон: "Телефон",
         "Ссылка на вконтакте": "Ссылка на вконтакте",
         "Никнейм в телеграм": "Никнейм в телеграм",
@@ -110,7 +111,7 @@ i18n.use(LanguageDetector).init({
         Компания: "Company",
         Агентство: "Agency",
         "Вам на почту пришла ссылка, пожалуйста перейдите по ней, чтобы завершить регистрацию":
-          "You have received a link in your mail, please follow it to complete registration",
+          "You have received a link in your E-mail, please follow it to complete registration",
 
         "Восстановление пароля": "Password recovery",
         ВОССТАНОВИТЬ: "RESET PASSWORD",
@@ -122,6 +123,7 @@ i18n.use(LanguageDetector).init({
         Имя: "Name",
         Фамилия: "Surname",
         Должность: "Position",
+        Специализация: "Specialization",
         Телефон: "Phone",
         "Ссылка на вконтакте": "Link to VK.com",
         "Никнейм в телеграм": "Nick in telegram",

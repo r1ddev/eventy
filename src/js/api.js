@@ -31,34 +31,38 @@ const api = {
 		getAvatarLocation() {
 			return api.origin + "/images/avatar/";
 		},
-		registration: async (
+		editProfile: async (
 			name,
 			lastName,
 			company,
 			position,
+			specialization, 
 			phone,
 			email,
 			shareContact,
 			soc,
 			telegram,
 			what_looking,
-			what_offer
+			what_offer,
+			town
 		) => {
-			let response = await axios.post(
-				api.proxy + api.host + "/users/edit",
-				api.toFormData({
+			let response = await axios.put(
+				api.proxy + api.host + "/v3/users",
+				{
 					first_name: name,
 					last_name: lastName,
 					company: company,
 					position: position,
+					specialization: specialization,
 					phone: phone,
-					mail: email,
+					email: email,
 					social_site: soc,
 					social_telegram: telegram,
 					what_looking: what_looking,
 					what_offer: what_offer,
 					view_contact: shareContact - 0,
-				}),
+					town: town
+				},
 				api.useAuth()
 			);
 
