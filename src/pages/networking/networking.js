@@ -14,6 +14,9 @@ import Translit from "../../components/translit";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 
+import Popover from 'react-awesome-popover'
+import { Motion, spring } from "react-motion";
+
 class Networking extends React.Component {
 	state = {
 		searchText: "",
@@ -23,14 +26,15 @@ class Networking extends React.Component {
 			currentPage: 1,
 			itemsOnPage: 9,
 		},
+		filterOpen: false
 	};
 
 	searchSubmit = async (e) => {
 		this.setState({
 			searchFilter: this.state.searchText,
 		});
-    if (e)
-      e.preventDefault();
+		if (e)
+			e.preventDefault();
 	};
 
 	componentDidMount() {
@@ -87,12 +91,12 @@ class Networking extends React.Component {
 
 	onSerchTextChange = (e) => {
 		this.setState({ searchText: e.target.value });
-  };
-  
-  onSerchTextClear = (e) => {
-    this.setState({ searchText: "" }, () => {
-      this.searchSubmit()
-    });
+	};
+
+	onSerchTextClear = (e) => {
+		this.setState({ searchText: "" }, () => {
+			this.searchSubmit()
+		});
 	};
 
 	paginateUsers = () => {
@@ -113,7 +117,7 @@ class Networking extends React.Component {
 	};
 
 	render() {
-		const { users, searchText, searchFilter } = this.state;
+		const { users, searchText, searchFilter, filterOpen } = this.state;
 		const { data } = this.props.user;
 		const t = this.props.t;
 
@@ -161,18 +165,42 @@ class Networking extends React.Component {
 		const search = (
 			<div className="search">
 				<form method="post" className="form-search" onSubmit={this.searchSubmit}>
-					<div className="inp-search-wrap">
-						<input
-							type="text"
-							className="inp-search col"
-							placeholder="Search"
-							onChange={this.onSerchTextChange}
-							value={this.state.searchText}
-						/>
-						{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
+					<div className="input-btn">
+						<div className="inp-search-wrap">
+							<input
+								type="text"
+								className="inp-search col"
+								placeholder="Search"
+								onChange={this.onSerchTextChange}
+								value={this.state.searchText}
+							/>
+							{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
+						</div>
+
+						<input type="submit" value="" className="btn-search" />
 					</div>
 
-					<input type="submit" value="" className="btn-search" />
+					
+
+					<Popover
+						placement="bottom-center"
+						overlayColor="rgba(0,0,0,0.1)"
+						>
+						<button className="btn-filter"></button>
+						<Motion defaultStyle={{ opacity: 0 }} style={{ opacity: spring(1) }}>
+							{style => {
+								return (
+									<div style={style}>
+										<div className="filter-container">
+											<div className="row">
+												<div className="col-auto">Специализация:</div>
+											</div>
+										</div>
+									</div>
+								);
+							}}
+						</Motion>
+					</Popover>
 				</form>
 			</div>
 		);
@@ -184,6 +212,7 @@ class Networking extends React.Component {
 				{isMobile && <>{search}</>}
 
 				<div className="container">
+
 					<div className="card-list">{cards}</div>
 
 					<Pagination

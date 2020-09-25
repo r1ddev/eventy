@@ -17,7 +17,7 @@
 	}
 	.search {
 		width: 75%;
-		border: 1px solid $base-color;
+		// border: 1px solid $base-color;
 
 		@media screen and (max-width: 767px) {
 			margin-top: 15px !important;
@@ -27,6 +27,30 @@
 
 		.form-search {
 			display: flex;
+
+			.input-btn {
+				border: 1px solid #350278;
+				display: flex;
+				width: 100%;
+			}
+
+			.btn-filter {
+				border: none;
+				vertical-align: bottom;
+				background-color: #ccc;
+				background-image: url(../../images/icons/filter.svg);
+				background-repeat: no-repeat;
+				background-position: center;
+				width: 38px;
+				height: 38px;
+				margin-left: 4px;
+			}
+
+			.filter-container {
+				background: #fff;
+				padding: 15px;
+				border-radius: 4px;
+			}
 		}
 
 		.inp-search-wrap {
@@ -34,7 +58,7 @@
 			position: relative;
 
 			.inp-search {
-				height: 35px;
+				height: 36px;
 				vertical-align: top;
 			}
 
@@ -42,8 +66,8 @@
 				position: absolute;
 				top: 0;
 				right: 0;
-				width: 35px;
-				height: 35px;
+				width: 36px;
+				height: 36px;
 				background-image: url(../../images/icons/close-btn.svg);
 				background-size: 15px;
 				background-repeat: no-repeat;
@@ -58,8 +82,8 @@
 			border: none;
 			background: url(../../images/search.svg) center center no-repeat;
 			background-color: $base-color;
-			height: 35px;
-			width: 35px;
+			height: 36px;
+			width: 36px;
 			vertical-align: top;
 		}
 	}
