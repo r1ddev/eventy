@@ -9,7 +9,7 @@ class ScenesChecker extends React.Component {
 
 
     return (
-      <div id="scenes-checker" className={(isVisible || 1) ? '' : 'hidden'}>
+      <div id="scenes-checker" className={(isVisible) ? '' : 'hidden'}>
 
         <div className={"scenes-checker--item" +
           ((sceneNumber == 0) ? " active" : "") +
