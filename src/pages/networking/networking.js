@@ -111,7 +111,7 @@ class Networking extends React.Component {
 
 			userStr += translit.t(userStr);
 
-			console.log(this.state.filterOptions.town);
+			// console.log(this.state.filterOptions.town);
 
 			let filterTown = this.state.filterOptions.town ? (user.town === this.state.filterOptions.town) : true;
 			let filterSpecialization = this.state.filterOptions.specialization ? (user.specialization == this.state.filterOptions.specialization) : true;
