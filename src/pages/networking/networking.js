@@ -14,6 +14,35 @@ import Translit from "../../components/translit";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 
+import { Collapse } from "react-collapse";
+
+import specializations from "../../consts/specializations-list";
+import towns from "../../consts/towns-list";
+import Select from "react-select";
+
+import OutsideClickHandler from "react-outside-click-handler";
+
+import { FixedSizeList as List } from "react-window";
+
+class MenuList extends React.Component {
+	render() {
+		const { options, children, maxHeight, getValue } = this.props;
+		const [value] = getValue();
+		const initialOffset = options.indexOf(value) * 35;
+  
+		return (
+			<List
+				height={maxHeight}
+				itemCount={children.length}
+				itemSize={35}
+				initialScrollOffset={initialOffset}
+			>
+				{({ index, style }) => <div style={style}>{children[index]}</div>}
+			</List>
+		);
+	}
+}
+
 class Networking extends React.Component {
 	state = {
 		searchText: "",
@@ -23,14 +52,20 @@ class Networking extends React.Component {
 			currentPage: 1,
 			itemsOnPage: 9,
 		},
+		filterOptions: {
+			specialization: undefined,
+			town: undefined,
+			onlyWhatLooking: false,
+			hasWhatOffer: false,
+		},
+		filterOpen: false,
 	};
 
 	searchSubmit = async (e) => {
 		this.setState({
 			searchFilter: this.state.searchText,
 		});
-    if (e)
-      e.preventDefault();
+		if (e) e.preventDefault();
 	};
 
 	componentDidMount() {
@@ -55,6 +90,7 @@ class Networking extends React.Component {
 					user.user_id = user.user_id || "";
 					user.what_looking = user.what_looking || "";
 					user.what_offer = user.what_offer || "";
+					user.town = user.town || "";
 
 					return user;
 				});
@@ -75,7 +111,18 @@ class Networking extends React.Component {
 
 			userStr += translit.t(userStr);
 
-			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase());
+			console.log(this.state.filterOptions.town);
+
+			let filterTown = this.state.filterOptions.town ? (user.town === this.state.filterOptions.town) : true;
+			let filterSpecialization = this.state.filterOptions.specialization ? (user.specialization == this.state.filterOptions.specialization) : true;
+			let filterHasWhatOffer = this.state.filterOptions.hasWhatOffer ? user.what_offer.length > 0 : true;
+			let filterOnlyWhatLooking = this.state.filterOptions.onlyWhatLooking ? (user.what_looking.length > 0 && user.what_offer.length == 0) : true;
+
+			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase()) && 
+				filterTown &&
+				filterSpecialization &&
+				filterHasWhatOffer &&
+				filterOnlyWhatLooking;
 		});
 	};
 
@@ -87,12 +134,12 @@ class Networking extends React.Component {
 
 	onSerchTextChange = (e) => {
 		this.setState({ searchText: e.target.value });
-  };
-  
-  onSerchTextClear = (e) => {
-    this.setState({ searchText: "" }, () => {
-      this.searchSubmit()
-    });
+	};
+
+	onSerchTextClear = (e) => {
+		this.setState({ searchText: "" }, () => {
+			this.searchSubmit();
+		});
 	};
 
 	paginateUsers = () => {
@@ -112,8 +159,59 @@ class Networking extends React.Component {
 		return element;
 	};
 
+	toggleFilterOpen = () => {
+		this.setState((prev) => ({
+			filterOpen: !prev.filterOpen,
+		}));
+	};
+
+	onOnlyWhatLookingChange = (e) => {
+
+		let filterOptions = this.state.filterOptions
+		filterOptions.onlyWhatLooking = e.target.checked
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
+	onHasWhatOfferChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		filterOptions.hasWhatOffer = e.target.checked
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
+	onSpecializationChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		if (e) {
+			filterOptions.specialization = e.value
+		} else {
+			filterOptions.specialization = undefined
+		}
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+	
+	onTownChange = (e) => {
+		let filterOptions = this.state.filterOptions
+		if (e) {
+			filterOptions.town = e.value
+		} else {
+			filterOptions.town = undefined
+		}
+
+		this.setState({
+			filterOptions: filterOptions
+		});
+	};
+
 	render() {
-		const { users, searchText, searchFilter } = this.state;
+		const { users, searchText, searchFilter, filterOpen, filterOptions } = this.state;
 		const { data } = this.props.user;
 		const t = this.props.t;
 
@@ -158,22 +256,114 @@ class Networking extends React.Component {
 			);
 		});
 
+		const currentSpecialization = specializations.find(s => s.value == filterOptions.specialization)
+		const currenTown = towns.find(s => s.value == filterOptions.town)
+
+		const filterContainer = (
+			<div
+				className={"filter-container" + (isMobile ? " filter-container-mobile" : "")}
+				style={filterOpen && !isMobile ? { position: "absolute" } : {}}>
+				<div className="row">
+					<div className="col-md-auto d-flex align-items-center">Специализация:</div>
+					<div className="col-md">
+						<Select
+							isClearable={true}
+							onChange={this.onSpecializationChange}
+							value={currentSpecialization}
+							options={specializations}
+							className="p-0"
+							placeholder={t("Специализация")}
+						/>
+					</div>
+				</div>
+				
+				<div className="row mt-3">
+					<div className="col-md-auto d-flex align-items-center">Город:</div>
+					<div className="col-md">
+
+						<Select
+							components={{ MenuList }}
+							isClearable={true}
+							onChange={this.onTownChange}
+							value={currenTown}
+							options={towns}
+							className="p-0"
+							placeholder={t("Город")}
+						/>
+					</div>
+				</div>
+
+				<div className="custom-control custom-checkbox my-3">
+					<input
+						type="checkbox"
+						className="custom-control-input"
+						id="filter1"
+						checked={this.state.filterOptions.onlyWhatLooking}
+						onChange={this.onOnlyWhatLookingChange}
+					/>
+					<label className="custom-control-label" htmlFor="filter1">
+						Только ищу
+					</label>
+				</div>
+
+				<div className="custom-control custom-checkbox my-3">
+					<input
+						type="checkbox"
+						className="custom-control-input"
+						id="filter2"
+						checked={this.state.filterOptions.hasWhatOffer}
+						onChange={this.onHasWhatOfferChange}
+					/>
+					<label className="custom-control-label" htmlFor="filter2">
+						Что-то предлагаю
+					</label>
+				</div>
+			</div>
+		);
+
 		const search = (
 			<div className="search">
 				<form method="post" className="form-search" onSubmit={this.searchSubmit}>
-					<div className="inp-search-wrap">
-						<input
-							type="text"
-							className="inp-search col"
-							placeholder="Search"
-							onChange={this.onSerchTextChange}
-							value={this.state.searchText}
-						/>
-						{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
+					<div className="input-btn">
+						<div className="inp-search-wrap">
+							<input
+								type="text"
+								className="form-control inp-search col"
+								placeholder="Search"
+								onChange={this.onSerchTextChange}
+								value={this.state.searchText}
+							/>
+							{searchText && (
+								<span
+									className="clear-search"
+									onClick={this.onSerchTextClear}></span>
+							)}
+						</div>
+
+						<input type="submit" value="" className="btn btn-search" />
 					</div>
 
-					<input type="submit" value="" className="btn-search" />
+					<button className="btn btn-filter" onClick={this.toggleFilterOpen}></button>
 				</form>
+
+				{isMobile && (
+					<Collapse isOpened={filterOpen} className="filter-container-wrap">
+						{filterContainer}
+					</Collapse>
+				)}
+
+				{!isMobile && (
+					<OutsideClickHandler
+						onOutsideClick={() => {
+							this.setState({
+								filterOpen: false,
+							});
+						}}>
+						<Collapse isOpened={filterOpen} className="filter-container-wrap">
+							{filterContainer}
+						</Collapse>
+					</OutsideClickHandler>
+				)}
 			</div>
 		);
 

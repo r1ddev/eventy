@@ -14,22 +14,29 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
 
-const specializations = [
-  { value: '1', label: 'Представители площадок' },
-  { value: '2', label: 'Ведущие и модераторы' },
-  { value: '3', label: 'Поставщики оборудования' },
-  { value: '4', label: 'Ведущие' },
-  { value: '5', label: 'Артисты и музыканты' },
-  { value: '6', label: 'Представители Event-агентств' },
-  { value: '7', label: 'Разработчики сервисов для организаторов' },
-  { value: '8', label: 'Реклама и продвижение событий' },
-  { value: '9', label: 'Фотографы, видеографы' },
-  { value: '10', label: 'Режиссеры событий' },
-  { value: '11', label: 'Сценографы, дизайнеры и декораторы' },
-  { value: '12', label: 'Специалист по свету и звуку' },
-  { value: '13', label: 'Организаторы трансляций' },
-  { value: '14', label: 'Event-агентства' },
-]
+import specializations from '../../consts/specializations-list'
+import towns from '../../consts/towns-list'
+
+import { FixedSizeList as List } from "react-window";
+
+class MenuList extends React.Component {
+  render() {
+    const { options, children, maxHeight, getValue } = this.props;
+    const [value] = getValue();
+    const initialOffset = options.indexOf(value) * 35;
+
+    return (
+      <List
+        height={maxHeight}
+        itemCount={children.length}
+        itemSize={35}
+        initialScrollOffset={initialOffset}
+      >
+        {({ index, style }) => <div style={style}>{children[index]}</div>}
+      </List>
+    );
+  }
+}
 
 class EditProfile extends React.Component {
   state = {
@@ -82,6 +89,8 @@ class EditProfile extends React.Component {
     const t = this.props.t;
     this.setLoading(true);
 
+    console.log(towns);
+
     api.account
       .getUserData()
       .then((res) => {
@@ -121,16 +130,30 @@ class EditProfile extends React.Component {
     });
   };
 
-  onChangeSpecialization = (e) => {
+  onSpecializationChange = (e) => {
     this.setState({
       specialization: e.value
     })
+  }
+  
+  onTownChange = (e) => {
+    if (e) {
+      this.setState({
+        town: e.value
+      })
+    } else {
+      this.setState({
+        town: 0
+      })
+    }
   }
 
   render() {
     const t = this.props.t;
     const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer, town, specialization } = this.state;
+    
     const currentSpecialization = specializations.find(s => s.value == specialization)
+    const currenTown = towns.find(s => s.value == town)
     
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
@@ -209,18 +232,18 @@ class EditProfile extends React.Component {
 
                     <div className="field mt-3">
 
-                    <Select
-                      value={currentSpecialization}
-                      options={specializations}
-                      onChange={this.onChangeSpecialization}
-                      className="form-control r1-inp p-0"
-                      placeholder={t("Специализация")}
-                      theme={theme => ({
-                        ...theme,
-                        borderRadius: 8,
-                      })}
-                      required={true}
-                    />
+                      <Select
+                        value={currentSpecialization}
+                        options={specializations}
+                        onChange={this.onSpecializationChange}
+                        className="form-control r1-inp p-0"
+                        placeholder={t("Специализация")}
+                        theme={theme => ({
+                          ...theme,
+                          borderRadius: 8,
+                        })}
+                        required={true}
+                      />
 
                     </div>
                   </div>
@@ -313,16 +336,18 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-4">
-                      <input
-                        type="text"
-                        className="form-control r1-inp"
+                      <Select
+                        isClearable={true}
+                        components={{ MenuList }}
+                        value={currenTown}
+                        options={towns}
+                        onChange={this.onTownChange}
+                        className="r1-inp p-0"
                         placeholder={t("Город")}
-                        value={town}
-                        onChange={(e) => {
-                          this.setState({
-                            town: e.target.value
-                          })
-                        }}
+                        theme={theme => ({
+                          ...theme,
+                          borderRadius: 8,
+                        })}
                       />
                     </div>
 
