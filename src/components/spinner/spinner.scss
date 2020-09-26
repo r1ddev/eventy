@@ -1,10 +1,12 @@
+@import "*../../../../variables.scss";
+
 .my-spinner {
 	height: 100%;
 	align-items: center;
 }
 
 .text-success {
-	color: $base-color + '!important';
+	color: $base-color + !important;
 }
 
 .my-spinner .spinner-border {
