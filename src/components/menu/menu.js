@@ -55,11 +55,15 @@ class Menu extends React.Component {
 				<MenuItem active={page.page == 'desk'} icon={desk} activeicon={activedesk} label={t("Лобби")} link="/desk"></MenuItem>
 				<MenuItem active={page.page == 'scenes'} icon={scenes} activeicon={activescenes} label={t("Трансляция")} link="/scenes"></MenuItem>
 				<MenuItem2 active={page.page == 'program'} icon={program} activeicon={activeprogram} label={t("Программа")} link="/program"></MenuItem2>
-				<MenuItem active={page.page == 'networking'} icon={networking} activeicon={activeprogram} label={t("Нетворкинг")} link="/networking"></MenuItem>
+				<MenuItem active={page.page == 'networking'} icon={networking} activeicon={activenetworking} label={t("Нетворкинг")} link="/networking"></MenuItem>
 				<MenuItem active={page.page == 'messages'} icon={messages} activeicon={activemessages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
 				<MenuItem active={page.page == 'conversations'} icon={conversations} activeicon={activeconversations} label={t("Переговорки")} link="/conversations"></MenuItem>
 				<MenuItem active={page.page == 'exposure'} icon={exposure} activeicon={activeexposure} label={t("Партнеры")} link="/exposure"></MenuItem>
 				<MenuItem active={page.page == 'presentations'} icon={presentations} activeicon={activepresentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
+
+				<a target="_blank" href="https://events.nethouse.ru/buy_tickets/25206/" className="menu-item flex-center buy">
+					<div className="menu-item-label">{'Купить билеты'}</div>
+				</a>
 			</div>
 		);
 	}
@@ -68,7 +72,6 @@ class Menu extends React.Component {
 class MenuItem extends React.Component {
 	render() {
 		const { label, link, icon, activeicon, out = false, notifications = false, active } = this.props;
-		console.log(active, label)
 		const api = new IdeaFirstApiService();
 		const curIcon = active ? activeicon : icon;
 
