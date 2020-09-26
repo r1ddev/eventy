@@ -1,6 +1,10 @@
 @import "../../variables.scss";
 
 #edit-profile {
+	.css-26l13qy-menu {
+		color: black;
+	}
+
 	.registration-wrap,
 	.edit-wrap,
 	.profile-wrap {
@@ -55,7 +59,8 @@
 				}
 
 				&:hover {
-					background: rgba($base-color, 0.4);
+					// background: rgba($base-color, 0.4);
+					transform: scale(1.05);
 				}
 			}
 
@@ -73,12 +78,13 @@
 			// 	// border: 3px solid #f4004d;
 			// }
 			.btn-submit {
-				color: $btn-border-color;
+				color: #fff;
 				font-family: IBM Plex Mono;
 				font-weight: bold;
 				font-size: 30px;
-				background: #ffffff;
-				border: 3px solid #19b75e;
+				background: $base-color;
+				// border: 3px solid #19b75e;
+				border: none;
 				border-radius: 10px;
 				padding: 5px 30px;
 				user-select: none;
@@ -97,6 +103,7 @@
 		.right {
 			.radio {
 				border: 2px solid $base-color;
+				text-transform: uppercase;
 
 				&-selected {
 					background: $base-color;

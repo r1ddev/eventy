@@ -22,6 +22,7 @@ class Registration extends React.Component {
     phone: "",
     email: "",
     soc: "",
+    telegram: "",
     isLoading: false,
     isEditable: false,
   };
@@ -55,8 +56,9 @@ class Registration extends React.Component {
               company: res.user.company,
               position: res.user.position,
               phone: res.user.phone,
-              email: res.user.mail,
+              email: res.user.email,
               soc: res.user.social_site,
+              telegram: res.user.telegram
             });
 
             this.setLoading(false);
@@ -82,8 +84,9 @@ class Registration extends React.Component {
               company: res.user.company || "",
               position: res.user.position || "",
               phone: res.user.phone || "",
-              email: res.user.mail || "",
+              email: res.user.email || "",
               soc: res.user.social_site || "",
+              telegram: res.user.social_telegram || "",
               isEditable: true,
             });
 
@@ -112,7 +115,7 @@ class Registration extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { isLoading, name, lastName, avatar, company, position, phone, email, soc, isEditable } = this.state;
+    const { isLoading, name, lastName, avatar, company, position, phone, email, soc, isEditable, telegram } = this.state;
 
     let userAvatar = require("../../images/default-avatar.svg");
     if (avatar) {
@@ -142,6 +145,7 @@ class Registration extends React.Component {
                     <div className="text">{email}</div>
                     <div className="text">{phone}</div>
                     <div className="text">{soc}</div>
+                    <div className="text">{telegram}</div>
 
                     {isEditable && (
                       <div className="field mt-3 flex-center">

@@ -14,6 +14,30 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
 
+import specializations from '../../consts/specializations-list'
+import towns from '../../consts/towns-list'
+
+import { FixedSizeList as List } from "react-window";
+
+class MenuList extends React.Component {
+  render() {
+    const { options, children, maxHeight, getValue } = this.props;
+    const [value] = getValue();
+    const initialOffset = options.indexOf(value) * 35;
+
+    return (
+      <List
+        height={maxHeight}
+        itemCount={children.length}
+        itemSize={35}
+        initialScrollOffset={initialOffset}
+      >
+        {({ index, style }) => <div style={style}>{children[index]}</div>}
+      </List>
+    );
+  }
+}
+
 class EditProfile extends React.Component {
   state = {
     avatar: "",
@@ -28,17 +52,18 @@ class EditProfile extends React.Component {
     telegram: "",
     what_looking: "",
     what_offer: "",
-
+    specialization: undefined,
+    town: "",
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer, specialization, town } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .registration(name, lastName, company, position, phone, email, shareContact, soc, telegram, what_looking, what_offer)
+      .editProfile(name, lastName, company, position, specialization, phone, email, shareContact, soc, telegram, what_looking, what_offer, town)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -64,6 +89,8 @@ class EditProfile extends React.Component {
     const t = this.props.t;
     this.setLoading(true);
 
+    console.log(towns);
+
     api.account
       .getUserData()
       .then((res) => {
@@ -74,12 +101,14 @@ class EditProfile extends React.Component {
           company: res.user.company || "",
           position: res.user.position || "",
           phone: res.user.phone || "",
-          email: res.user.mail || "",
+          email: res.user.email || "",
           shareContact: !!res.user.view_contact,
           soc: res.user.social_site || "",
           telegram: res.user.social_telegram || "",
           what_looking: res.user.what_looking || "",
           what_offer: res.user.what_offer || "",
+          town: res.user.town || "",
+          specialization: res.user.specialization || 0
         });
 
         this.setLoading(false);
@@ -101,10 +130,31 @@ class EditProfile extends React.Component {
     });
   };
 
+  onSpecializationChange = (e) => {
+    this.setState({
+      specialization: e.value
+    })
+  }
+  
+  onTownChange = (e) => {
+    if (e) {
+      this.setState({
+        town: e.value
+      })
+    } else {
+      this.setState({
+        town: 0
+      })
+    }
+  }
+
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer } = this.state;
-
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, telegram, what_looking, what_offer, town, specialization } = this.state;
+    
+    const currentSpecialization = specializations.find(s => s.value == specialization)
+    const currenTown = towns.find(s => s.value == town)
+    
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
         <div className="bg-light flex-center min-vh-100">
@@ -179,6 +229,23 @@ class EditProfile extends React.Component {
                         required
                       />
                     </div>
+
+                    <div className="field mt-3">
+
+                      <Select
+                        value={currentSpecialization}
+                        options={specializations}
+                        onChange={this.onSpecializationChange}
+                        className="form-control r1-inp p-0"
+                        placeholder={t("Специализация")}
+                        theme={theme => ({
+                          ...theme,
+                          borderRadius: 8,
+                        })}
+                        required={true}
+                      />
+
+                    </div>
                   </div>
 
                   <div className="col-md-7 right p-5">
@@ -229,7 +296,7 @@ class EditProfile extends React.Component {
                         type="text"
                         className="form-control r1-inp"
                         placeholder={t("Никнейм в телеграм")}
-                        value={soc}
+                        value={telegram}
                         onChange={(e) => {
                           this.setState({
                             telegram: e.target.value,
@@ -269,14 +336,18 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-4">
-                      <input
-                        type="text"
-                        className="form-control r1-inp"
+                      <Select
+                        isClearable={true}
+                        components={{ MenuList }}
+                        value={currenTown}
+                        options={towns}
+                        onChange={this.onTownChange}
+                        className="r1-inp p-0"
                         placeholder={t("Город")}
-                        value={soc}
-                        onChange={(e) => {
-                          
-                        }}
+                        theme={theme => ({
+                          ...theme,
+                          borderRadius: 8,
+                        })}
                       />
                     </div>
 
@@ -316,8 +387,8 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-3 flex-center">
-                      <button type="submit" className="btn-submit mt-3" disabled={isLoading}>
-                        {t("Изменить профиль")}
+                      <button type="submit" className="btn btn-submit mt-3" disabled={isLoading}>
+                        {t("Сохранить")}
                       </button>
                     </div>
                   </div>

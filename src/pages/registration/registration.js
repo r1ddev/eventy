@@ -16,6 +16,7 @@ class Registration extends React.Component {
     password: "",
     passwordRepeated: "",
     company: "",
+    termsAgree: false,
     regTag: [this.props.t("Компания")],
     passwordRepeatedError: false,
     disableForm: false,
@@ -110,9 +111,15 @@ class Registration extends React.Component {
     this.setState({ regTag: e.value.split(" ") || [] });
   };
 
+  onTermsAgreeChange = (e) => {
+    this.setState({
+      termsAgree: e.target.checked
+    })
+  }
+
   render() {
     const t = this.props.t;
-    const { email, password, passwordRepeated, company, regTag, disableForm, passwordRepeatedError } = this.state;
+    const { email, password, passwordRepeated, company, regTag, disableForm, passwordRepeatedError, termsAgree } = this.state;
 
     return (
       <div id="registration">
@@ -162,6 +169,21 @@ class Registration extends React.Component {
               className="reg-select"
             />
 
+            <div className="custom-control custom-checkbox my-3">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="terms-agree"
+                checked={this.state.termsAgree}
+                onChange={this.onTermsAgreeChange}
+                required
+              />
+              <label className="custom-control-label" htmlFor="terms-agree">
+                Я согласен с условиями обработки персональных данных
+              </label>
+            </div>
+          
+
             <button
               disabled={
                 passwordRepeatedError ||
@@ -169,6 +191,7 @@ class Registration extends React.Component {
                 password == "" ||
                 passwordRepeated == "" ||
                 company == "" ||
+                termsAgree == "" ||
                 disableForm
               }
               className="white-button login-btn">
