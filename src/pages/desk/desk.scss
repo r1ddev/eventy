@@ -17,23 +17,79 @@
 	}
 
 	.lobby-text{
-		position: absolute;
-    top: 10px;
-    left: 10px;
-    color: white;
-    z-index: 2;
-    font-family: "FuturaBookC";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 4vw;
-    line-height: 1.5;
-		margin: 10vmin 5vmin;
+		// position: absolute;
+		// top: 10px;
+		// left: 10px;
+		color: white;
+		// z-index: 2;
+		font-family: "Montserrat";
+		font-style: normal;
+		font-weight: 500;
+		// font-size: 4vw;
+		// line-height: 1.5;
+		// margin: 10vmin 5vmin;
+		height: 100%;
+		padding-top: 74px;
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			.text-center {
+				flex: 75%;
+				align-items: center;
+				justify-content: center;
+				display: flex;
+				flex-direction: column;
+
+				.date {
+					font-size: 1.6rem;
+					font-weight: 100;
+				}
 		
+				.title {
+					font-size: 3rem;
+					font-weight: 600;
+				}
+		
+				.subtitle {
+					font-size: 1.6rem;
+					font-weight: 100;
+				}
+		
+				.desc {
+					font-size: 1.6rem;
+					font-weight: 600;
+				}
+			}
+
+			.bottom-text {
+				font-weight: 100;
+				font-size: 1rem;
+				padding-left: 1.5rem;
+				position: relative;
+				flex: 25%;
+				
+				&:before {
+					content: "*";
+					position: absolute;
+					color: #FF5300;
+					font-size: 2rem;
+					font-weight: 600;
+					left: 0;
+					line-height: 1.3;
+				}
+			}
+		}
+	
 		.lobby-lang-checker{
 			margin-top:40px;
 			font-size: 20px;
 			color: black;
 		}
+
+		
 	}
 
 	
@@ -76,7 +132,7 @@
 @media screen and (max-width: 900px) {
 	#desk .lobby-text {
 		font-size: 6vw;
-    line-height: 1.5;
-    margin: 20vmin 5vmin;
+		line-height: 1.5;
+		// margin: 20vmin 5vmin;
 	}
 }
