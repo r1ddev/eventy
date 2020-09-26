@@ -234,10 +234,12 @@ class MessageItem extends React.Component {
 
   render() {
 
-    const { id, first_name, last_name, ad, sponsor, message, avatar, time, reply } = this.props.item;
+    const { id, first_name, last_name, range, message, avatar, time, reply } = this.props.item;
     const { onSetReplyAttachment, t } = this.props;
     let origin = api.origin;
     let newAvatar = origin + "/images/avatar/" + avatar;
+    const sponsor = range == 5;
+    const ad = range == 4;
 
     return (
       <>
@@ -252,7 +254,7 @@ class MessageItem extends React.Component {
         <div className={(reply) ? "message-item bordered" : (ad ? "message-item ad" : "message-item")}>
           <img alt="" src={newAvatar} />
           <div className='text'>
-            <span><Translit value={first_name + ' ' + last_name} /></span>{(sponsor) && <span className="umf">UMF</span>}
+            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">UMF</span>}
             <div className='mes-text'> {message}</div>
 
           </div>
