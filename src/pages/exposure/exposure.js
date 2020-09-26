@@ -11,24 +11,57 @@ import { Trans, withTranslation } from "react-i18next";
 class Exposure extends React.Component {
   partners = [
     {
-      logo: require("../../images/partners/smitstudio.png"),
-      background: require("../../images/partners/smitstudio-bg.png"),
+      background: require("../../images/partners/so_nethouse.png"),
       backgroundPosition: "top",
-      name: "Smit.Studio",
-      desc: (
-        <p>
-          <Trans t={this.props.t}>expo_smit</Trans>
-        </p>
-      ),
-      link: "https://smit.studio/",
-    },
-    {
-      logo: require("../../images/partners/smitscreen.png"),
-      background: require("../../images/partners/smitscreen-bg.png"),
+      link: "https://events.nethouse.ru/?p=soldout",
+    },{
+      background: require("../../images/partners/so_infobraz.jpg"),
       backgroundPosition: "center",
-      name: "Smit.Screen",
-      desc: (<Trans t={this.props.t}>expo_smitscreen</Trans>),
-      link: "https://smitscreen.ru",
+      link: "https://infoobraz.ru/",
+    },{
+      background: require("../../images/partners/so_topmoderator.png"),
+      backgroundPosition: "center",
+      link: "https://topmoderator.ru/?utm_source=soldout&utm_medium=post_iventologiya&utm_campaign=promotion",
+    },{
+      background: require("../../images/partners/so_infoblock_Verspeak.png"),
+      backgroundPosition: "center",
+      link: "https://verspeak.com/ru/",
+    },{
+      background: require("../../images/partners/so_Funky_Games.jpg"),
+      backgroundPosition: "center",
+      link: "https://funkygames.ru/",
+    },{
+      background: require("../../images/partners/so_eLama_партнеры_SMIT.png"),
+      backgroundPosition: "center",
+      link: "https://try.elama.ru/product?utm_source=soldout_online&utm_medium=pr&utm_campaign=sait_soldout_online",
+    },{
+      background: require("../../images/partners/so_gifts.png"),
+      backgroundPosition: "center",
+      link: "https://gifts.ru/pro/event?utm_source=soldout&utm_medium=banner&utm_campaign=010_for_event&utm_content=info",
+    },{
+      background: require("../../images/partners/smitstudio.png"),
+      backgroundPosition: "center",
+      link: "https://smit.studio/",
+    },{
+      background: require("../../images/partners/so_Banner_Surovogo.png"),
+      backgroundPosition: "center",
+      link: "https://smmconfa.ru/?utm_source=soldout&utm_medium=broadcast",
+    },{
+      background: require("../../images/partners/so_Eventology_banner.png"),
+      backgroundPosition: "center",
+      link: "https://event-manager.eventologia.ru/?utm_source=soldout&utm_medium=broadcast",
+    },{
+      background: require("../../images/partners/so_po_promokodu_soldaut_2.png"),
+      backgroundPosition: "center",
+      link: "https://smm2020.tochkadostupa.pro/?utm_source=soldout&utm_medium=broadcast",
+    },{
+      background: require("../../images/partners/so_po_promokodu_soldaut_1.png"),
+      backgroundPosition: "center",
+      link: "https://partner.markevent.ru/?utm_source=soldout&utm_medium=broadcast",
+    },{
+      background: require("../../images/partners/so_488_355_VShT.png"),
+      backgroundPosition: "center",
+      link: "http://targeting.school/?utm_source=soldout&utm_medium=broadcast",
     },
   ];
 
@@ -46,12 +79,12 @@ class Exposure extends React.Component {
           href={partner.link}
           className="card"
           onClick={() => this.props.postUrl(partner.link)}>
-          <div className="row head m-0">
+          {/* <div className="row head m-0">
             <div className="col-sm-5 logo flex-center">
               <img src={partner.logo} alt="" />
             </div>
-          </div>
-          <div className="desc">{partner.desc}</div>
+          </div> */}
+          {/* <div className="desc">{partner.desc}</div> */}
         </a>
       );
     });
