@@ -9,6 +9,8 @@ import ScenesChat from "./../../components/scenes-chat/scenes-chat";
 import Header from "../../components/header";
 import IdleTimer from "react-idle-timer";
 import { setMessagesNotifications } from "../../actions/notifications-actions";
+import { setPageFetch } from "../../actions/page-actions";
+
 import { isMobile } from "react-device-detect";
 
 import AES from "crypto-js/aes";
@@ -168,6 +170,8 @@ class MessagesContainer extends React.Component {
 
   componentDidMount() {
     this.fetchData();
+    this.props.setPageFetch('messages');
+
   }
 
   fetchData = (setUser = true) => {
@@ -400,6 +404,7 @@ const mapStateToProps = ({ user, timers }) => {
 const mapDispatchToProps = (dispatch, { apiService }) => {
   return {
     setMessagesNotifications: (n) => dispatch(setMessagesNotifications(n)),
+    setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
   };
 };
 

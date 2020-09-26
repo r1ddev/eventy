@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import Header from "../../components/header";
 import { isMobile } from "react-device-detect";
+import { setPageFetch } from "../../actions/page-actions";
+
 
 class Presentations extends React.Component {
   state = {};
@@ -48,6 +50,11 @@ class Presentations extends React.Component {
   }
 }
 class PresentationsContainer extends React.Component {
+  componentDidMount() {
+    this.props.setPageFetch('presentatons');
+
+  }
+
   render() {
     return <Presentations {...this.props} />;
   }
@@ -58,7 +65,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-  return {};
+  return {
+    setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
+  };
 };
 
 export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(PresentationsContainer);

@@ -11,6 +11,8 @@ import NoPermissions from "../../components/no-permissions";
 import { isMobile } from "react-device-detect";
 import { fetchUser } from "../../actions/user-actions";
 import { conversationRoomsLoading, conversationRoomsLoaded } from "../../actions/conversations-actions";
+import { setPageFetch } from "../../actions/page-actions";
+
 
 import { withTranslation } from "react-i18next";
 
@@ -74,6 +76,8 @@ class СonversationsContainer extends React.Component {
   state = {};
 
   componentDidMount() {
+    this.props.setPageFetch('conversations');
+
     this.props.fetchUser();
 
     api.account.conversations.getRooms().then((res) => {
@@ -112,6 +116,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     conversationRoomsLoading: () => conversationRoomsLoading(dispatch),
     conversationRoomsLoaded: (rooms) => conversationRoomsLoaded(dispatch)(rooms),
     fetchUser: fetchUser(apiService, dispatch),
+    setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
   };
 };
 

@@ -6,6 +6,7 @@ import { compose } from "../../utils";
 import ScenesChat from "./scenes-chat-container";
 import Stikers from "../../components/stikers";
 import { fetchScenes } from "../../actions/scenes-actions";
+import { setPageFetch } from "../../actions/page-actions";
 import { fetchUser } from "../../actions/user-actions";
 import { withTranslation } from "react-i18next";
 
@@ -161,6 +162,7 @@ class ScenesContainer extends React.Component {
   };
 
   componentDidMount() {
+    this.props.setPageFetch('scenes');
     this.getScenes();
     this.props.fetchUser();
     this.props.setVideoFrameVisible();
@@ -240,6 +242,8 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     setVideoFixed: () => dispatch(setVideoFixed()),
     setVideoFloated: () => dispatch(setVideoFloated()),
     setCurrentSceneUrl: (url) => dispatch(setCurrentSceneUrl(url)),
+    setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
+
   };
 };
 

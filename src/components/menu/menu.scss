@@ -14,7 +14,6 @@
 	display: grid;
 	overflow-y: auto;
 	min-width: 150px;
-	border-right: 1px solid #cecece;
 }
 
 .menu-item {
@@ -25,25 +24,25 @@
 	background-color: #c3d600;
 	transition: background-color 200ms;
 	flex-grow: 1; */
-	color: black;
+	color: white;
 	text-decoration: none;
 	font-family: "Gilroy";
 	font-size: 17px;
 	padding: 0px 10px;
 	flex-direction: column;
 	text-align: center;
-	border-left: 0px solid $base-color;
 	transition: 100ms;
-	background-color: white;
+	background-color: #350278;
 
 }
 
 .menu-item:hover {
-	background-color:#e3ffef;
+	background-color:'#ff5900';
 	border-left: 3px solid $base-color;
 	transition:100ms;
 	text-decoration: none;
-	color: black;
+	color: white;
+
 }
 
 .menu-item > a {

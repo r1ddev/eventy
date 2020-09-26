@@ -10,6 +10,7 @@ import posed from "react-pose";
 import { isMobile } from "react-device-detect";
 import { withTranslation } from "react-i18next";
 import Translit from "../../components/translit";
+import { setPageFetch } from "../../actions/page-actions";
 
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
@@ -29,7 +30,7 @@ class MenuList extends React.Component {
 		const { options, children, maxHeight, getValue } = this.props;
 		const [value] = getValue();
 		const initialOffset = options.indexOf(value) * 35;
-  
+
 		return (
 			<List
 				height={maxHeight}
@@ -118,7 +119,7 @@ class Networking extends React.Component {
 			let filterHasWhatOffer = this.state.filterOptions.hasWhatOffer ? user.what_offer.length > 0 : true;
 			let filterOnlyWhatLooking = this.state.filterOptions.onlyWhatLooking ? (user.what_looking.length > 0 && user.what_offer.length == 0) : true;
 
-			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase()) && 
+			return ~userStr.toLowerCase().indexOf(this.state.searchFilter.toLowerCase()) &&
 				filterTown &&
 				filterSpecialization &&
 				filterHasWhatOffer &&
@@ -196,7 +197,7 @@ class Networking extends React.Component {
 			filterOptions: filterOptions
 		});
 	};
-	
+
 	onTownChange = (e) => {
 		let filterOptions = this.state.filterOptions
 		if (e) {
@@ -276,7 +277,7 @@ class Networking extends React.Component {
 						/>
 					</div>
 				</div>
-				
+
 				<div className="row mt-3">
 					<div className="col-md-auto d-flex align-items-center">Город:</div>
 					<div className="col-md">
@@ -390,6 +391,11 @@ class Networking extends React.Component {
 	}
 }
 class NetworkingContainer extends React.Component {
+
+	componentDidMount() {
+		this.props.setPageFetch('networking');
+	}
+
 	render() {
 		return <Networking {...this.props} />;
 	}
@@ -402,7 +408,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-	return {};
+	return {
+		setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
+	};
 };
 
 export default compose(

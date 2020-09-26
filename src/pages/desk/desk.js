@@ -6,6 +6,8 @@ import { compose } from "../../utils";
 import Header from "../../components/header";
 import { Link } from "react-router-dom";
 import { fetchUser } from "../../actions/user-actions";
+import { setPageFetch } from "../../actions/page-actions";
+
 import IdeaFirstApiService from "../../services/idea-first-api-service";
 import { isMobile } from "react-device-detect";
 
@@ -139,6 +141,8 @@ class Desk extends React.Component {
 class DeskContainer extends React.Component {
     componentDidMount() {
         this.props.fetchUser();
+        this.props.setPageFetch('desk');
+
     }
 
     render() {
@@ -161,6 +165,7 @@ const mapStateToProps = ({ user }) => {
 const mapDispatchToProps = (dispatch, { apiService }) => {
     return {
         fetchUser: fetchUser(apiService, dispatch),
+        setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
     };
 };
 
