@@ -40,9 +40,10 @@ class ScenesMobile extends React.Component {
 
         } = this.props;
 
-        const { generalChatId, spikerChatId } = scenes[scene] || {
+        const { generalChatId, spikerChatId, sponsorChatId } = scenes[scene] || {
             generalChatId: 0,
-            spikerChatId: 0
+            spikerChatId: 0,
+            sponsorChatId: 0,
         }
 
 
@@ -60,10 +61,10 @@ class ScenesMobile extends React.Component {
 
                 <ScenesVideo sceneUrl={sceneUrl} />
 
-                <ScenesVideoActions isVisible={!chatIsOpen}>
+                {/*<ScenesVideoActions isVisible={!chatIsOpen}>
                     <ScenesReactions sceneNumber={scene} />
                     <ScenesLangChecker />
-                </ScenesVideoActions>
+                </ScenesVideoActions> */}
 
                 <ScenesBanner isVisible={!chatIsOpen} />
                 <ScenesTimetable isVisible={!chatIsOpen} t={t} />
@@ -73,6 +74,7 @@ class ScenesMobile extends React.Component {
                     onClose={() => this.onChangeChatIsOpenValue(false)}
                     generalChatId={generalChatId}
                     spikerChatId={spikerChatId}
+                    sponsorChatId={sponsorChatId}
                     t={t}
                 />
 

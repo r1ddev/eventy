@@ -1,5 +1,5 @@
 import React from "react";
-import "./scenes.css";
+import "./scenes.scss";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
@@ -19,11 +19,12 @@ import api from "./../../js/api";
 import Header from "../../components/header/header";
 import { isMobile } from "react-device-detect";
 import ScenesMobile from "../scenes-mobile";
+import ScenesBanner from "../../components/scenes-mobile-components/scenes-banner";
 
 
 class Scenes extends React.Component {
   componentDidMount() {
-    this.props.setCurrentSceneUrl(this.props.sceneUrl);
+    if (this.props.sceneUrl) this.props.setCurrentSceneUrl(this.props.sceneUrl);
   }
 
   render() {
@@ -58,9 +59,10 @@ class Scenes extends React.Component {
                             </iframe> */}
             </div>
           </div>
-          <div className="translation-footer">
+          {/* <div className="translation-footer">
             <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
-          </div>
+          </div> */}
+          <ScenesBanner />
         </div>
         <div className="scenes-chat">
           <div className="chat-header">
@@ -100,6 +102,17 @@ class TranslationHeader extends React.Component {
           </div>
         </div>
 
+        <div className="scene-item">
+          <div>
+            <div className={scene === 1 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(1)}>
+              {t('СЦЕНА') + ' 2'}
+            </div>
+            <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
+              {t('Идет')}
+            </div>
+          </div>
+        </div>
+
         {/* <div className="scene-item">
                     <div>
                         <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
@@ -127,12 +140,16 @@ class ScenesContainer extends React.Component {
   timerId = null;
 
   setScene = (scene) => {
+    const { scenes } = this.props.scenes;
     const { lang } = this.state;
 
     this.setState({
       scene: scene,
       lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
     });
+    this.props.setCurrentSceneUrl(scenes[scene][lang]);
+
+
   };
 
   setLang = (lang) => {

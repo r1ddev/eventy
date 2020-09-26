@@ -104,6 +104,10 @@
     border-radius: 2px;
     margin-bottom: 7px;
 
+    &.ad{
+      background-color: rgb(136, 49, 136);
+    }
+
     &.bordered{
       border-left: 4px solid #ccc9c9
 
@@ -115,6 +119,11 @@
       text-align: left;
       padding-left: 2px;
       line-height: 1.2;
+
+      .umf{
+        background-color: rgb(136, 49, 136);
+
+      }
 
       .mes-text{
         overflow-wrap: anywhere;
