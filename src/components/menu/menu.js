@@ -25,13 +25,19 @@ class Menu extends React.Component {
 		const networking = require("../../images/icons/soldout/Orange_Icon_04.svg");
 		const activenetworking = require("../../images/icons/soldout/White_Icon_04.svg");
 
-		const presentations = require("../../images/icons/presentations.svg");
-		const messages = require("../../images/icons/messages.svg");
-		const exposure = require("../../images/icons/exposure.svg");
-		const conversations = require("../../images/icons/conversations.svg");
-		const party = require("../../images/icons/party.svg");
-		const quest = require("../../images/icons/quest.svg");
-		const vipassistent = require("../../images/icons/vipassistent.svg");
+		const messages = require("../../images/icons/soldout/Orange_Icon_05.svg");
+		const activemessages = require("../../images/icons/soldout/White_Icon_05.svg");
+
+		const conversations = require("../../images/icons/soldout/Orange_Icon_06.svg");
+		const activeconversations = require("../../images/icons/soldout/White_Icon_06.svg");
+
+		const exposure = require("../../images/icons/soldout/Orange_Icon_07.svg");
+		const activeexposure = require("../../images/icons/soldout/White_Icon_07.svg");
+
+		const presentations = require("../../images/icons/soldout/Orange_Icon_08.svg");
+		const activepresentations = require("../../images/icons/soldout/Orange_Icon_08.svg");
+
+
 
 		const { range, notifications, page } = this.props;
 
@@ -50,10 +56,10 @@ class Menu extends React.Component {
 				<MenuItem active={page.page == 'scenes'} icon={scenes} activeicon={activescenes} label={t("Трансляция")} link="/scenes"></MenuItem>
 				<MenuItem2 active={page.page == 'program'} icon={program} activeicon={activeprogram} label={t("Программа")} link="/program"></MenuItem2>
 				<MenuItem active={page.page == 'networking'} icon={networking} activeicon={activeprogram} label={t("Нетворкинг")} link="/networking"></MenuItem>
-				<MenuItem active={page.page == 'messages'} icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
-				<MenuItem active={page.page == 'conversations'} icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
-				<MenuItem active={page.page == 'exposure'} icon={exposure} label={t("Партнеры")} link="/exposure"></MenuItem>
-				<MenuItem active={page.page == 'presentations'} icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
+				<MenuItem active={page.page == 'messages'} icon={messages} activeicon={activemessages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
+				<MenuItem active={page.page == 'conversations'} icon={conversations} activeicon={activeconversations} label={t("Переговорки")} link="/conversations"></MenuItem>
+				<MenuItem active={page.page == 'exposure'} icon={exposure} activeicon={activeexposure} label={t("Партнеры")} link="/exposure"></MenuItem>
+				<MenuItem active={page.page == 'presentations'} icon={presentations} activeicon={activepresentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
 			</div>
 		);
 	}

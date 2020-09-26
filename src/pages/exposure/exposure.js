@@ -7,6 +7,8 @@ import Header from "../../components/header";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
+import { setPageFetch } from "../../actions/page-actions";
+
 
 class Exposure extends React.Component {
   partners = [
@@ -72,6 +74,11 @@ class Exposure extends React.Component {
 }
 
 class ExposureContainer extends React.Component {
+
+  componentDidMount() {
+    this.props.setPageFetch('exposure');
+  }
+
   render() {
     return <Exposure {...this.props} />;
   }
@@ -88,6 +95,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
     postUrl: (url) => {
       apiService.postUrl(url);
     },
+    setPageFetch: (page) => setPageFetch(apiService, dispatch)(page)
   };
 };
 
