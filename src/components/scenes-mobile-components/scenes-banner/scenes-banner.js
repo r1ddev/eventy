@@ -15,26 +15,26 @@ class ScenesBanner extends React.Component {
   banners = [
     {
       type: 'simple',
-      img: "https://demo.smit.events/images/smitbanner.jpg",
+      img: "https://translation.soldoutconf.ru/images/smitbanner.jpg",
       name: 'smit',
       src: "https://smit.events/"
     },
     {
       type: 'simple',
-      img: "https://demo.smit.events/images/banner1.jpg",
+      img: "https://translation.soldoutconf.ru/images/banner1.jpg",
       name: 'smitmerch',
       src: "https://gifts.ru/pro/event?utm_source=soldout&utm_medium=banner&utm_campaign=010_for_event&utm_content=online"
     },
     {
       type: 'simple',
-      img: "https://demo.smit.events/images/banner2.jpg",
+      img: "https://translation.soldoutconf.ru/images/banner2.jpg",
       name: 'nethouse',
       src: 'https://events.nethouse.ru/?utm_source=soldout&utm_medium=banner'
     },
     {
 
       type: 'complex',
-      img: "http://demo.smit.events/images/banner3.jpg",
+      img: "https://translation.soldoutconf.ru/images/banner3.jpg",
       name: 'complex',
       src: [
         'https://event-manager.eventologia.ru/?utm_source=soldout&utm_medium=banner',
