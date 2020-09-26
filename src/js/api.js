@@ -4,8 +4,8 @@ const api = {
 	// proxy: "https://cors-anywhere.herokuapp.com/",
 	proxy: "",
 
-	origin: window.location.protocol + "//demo.smit.events",
-	host: window.location.protocol + "//api.smit.events/api",
+	origin: window.location.protocol + "//translation.soldoutconf.ru",
+	host: window.location.protocol + "//translation.soldoutconf.ru/api",
 
 	useAuth: () => {
 		return {
