@@ -5,7 +5,7 @@ class ScenesBanner extends React.Component {
 
   state = {
     lasttime: null,
-    period: 3000,
+    period: 180000,
     current: 0,
     count: 4,
   }
