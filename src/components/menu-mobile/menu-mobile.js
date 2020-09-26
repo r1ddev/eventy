@@ -98,7 +98,7 @@ class MenuItemMobile extends React.Component {
 			<NavLink
 				to={link}
 				activeStyle={{
-					backgroundColor: '#22d671'
+					backgroundColor: '#Ff5900'
 				}}
 				className="icon-item"
 				style={{ backgroundImage: `url(${icon})` }}

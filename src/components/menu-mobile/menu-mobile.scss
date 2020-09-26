@@ -35,7 +35,7 @@
 
 	.menu-mobile--item-container{
 		position: absolute;
-    background-color: rgb(34, 214, 113);
+    	background-color: $base-color + a6;
 		border-bottom: 0px;
 		width: 100vw;
 		height: 0px;
@@ -47,8 +47,8 @@
 
 	.menu-mobile--item-container.active{
 		height: 354px;
-    overflow: hidden;
-    border-bottom: 4px double #1caa58;
+    	overflow: hidden;
+    	border-bottom: 4px double $base-color;
 		transition: 300ms;
 	}
 
@@ -64,7 +64,7 @@
 			background-repeat: no-repeat;
 			background-size: 60px;
 			position: relative;
-			background-color: rgba(28, 176, 91, 0.75);
+			background-color: $base-color;
 
 			.icon-label{
 				position: absolute;
