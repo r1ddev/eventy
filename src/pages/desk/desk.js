@@ -26,14 +26,24 @@ class Desk extends React.Component {
                 )}
                 <section
                     className="first-section"
-                    style={{ backgroundImage: `url(${require("../../images/lobby.jpg")})` }}>
+                    style={{ backgroundImage: `url(${require("../../images/so-lobby.png")})` }}>
                     {/* <img src={require('../../images/lobby.jpg')} alt="img" /> */}
                     <div className="lobby-text">
                         {/* {t(`Добро пожаловать на digital Stand-up Smit.Studio`)} */}
-                        <Trans t={t}>Добро пожаловать на digital Stand-up Smit.Studio</Trans>
-                        <div className='lobby-lang-checker'>
-                            <LangChecker />
+                        {/* <Trans t={t}>Добро пожаловать на digital Stand-up Smit.Studio</Trans> */}
+                        {/* <div className='lobby-lang-checker'> */}
+                            {/* <LangChecker /> */}
+                        {/* </div> */}
+                        <div className="container h-100">
+                            <div className="text-center">
+                                <div className="date">28-30 сентября</div>
+                                <div className="title">SOLD OUT 2020. НОВОЕ ВРЕМЯ</div>
+                                <div className="subtitle">КЛЮЧЕВОЙ ФОРУМ ОБ ОРГАНИЗАЦИИ И ПРОДВИЖЕНИИ СОБЫТИЙ</div>
+                                <div className="desc">2 потока. Бесплатная онлайн-трансляция</div>
+                            </div>
+                            <div className="bottom-text">Записи, презентации и пакет из 20+ актуальных на сейчас чек-листов, алгоритмов и мануалов для работы в event-нише будут отправлены всем участникам, оплатившим пакет с записями</div>
                         </div>
+                        
                     </div>
 
                     {/* <div className="first-svg">
