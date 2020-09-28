@@ -106,7 +106,7 @@ i18n.use(LanguageDetector).init({
         Компания: "Company",
         Агентство: "Agency",
         "Вам на почту пришла ссылка, пожалуйста перейдите по ней, чтобы завершить регистрацию":
-          "You have received a link in your mail, please follow it to complete registration",
+          "You have received a link in your E-mail, please follow it to complete registration",
 
         "Восстановление пароля": "Password recovery",
         ВОССТАНОВИТЬ: "RESET PASSWORD",

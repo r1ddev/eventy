@@ -1,5 +1,5 @@
 import React from 'react';
-import "./spinner.css"
+import "./spinner.scss"
 class Spinner extends React.Component {
 
     render() {

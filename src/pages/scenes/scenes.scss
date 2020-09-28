@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #scenes {
 	width: 100%;
 	height: 100%;
@@ -79,7 +81,7 @@
 }
 
 .scene-item .scene-btn-active {
-	background-color: #22D671;
+	background-color: $base-color;
 	color: white;
 }
 

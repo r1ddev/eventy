@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #networking {
 	.header {
 		border-bottom: 1px solid #c4c4c4;
@@ -15,7 +17,7 @@
 	}
 	.search {
 		width: 75%;
-		border: 1px solid #22D671;
+		border: 1px solid $base-color;
 
 		@media screen and (max-width: 767px) {
 			margin-top: 15px !important;
@@ -55,7 +57,7 @@
 		.btn-search {
 			border: none;
 			background: url(../../images/search.svg) center center no-repeat;
-			background-color: #22D671;
+			background-color: $base-color;
 			height: 35px;
 			width: 35px;
 			vertical-align: top;
@@ -126,7 +128,7 @@
 				font-size: 28px;
 				line-height: 33px;
 
-				color: #22D671;
+				color: $base-color;
 			}
 
 			.text {
@@ -156,7 +158,7 @@
 	}
 
 	.rc-pagination-item-active {
-		border-color: #22d671;
+		border-color: $base-color;
 
 		a {
 			color: #000;
@@ -164,12 +166,12 @@
 	}
 
 	.rc-pagination-item:focus, .rc-pagination-item:hover {
-		border-color: #22d671;
+		border-color: $base-color;
 		transition: all 0.3s;
 	}
 
 	.rc-pagination-item:focus, .rc-pagination-item:hover {
-		border-color: #22d671;
+		border-color: $base-color;
 		transition: all 0.3s;
 
 		a {
@@ -189,7 +191,7 @@
 		min-width: 40px;
 
 		&:hover {
-			border-color: #22d671;
+			border-color: $base-color;
 		}
 	}
 

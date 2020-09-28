@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #lang-checker {
 	height: 56px;
 	width: 300px;
@@ -14,7 +16,7 @@
 		}
 
 		.css-1cnxohn-control {
-			border-color: #22d671;
+			border-color: $base-color;
 			box-shadow: inset 0 0 1px 1px #1dd673;
 		}
 	}
@@ -36,13 +38,13 @@
 	.css-1pahdxg-control {
 		background-color: rgba(0, 0, 0, 0.1);
 		color: white;
-		border-color: #22d671;
-		box-shadow: 0 0 0 1px #22d671;
+		border-color: $base-color;
+		box-shadow: 0 0 0 1px $base-color;
 		border-radius: 8px;
 
 		&:hover {
-			border-color: #22d671;
-			box-shadow: 0 0 0 1px #22d671;
+			border-color: $base-color;
+			box-shadow: 0 0 0 1px $base-color;
 		}
 	}
 
