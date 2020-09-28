@@ -49,7 +49,7 @@ const api = {
 			what_offer
 		) => {
 			let response = await axios.put(
-				api.proxy + api.host + "/users",
+				api.proxy + api.host + "/v3/users",
 				{
 					first_name: name,
 					last_name: lastName,
@@ -142,7 +142,7 @@ const api = {
 		if (!errors.hasOwnProperty("404")) {
 			errors['404'] = () => alert("something сломалось")
 		}
-		
+
 		if (!e.response) {
 			console.log("Ошибка Интернета");
 		} else {
