@@ -327,7 +327,7 @@ a.mes-info-name{
 }
 
 .text-success {
-	color: $base-color + '!important';
+	color: $base-color + !important;
 
 }
 
