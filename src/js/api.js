@@ -46,7 +46,8 @@ const api = {
 			shareContact,
 			soc,
 			what_looking,
-			what_offer
+			what_offer,
+			tags
 		) => {
 			let response = await axios.put(
 				api.proxy + api.host + "/v3/users",
@@ -61,6 +62,7 @@ const api = {
 					what_looking: what_looking,
 					what_offer: what_offer,
 					view_contact: shareContact - 0,
+					tags: tags
 				},
 				api.useAuth()
 			);

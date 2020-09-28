@@ -14,6 +14,22 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
 
+const defaultTags = [
+	{
+		value: 1,
+		label: "Креатор",
+	}, {
+		value: 2,
+		label: "Дизайнер",
+	}, {
+		value: 3,
+		label: "Менеджер",
+	}, {
+		value: 4,
+		label: "Директор",
+	}
+]
+
 class EditProfile extends React.Component {
   state = {
     avatar: "",
@@ -27,17 +43,18 @@ class EditProfile extends React.Component {
     soc: "",
     what_looking: "",
     what_offer: "",
+    tags: [],
 
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer)
+      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags.map(v => v.value))
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -66,6 +83,15 @@ class EditProfile extends React.Component {
     api.account
       .getUserData()
       .then((res) => {
+
+        let userTags = JSON.parse(res.user.tags)
+
+        userTags = userTags.map(v => {
+          return defaultTags.find(t => {
+            return t.value == v
+          })
+        })
+      
         this.setState({
           avatar: api.auth.getAvatarLocation() + res.user.avatar,
           name: res.user.first_name || "",
@@ -78,6 +104,7 @@ class EditProfile extends React.Component {
           soc: res.user.social_site || "",
           what_looking: res.user.what_looking || "",
           what_offer: res.user.what_offer || "",
+          tags: userTags
         });
 
         this.setLoading(false);
@@ -101,7 +128,7 @@ class EditProfile extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer } = this.state;
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer, tags } = this.state;
 
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
@@ -251,6 +278,28 @@ class EditProfile extends React.Component {
                       >
                       </textarea>
                     </div>
+
+                    <div className="field mt-4">
+											<Select
+												placeholder="Выберите теги"
+												isMulti
+												options={tags.length >= 2 ? [] : defaultTags}
+												value={tags}
+												theme={(theme) => ({
+													...theme,
+													borderRadius: 10,
+													colors: {
+														...theme.colors,
+														primary: "#f4004d",
+													},
+												})}
+												noOptionsMessage={() => 'Нет данных для отображения'}
+												onChange={(e) => {
+                          // console.log(e);
+													this.setState({ tags: e || [] });
+												}}
+											/>
+										</div>
 
                     <div className="field">
                       <div className="row">
