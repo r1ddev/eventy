@@ -7,7 +7,7 @@ const api = {
 	// host: "https://onlineshow.marketingforum.com.ua/api",
 
 	origin: window.location.protocol + "//demo.smit.events",
-	host: window.location.protocol + "//demo.smit.events/api",
+	host: window.location.protocol + "//api.smit.events/api",
 
 	// origin: window.location.origin,
 	// host: window.location.origin + "/api",
@@ -54,7 +54,7 @@ const api = {
 					company: company,
 					position: position,
 					phone: phone,
-					mail: email,
+					email: email,
 					social_site: soc,
 					what_looking: "",
 					what_offer: "",

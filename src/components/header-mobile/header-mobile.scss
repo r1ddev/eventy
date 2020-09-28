@@ -1,5 +1,7 @@
+@import "../../variables.scss";
+
 #header-mobile {
-	background-color:#22D671;
+	background-color:$base-color;
 	display: grid;
 	grid-template-columns: 60px 1fr 60px;
 }

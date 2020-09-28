@@ -71,7 +71,7 @@ class EditProfile extends React.Component {
           company: res.user.company || "",
           position: res.user.position || "",
           phone: res.user.phone || "",
-          email: res.user.mail || "",
+          email: res.user.email || "",
           shareContact: !!res.user.view_contact,
           soc: res.user.social_site || "",
         });
