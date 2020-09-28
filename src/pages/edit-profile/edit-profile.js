@@ -25,17 +25,19 @@ class EditProfile extends React.Component {
     email: "",
     shareContact: true,
     soc: "",
+    what_looking: "",
+    what_offer: "",
 
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .registration(name, lastName, company, position, phone, email, shareContact, soc)
+      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -74,6 +76,8 @@ class EditProfile extends React.Component {
           email: res.user.email || "",
           shareContact: !!res.user.view_contact,
           soc: res.user.social_site || "",
+          what_looking: res.user.what_looking || "",
+          what_offer: res.user.what_offer || "",
         });
 
         this.setLoading(false);
@@ -97,7 +101,7 @@ class EditProfile extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc } = this.state;
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer } = this.state;
 
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
@@ -216,6 +220,36 @@ class EditProfile extends React.Component {
                           });
                         }}
                       />
+                    </div>
+
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что ищете?")}
+                        value={what_looking}
+                        onChange={(e) => {
+                          this.setState({
+                            what_looking: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
+                    </div>
+
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что предлагаете?")}
+                        value={what_offer}
+                        onChange={(e) => {
+                          this.setState({
+                            what_offer: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
                     </div>
 
                     <div className="field">
