@@ -139,6 +139,10 @@ const api = {
 	},
 
 	errorHandler: (e, errors) => {
+		if (!errors.hasOwnProperty("404")) {
+			errors['404'] = () => alert("something сломалось")
+		}
+		
 		if (!e.response) {
 			console.log("Ошибка Интернета");
 		} else {
