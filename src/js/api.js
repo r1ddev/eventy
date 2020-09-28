@@ -36,7 +36,7 @@ const api = {
 		getAvatarLocation() {
 			return api.origin + "/images/avatar/";
 		},
-		registration: async (
+		editProfile: async (
 			name,
 			lastName,
 			company,
@@ -44,11 +44,13 @@ const api = {
 			phone,
 			email,
 			shareContact,
-			soc
+			soc,
+			what_looking,
+			what_offer
 		) => {
-			let response = await axios.post(
-				api.proxy + api.host + "/users/edit",
-				api.toFormData({
+			let response = await axios.put(
+				api.proxy + api.host + "/users",
+				{
 					first_name: name,
 					last_name: lastName,
 					company: company,
@@ -56,10 +58,10 @@ const api = {
 					phone: phone,
 					email: email,
 					social_site: soc,
-					what_looking: "",
-					what_offer: "",
+					what_looking: what_looking,
+					what_offer: what_offer,
 					view_contact: shareContact - 0,
-				}),
+				},
 				api.useAuth()
 			);
 
