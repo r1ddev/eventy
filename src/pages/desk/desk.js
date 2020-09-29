@@ -26,11 +26,11 @@ class Desk extends React.Component {
                 )}
                 <section
                     className="first-section"
-                    style={{ backgroundImage: `url(${require("../../images/lobby.jpg")})` }}>
+                    style={{ backgroundImage: `url(${require("../../images/lobby.png")})` }}>
                     {/* <img src={require('../../images/lobby.jpg')} alt="img" /> */}
                     <div className="lobby-text">
                         {/* {t(`Добро пожаловать на digital Stand-up Smit.Studio`)} */}
-                        <Trans t={t}>Добро пожаловать на digital Stand-up Smit.Studio</Trans>
+                        <Trans t={t}>Добро пожаловать</Trans>
                         <div className='lobby-lang-checker'>
                             <LangChecker />
                         </div>
