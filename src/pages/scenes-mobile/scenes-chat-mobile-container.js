@@ -92,7 +92,7 @@ class ScenesChatMobileContainer extends React.Component {
         const { messages, loading, error } = this.props.chat;
         const { survey } = this.state;
         let userbanned = this.props.user.chat_ban;
-        if (error) userbanned = (error.response.data.error == 'user_banned' || this.props.user.chat_ban) ? true : false;
+        if (error && error.response) userbanned = (error.response.data.error == 'user_banned' || this.props.user.chat_ban) ? true : false;
         // console.log(messages)
 
         return (
