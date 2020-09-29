@@ -11,27 +11,19 @@ import { withTranslation } from "react-i18next";
 class Menu extends React.Component {
 
 	render() {
-		const logo = require("../../images/icons/logo.svg");
-		const desk = require("../../images/icons/desk.svg");
-		const scenes = require("../../images/icons/scenes.svg");
-		const program = require("../../images/icons/program.svg");
-		const spikers = require("../../images/icons/spikers.svg");
-		const presentations = require("../../images/icons/presentations.svg");
-		const networking = require("../../images/icons/networking.svg");
-		const messages = require("../../images/icons/messages.svg");
-		const exposure = require("../../images/icons/exposure.svg");
-		const conversations = require("../../images/icons/conversations.svg");
-		const party = require("../../images/icons/party.svg");
-		const quest = require("../../images/icons/quest.svg");
-		const vipassistent = require("../../images/icons/vipassistent.svg");
-
+		const logo = require("../../images/icons/menu/logo.svg");
+		const desk = require("../../images/icons/menu/desk.svg");
+		const scenes = require("../../images/icons/menu/scenes.svg");
+		const presentations = require("../../images/icons/menu/presentations.svg");
+		const networking = require("../../images/icons/menu/networking.svg");
+		const messages = require("../../images/icons/menu/messages.svg");
+		const exposure = require("../../images/icons/menu/exposure.svg");
+		const conversations = require("../../images/icons/menu/conversations.svg");
+	
 		const { range, notifications } = this.props;
 
 		const { newMessages, newVipMessages } = notifications;
 		const t = this.props.t;
-
-
-
 
 		return (
 			<div id="menu">
@@ -63,8 +55,7 @@ class MenuItem extends React.Component {
 			<NavLink
 				to={link}
 				activeStyle={{
-					background: '#e3ffef',
-					borderLeft: '3px solid #22D671',
+					borderLeft: '3px solid #3F4545',
 
 				}}
 				className="menu-item flex-center"

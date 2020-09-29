@@ -13,13 +13,13 @@ import { withTranslation } from "react-i18next";
 
 const logo = require("../../images/icons/logo.svg");
 const closebtn = require("../../images/menu/close-icon.svg");
-const desk = require("../../images/icons/desk.svg");
-const scenes = require("../../images/icons/scenes.svg");
-const networking = require("../../images/icons/networking.svg");
-const messages = require("../../images/icons/messages.svg");
-const conversations = require("../../images/icons/conversations.svg");
-const exposure = require("../../images/icons/exposure.svg");
-const presentations = require("../../images/icons/presentations.svg");
+const desk = require("../../images/icons/menu/desk.svg");
+const scenes = require("../../images/icons/menu/scenes.svg");
+const presentations = require("../../images/icons/menu/presentations.svg");
+const networking = require("../../images/icons/menu/networking.svg");
+const messages = require("../../images/icons/menu/messages.svg");
+const exposure = require("../../images/icons/menu/exposure.svg");
+const conversations = require("../../images/icons/menu/conversations.svg");
 
 
 
