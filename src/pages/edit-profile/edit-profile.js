@@ -227,7 +227,7 @@ class EditProfile extends React.Component {
 
                     <div className="field mt-3">
 											<Select
-												placeholder="Выберите теги"
+												placeholder={t("Выберите теги")}
 												isMulti
 												options={tags.length >= 2 ? [] : defaultTags}
 												value={tags}
