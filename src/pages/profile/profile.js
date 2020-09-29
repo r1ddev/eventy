@@ -22,6 +22,9 @@ class Registration extends React.Component {
     phone: "",
     email: "",
     soc: "",
+    what_looking: "",
+    what_offer: "",
+
     isLoading: false,
     isEditable: false,
   };
@@ -57,6 +60,8 @@ class Registration extends React.Component {
               phone: res.user.phone,
               email: res.user.email,
               soc: res.user.social_site,
+              what_looking: res.user.what_looking,
+              what_offer: res.user.what_offer,
             });
 
             this.setLoading(false);
@@ -84,6 +89,8 @@ class Registration extends React.Component {
               phone: res.user.phone || "",
               email: res.user.email || "",
               soc: res.user.social_site || "",
+              what_looking: res.user.what_looking || "",
+              what_offer: res.user.what_offer || "",
               isEditable: true,
             });
 
@@ -112,7 +119,7 @@ class Registration extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { isLoading, name, lastName, avatar, company, position, phone, email, soc, isEditable } = this.state;
+    const { isLoading, name, lastName, avatar, company, position, phone, email, soc, isEditable, what_looking, what_offer } = this.state;
 
     let userAvatar = require("../../images/default-avatar.svg");
     if (avatar) {
@@ -143,9 +150,15 @@ class Registration extends React.Component {
                     <div className="text">{phone}</div>
                     <div className="text">{soc}</div>
 
+                    <div className="title mt-2">{t("Что ищу")}:</div>
+                    <div className="text">{what_looking}</div>
+
+                    <div className="title mt-2">{t("Что предлагаю")}:</div>
+                    <div className="text">{what_offer}</div>
+
                     {isEditable && (
                       <div className="field mt-3 flex-center">
-                        <Link to="/profile/edit" className="flex-center btn-submit text-center">
+                        <Link to="/profile/edit" className="btn btn-submit text-center">
                           {t("Изменить профиль")}
                         </Link>
                       </div>
