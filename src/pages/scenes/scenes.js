@@ -100,6 +100,17 @@ class TranslationHeader extends React.Component {
           </div>
         </div>
 
+        <div className="scene-item">
+          <div>
+            <div className={scene === 1 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(1)}>
+              {t('СЦЕНА') + ' 2'}
+            </div>
+            <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
+              {t('Идет')}
+            </div>
+          </div>
+        </div>
+
         {/* <div className="scene-item">
                     <div>
                         <div className={(scene === 1) ? 'scene-btn-active' : 'scene-btn'} onClick={() => setScene(1)}>СЦЕНА 2</div>
@@ -127,12 +138,15 @@ class ScenesContainer extends React.Component {
   timerId = null;
 
   setScene = (scene) => {
+    const { scenes } = this.props.scenes;
     const { lang } = this.state;
 
     this.setState({
       scene: scene,
       lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
     });
+    this.props.setCurrentSceneUrl(scenes[scene][lang]);
+
   };
 
   setLang = (lang) => {
