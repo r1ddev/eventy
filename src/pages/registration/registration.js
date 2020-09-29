@@ -17,6 +17,7 @@ class Registration extends React.Component {
     passwordRepeated: "",
     passwordRepeatedError: false,
     disableForm: false,
+    termsAgree: false,
   };
 
   regOptions = [
@@ -96,9 +97,15 @@ class Registration extends React.Component {
     });
   };
 
+  onTermsAgreeChange = (e) => {
+    this.setState({
+      termsAgree: e.target.checked
+    })
+  }
+
   render() {
     const t = this.props.t;
-    const { email, password, passwordRepeated, disableForm, passwordRepeatedError } = this.state;
+    const { email, password, passwordRepeated, disableForm, passwordRepeatedError, termsAgree  } = this.state;
 
     return (
       <div id="registration">
@@ -132,12 +139,27 @@ class Registration extends React.Component {
 
             {passwordRepeatedError && <p className="error-message">{t("Пароли должны быть одинаковыми")}</p>}
 
+            <div className="custom-control custom-checkbox my-3">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="terms-agree"
+                checked={this.state.termsAgree}
+                onChange={this.onTermsAgreeChange}
+                required
+              />
+              <label className="custom-control-label" htmlFor="terms-agree">
+                Я согласен с условиями обработки персональных данных
+              </label>
+            </div>
+
             <button
               disabled={
                 passwordRepeatedError ||
                 email == "" ||
                 password == "" ||
                 passwordRepeated == "" ||
+                termsAgree == "" ||
                 disableForm
               }
               className="white-button login-btn">
