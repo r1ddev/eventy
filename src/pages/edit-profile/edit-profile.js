@@ -19,16 +19,34 @@ import sassVars from "../../variables.scss"
 const defaultTags = [
 	{
 		value: 1,
-		label: "Креатор",
+		label: "Інноватор",
 	}, {
 		value: 2,
-		label: "Дизайнер",
+		label: "Бізнес",
 	}, {
 		value: 3,
-		label: "Менеджер",
+		label: "Медіа",
 	}, {
 		value: 4,
-		label: "Директор",
+		label: "Адміністрація",
+	}, {
+		value: 5,
+		label: "Ченжмейкер",
+	}, {
+		value: 6,
+		label: "Урбаніст",
+	}, {
+		value: 7,
+		label: "Активіст",
+	}, {
+		value: 8,
+		label: "Підприємець",
+	}, {
+		value: 9,
+		label: "Містянин",
+	}, {
+		value: 10,
+		label: "Держслужбовець",
 	}
 ]
 
@@ -206,6 +224,28 @@ class EditProfile extends React.Component {
                         required
                       />
                     </div>
+
+                    <div className="field mt-3">
+											<Select
+												placeholder="Выберите теги"
+												isMulti
+												options={tags.length >= 2 ? [] : defaultTags}
+												value={tags}
+												theme={(theme) => ({
+													...theme,
+													borderRadius: 10,
+													colors: {
+														...theme.colors,
+														primary: sassVars.baseColor,
+													},
+												})}
+												noOptionsMessage={() => 'Нет данных для отображения'}
+												onChange={(e) => {
+                          // console.log(e);
+													this.setState({ tags: e || [] });
+												}}
+											/>
+										</div>
                   </div>
 
                   <div className="col-md-7 right p-5">
@@ -280,28 +320,6 @@ class EditProfile extends React.Component {
                       >
                       </textarea>
                     </div>
-
-                    <div className="field mt-4">
-											<Select
-												placeholder="Выберите теги"
-												isMulti
-												options={tags.length >= 2 ? [] : defaultTags}
-												value={tags}
-												theme={(theme) => ({
-													...theme,
-													borderRadius: 10,
-													colors: {
-														...theme.colors,
-														primary: "#f4004d",
-													},
-												})}
-												noOptionsMessage={() => 'Нет данных для отображения'}
-												onChange={(e) => {
-                          // console.log(e);
-													this.setState({ tags: e || [] });
-												}}
-											/>
-										</div>
 
                     <div className="field">
                       <div className="row">
