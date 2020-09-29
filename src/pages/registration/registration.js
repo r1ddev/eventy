@@ -15,10 +15,9 @@ class Registration extends React.Component {
     email: "",
     password: "",
     passwordRepeated: "",
-    company: "",
-    regTag: [this.props.t("Компания")],
     passwordRepeatedError: false,
     disableForm: false,
+    termsAgree: false,
   };
 
   regOptions = [
@@ -42,8 +41,6 @@ class Registration extends React.Component {
         email: this.state.email,
         password: this.state.password,
         re_password: this.state.passwordRepeated,
-        company: this.state.company,
-        tag: JSON.stringify(this.state.regTag),
       };
 
       // console.log(user);
@@ -100,19 +97,15 @@ class Registration extends React.Component {
     });
   };
 
-  onChangeCompany = (e) => {
+  onTermsAgreeChange = (e) => {
     this.setState({
-      company: e.target.value,
-    });
-  };
-
-  onChangeRegTag = (e) => {
-    this.setState({ regTag: e.value.split(" ") || [] });
-  };
+      termsAgree: e.target.checked
+    })
+  }
 
   render() {
     const t = this.props.t;
-    const { email, password, passwordRepeated, company, regTag, disableForm, passwordRepeatedError } = this.state;
+    const { email, password, passwordRepeated, disableForm, passwordRepeatedError, termsAgree  } = this.state;
 
     return (
       <div id="registration">
@@ -146,21 +139,19 @@ class Registration extends React.Component {
 
             {passwordRepeatedError && <p className="error-message">{t("Пароли должны быть одинаковыми")}</p>}
 
-            <input
-              required
-              type="text"
-              value={company}
-              onChange={this.onChangeCompany}
-              className="company-input"
-              placeholder={t("Название компании")}></input>
-
-            <Select
-              isSearchable={false}
-              defaultValue={this.regOptions[0]}
-              options={this.regOptions}
-              onChange={this.onChangeRegTag}
-              className="reg-select"
-            />
+            <div className="custom-control custom-checkbox my-3">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="terms-agree"
+                checked={this.state.termsAgree}
+                onChange={this.onTermsAgreeChange}
+                required
+              />
+              <label className="custom-control-label" htmlFor="terms-agree">
+                {t("Я согласен с условиями обработки персональных данных")}
+              </label>
+            </div>
 
             <button
               disabled={
@@ -168,7 +159,7 @@ class Registration extends React.Component {
                 email == "" ||
                 password == "" ||
                 passwordRepeated == "" ||
-                company == "" ||
+                termsAgree == "" ||
                 disableForm
               }
               className="white-button login-btn">
