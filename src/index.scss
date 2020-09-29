@@ -76,8 +76,8 @@ body {
 
 .white-button{
   padding:8px;
-  background-color: white;
-  color:  $btn-border-color;
+  background-color: $primary-btn-color;
+  color:  $primary-btn-text-color;
   border-radius: 12px;
   font-size: 23px;
   display: flex;
