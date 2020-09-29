@@ -31,11 +31,11 @@ class Menu extends React.Component {
 					<img alt="" src={logo} />
 				</div>
 				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
-				<MenuItem icon={scenes} label={t("Сцены")} link="/scenes"></MenuItem>
+				<MenuItem icon={scenes} label={t("Сценa")} link="/scenes"></MenuItem>
 				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>
 				<MenuItem icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
 				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
-				<MenuItem icon={exposure} label={t("Партнеры")} link="/exposure"></MenuItem>
+				<MenuItem icon={exposure} label={t("Экспозона")} link="/exposure"></MenuItem>
 				<MenuItem icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
 
 
