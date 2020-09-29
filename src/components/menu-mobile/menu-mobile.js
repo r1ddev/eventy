@@ -11,15 +11,15 @@ import IdeaFirstApiService from "../../services/idea-first-api-service";
 import { withTranslation } from "react-i18next";
 
 
-const logo = require("../../images/icons/logo.svg");
+
 const closebtn = require("../../images/menu/close-icon.svg");
-const desk = require("../../images/icons/desk.svg");
-const scenes = require("../../images/icons/scenes.svg");
-const networking = require("../../images/icons/networking.svg");
-const messages = require("../../images/icons/messages.svg");
-const conversations = require("../../images/icons/conversations.svg");
-const exposure = require("../../images/icons/exposure.svg");
-const presentations = require("../../images/icons/presentations.svg");
+const desk = require("../../images/icons/menu/desk.svg");
+const scenes = require("../../images/icons/menu/scenes.svg");
+const presentations = require("../../images/icons/menu/presentations.svg");
+const networking = require("../../images/icons/menu/networking.svg");
+const messages = require("../../images/icons/menu/messages.svg");
+const exposure = require("../../images/icons/menu/exposure.svg");
+const conversations = require("../../images/icons/menu/conversations.svg");
 
 
 
@@ -77,7 +77,7 @@ class MenuMobile extends React.Component {
 						<MenuItemMobile link='/messages' icon={messages} label={t('Сообщения')} onClose={this.onClose} />
 						<div className="icon-item"></div>
 						<MenuItemMobile link='/conversations' icon={conversations} label={t('Переговорки')} onClose={this.onClose} />
-						<MenuItemMobile link='/exposure' icon={exposure} label={t('Партнеры')} onClose={this.onClose} />
+						<MenuItemMobile link='/exposure' icon={exposure} label={t('Экспозона')} onClose={this.onClose} />
 						<MenuItemMobile link='/presentations/day1' icon={presentations} label={t('Презентации')} onClose={this.onClose} />
 						<div className="icon-item" onClick={this.onClose} style={{ backgroundImage: `url(${closebtn})`, backgroundPosition: 'center' }}></div>
 
@@ -98,7 +98,7 @@ class MenuItemMobile extends React.Component {
 			<NavLink
 				to={link}
 				activeStyle={{
-					backgroundColor: '#22d671'
+					backgroundColor: '#cecece'
 				}}
 				className="icon-item"
 				style={{ backgroundImage: `url(${icon})` }}

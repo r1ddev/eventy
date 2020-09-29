@@ -19,7 +19,7 @@
 	justify-content: center;
 	font-family: "FuturaBookC";
 	color: white;
-	font-size: 28px;
+	// font-size: 28px;
 	transition: 200ms;
 	z-index: 5;
 
@@ -40,11 +40,25 @@
 			transition: 300ms;
 		}
 
+		.logo-mobile--icon{
+			height: 35px;
+			transform: translateY(200px);
+		}
+
 	}
 
 	.logo-mobile--text{
 			transition: 300ms;
+	}
+
+	.logo-mobile--icon{
+		height: 25px;
+		transition: 300ms;
+
+		img{
+			height: 100%;
 		}
+	}
 	
 
 }
