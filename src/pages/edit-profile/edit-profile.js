@@ -63,7 +63,7 @@ class EditProfile extends React.Component {
     soc: "",
     what_looking: "",
     what_offer: "",
-    tags: [],
+    tags: null,
 
     isLoading: false,
   };
@@ -74,7 +74,7 @@ class EditProfile extends React.Component {
     this.setLoading(true);
 
     api.auth
-      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags.map(v => v.value))
+      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -103,14 +103,6 @@ class EditProfile extends React.Component {
     api.account
       .getUserData()
       .then((res) => {
-
-        let userTags = JSON.parse(res.user.tags)
-
-        userTags = userTags.map(v => {
-          return defaultTags.find(t => {
-            return t.value == v
-          })
-        })
       
         this.setState({
           avatar: api.auth.getAvatarLocation() + res.user.avatar,
@@ -124,7 +116,7 @@ class EditProfile extends React.Component {
           soc: res.user.social_site || "",
           what_looking: res.user.what_looking || "",
           what_offer: res.user.what_offer || "",
-          tags: userTags
+          tags: res.user.tags || null,
         });
 
         this.setLoading(false);
@@ -146,10 +138,19 @@ class EditProfile extends React.Component {
     });
   };
 
+  onTagsChange = (e) => {
+    if (e) {
+      this.setState({ tags: e.value });
+    } else {
+      this.setState({ tags: null });
+    }
+  }
+
   render() {
     const t = this.props.t;
     const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer, tags } = this.state;
-
+    const currentTag = defaultTags.find(t => t.value == tags)
+    
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
         <div className="bg-light flex-center min-vh-100">
@@ -205,7 +206,7 @@ class EditProfile extends React.Component {
                         onChange={(e) => {
                           this.setState({
                             company: e.target.value,
-                          });
+                          }); 
                         }}
                         required
                       />
@@ -227,10 +228,10 @@ class EditProfile extends React.Component {
 
                     <div className="field mt-3">
 											<Select
+                        isClearable
 												placeholder={t("Выберите теги")}
-												isMulti
-												options={tags.length >= 2 ? [] : defaultTags}
-												value={tags}
+												options={defaultTags}
+												value={currentTag}
 												theme={(theme) => ({
 													...theme,
 													borderRadius: 10,
@@ -239,11 +240,7 @@ class EditProfile extends React.Component {
 														primary: sassVars.baseColor,
 													},
 												})}
-												noOptionsMessage={() => 'Нет данных для отображения'}
-												onChange={(e) => {
-                          // console.log(e);
-													this.setState({ tags: e || [] });
-												}}
+												onChange={this.onTagsChange}
 											/>
 										</div>
                   </div>
