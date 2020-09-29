@@ -149,7 +149,7 @@ class Registration extends React.Component {
                 required
               />
               <label className="custom-control-label" htmlFor="terms-agree">
-                Я согласен с условиями обработки персональных данных
+                {t("Я согласен с условиями обработки персональных данных")}
               </label>
             </div>
 
