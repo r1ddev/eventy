@@ -73,12 +73,12 @@
 			// 	// border: 3px solid #f4004d;
 			// }
 			.btn-submit {
-				color: $btn-border-color;
+				color: $secondary-btn-text-color;
 				font-family: IBM Plex Mono;
 				font-weight: bold;
 				font-size: 30px;
-				background: #ffffff;
-				border: 3px solid #19b75e;
+				background: $secondary-btn-color;
+				border: 3px solid $secondary-btn-color;
 				border-radius: 10px;
 				padding: 5px 30px;
 				user-select: none;

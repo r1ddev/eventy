@@ -14,6 +14,8 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
 
+import sassVars from "../../variables.scss"
+
 const defaultTags = [
 	{
 		value: 1,
@@ -337,8 +339,8 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-3 flex-center">
-                      <button type="submit" className="btn-submit mt-3" disabled={isLoading}>
-                        {t("Изменить профиль")}
+                      <button type="submit" className="btn btn-submit mt-3" disabled={isLoading}>
+                        {t("Сохранить")}
                       </button>
                     </div>
                   </div>
