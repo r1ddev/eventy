@@ -15,6 +15,7 @@ import { withTranslation } from "react-i18next";
 const closebtn = require("../../images/menu/close-icon.svg");
 const desk = require("../../images/icons/menu/desk.svg");
 const scenes = require("../../images/icons/menu/scenes.svg");
+const program = require("../../images/icons/menu/program.svg");
 const presentations = require("../../images/icons/menu/presentations.svg");
 const networking = require("../../images/icons/menu/networking.svg");
 const messages = require("../../images/icons/menu/messages.svg");
@@ -73,9 +74,9 @@ class MenuMobile extends React.Component {
 					<div className="icon-list">
 						<MenuItemMobile link='/desk' icon={desk} label={t('Лобби')} onClose={this.onClose} />
 						<MenuItemMobile link='/scenes' icon={scenes} label={t('Сцены')} onClose={this.onClose} />
+						<MenuItemOutMobile link='#' icon={program} label={t('Программа')} onClose={this.onClose} />
 						<MenuItemMobile link='/networking' icon={networking} label={t('Нетворкинг')} onClose={this.onClose} />
 						<MenuItemMobile link='/messages' icon={messages} label={t('Сообщения')} onClose={this.onClose} />
-						<div className="icon-item"></div>
 						<MenuItemMobile link='/conversations' icon={conversations} label={t('Переговорки')} onClose={this.onClose} />
 						<MenuItemMobile link='/exposure' icon={exposure} label={t('Экспозона')} onClose={this.onClose} />
 						<MenuItemMobile link='/presentations/day1' icon={presentations} label={t('Презентации')} onClose={this.onClose} />
@@ -106,6 +107,26 @@ class MenuItemMobile extends React.Component {
 			>
 				<span className="icon-label">{label}</span>
 			</NavLink>
+		)
+	}
+
+}
+
+class MenuItemOutMobile extends React.Component {
+
+	render() {
+		const { link, icon, label, onClose } = this.props;
+
+		return (
+			<a
+				target="_blank"
+				href={link}
+				className="icon-item"
+				style={{ backgroundImage: `url(${icon})` }}
+				onClick={onClose}
+			>
+				<span className="icon-label">{label}</span>
+			</a>
 		)
 	}
 

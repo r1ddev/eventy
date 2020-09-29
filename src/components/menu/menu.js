@@ -14,6 +14,7 @@ class Menu extends React.Component {
 		const logo = require("../../images/icons/menu/logo.svg");
 		const desk = require("../../images/icons/menu/desk.svg");
 		const scenes = require("../../images/icons/menu/scenes.svg");
+		const program = require("../../images/icons/menu/program.svg");
 		const presentations = require("../../images/icons/menu/presentations.svg");
 		const networking = require("../../images/icons/menu/networking.svg");
 		const messages = require("../../images/icons/menu/messages.svg");
@@ -32,6 +33,7 @@ class Menu extends React.Component {
 				</div>
 				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
 				<MenuItem icon={scenes} label={t("Сценa")} link="/scenes"></MenuItem>
+				<MenuItemOut icon={program} label={t("Программа")} link="#"></MenuItemOut>
 				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>
 				<MenuItem icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
 				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
@@ -47,9 +49,6 @@ class Menu extends React.Component {
 class MenuItem extends React.Component {
 	render() {
 		const { label, link, icon, out = false, notifications = false } = this.props;
-
-		const api = new IdeaFirstApiService();
-
 
 		return (
 			<NavLink
@@ -69,6 +68,27 @@ class MenuItem extends React.Component {
 		);
 	}
 }
+
+class MenuItemOut extends React.Component {
+	render() {
+		const { label, link, icon} = this.props;
+
+
+		return (
+			<a
+				target="_blank"
+				href={link}
+				className="menu-item flex-center"
+			>
+				<div className="menu-item-icon-wrap">
+					<img alt="" src={icon} className="menu-item-icon" />
+				</div>
+				<div className="menu-item-label">{label}</div>
+			</a>
+		);
+	}
+}
+
 
 class MenuContainer extends React.Component {
 
