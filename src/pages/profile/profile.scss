@@ -57,12 +57,12 @@
 			}
 
 			.btn-submit {
-				color: $btn-color;
+				color: $secondary-btn-text-color;
 				font-family: IBM Plex Mono;
 				font-weight: bold;
 				font-size: 30px;
-				background: #ffffff;
-				border: 3px solid $btn-border-color;
+				background: $secondary-btn-color;
+				border: 3px solid $secondary-btn-color;
 				border-radius: 10px;
 				padding: 5px 30px;
 				text-decoration: none;
