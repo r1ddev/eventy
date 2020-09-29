@@ -16,9 +16,9 @@ class ScenesReactions extends React.Component {
       <div id="scenes-reactions">
         <div className="stiker-reaction" onClick={() => this.postReaction(1)}><img alt="" src={require("../../../images/stikers/heart.svg")} /></div>
         <div className="stiker-reaction" onClick={() => this.postReaction(2)}><img alt="" src={require("../../../images/stikers/fire.svg")} /></div>
-        <div className="stiker-reaction" onClick={() => this.postReaction(3)}><img alt="" src={require("../../../images/stikers/happy.svg")} /></div>
-        <div className="stiker-reaction" onClick={() => this.postReaction(4)}><img alt="" src={require("../../../images/stikers/normal.svg")} /></div>
-        <div className="stiker-reaction" onClick={() => this.postReaction(5)}><img alt="" src={require("../../../images/stikers/sad.svg")} /></div>
+        <div className="stiker-reaction" onClick={() => this.postReaction(3)}><img alt="" src={require("../../../images/stikers/normal.svg")} /></div>
+        <div className="stiker-reaction" onClick={() => this.postReaction(4)}><img alt="" src={require("../../../images/stikers/sad.svg")} /></div>
+        <div className="stiker-reaction" onClick={() => this.postReaction(6)}><img alt="" src={require("../../../images/stikers/arm.svg")} /></div>
       </div >
     )
   }

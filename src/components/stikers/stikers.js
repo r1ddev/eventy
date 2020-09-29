@@ -114,13 +114,16 @@ class Stikers extends React.Component {
                                     <img alt="" src={require("../../images/stikers/fire.svg")} />
                                 </Stiker>
                                 <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
-                                    <img alt="" src={require("../../images/stikers/happy.svg")} />
-                                </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
                                     <img alt="" src={require("../../images/stikers/normal.svg")} />
                                 </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
                                     <img alt="" src={require("../../images/stikers/sad.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
+                                    <img alt="" src={require("../../images/stikers/robot.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(6)}>
+                                    <img alt="" src={require("../../images/stikers/arm.svg")} />
                                 </Stiker>
                             </div>
                         </div>
