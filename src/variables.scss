@@ -1,3 +1,19 @@
-$base-color: #22D671;
-$btn-color: #22D671;
-$btn-border-color: #22D671;
+$base-color: #FCD128;
+$btn-color: #8DCBFC;
+
+$primary-btn-color: #ffffff;
+$primary-btn-text-color: $base-color;
+
+$secondary-btn-color: $base-color;
+$secondary-btn-text-color: #ffffff;
+
+:export {
+	baseColor: $base-color;
+	btnColor: $btn-color;
+
+	primaryBtnColor: $primary-btn-color;
+	primaryBtnTextColor: $primary-btn-text-color;
+
+	secondaryBtnColor: $secondary-btn-color;
+	secondaryBtnTextColor: $secondary-btn-text-color;
+}
