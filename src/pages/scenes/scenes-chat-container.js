@@ -135,7 +135,7 @@ class ScenesChatContainer extends React.Component {
         } = this.props.chat
 
         let userbanned = this.props.user.chat_ban;
-        if (error) userbanned = (error.response.data.error == 'user_banned' || this.props.user.chat_ban) ? true : false;
+        if (error && error.response) userbanned = (error.response.data.error === 'user_banned' || this.props.user.chat_ban) ? true : false;
 
         return (
 
@@ -148,7 +148,7 @@ class ScenesChatContainer extends React.Component {
                 isPrivate={false}
                 ref="scenesChat"
                 t={this.props.t}
-                userbanned={userbanned}
+                userbanned={userbanned} 
             />
         )
     }
