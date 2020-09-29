@@ -12,14 +12,14 @@
   }
 
   img{
-    width: 45px;  
+    width: 35px;  
     height: 100%;
-    filter: hue-rotate(65deg);
+    // filter: hue-rotate(65deg);
   }
 
   .stiker-reaction:nth-child(1){
     img{
-      filter: brightness(1.8) hue-rotate(-55deg);
+      // filter: brightness(1.8) hue-rotate(-55deg);
     }
   }
 
