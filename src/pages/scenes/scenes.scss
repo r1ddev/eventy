@@ -18,6 +18,8 @@
 }
 
 #scenes .translation-header {
+	position:sticky;
+	top: 0px;
 	display: flex;
 	padding: 10px;
 	flex-direction: row;
