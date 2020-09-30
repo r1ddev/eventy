@@ -10,7 +10,7 @@ import sassVars from "../../variables.scss"
 
 const colourStyles = {
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    const color = "#22d671";
+    const color = "#ffefaf";
     return {
       ...styles,
       backgroundColor: isDisabled ? null : isSelected ? sassVars.baseColor : isFocused ? color : null,
@@ -33,8 +33,7 @@ class LangChecker extends React.Component {
 
   options = [
     { value: "en", label: "English" },
-    { value: "ru", label: "Русский" },
-    { value: "uk", label: "український" },
+    { value: "ua", label: "український" },
   ];
 
   onChangeLang = (e) => {
@@ -54,7 +53,7 @@ class LangChecker extends React.Component {
       });
     } else {
       this.setState({
-        lang: "ru",
+        lang: "ua",
       });
     }
   }
@@ -77,7 +76,7 @@ class LangChecker extends React.Component {
             borderRadius: 8,
             colors: {
               ...theme.colors,
-              primary: '#1dd673',
+              primary: '#ffefaf',
             },
           })} />
 
