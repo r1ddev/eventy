@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default class IdeaFirstApiService {
 
-    origin = window.location.protocol + "//demo.smit.events";
+    origin = window.location.protocol + "//liveforum.kyivsmartcity.com";
     host = window.location.protocol + "//api.smit.events/api";
     staticHost = window.location.protocol + "//demo.smit.events/static-api";
     
