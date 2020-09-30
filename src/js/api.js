@@ -93,7 +93,7 @@ const api = {
 		messages: {
 			async getDialogs() {
 				let response = await axios.get(
-					api.proxy + api.host + "/personal/messages",
+					api.proxy + api.host + "/v3/dialogs",
 					api.useAuth()
 				);
 				return response.data;
