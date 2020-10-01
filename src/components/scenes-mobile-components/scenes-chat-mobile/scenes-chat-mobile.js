@@ -80,7 +80,7 @@ class ScenesChatMobile extends React.Component {
               t={t}
             />
 
-            {(isOpen && !loading && !survey) &&
+            {(isOpen && !loading) &&
               <MessageBox
                 isVisible={!activeInput}
                 messages={messages}
@@ -90,7 +90,7 @@ class ScenesChatMobile extends React.Component {
 
             {(isOpen && loading) && <Spinner />}
 
-            {(!survey) && <MessageInput
+            {(true) && <MessageInput
               isVisible={isOpen}
               activeInput={activeInput}
               replyAttachment={replyAttachment}
@@ -117,7 +117,7 @@ class ScenesChatMobile extends React.Component {
               t={t}
             />
 
-            {(isOpen && !loading && !survey) &&
+            {(isOpen && !loading) &&
               <MessageBox
                 isVisible={true}
                 messages={messages}
@@ -127,7 +127,7 @@ class ScenesChatMobile extends React.Component {
 
             {(isOpen && loading) && <Spinner />}
 
-            {(!survey) && <MessageInput
+            {(true) && <MessageInput
               isVisible={isOpen}
               activeInput={activeInput}
               onFocus={this.onFocusInput}
@@ -234,10 +234,12 @@ class MessageItem extends React.Component {
 
   render() {
 
-    const { id, first_name, last_name, ad, sponsor, message, avatar, time, reply } = this.props.item;
+    const { id, first_name, last_name, range, message, avatar, time, reply } = this.props.item;
     const { onSetReplyAttachment, t } = this.props;
     let origin = api.origin;
     let newAvatar = origin + "/images/avatar/" + avatar;
+    const sponsor = range == 5;
+    const ad = range == 4;
 
     return (
       <>
@@ -249,10 +251,10 @@ class MessageItem extends React.Component {
           </div>
         </div >
         }
-        <div className={(reply) ? "message-item bordered" : "message-item"}>
+        <div className={(reply) ? "message-item bordered" : (ad ? "message-item ad" : "message-item")}>
           <img alt="" src={newAvatar} />
           <div className='text'>
-            <span><Translit value={first_name + ' ' + last_name} /></span>
+            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">UMF</span>}
             <div className='mes-text'> {message}</div>
 
           </div>
@@ -357,7 +359,7 @@ class CheckChatPanel extends React.Component {
 
   state = {
     isOpen: false,
-    itemList: ['survey', 'spiker', 'general'],
+    itemList: ['survey', 'spiker', 'general', 'sponsor'],
     activeItem: '',
   }
 
@@ -412,12 +414,20 @@ class CheckChatPanel extends React.Component {
     return (
       <div className={(isVisible) ? 'check-chat-panel' : 'check-chat-panel hidden'}>
 
-        <div
+        {/* <div
           className={(activeItem === itemList[0]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[0])}
         >
           {t('Опросы')}
-        </div>   {/*active - активная вкладка */}
+        </div>   */}
+        {/*active - активная вкладка */}
+
+        <div
+          className={(activeItem === itemList[3]) ? 'item active' : 'item'}
+          onClick={() => this.onChangeItem(itemList[3])}
+        >
+          {t('Чат с организатором')}
+        </div>
 
         <div
           className={(activeItem === itemList[1]) ? 'item active' : 'item'}
