@@ -12,7 +12,7 @@ import Desk from "./pages/desk/desk";
 import Networking from "./pages/networking";
 import Quest from "./pages/quest/quest";
 import PresentationsList from './pages/presentations-list/index';
-import ConversationsRoom from "./pages/conversationsRoom";
+import ConversationsRoom from "./pages/conversations-room";
 import { connect } from 'react-redux';
 import { compose } from './utils';
 import api from './js/api';

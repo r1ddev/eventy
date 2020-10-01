@@ -1,5 +1,5 @@
 import React from "react";
-import "./conversationsRoom.scss";
+import "./conversations-room.scss";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
@@ -10,7 +10,7 @@ import Spinner from "../../components/spinner";
 import NoPermissions from "../../components/no-permissions";
 import { fetchUser } from "../../actions/user-actions";
 import { conversationRoomsLoading, conversationRoomsLoaded } from "../../actions/conversations-actions";
-import api from "./../../js/api";
+import api from "../../js/api";
 import { isMobile } from "react-device-detect";
 
 class СonversationsRoom extends React.Component {
@@ -43,7 +43,13 @@ class СonversationsRoom extends React.Component {
   }
 
   updateRoomStatus = () => {
-    api.account.conversations.updateRoomStatus(this.state.room.room_id);
+    api.account.conversations.updateRoomStatus(this.state.room.room_id).then(res => {
+
+    }).catch(e => {
+      api.errorHandler(e, {
+        "403": () => this.props.history.goBack()
+      })
+    })
 
     this.timeout = setTimeout(() => {
       this.updateRoomStatus();
