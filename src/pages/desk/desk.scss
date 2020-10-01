@@ -21,11 +21,13 @@
 			grid-row-start: 1;
 		}
 		.lobby-item:nth-child(2){
-			grid-column: 2 / span 1;
+			grid-column: 3 / span 1;
 			grid-row-start: 3;
+
 		}
 		.lobby-item:nth-child(3){
-			grid-column: 3 / span 1;
+			
+			grid-column: 2 / span 1;
 			grid-row-start: 3;
 		}
 		.lobby-item:nth-child(4){
@@ -112,7 +114,6 @@
 	.lobby-text{
 
 		color: #3F4545;
-		z-index: 2;
 		font-family: "FuturaBookC";
 		font-style: normal;
 		font-weight: 600;
@@ -157,11 +158,13 @@
 		.lobby-lang-checker{
 			display: flex;
 			flex-direction: column;
-			align-content: center;
+			align-items: center;
+			z-index: 3;
 		}
 	}
 
 	.main-logo{
+		margin-top: 70px;
 		text-align: center !important;
 		img{
 			width: 80%;
@@ -169,7 +172,7 @@
 	}
 
 	.lang{
-		margin-top: 70px;
+		
 		width: 80%;
 		text-align: center;
 
@@ -180,7 +183,9 @@
 	}
 
 	.visa{
+
 		padding: 20px;
+		padding-bottom: 40px;
 	}
 
 	.brand-icons1{
@@ -292,6 +297,10 @@
 				height: 100% !important;
 				width: unset !important;
 			}
+		}
+
+		.main-logo{
+			margin-top: 0px !important;
 		}
 	}
 	
