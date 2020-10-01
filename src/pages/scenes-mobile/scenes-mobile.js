@@ -35,6 +35,9 @@ class ScenesMobile extends React.Component {
             scene, //порядковый номер сцены
             scenes, //все сцены
             setScene, //установить текущую сцену
+            lang, //язык текущей сцены
+            setLang, //установить язык
+            
 
             t, //локализация
 
@@ -62,7 +65,7 @@ class ScenesMobile extends React.Component {
 
                 <ScenesVideoActions isVisible={!chatIsOpen}>
                     <ScenesReactions sceneNumber={scene} />
-                    <ScenesLangChecker />
+                    <ScenesLangChecker lang={lang} setLang={setLang}/>
                 </ScenesVideoActions>
 
                 <ScenesBanner isVisible={!chatIsOpen} />

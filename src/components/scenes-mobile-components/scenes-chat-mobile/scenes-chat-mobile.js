@@ -422,6 +422,12 @@ class CheckChatPanel extends React.Component {
         </div>   */}
         {/*active - активная вкладка */}
 
+        <div className={(activeItem === itemList[2]) ? 'item active' : 'item'}
+          onClick={() => this.onChangeItem(itemList[2])}
+        >
+          {t('Чат')}
+        </div>
+        
         <div
           className={(activeItem === itemList[3]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[3])}
@@ -436,11 +442,6 @@ class CheckChatPanel extends React.Component {
           {t('Чат со спикером')}
         </div>
 
-        <div className={(activeItem === itemList[2]) ? 'item active' : 'item'}
-          onClick={() => this.onChangeItem(itemList[2])}
-        >
-          {t('Чат')}
-        </div>
 
         <div
           className={(isOpen) ? 'arrow-btn opened' : 'arrow-btn'}
