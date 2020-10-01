@@ -5,14 +5,16 @@ class ScenesLangChecker extends React.Component {
 
 
   langtext=(lang)=>{
+    
     switch (lang) {
       case 'rus':
         return 'RU'
   
-      case 'SET_NEW_VIP_MESSAGES':
-        return {
-         
-        };
+      case 'eng':
+        return 'EN';
+
+      case 'ua':
+        return 'UA';  
   
       default:
         return lang;
@@ -20,14 +22,19 @@ class ScenesLangChecker extends React.Component {
   }
 
   render() {
-    const {lang} = this.props;
+    const {lang,setLang, langList} = this.props;
 
-
+    let engExists = langList.indexOf('eng')+1;
 
     return (
-      <div id="scenes-lang-checker">
-        {this.langtext(lang)}
-      </div >
+      <>
+      {(!!engExists)&&<div id="scenes-lang-checker" onClick={()=>setLang(lang =='ua'?'eng':'ua')}>
+      {this.langtext(lang)}
+      </div >}
+      {(!engExists)&&<div id="scenes-lang-checker" className="disabled">
+      {this.langtext(lang)}
+      </div >}
+      </>
     )
   }
 }

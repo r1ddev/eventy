@@ -48,7 +48,12 @@ class ScenesMobile extends React.Component {
             spikerChatId: 0
         }
 
+        let langList = [];
+        if  (scenes[scene]['eng']) langList.push('eng');
+        if  (scenes[scene]['ua']) langList.push('ua');
 
+
+       
 
         return (
             <div id="scenes-mobile">
@@ -65,7 +70,7 @@ class ScenesMobile extends React.Component {
 
                 <ScenesVideoActions isVisible={!chatIsOpen}>
                     <ScenesReactions sceneNumber={scene} />
-                    <ScenesLangChecker lang={lang} setLang={setLang}/>
+                    <ScenesLangChecker lang={lang} setLang={setLang} langList={langList}/>
                 </ScenesVideoActions>
 
                 <ScenesBanner isVisible={!chatIsOpen} />

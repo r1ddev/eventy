@@ -132,7 +132,7 @@ class TranslationHeader extends React.Component {
 class ScenesContainer extends React.Component {
   state = {
     scene: 0,
-    lang: "rus",
+    lang: "ua",
   };
 
   timerId = null;
@@ -143,7 +143,7 @@ class ScenesContainer extends React.Component {
 
     this.setState({
       scene: scene,
-      lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
+      lang: this.props.scenes.scenes[scene][lang] ? lang : "ua",
     });
     this.props.setCurrentSceneUrl(scenes[scene][lang]);
 
@@ -153,7 +153,7 @@ class ScenesContainer extends React.Component {
     const { scene } = this.state;
 
     this.setState({
-      lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
+      lang: this.props.scenes.scenes[scene][lang] ? lang : "ua",
     });
   };
 
