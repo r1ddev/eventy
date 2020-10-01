@@ -1,5 +1,5 @@
 import React from "react";
-import "./conversationsRoom.scss";
+import "./conversations-room.scss";
 import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
@@ -10,9 +10,43 @@ import Spinner from "../../components/spinner";
 import NoPermissions from "../../components/no-permissions";
 import { fetchUser } from "../../actions/user-actions";
 import { conversationRoomsLoading, conversationRoomsLoaded } from "../../actions/conversations-actions";
-import api from "./../../js/api";
+import api from "../../js/api";
 import { isMobile } from "react-device-detect";
 
+import posed, { PoseGroup } from 'react-pose';
+
+const Item = posed.div({
+  // preEnter: {
+  //   opacity: 0,
+  //   transition: { type: "spring" }
+  // },
+  // enter: {
+  //   opacity: 1,
+  //   transition: { type: "spring" },
+  //   delay: ({ i }) => i * 200,
+  // },
+  // exit: {
+  //   opacity: 0,
+  //   transition: { type: "spring" }
+  // },
+
+  preEnter: {
+    scale: 1,
+    opacity: 0,
+    x: 100
+  },
+  enter: {
+    delay: ({ i }) => i * 50,
+    scale: 1,
+    opacity: 1,
+    x: 0
+  },
+  exit: {
+    delay: ({ i }) => i * 25,
+    opacity: 0,
+    x: -100
+  }
+});
 class СonversationsRoom extends React.Component {
   constructor() {
     super();
@@ -21,6 +55,7 @@ class СonversationsRoom extends React.Component {
     this.iframeRef = React.createRef();
     this.state = {
       room: undefined,
+      onlineUsers: []
     };
   }
 
@@ -43,7 +78,15 @@ class СonversationsRoom extends React.Component {
   }
 
   updateRoomStatus = () => {
-    api.account.conversations.updateRoomStatus(this.state.room.room_id);
+    api.account.conversations.updateRoomStatus(this.state.room.room_id).then(res => {
+      this.setState({
+        onlineUsers: res
+      })
+    }).catch(e => {
+      api.errorHandler(e, {
+        "access_denied": () => this.props.history.goBack()
+      })
+    })
 
     this.timeout = setTimeout(() => {
       this.updateRoomStatus();
@@ -65,14 +108,44 @@ class СonversationsRoom extends React.Component {
           </Header>
         )}
 
-        <div className="container">
-          {this.state.room && (
-            <iframe
-              className="video"
-              title="video call iframe"
-              ref={this.iframeRef}
-              allow="camera; microphone; fullscreen"></iframe>
-          )}
+        <div className="container pt-3">
+          <div className="row">
+            <div className="col-lg-9">
+              {this.state.room && (
+                <iframe
+                  className="video"
+                  title="video call iframe"
+                  ref={this.iframeRef}
+                  allow="camera; microphone; fullscreen"></iframe>
+              )}
+            </div>
+            <div className="col-lg-3">
+
+              <div className="online-list-wrap">
+                <div className="title">Пользователи онлайн:</div>
+                <div className="online-list">
+                  <PoseGroup animateOnMount preEnterPose="preEnter">
+                    {
+                      this.state.onlineUsers.map(user => (
+                        <Item key={user.id}>
+                          <a key={user.id} href={`/profile/${user.id}`} className="link" target="_blank">
+                            <div className="row m-0">
+                              <div className="col-auto p-0">
+                                <div className="avatar">
+                                  <img src={api.auth.getAvatarLocation() + user.avatar} alt=""/>
+                                </div>
+                              </div>
+                              <div className="col username"><span>{`${user.first_name} ${user.last_name}`}</span></div>
+                            </div>
+                          </a>
+                        </Item>
+                      ))
+                    }
+                  </PoseGroup>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
