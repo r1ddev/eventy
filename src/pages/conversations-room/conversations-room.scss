@@ -1,0 +1,70 @@
+#conversations-room {
+	height: 100%;
+
+	.container {
+		height: 100%;
+
+		.video {
+			width: 100%;
+			border: none;
+			height: 80%;
+			min-height: 700px;
+		}
+
+		.online-list-wrap {
+			background: #e9e9e9;
+			border-radius: 5px;
+			padding: 5px 10px;
+
+			.title {
+				padding: 5px 0px;
+				font-family: "Gilroy";
+				font-weight: 300;
+				position: static;
+				top: 0;
+			}
+
+			.online-list {
+				font-size: .9rem;
+				max-height: 300px;
+				overflow: auto;
+	
+	
+				.link {
+					color: #212529;
+					text-decoration: none;
+					display: block;
+					padding: 3px 5px;
+					border-radius: 5px;
+	
+					&:hover {
+						background: #00000005;
+					}
+	
+					.avatar {
+						width: 40px;
+						height: 40px;
+		
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							border-radius: 50%;
+						}
+					}
+
+					.username {
+						display: flex;	
+						align-items: center;
+
+						span {
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							overflow: hidden;
+						}
+					}
+				}
+			}
+		}
+	}
+}

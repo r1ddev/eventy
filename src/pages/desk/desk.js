@@ -24,21 +24,26 @@ class Desk extends React.Component {
                         <></>
                     </Header>
                 )}
+                {isMobile && (
+                    <div></div>
+                )}
                 <section
                     className="first-section"
                     style={{ backgroundImage: `url(${require("../../images/lobby.png")})` }}>
                         {!isMobile && (
                             <div className="lobby-item" style={{backgroundColor: "rgba(255, 0, 0, 0.0)", width: '100%', height:'100%'}}></div>
                         )}
-                        <div className="lobby-item" style={{backgroundColor: "rgba(55, 55, 100, 0.0)", width: '100%', height:'100%'}}>
+
+                        <div className="lobby-item main-logo" style={{backgroundColor: "rgba(100, 200, 200, 0.0)", width: '100%', height:'100%'}}>
+                            <img alt="" src={require("../../images/icons/lobby/main-logo.svg")} />
+                        </div>
+                        <div className="lobby-item lang" style={{backgroundColor: "rgba(55, 55, 100, 0.0)", width: '100%', height:'100%'}}>
                             <p className="lobby-text">{t(`Добро пожаловать!`)} </p>
                             <div className='lobby-lang-checker'>
                                 <LangChecker />
                             </div>
                         </div>
-                        <div className="lobby-item main-logo" style={{backgroundColor: "rgba(100, 200, 200, 0.0)", width: '100%', height:'100%'}}>
-                            <img alt="" src={require("../../images/icons/lobby/main-logo.svg")} />
-                        </div>
+                        
                         <div className="lobby-item visa" style={{backgroundColor: "rgba(255, 20, 100, 0.0)", width: '100%', height:'100%'}}>
                             <p className="lobby-text">{t(`Главный партнер`)} </p>
                             <div>
