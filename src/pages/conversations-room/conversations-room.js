@@ -47,7 +47,7 @@ class СonversationsRoom extends React.Component {
 
     }).catch(e => {
       api.errorHandler(e, {
-        "403": () => this.props.history.goBack()
+        "access_denied": () => this.props.history.goBack()
       })
     })
 

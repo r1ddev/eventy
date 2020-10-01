@@ -128,11 +128,8 @@ const api = {
 				return response.data;
 			},
 			async updateRoomStatus(roomId) {
-				let response = await axios.post(
-					api.proxy + api.host + "/rooms/booking",
-					api.toFormData({
-						room_id: roomId,
-					}),
+				let response = await axios.put(
+					api.proxy + api.host + `/v3/conversations/${roomId}/busy`, {},
 					api.useAuth()
 				);
 				return response.data;
