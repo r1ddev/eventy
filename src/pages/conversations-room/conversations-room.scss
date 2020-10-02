@@ -118,6 +118,29 @@
 			}
 		}
 
+		.wrap {
+			height: calc(100vh - 75px - 1rem);
+
+			@media screen and (max-width: 991px){
+				flex-direction: column;
+			}
+		}
+
+		.left {
+			min-height: 700px;
+
+			@media screen and (max-width: 991px){
+				flex-grow: 1;
+				min-height: auto;
+			}
+		}
+
+		.right {
+			@media screen and (max-width: 991px){
+				flex-grow: 0;
+			}
+		}
+
 		.video {
 			width: 100%;
 			border: none;
