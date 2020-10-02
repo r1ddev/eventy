@@ -10,7 +10,7 @@ class Header extends React.Component {
   state = {};
 
   render() {
-    const { data, className, t } = this.props;
+    const { data, className = "", t } = this.props;
 
     let userAvatar = require("../../images/default-avatar.svg");
     if (data) {
@@ -23,7 +23,7 @@ class Header extends React.Component {
 
     return (
       <div className={className + " header profile-header"}>
-        <div className="container">
+        <div className={this.props.expand ? "container-fluid" : "container"}>
           <div className="row">
             <div className="col d-flex align-items-center">{this.props.children}</div>
 
