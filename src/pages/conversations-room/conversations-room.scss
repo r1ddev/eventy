@@ -191,6 +191,7 @@
 					display: block;
 					padding: 3px 5px;
 					border-radius: 5px;
+					position: relative;
 	
 					&:hover {
 						background: #00000005;
@@ -220,6 +221,24 @@
 							text-overflow: ellipsis;
 							white-space: nowrap;
 							overflow: hidden;
+						}
+					}
+
+					.kick-icon {
+						background: url(../../images/icons/close-btn.svg) center center no-repeat;
+						background-size: 100%;
+						width: 15px;
+						height: 15px;
+						position: absolute;
+						right: 5px;
+						top: 50%;
+						transform: translateY(-50%);
+						transition: filter .2s;
+						filter: brightness(0.5);
+						
+						&:hover {
+							cursor: pointer;
+							filter: brightness(0);
 						}
 					}
 				}

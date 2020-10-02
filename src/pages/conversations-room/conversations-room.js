@@ -24,6 +24,7 @@ import posed, { PoseGroup } from "react-pose";
 import ScenesChat from "../../components/scenes-chat";
 import ErrorIndicator from "../../components/error-indicator";
 import Translit from "../../components/translit";
+import Rules from './../../utils/rules';
 
 const Modal = posed.div({
   enter: {
@@ -91,31 +92,43 @@ class СonversationsRoom extends React.Component {
     
 		this.state = {
       onlineUsers: [],
-      chatVisible: false
+      chatVisible: false,
+      rules: undefined
 		};
-	}
+  }
+  
+  getCurrentPageRules = () => {
+    let rules = new Rules().getCurrentPageRules(this.props.user.data.rules)
+
+    let rule = rules[0] || undefined
+    this.setState({
+      rule: rule
+    })
+  }
 
 	componentDidMount () {
+    this.getCurrentPageRules()
     if (this.props.room) {
       
       this.daily = DailyIframe.wrap(this.iframeRef.current);
       this.daily.join({ url: this.props.room.url });
 
       this.updateRoomStatus();
-      
-      this.props.fetchMessages(this.props.room.chat_id)
+      setTimeout(() => {
+        this.props.fetchMessages(this.props.room.chat_id)
+      }, 300);
+
       this.updateMessages()
+      
     }
   }
 
   updateMessages = () => {
-
-    let id = setTimeout(() => {
+    this.timeoutChat = setTimeout(() => {
         this.props.updateMessages(this.props.room.chat_id, this.props.chat.lastApiMessageId);
         this.updateMessages();
     }, this.props.timers.sceneChatTime)
 
-    this.timerId = id
   }
 
   sendMessage = (message, reply_id, replyAttachmentData) => {
@@ -150,7 +163,7 @@ class СonversationsRoom extends React.Component {
 			.catch((e) => {
 				api.errorHandler(e, {
 					access_denied: () => {
-            this.props.history.goBack();
+            this.goBack();
             ErrorIndicator(this.props.t("Комната недоступна"))
           },
 				});
@@ -159,6 +172,10 @@ class СonversationsRoom extends React.Component {
 		this.timeout = setTimeout(() => {
 			this.updateRoomStatus();
 		}, this.props.timers.conversationsTimer);
+  };
+
+  goBack = () => {
+    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
   };
 
   toggleChat = () => {
@@ -184,9 +201,23 @@ class СonversationsRoom extends React.Component {
     }
   }
 
+  kickUser = (e, userId) => {
+    let res = window.confirm(this.props.t("Заблокировать пользователю доступ к разделу?"))
+    if (res) {
+      api.account.rules.conversations.kickUser(this.props.room.room_id, userId).then(res => {
+        this.setState({
+          onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
+        })
+      }).catch(e => {
+        api.errorHandler(e, {})
+      })
+    }
+    e.preventDefault();
+  }
+
 	componentWillUnmount() {
 		clearTimeout(this.timeout);
-		clearTimeout(this.timeoutChat);
+    clearTimeout(this.timeoutChat);
 	}
 
 	render() {
@@ -246,6 +277,11 @@ class СonversationsRoom extends React.Component {
 															<span><Translit value={`${user.first_name} ${user.last_name}`} /></span>
 														</div>
 													</div>
+                          {
+                            Rules.isModerator(this.props.user.data.range) && (
+                              <div className="kick-icon" alt={t("Выгнать пользователя")} title={t("Выгнать пользователя")} onClick={e => { this.kickUser(e, user.id) }}></div>
+                            )
+                          }
 												</a>
 											</Item>
 										))}
@@ -320,10 +356,11 @@ class СonversationsRoomContainer extends React.Component {
 
 	render() {
 		let loading = true;
-    const { isLoaded: roomsLoading, rooms } = this.props.conversations;
+    const { isLoaded: roomsLoading } = this.props.conversations;
+    const { loading: userLoading, data: userData  } = this.props.user;
+    
     const room = this.state.room;
-
-    loading = !roomsLoading || !room;
+    loading = !roomsLoading || !room || !userData;
 
 		return (
 			<div style={{ height: "100%", width: "100%" }}>
