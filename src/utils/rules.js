@@ -18,4 +18,9 @@ export default class Rules {
 			return new RegExp(`^${rule.route}$`).test(currentRoute)
 		})
 	}
+
+	isModeratorHere (userRule) {
+		let rules = this.getCurrentPageRules(userRule)
+		return rules.filter(rule => Rules.isModerator(rule.range_type)).length > 0
+	}
 }
