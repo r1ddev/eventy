@@ -105,18 +105,18 @@ class EditProfile extends React.Component {
       .then((res) => {
       
         this.setState({
-          avatar: api.auth.getAvatarLocation() + res.user.avatar,
-          name: res.user.first_name || "",
-          lastName: res.user.last_name || "",
-          company: res.user.company || "",
-          position: res.user.position || "",
-          phone: res.user.phone || "",
-          email: res.user.email || "",
-          shareContact: !!res.user.view_contact,
-          soc: res.user.social_site || "",
-          what_looking: res.user.what_looking || "",
-          what_offer: res.user.what_offer || "",
-          tags: res.user.tags || null,
+          avatar: api.auth.getAvatarLocation() + res.avatar,
+          name: res.first_name || "",
+          lastName: res.last_name || "",
+          company: res.company || "",
+          position: res.position || "",
+          phone: res.phone || "",
+          email: res.email || "",
+          shareContact: !!res.view_contact,
+          soc: res.social_site || "",
+          what_looking: res.what_looking || "",
+          what_offer: res.what_offer || "",
+          tags: res.tags || null,
         });
 
         this.setLoading(false);
