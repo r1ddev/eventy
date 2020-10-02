@@ -140,14 +140,14 @@ class Stikers extends React.Component {
                                 {t('язык трансляции')}
                             </div>
                             <div className="language-stikers-list">
-                                <div className="language-stikers-item" onClick={() => setLang('rus')}>
-                                    {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
-                                    {(lang === 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
+                                <div className="language-stikers-item" onClick={() => setLang('ua')}>
+                                    {(lang === 'ua') && <img alt="" src={require("../../images/stikers/UKR-active.svg")} />}
+                                    {(lang === 'eng') && <img alt="" src={require("../../images/stikers/UKR.svg")} />}
 
                                 </div>
                                 <div className="language-stikers-item" onClick={() => setLang('eng')}>
                                     {(lang === 'eng') && <img alt="" src={require("../../images/stikers/ENG-active.svg")} />}
-                                    {(lang === 'rus') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
+                                    {(lang === 'ua') && <img alt="" src={require("../../images/stikers/ENG.svg")} />}
                                 </div>
                             </div>
                         </div>

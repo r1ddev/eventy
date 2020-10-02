@@ -145,16 +145,18 @@ class ScenesContainer extends React.Component {
       scene: scene,
       lang: this.props.scenes.scenes[scene][lang] ? lang : "ua",
     });
-    this.props.setCurrentSceneUrl(scenes[scene][lang]);
+    this.props.setCurrentSceneUrl(scenes[scene]['ua']);
 
   };
 
   setLang = (lang) => {
+    const { scenes } = this.props.scenes;
     const { scene } = this.state;
 
     this.setState({
       lang: this.props.scenes.scenes[scene][lang] ? lang : "ua",
     });
+    this.props.setCurrentSceneUrl(scenes[scene][lang]);
   };
 
   componentDidMount() {

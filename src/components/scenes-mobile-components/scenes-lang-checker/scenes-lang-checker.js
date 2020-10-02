@@ -11,10 +11,10 @@ class ScenesLangChecker extends React.Component {
         return 'RU'
   
       case 'eng':
-        return 'EN';
+        return 'ENG';
 
       case 'ua':
-        return 'UA';  
+        return 'UKR';  
   
       default:
         return lang;
