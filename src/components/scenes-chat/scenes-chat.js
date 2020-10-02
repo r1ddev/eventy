@@ -141,7 +141,7 @@ class ScenesChat extends React.Component {
 									? "chat-tab-item-active col"
 									: "chat-tab-item col"
 							}>
-							<div className="tab-label">{t('Вопрос спикеру')}</div>
+							<div className="tab-label">{t('Вопросы спикеру')}</div>
 						</div>
 					</div>
 				)}
@@ -229,7 +229,7 @@ class MessageItem extends React.Component {
 								className="mes-info-status"
 								style={{
 									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${sponsor ? "#22D671" : "white"
+									backgroundColor: `${sponsor ? "#FCD128" : "white"
 										}`,
 								}}>
 								{sponsor ? "UMF" : ""}
@@ -245,7 +245,7 @@ class MessageItem extends React.Component {
 
 				<div
 					className={reply ? "message-item bordered" : "message-item"}
-					style={{ backgroundColor: `${ad ? "#22D671" : "white"}` }}>
+					style={{ backgroundColor: `${ad ? "#FCD128" : "white"}` }}>
 					<div className="mes-photo-wrapper">
 						<Link to={"/profile/" + user_id} target="_blank">
 							<div
