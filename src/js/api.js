@@ -71,7 +71,7 @@ const api = {
 	account: {
 		async getUserData() {
 			let response = await axios.get(
-				api.proxy + api.host + "/users/get",
+				api.proxy + api.host + "/v3/users/me",
 				api.useAuth()
 			);
 			return response.data;
