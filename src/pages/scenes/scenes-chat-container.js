@@ -88,6 +88,8 @@ class ScenesChatContainer extends React.Component {
         })
     }
 
+  
+
     componentWillUnmount() {
 
         clearTimeout(this.state.timerId);

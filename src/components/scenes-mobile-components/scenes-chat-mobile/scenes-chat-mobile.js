@@ -425,7 +425,7 @@ class CheckChatPanel extends React.Component {
         <div className={(activeItem === itemList[2]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[2])}
         >
-          {t('Чат')}
+          {t('Общий чат')}
         </div>
         
         <div
@@ -439,7 +439,7 @@ class CheckChatPanel extends React.Component {
           className={(activeItem === itemList[1]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[1])}
         >
-          {t('Чат со спикером')}
+          {t('Вопросы спикеру')}
         </div>
 
 
