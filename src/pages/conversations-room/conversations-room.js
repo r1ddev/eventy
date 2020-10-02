@@ -109,8 +109,8 @@ class СonversationsRoom extends React.Component {
         )}
 
         <div className="container pt-3">
-          <div className="row">
-            <div className="col-lg-9">
+          <div className="row wrap">
+            <div className="col-lg-9 left">
               {this.state.room && (
                 <iframe
                   className="video"
@@ -119,15 +119,14 @@ class СonversationsRoom extends React.Component {
                   allow="camera; microphone; fullscreen"></iframe>
               )}
             </div>
-            <div className="col-lg-3">
-
+            <div className="col-lg-3 right">
               <div className="online-list-wrap">
                 <div className="title">Пользователи онлайн:</div>
                 <div className="online-list">
                   <PoseGroup animateOnMount preEnterPose="preEnter">
                     {
                       this.state.onlineUsers.map(user => (
-                        <Item key={user.id}>
+                        <Item key={user.id} >
                           <a key={user.id} href={`/profile/${user.id}`} className="link" target="_blank">
                             <div className="row m-0">
                               <div className="col-auto p-0">
