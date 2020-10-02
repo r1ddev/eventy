@@ -122,13 +122,9 @@ export default class IdeaFirstApiService {
 
     getUser() {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/users/get`, this.useAuth())
+            axios.get(this.host + `/v3/users/me`, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
                 .catch(error => { reject(error) }
                 )

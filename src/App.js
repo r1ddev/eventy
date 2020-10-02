@@ -25,7 +25,7 @@ class App extends React.Component {
 		if (window.localStorage.token !== undefined) {
 			if (this.props.user.data === undefined) {
 				api.account.getUserData().then(res => {
-					this.props.setUser(res.user)
+					this.props.setUser(res)
 				}).catch(e => console.log(e))
 			}
 		} else {

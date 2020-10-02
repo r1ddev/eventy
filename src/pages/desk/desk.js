@@ -20,7 +20,7 @@ class Desk extends React.Component {
         return (
             <div id="desk" className="h-100">
                 {!isMobile && (
-                    <Header className="fixed transparented" data={this.props.user.data}>
+                    <Header className="fixed transparented" data={this.props.user.data} expand>
                         <></>
                     </Header>
                 )}

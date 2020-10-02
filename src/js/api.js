@@ -73,14 +73,14 @@ const api = {
 	account: {
 		async getUserData() {
 			let response = await axios.get(
-				api.proxy + api.host + "/users/get",
+				api.proxy + api.host + "/v3/users/me",
 				api.useAuth()
 			);
 			return response.data;
 		},
-		async getUserDataById(user_id) {
+		async getUserDataById(userId) {
 			let response = await axios.get(
-				api.proxy + api.host + "/users/public/get/" + user_id,
+				api.proxy + api.host + "/users/public/get/" + userId,
 				api.useAuth()
 			);
 			return response.data;
@@ -100,18 +100,18 @@ const api = {
 				);
 				return response.data;
 			},
-			async getMessages(user_id) {
+			async getMessages(userId) {
 				let response = await axios.get(
-					api.proxy + api.host + "/personal/messages/from/" + user_id,
+					api.proxy + api.host + "/personal/messages/from/" + userId,
 					api.useAuth()
 				);
 				return response.data;
 			},
-			async sendMessages(user_id, text) {
+			async sendMessages(userId, text) {
 				let response = await axios.post(
 					api.proxy + api.host + "/personal/messages",
 					api.toFormData({
-						user_id: user_id,
+						user_id: userId,
 						text: text,
 					}),
 					api.useAuth()
@@ -135,6 +135,25 @@ const api = {
 				return response.data;
 			},
 		},
+		rules: {
+			conversations: {
+				async kickUser (roomId, userId) {
+					return new Promise((resolve, reject) => {
+						axios.post(
+							`${api.proxy}${api.host}/v3/conversations/${roomId}/rules`,
+							{ userId, access: false },
+							api.useAuth()
+						).then(res => {
+							resolve(res.data)
+						}).catch(e => {
+							reject(e)
+						})
+					})
+					
+				}
+			}
+			
+		}
 	},
 
 	errorHandler: (e, errors) => {
@@ -146,9 +165,10 @@ const api = {
 			console.log("Ошибка Интернета");
 		} else {
 			Object.keys(errors).map(function (key) {
-				e.response.data.error = String(e.response.data.error);
+				let error = String(e.response.data.error)
+				let errorCode = String(e.response.status)
 
-				if (e.response.data.error === key) {
+				if (error === key || errorCode === key) {
 					errors[key]();
 				}
 			});
