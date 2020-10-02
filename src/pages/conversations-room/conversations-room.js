@@ -93,17 +93,19 @@ class СonversationsRoom extends React.Component {
 		this.state = {
       onlineUsers: [],
       chatVisible: false,
-      rules: undefined
+      isModer: false
 		};
   }
   
   getCurrentPageRules = () => {
-    let rules = new Rules().getCurrentPageRules(this.props.user.data.rules)
 
-    let rule = rules[0] || undefined
+    let isModer = new Rules().isModeratorHere(this.props.user.data.rules)
+
     this.setState({
-      rule: rule
+      isModer: isModer
     })
+
+    console.log(isModer);
   }
 
 	componentDidMount () {
@@ -223,6 +225,7 @@ class СonversationsRoom extends React.Component {
 	render() {
 		const { data } = this.props.user;
     const t = this.props.t;
+    const { isModer } = this.state
     
     const { messages, loading, error } = this.props.chat;
 
@@ -278,7 +281,7 @@ class СonversationsRoom extends React.Component {
 														</div>
 													</div>
                           {
-                            Rules.isModerator(this.props.user.data.range) && (
+                            isModer && (
                               <div className="kick-icon" alt={t("Выгнать пользователя")} title={t("Выгнать пользователя")} onClick={e => { this.kickUser(e, user.id) }}></div>
                             )
                           }
