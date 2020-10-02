@@ -23,6 +23,7 @@ import { withTranslation } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import ScenesChat from "../../components/scenes-chat";
 import ErrorIndicator from "../../components/error-indicator";
+import Translit from "../../components/translit";
 
 const Modal = posed.div({
   enter: {
@@ -118,7 +119,6 @@ class СonversationsRoom extends React.Component {
   }
 
   sendMessage = (message, reply_id, replyAttachmentData) => {
-    console.log("this.props.user", this.props.user);
     const { first_name, last_name, avatar, range } = this.props.user.data;
 
     const date = new Date;
@@ -151,7 +151,7 @@ class СonversationsRoom extends React.Component {
 				api.errorHandler(e, {
 					access_denied: () => {
             this.props.history.goBack();
-            ErrorIndicator("Комната недоступна")
+            ErrorIndicator(this.props.t("Комната недоступна"))
           },
 				});
 			});
@@ -164,11 +164,7 @@ class СonversationsRoom extends React.Component {
   toggleChat = () => {
     this.setState({
       chatVisible: !this.state.chatVisible
-    }, () => {
-      console.log(this.state.chatVisible);
     })
-
-    
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -224,7 +220,7 @@ class СonversationsRoom extends React.Component {
               </div>
               
 							<div className="online-list-wrap">
-								<div className="title">Пользователи онлайн:</div>
+								<div className="title">{t("Пользователи онлайн")}:</div>
 								<div className="online-list">
 									<PoseGroup animateOnMount preEnterPose="preEnter">
 										{this.state.onlineUsers.map((user) => (
@@ -247,7 +243,7 @@ class СonversationsRoom extends React.Component {
 															</div>
 														</div>
 														<div className="col username">
-															<span>{`${user.first_name} ${user.last_name}`}</span>
+															<span><Translit value={`${user.first_name} ${user.last_name}`} /></span>
 														</div>
 													</div>
 												</a>
