@@ -360,3 +360,23 @@ a.mes-info-name{
 
 
 
+.react-emoji {
+	padding-right: 0 !important;
+}
+
+.react-input-emoji--button {
+	margin-bottom: unset !important;
+	height: 100% !important;
+}
+
+.react-emoji-picker--wrapper {
+	position: fixed !important;
+	right: 5px !important;
+	bottom: 50px !important;
+}
+
+.send-mes-btn {
+	margin-bottom: 0 !important;
+	width: 65px !important;
+	background-position: 5px center !important;
+}
