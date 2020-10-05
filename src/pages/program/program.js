@@ -5,12 +5,13 @@ import withApiService from "../../components/hoc/with-api-service";
 import { connect } from "react-redux";
 import { compose } from "../../utils";
 import Header from "../../components/header";
+import { isMobile } from "react-device-detect";
 
 class Program extends React.Component {
 	render () {
 		return (
 			<div id="program">
-				<Header data={this.props.user.data} />
+				{!isMobile && (<Header data={this.props.user.data} />) }
 				<iframe src="https://drive.google.com/file/d/1h_56n64fZ4PQkueKPpRQlaXO1sZbLjZY/preview" width="100%" height="100%"></iframe>
 			</div>
 		)
