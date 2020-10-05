@@ -61,6 +61,7 @@ class EditProfile extends React.Component {
     email: "",
     shareContact: true,
     soc: "",
+    linkedin: "",
     what_looking: "",
     what_offer: "",
     tags: null,
@@ -69,12 +70,12 @@ class EditProfile extends React.Component {
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, linkedin, what_looking, what_offer, tags } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer, tags)
+      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, linkedin, what_looking, what_offer, tags)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -114,6 +115,7 @@ class EditProfile extends React.Component {
           email: res.email || "",
           shareContact: !!res.view_contact,
           soc: res.social_site || "",
+          linkedin: res.linkedin || "",
           what_looking: res.what_looking || "",
           what_offer: res.what_offer || "",
           tags: res.tags || null,
@@ -148,7 +150,7 @@ class EditProfile extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer, tags } = this.state;
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, linkedin, what_looking, what_offer, tags } = this.state;
     const currentTag = defaultTags.find(t => t.value == tags)
     
     return (
@@ -283,6 +285,20 @@ class EditProfile extends React.Component {
                         onChange={(e) => {
                           this.setState({
                             soc: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                    
+                    <div className="field mt-4">
+                      <input
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Ссылка на LinkedIn")}
+                        value={linkedin}
+                        onChange={(e) => {
+                          this.setState({
+                            linkedin: e.target.value,
                           });
                         }}
                       />
