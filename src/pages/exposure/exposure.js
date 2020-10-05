@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
 import api from "../../js/api";
-import Langs from "../../utils/Langs";
+import Langs from "../../utils/lang";
 import { Spinner } from "react-bootstrap";
 
 class Exposure extends React.Component {
