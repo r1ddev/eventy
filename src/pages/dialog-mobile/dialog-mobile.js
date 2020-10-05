@@ -24,7 +24,7 @@ class DialogMobile extends React.Component {
               </Link>
             </div>
             <div className="col">
-              <Link to={"/profile/" + activeUser.user_id} target="_blank" className="userdata">
+              <Link to={"/profile/" + activeUser.id} target="_blank" className="userdata">
                 <div className="row">
                   <div className="col-auto">
                     <div className="avatar">
