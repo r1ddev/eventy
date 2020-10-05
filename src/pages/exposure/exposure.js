@@ -34,7 +34,7 @@ class Exposure extends React.Component {
     let list = this.props.list.map((partner) => {
       return (
         <Link
-          to={`exposure/landing`}
+          to={`exposure/${partner.id}`}
           className="card"
           onClick={() => this.props.postUrl(partner.link)}>
           <div className="row head m-0">
