@@ -34,11 +34,12 @@ class Exposure extends React.Component {
     let list = this.props.list.map((partner) => {
       return (
         <Link
-          to={`exposure/landing`}
+          key={partner.id}
+          to={`exposure/${partner.id}`}
           className="card"
           onClick={() => this.props.postUrl(partner.link)}>
           <div className="row head m-0">
-            <div className="col-sm-5 logo flex-center">
+            <div className="col-sm-4 logo flex-center">
               <img src={partner.logo} alt="" />
             </div>
           </div>

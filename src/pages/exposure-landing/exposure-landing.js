@@ -17,6 +17,10 @@ import 'swiper/components/navigation/navigation.scss';
 class ExposureLanding extends React.Component {
   state = {};
 
+  componentDidMount(){
+    console.log(this.props.match.params.id)
+  }
+
   render() {
     const { data } = this.props.user;
     const members = [1,2,3];
