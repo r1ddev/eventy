@@ -6,25 +6,26 @@ import { compose } from "../../utils";
 import { Link } from "react-router-dom";
 import Header from "../../components/header";
 import { isMobile } from "react-device-detect";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/navigation/navigation.scss';
+import { Trans, withTranslation } from "react-i18next";
+
+import Spinner from "../../components/spinner";
+import LangChecker from "../../components/lang-checker";
+import Langs from "../../utils/lang";
 
 
 
 class ExposureLanding extends React.Component {
   state = {};
 
-  componentDidMount(){
-    console.log(this.props.match.params.id)
-  }
+
 
   render() {
-    const { data } = this.props.user;
-    const members = [1,2,3];
-    SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
+    const t = this.props.t;
+    const { data} = this.props.user;
+    const {partner} = this.props;
+    console.log(partner)
+    const members = partner.members || [];
+
     
 
     const memberList = members.map((item)=>{
@@ -32,17 +33,17 @@ class ExposureLanding extends React.Component {
         <div className="segment">
         <div className="header">
 
-          <img src = "https://thumbs.dfs.ivi.ru/storage8/contents/d/4/aa05891d3647b35ee578145bb3c135.jpg"/>
+          <img src = {item.avatar}/>
           <div className="name">
-            <div className="first-name">Константин</div>
-            <div className="last-name">Константинопольский</div>
-            <div className="tag">креативный директор</div>
+            <div className="first-name">{item.first_name}</div>
+            <div className="last-name">{item.last_name}</div>
+            <div className="tag">{item.position}</div>
           </div>
         </div>
 
         <div className="contacts">
-          <p className="label">Контакты</p>
-            <div className="email">example.smit@mail.ru</div>
+          <p className="label">{t('Контакты')}</p>
+            <div className="email"></div>
             <div className="phone">+79 899 456 38 59</div>
         </div>
 
@@ -63,27 +64,27 @@ class ExposureLanding extends React.Component {
           </Header>
         )}
         <div className="expo-header" style={{
-          backgroundImage: `url(${"https://lh3.googleusercontent.com/proxy/_G3trgvGqRH2mKDxoUITrrPjmwADbxEIPlxeqi9jMhnNyXqFijz_JE_47XgAjqmJN260VPNbnTOTYVnXucGwhb-r7vB4FvyZwA"})`,
+          backgroundImage: `url(${partner.logo_bg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center center"
         }}>
            <div className="img-wrap">
-            <img src="https://www.google.com/logos/doodles/2020/teachers-day-2020-october-05-6753651837108570-l.png"/>
+            {/* <img src={partner.logo}/> */}
           </div>
         </div>
         <div className="content">
            
 
             <div className="segment right">
-              <img src="https://thumbs.dfs.ivi.ru/storage8/contents/d/4/aa05891d3647b35ee578145bb3c135.jpg"/>
+              <img src={partner.logo}/>
               <p className="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam placerat volutpat. Duis interdum est cursus, cursus tellus ac, efficitur lacus. Vivamus mollis pellentesque diam, in rhoncus ex. Praesent elementum nulla vel lobortis elementum. Ut nulla justo, vestibulum a turpis non, blandit dapibus ante. Nulla sagittis tortor sed fermentum convallis. In semper efficitur ipsum a posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus nisi diam, sodales vitae ligula eu, faucibus egestas nisi. Integer accumsan dictum tristique. Quisque at interdum eros.
+              {partner.title_text}
 
               </p>
             </div>
 
-            <h3>Предcтавители</h3>
+            <h3>{t('Предcтавители')}</h3>
 
             <div className="card-list">
              
@@ -134,8 +135,51 @@ class ExposureLanding extends React.Component {
   }
 }
 class ExposureLandingContainer extends React.Component {
+
+  state = {
+    loading: true,
+    error: false,
+    partner: null,
+  }
+
+  componentDidMount(){
+
+    this.fetchPartner();
+  }
+
+  fetchPartner=()=>{
+    const partnerId= this.props.match.params.id;
+    this.props.getExpoPartnerInfo(partnerId)
+    .then((data)=>{
+      console.log('ppp'+data[Langs.getCurrentLang()])
+      this.setState({
+        partner: data[Langs.getCurrentLang()],
+        loading: false,
+        error: false
+      })
+    })
+    .catch(()=>{
+       this.setState({
+        error: true,
+        loading: false,
+        partner: null,
+      })
+    }
+    )
+  }
+
   render() {
-    return <ExposureLanding {...this.props} />;
+
+    const {loading, error, partner} = this.state;
+    console.log(this.state)
+
+    return (
+    <div style={{ height: "100vh", width: "100%" }}>
+      {!loading && <ExposureLanding {...this.props} partner={partner}/>}
+      {loading && <Spinner big={1} />}
+    </div>
+    )
+   
   }
 }
 
@@ -144,7 +188,9 @@ const mapStateToProps = ({ user }) => {
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-  return {};
+  return {
+    getExpoPartnerInfo:(id)=>apiService.getExpoPartnerInfo(id)
+  };
 };
 
-export default compose(withApiService(), connect(mapStateToProps, mapDispatchToProps))(ExposureLandingContainer);
+export default compose(withApiService(),  withTranslation(), connect(mapStateToProps, mapDispatchToProps))(ExposureLandingContainer);
