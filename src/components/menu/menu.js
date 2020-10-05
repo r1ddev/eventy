@@ -33,7 +33,8 @@ class Menu extends React.Component {
 				</div>
 				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
 				<MenuItem icon={scenes} label={t("Сценa")} link="/scenes"></MenuItem>
-				<MenuItemOut icon={program} label={t("Программа")} link="#"></MenuItemOut>
+				{/* <MenuItemOut icon={program} label={t("Программа")} link="#"></MenuItemOut> */}
+				<MenuItem icon={program} label={t("Программа")} link="/program"></MenuItem>
 				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>
 				<MenuItem icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
 				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>

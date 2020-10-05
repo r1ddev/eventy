@@ -19,6 +19,7 @@ import { compose } from './utils';
 import api from './js/api';
 import withApiService from './components/hoc/with-api-service'
 import { setUserData } from './actions/user-actions';
+import Program from "./pages/program";
 
 class App extends React.Component {
 
@@ -67,6 +68,7 @@ class App extends React.Component {
 						<Route exact path="/presentations" component={Presentations} />
 						<Route exact path="/presentations/:folder" component={PresentationsList} />
 						<Route exact path="/scenes" component={Scenes} />
+						<Route exact path="/program" component={Program} />
 						<Route exact path="/messages" component={Messages} />
 						<Route exact path="/messages/:id" component={Messages} />
 						<Route exact path="/exposure" component={Exposure} />
