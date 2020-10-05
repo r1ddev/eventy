@@ -237,7 +237,10 @@ class MessageItem extends React.Component {
     const { id, first_name, last_name, ad, sponsor, message, avatar, time, reply } = this.props.item;
     const { onSetReplyAttachment, t } = this.props;
     let origin = api.origin;
-    let newAvatar = origin + "/images/avatar/" + avatar;
+    
+    let newAvatar = api.auth.getAvatarLocation() + avatar;
+    const sponsor = range == 5;
+    const ad = range == 4;
 
     return (
       <>
