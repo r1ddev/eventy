@@ -212,7 +212,7 @@ class MessageItem extends React.Component {
 		// let origin = "https://onlineshow.marketingforum.com.ua";
 		let origin = api.origin;
 
-		let newAvatar = origin + "/images/avatar/" + avatar;
+		let newAvatar = api.auth.getAvatarLocation() + avatar;
 
 		return (
 			<>

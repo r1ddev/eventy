@@ -36,7 +36,7 @@ class Scenes extends React.Component {
     };
 
     let origin = api.origin;
-    let newAvatar = origin + "/images/avatar/" + user.avatar;
+    let newAvatar = api.auth.getAvatarLocation() + user.avatar;
 
     // console.log(user);
 
