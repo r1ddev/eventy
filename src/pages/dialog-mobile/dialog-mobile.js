@@ -13,6 +13,7 @@ class DialogMobile extends React.Component {
     const { activeUser, messages, loading, sendMessage, t } = this.props;
     const userIsLoaded = Object.entries(activeUser).length > 0;
 
+    
     return (
       <div id="dialog-mobile">
         <div className="header">
