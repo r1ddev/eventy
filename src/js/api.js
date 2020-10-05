@@ -7,6 +7,7 @@ const api = {
 	// host: "https://onlineshow.marketingforum.com.ua/api",
 
 	origin: window.location.protocol + "//liveforum.kyivsmartcity.com",
+	imagesHost: window.location.protocol + "//api.smit.events/images",
 	host: window.location.protocol + "//api.smit.events/api",
 
 	// origin: window.location.origin,
@@ -34,7 +35,7 @@ const api = {
 			return "/users/avatar/upload";
 		},
 		getAvatarLocation() {
-			return api.origin + "/images/avatar/";
+			return imagesHost;
 		},
 		editProfile: async (
 			name,
