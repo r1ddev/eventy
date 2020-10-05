@@ -86,7 +86,7 @@ class AdminPanel extends React.Component {
 			return (
 				<div className={(item.chat_ban) ? "user-item blocked" : "user-item"} key={item.id}>
 					<div className="id">{item.id}</div>
-					<div className="avatar"><img src={origin + "/images/avatar/" + item.avatar}></img></div>
+					<div className="avatar"><img src={api.auth.getAvatarLocation() + item.avatar}></img></div>
 					<div className="name">{`| ${item.first_name} ${item.last_name}`}</div>
 					<div className="email">{`| ${item.mail}`}</div>
 
