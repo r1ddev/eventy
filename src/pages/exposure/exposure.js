@@ -38,7 +38,7 @@ class Exposure extends React.Component {
           className="card"
           onClick={() => this.props.postUrl(partner.link)}>
           <div className="row head m-0">
-            <div className="col-sm-5 logo flex-center">
+            <div className="col-sm-4 logo flex-center">
               <img src={partner.logo} alt="" />
             </div>
           </div>
