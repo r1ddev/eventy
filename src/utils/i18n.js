@@ -80,7 +80,7 @@ i18n.use(LanguageDetector).init({
         Сцены: 'Сцены',
         СЦЕНА: 'СЦЕНА',
         Сцена: 'Сцена',
-        идет: 'Идет',
+        Идет: 'Идет',
         "язык трансляции": 'язык трансляции',
 
         Чат: 'Чат',
@@ -100,6 +100,7 @@ i18n.use(LanguageDetector).init({
         expo_smit:
           "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда",
         expo_smitscreen: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
+        Представители: "Представители",
 
         Презентации: "Презентации",
         "Презентация Smit.studio": "Презентация Smit.studio",
@@ -216,6 +217,7 @@ i18n.use(LanguageDetector).init({
         expo_smit:
           "SMIT.studio - Experts in Interactive Marketing <br /> Grow your community with loyal players and convert them into brand advocates in the future",
         expo_smitscreen: "A project that opens up new opportunities for business in the world of outdoor advertising",
+        Представители: "Representatives",
 
         Презентации: "Files",
         "Презентация Smit.studio": "Smit.studio presentation",
@@ -311,7 +313,7 @@ i18n.use(LanguageDetector).init({
         Сцены: 'Сцены',
         СЦЕНА: 'СЦЕНА',
         Сцена: 'Сцена',
-        идет: 'В ефірі',
+        Идет: 'В ефірі',
         "язык трансляции": 'Мова трансляції',
 
         Чат: 'Чат',
@@ -332,6 +334,7 @@ i18n.use(LanguageDetector).init({
         expo_smit:
           "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда",
         expo_smitscreen: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
+        Представители: "Зв'язок із представником компанії",
 
         Презентации: "Підкасти",
         "Презентация Smit.studio": "Презентация Smit.studio",
