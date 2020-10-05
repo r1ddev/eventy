@@ -70,7 +70,7 @@ class App extends React.Component {
 						<Route exact path="/messages" component={Messages} />
 						<Route exact path="/messages/:id" component={Messages} />
 						<Route exact path="/exposure" component={Exposure} />
-						<Route exact path="/exposure/landing" component={exposureLanding} />
+						<Route exact path="/exposure/:id" component={exposureLanding} />
 						<Route exact path="/conversations" component={Conversations} />
 						<Route exact path="/conversations/:room" component={ConversationsRoom} />
 						<Route exact path="/quest" component={Quest} />
