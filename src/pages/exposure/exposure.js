@@ -8,27 +8,10 @@ import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
 import api from "../../js/api";
+import Langs from "../../utils/Langs";
 import { Spinner } from "react-bootstrap";
 
 class Exposure extends React.Component {
-  partners = [
-    {
-      logo: require("../../images/partners/smitstudio.png"),
-      name: "Smit.Studio",
-      desc: (
-        <p>
-          <Trans t={this.props.t}>expo_smit</Trans>
-        </p>
-      ),
-      link: "https://smit.studio/",
-    },
-    {
-      logo: require("../../images/partners/smitscreen.png"),
-      name: "Smit.Screen",
-      desc: (<Trans t={this.props.t}>expo_smitscreen</Trans>),
-      link: "https://smitscreen.ru",
-    },
-  ];
 
   render() {
     let list = this.props.list.map((partner) => {
@@ -73,7 +56,7 @@ class ExposureContainer extends React.Component {
   componentDidMount () {
     api.account.exposure.getList().then(res => {
       this.setState({
-        exposureList: res,
+        exposureList: res[Langs.getCurrentLang()],
         loading: false
       })
     }).catch(e => [
