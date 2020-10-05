@@ -11,6 +11,7 @@ import { Trans, withTranslation } from "react-i18next";
 import Spinner from "../../components/spinner";
 import LangChecker from "../../components/lang-checker";
 import Langs from "../../utils/lang";
+import parse from 'html-react-parser';
 
 
 
@@ -43,16 +44,23 @@ class ExposureLanding extends React.Component {
 
         <div className="contacts">
           <p className="label">{t('Контакты')}</p>
-            <div className="email"></div>
-            <div className="phone">+79 899 456 38 59</div>
+            {(partner.email)&&<div className="email">{partner.email}</div>}
+            {(partner.phone)&&<div className="phone">{partner.phone}</div>}
         </div>
 
         <div className="btns row">
-        
-            <button className="video-btn col">Видеозвонок <span> </span></button>
-            <button className="chat-btn col">Чат <span> </span></button>
+            <button className="video-btn col">{t('Видеозвонок')}<span> </span></button>
+            <button className="chat-btn col">{t('Чат')} <span></span></button>
         </div>
       </div>
+      )
+    })
+
+    const descriptionList = partner.description.map((item)=>{
+      return(
+        <div className="description-visual">
+        <img src={item.value}/>
+        </div>
       )
     })
 
@@ -63,15 +71,19 @@ class ExposureLanding extends React.Component {
             <></>
           </Header>
         )}
-        <div className="expo-header" style={{
+        {/* <div className="expo-header" style={{
           backgroundImage: `url(${partner.logo_bg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center center"
         }}>
            <div className="img-wrap">
-            {/* <img src={partner.logo}/> */}
+             <img src={partner.logo}/>
           </div>
+        </div> */}
+
+        <div className="expo-header2">
+             <img src={partner.logo_bg}/> 
         </div>
         <div className="content">
            
@@ -87,33 +99,23 @@ class ExposureLanding extends React.Component {
             <h3>{t('Предcтавители')}</h3>
 
             <div className="card-list">
-             
-              
             {memberList}
-            
-         
             </div>
+
+
            
-            <div className="segment">       
-            <div className="visual">
+            <div className="segment" style={{overflow:"hidden"}}>    
 
-                <div>
-                  <img/>
-                </div>
-
-                <div>
-                  <img/>
-                </div>
-
-                <div>
-                  <img/>
-                </div>
-
-              </div>
-              <p className="text"> описание технического решения</p>
+            <h3 style={{paddingTop: '20px'}}>{t('Описание технического решения')}</h3>  
+            <div className="visual">{descriptionList}
+            </div> 
+            
+            {(partner.description_text)&&<p className="text pb-2">
+                {parse(partner.description_text)}
+            </p>}
             </div> 
 
-            <div className="segment">
+            {/* <div className="segment">
               <h3>Контакты</h3>
                 <p className="text">Телефон</p>
                 <p className="text">почта</p>
@@ -127,7 +129,7 @@ class ExposureLanding extends React.Component {
             </a>
             <a href="#" className="segment">
               <p className="text">Презентация 2</p>
-            </a>
+            </a> */}
           
         </div>
       </div>

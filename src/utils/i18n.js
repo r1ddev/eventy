@@ -101,6 +101,8 @@ i18n.use(LanguageDetector).init({
           "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда",
         expo_smitscreen: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
         Представители: "Представители",
+        Видеозвонок: "Видеозвонок", 
+        "Описание технического решения": "Описание технического решения",
 
         Презентации: "Презентации",
         "Презентация Smit.studio": "Презентация Smit.studio",
@@ -218,6 +220,10 @@ i18n.use(LanguageDetector).init({
           "SMIT.studio - Experts in Interactive Marketing <br /> Grow your community with loyal players and convert them into brand advocates in the future",
         expo_smitscreen: "A project that opens up new opportunities for business in the world of outdoor advertising",
         Представители: "Representatives",
+        Видеозвонок: "Videocall",
+        "Описание технического решения": "Description of the technical solution",
+
+
 
         Презентации: "Files",
         "Презентация Smit.studio": "Smit.studio presentation",
@@ -335,6 +341,8 @@ i18n.use(LanguageDetector).init({
           "SMIT.studio - эксперты в интерактивом маркетинге <br /> Наращивайте своё сообщество лояльными игроками, которых в будущем конвертируете в адвокатов бренда",
         expo_smitscreen: "Проект, открывающий для бизнеса новые возможности в мире наружной рекламы",
         Представители: "Зв'язок із представником компанії",
+        Видеозвонок: "Відеозв’язок",
+        "Описание технического решения": "ОПИС ТЕХНІЧНОГО РІШЕННЯ",
 
         Презентации: "Підкасти",
         "Презентация Smit.studio": "Презентация Smit.studio",
