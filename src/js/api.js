@@ -35,7 +35,7 @@ const api = {
 			return "/users/avatar/upload";
 		},
 		getAvatarLocation() {
-			return api.imagesHost;
+			return `${api.imagesHost}/avatar/`;
 		},
 		editProfile: async (
 			name,
