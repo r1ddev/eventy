@@ -48,7 +48,8 @@ class Messages extends React.Component {
       activeUser.what_offer ||
       activeUser.what_looking ||
       false;
-
+    
+    // console.log(users);
 
     return (
       <div id="messages">
