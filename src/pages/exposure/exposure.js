@@ -7,13 +7,13 @@ import Header from "../../components/header";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
+import api from "../../js/api";
+import { Spinner } from "react-bootstrap";
 
 class Exposure extends React.Component {
   partners = [
     {
       logo: require("../../images/partners/smitstudio.png"),
-      background: require("../../images/partners/smitstudio-bg.png"),
-      backgroundPosition: "top",
       name: "Smit.Studio",
       desc: (
         <p>
@@ -24,8 +24,6 @@ class Exposure extends React.Component {
     },
     {
       logo: require("../../images/partners/smitscreen.png"),
-      background: require("../../images/partners/smitscreen-bg.png"),
-      backgroundPosition: "center",
       name: "Smit.Screen",
       desc: (<Trans t={this.props.t}>expo_smitscreen</Trans>),
       link: "https://smitscreen.ru",
@@ -33,17 +31,10 @@ class Exposure extends React.Component {
   ];
 
   render() {
-    let partnersList = this.partners.map((partner) => {
+    let list = this.props.list.map((partner) => {
       return (
-        <a
-          style={{
-            backgroundImage: `url(${partner.background})`,
-            backgroundSize: "cover",
-            backgroundPosition: partner.backgroundPosition,
-            backgroundRepeat: "norepeat",
-          }}
-          target="_blank"
-          href={partner.link}
+        <Link
+          to={`exposure/landing`}
           className="card"
           onClick={() => this.props.postUrl(partner.link)}>
           <div className="row head m-0">
@@ -51,8 +42,8 @@ class Exposure extends React.Component {
               <img src={partner.logo} alt="" />
             </div>
           </div>
-          <div className="desc">{partner.desc}</div>
-        </a>
+          <div className="desc">{partner.title_text}</div>
+        </Link>
       );
     });
 
@@ -64,7 +55,7 @@ class Exposure extends React.Component {
           </Header>
         )}
         <div className="container">
-          <div className="card-list">{partnersList}</div>
+          <div className="card-list">{list}</div>
         </div>
       </div>
     );
@@ -72,8 +63,30 @@ class Exposure extends React.Component {
 }
 
 class ExposureContainer extends React.Component {
+  
+  state = {
+    exposureList: [],
+    loading: true,
+  }
+
+  componentDidMount () {
+    api.account.exposure.getList().then(res => {
+      this.setState({
+        exposureList: res,
+        loading: false
+      })
+    }).catch(e => [
+      api.errorHandler(e, {})
+    ])
+  }
   render() {
-    return <Exposure {...this.props} />;
+
+    const { exposureList, loading }  = this.state;
+
+    return (<div style={{ height: "100%", width: "100%" }}>
+      {!loading && <Exposure {...this.props} list={exposureList} />}
+      {loading && <Spinner big={1} />}
+    </div>)
   }
 }
 
