@@ -170,7 +170,7 @@ const api = {
 			async get (id) {
 				return new Promise((resolve, reject) => {
 					axios.get(
-						`${api.proxy}${api.host}/v3/exposures/${id}/rules`,
+						`${api.proxy}${api.host}/v3/exposures/${id}`,
 						api.useAuth()
 					).then(res => {
 						resolve(res.data)
