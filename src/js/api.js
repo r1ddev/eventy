@@ -46,6 +46,7 @@ const api = {
 			email,
 			shareContact,
 			soc,
+			linkedin,
 			what_looking,
 			what_offer,
 			tags
@@ -60,6 +61,7 @@ const api = {
 					phone: phone,
 					email: email,
 					social_site: soc,
+					linkedin: linkedin,
 					what_looking: what_looking,
 					what_offer: what_offer,
 					view_contact: shareContact - 0,
