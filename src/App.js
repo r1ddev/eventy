@@ -5,6 +5,7 @@ import Presentations from "./pages/presentations";
 import Scenes from "./pages/scenes";
 import Messages from "./pages/messages";
 import Exposure from "./pages/exposure";
+import exposureLanding from "./pages/exposure-landing/exposure-landing";
 import Conversations from "./pages/conversations";
 import VipAssistent from "./pages/vip-assistent";
 import Frame from "./components/frame";
@@ -69,6 +70,7 @@ class App extends React.Component {
 						<Route exact path="/messages" component={Messages} />
 						<Route exact path="/messages/:id" component={Messages} />
 						<Route exact path="/exposure" component={Exposure} />
+						<Route exact path="/exposure/landing" component={exposureLanding} />
 						<Route exact path="/conversations" component={Conversations} />
 						<Route exact path="/conversations/:room" component={ConversationsRoom} />
 						<Route exact path="/quest" component={Quest} />
