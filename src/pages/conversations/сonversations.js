@@ -13,6 +13,7 @@ import { fetchUser } from "../../actions/user-actions";
 import { conversationRoomsLoading, conversationRoomsLoaded } from "../../actions/conversations-actions";
 
 import { withTranslation } from "react-i18next";
+import Langs from './../../utils/lang';
 
 const Room = ({ t, name, currentPeople, maxPeople }) => {
   return (
@@ -71,19 +72,28 @@ class Сonversations extends React.Component {
   }
 }
 class СonversationsContainer extends React.Component {
-  state = {};
+  state = {
+    rooms: []
+  };
 
   componentDidMount() {
     this.props.fetchUser();
 
     api.account.conversations.getRooms().then((res) => {
-      this.props.conversationRoomsLoaded(res.rooms);
+      this.props.conversationRoomsLoaded(res);
+
+      let rooms = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang())
+
+      this.setState({
+        rooms: rooms
+      })
     });
   }
   render() {
     let loading = true;
     // const { loading: userLoading, user, error } = this.props.user;
-    const { isLoaded: roomsLoaded, rooms } = this.props.conversations;
+    const { isLoaded: roomsLoaded } = this.props.conversations;
+    const { rooms } = this.state;
 
     // loading = userLoading || !roomsLoaded;
     loading = !roomsLoaded;

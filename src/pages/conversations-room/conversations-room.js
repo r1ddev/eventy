@@ -345,7 +345,7 @@ class СonversationsRoomContainer extends React.Component {
   loadRooms = async () => {
     if (!this.props.conversations.isLoaded) {
 			let rooms = await api.account.conversations.getRooms()
-      this.props.conversationRoomsLoaded(rooms.rooms);
+      this.props.conversationRoomsLoaded(rooms);
     }
 
     let currentRoom = this.props.conversations.rooms.find((r) => r.room_id == this.props.match.params.room);
