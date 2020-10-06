@@ -53,19 +53,24 @@ class Desk extends React.Component {
                         <div className="lobby-item brand-icons1" style={{backgroundColor: "rgba(5, 120, 10, 0.0)", width: '100%', height:'100%'}}>
                            
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/vodafone-logo.svg")} />
+                                <img alt="" src={require("../../images/icons/lobby/vodafone-logo.svg")} />
+                                <span>{t('Инновационный партнер')}</span>
                             </div>
                            
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/cisco-logo.svg")} />
+                                <img alt="" src={require("../../images/icons/lobby/cisco-logo.svg")} />
+                                <span>{t('Премиум партнер')}</span>
                             </div>
                         
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/erc.svg")} />
+                                <img alt="" src={require("../../images/icons/lobby/erc.svg")} />
+                                <span>{t('Премиум партнер')}</span>
+
                             </div>
                             
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/it-integrator-logo.svg")} />
+                                <img alt="" src={require("../../images/icons/lobby/it-integrator-logo.svg")} />
+                                <span>{t('Премиум партнер')}</span>
                             </div>
                             
                         </div>

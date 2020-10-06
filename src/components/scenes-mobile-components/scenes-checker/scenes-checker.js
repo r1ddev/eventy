@@ -16,7 +16,7 @@ class ScenesChecker extends React.Component {
           ((scenes[0].status) ? " inprogress" : "")}
           onClick={() => setScene(0)}
         >
-          {t('Сцена')} 1
+          {t('Главная сцена')}
         </div>
 
         <div className={"scenes-checker--item" +
@@ -24,7 +24,7 @@ class ScenesChecker extends React.Component {
           ((scenes[1].status) ? " inprogress" : "")}
           onClick={() => setScene(1)}
         >
-          {t('Сцена')} 2
+          {t('Умные решения')}
         </div>
 
       </div >

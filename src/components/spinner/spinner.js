@@ -5,11 +5,29 @@ class Spinner extends React.Component {
     render() {
 
         if (this.props.big) {
-            return (
+            return(
                 <div className="d-flex justify-content-center my-spinner-big">
                     <div className="spinner-border text-success" role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
+                </div>
+            )
+        }
+
+        if(this.props.center){
+            return(
+                <div style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100vh'
+                }}>
+
+                <div className="d-flex justify-content-center my-spinner-big">
+                    <div className="spinner-border text-success" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+
                 </div>
             )
         }

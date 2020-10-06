@@ -33,7 +33,7 @@ class LangChecker extends React.Component {
 
   options = [
     { value: "en", label: "English" },
-    { value: "ua", label: "український" },
+    { value: "ua", label: "Українська" },
   ];
 
   onChangeLang = (e) => {

@@ -49,7 +49,7 @@ class ExposureLanding extends React.Component {
         </div>
 
         <div className="btns row">
-            <button className="video-btn col">{t('Видеозвонок')}<span> </span></button>
+            <button className="video-btn col">{t('Видеозвонок')} <span> </span></button>
             <button className="chat-btn col">{t('Чат')} <span></span></button>
         </div>
       </div>
@@ -58,10 +58,28 @@ class ExposureLanding extends React.Component {
 
     const descriptionList = partner.description.map((item)=>{
       return(
-        <div className="description-visual">
-        <img src={item.value}/>
-        </div>
+        <>
+        {(item.type == 'image')&& <div className="description-visual">
+          <img src={item.value}/>
+        </div>}
+        {(item.type =='video') &&
+            <iframe 
+            title="video"
+              width="100%" 
+              height='300px'
+              src={item.value} 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+        }
+        </>
+       
       )
+    })
+
+    const contactList = partner.contacts.map((item)=>{
+    return(<p className="mb-1 mt-1" style={{marginLeft: '20px', overflowWrap: 'break-word'}}><span style={{fontWeight:'bold'}}>{item.label}</span>{': '+item.value}</p>)
     })
 
     return (
@@ -84,7 +102,7 @@ class ExposureLanding extends React.Component {
 
         <div className="expo-header2">
              <img src={partner.logo_bg}/> 
-        </div>
+        </div> 
         <div className="content">
            
 
@@ -107,21 +125,23 @@ class ExposureLanding extends React.Component {
             <div className="segment" style={{overflow:"hidden"}}>    
 
             <h3 style={{paddingTop: '20px'}}>{t('Описание технического решения')}</h3>  
-            <div className="visual">{descriptionList}
-            </div> 
+            {(!isMobile)&&<div className="visual">{descriptionList}
+            </div> }
             
             {(partner.description_text)&&<p className="text pb-2">
                 {parse(partner.description_text)}
             </p>}
+
+            {(isMobile)&&<div className="visual-mob">{descriptionList}
+            </div> }
             </div> 
 
-            {/* <div className="segment">
-              <h3>Контакты</h3>
-                <p className="text">Телефон</p>
-                <p className="text">почта</p>
-                <p className="text">email</p>
-            </div>
-            
+            {(partner.contacts.length !== 0)&&<div className="segment pb-2">
+              <h3 className={'pt-2'}>{t('Контакты')}</h3>
+              {contactList}
+            </div>}
+
+             
 
             <h4> Дополнительные материалы</h4>
             <a  href = "#" className="segment">
@@ -129,7 +149,7 @@ class ExposureLanding extends React.Component {
             </a>
             <a href="#" className="segment">
               <p className="text">Презентация 2</p>
-            </a> */}
+            </a> 
           
         </div>
       </div>
@@ -173,13 +193,12 @@ class ExposureLandingContainer extends React.Component {
   render() {
 
     const {loading, error, partner} = this.state;
-    console.log(this.state)
 
     return (
-    <div style={{ height: "100vh", width: "100%" }}>
-      {!loading && <ExposureLanding {...this.props} partner={partner}/>}
-      {loading && <Spinner big={1} />}
-    </div>
+    <>
+      {(!loading && !error) && <ExposureLanding {...this.props} partner={partner}/>}
+      {(loading || error) && <Spinner big={1} center={true}/>}
+    </>
     )
    
   }
