@@ -122,7 +122,7 @@ class ExposureLanding extends React.Component {
 
 
            
-            <div className="segment" style={{overflow:"hidden"}}>    
+            <div className="segment" style={{overflow:"hidden", paddingTop:"20px"}}>    
 
             {/* <h3 style={{paddingTop: '20px'}}>{t('Описание технического решения')}</h3>   */}
             {(!isMobile)&&<div className="visual">{descriptionList}
