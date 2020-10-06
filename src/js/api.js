@@ -120,11 +120,16 @@ const api = {
 		},
 		conversations: {
 			async getRooms() {
-				let response = await axios.get(
-					api.proxy + api.host + "/rooms/all",
-					api.useAuth()
-				);
-				return response.data;
+				return new Promise((resolve, reject) => {
+					axios.get(
+						api.proxy + api.host + "/v3/conversations",
+						api.useAuth()
+					).then(res => {
+						resolve(res.data)
+					}).catch(e => {
+						reject()
+					})
+				})
 			},
 			async updateRoomStatus(roomId) {
 				let response = await axios.put(
