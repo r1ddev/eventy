@@ -20,7 +20,7 @@ class Menu extends React.Component {
 		const messages = require("../../images/icons/menu/messages.svg");
 		const exposure = require("../../images/icons/menu/exposure.svg");
 		const conversations = require("../../images/icons/menu/conversations.svg");
-	
+		const smart = require("../../images/icons/menu/smart.svg");
 		const { range, notifications } = this.props;
 
 		const { newMessages, newVipMessages } = notifications;
@@ -40,7 +40,7 @@ class Menu extends React.Component {
 				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
 				<MenuItem icon={exposure} label={t("Экспозона")} link="/exposure"></MenuItem>
 				<MenuItem icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
-
+				<MenuItemOut icon={smart} label={t("Программа")} link="#"></MenuItemOut> 
 
 			</div>
 		);
@@ -60,7 +60,7 @@ class MenuItem extends React.Component {
 				}}
 				className="menu-item flex-center"
 			>
-				<div className="menu-item-icon-wrap">
+				<div className="menu-item-icon-wrap pb-2 pt-2">
 					<img alt="" src={icon} className="menu-item-icon" />
 					{((link === '/messages' || link === "/vip-assistent") && notifications) && <div className="menu-notify"></div>}
 				</div>
@@ -81,10 +81,10 @@ class MenuItemOut extends React.Component {
 				href={link}
 				className="menu-item flex-center"
 			>
-				<div className="menu-item-icon-wrap">
+				<div className="menu-item-icon-wrap out">
 					<img alt="" src={icon} className="menu-item-icon" />
 				</div>
-				<div className="menu-item-label">{label}</div>
+				{/* <div className="menu-item-label">{label}</div> */}
 			</a>
 		);
 	}

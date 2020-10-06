@@ -66,6 +66,11 @@
 .menu-item-icon-wrap {
 	max-width: 40px;
 	position: relative;
+
+	&.out{
+		max-width: 100px;
+		width: 90%;
+	}
 }
 
 .menu-notify{
