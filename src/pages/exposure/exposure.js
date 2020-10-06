@@ -9,7 +9,7 @@ import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
 import api from "../../js/api";
 import Langs from "../../utils/lang";
-import { Spinner } from "react-bootstrap";
+import Spinner from './../../components/spinner';
 
 class Exposure extends React.Component {
 
@@ -66,10 +66,10 @@ class ExposureContainer extends React.Component {
   render() {
 
     const { exposureList, loading }  = this.state;
-
+    
     return (<div style={{ height: "100%", width: "100%" }}>
       {!loading && <Exposure {...this.props} list={exposureList} />}
-      {loading && <Spinner big={1} />}
+      {loading && <Spinner big={1} center/>}
     </div>)
   }
 }
