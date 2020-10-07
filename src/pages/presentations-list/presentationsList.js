@@ -15,18 +15,28 @@ class PresentationsList extends React.Component {
       files: [
         {
           name: this.props.t("SMART CITIES 2020: MOVING BEYOND THE HYPE"),
-          weight: "Володимир Гук",
+          weight: "Charles Reed Anderson",
           link: "https://drive.google.com/drive/folders/1869EXaswXW7Ml3FhJ7MV1Nz8oxNNgQIf?usp=sharing",
         },
         {
-          name: this.props.t("Виступає без презентації"),
-          weight: "Вадим Бортник",
-          link: "https://drive.google.com/drive/folders/1nn3gAVUPRoe4dcOpfcBqTAx-fttukiQ1?usp=sharing",
+          name: this.props.t("Сучасні розумні міста. Світові тренди."),
+          weight: "Юрій Назаров",
+          link: "https://drive.google.com/drive/folders/1tRwBmnca0TZX_GjuEOM6q51qzurnXBN5?usp=sharing",
         },
         {
           name: this.props.t("Цифрова трансформація регіонів."),
           weight: "Михайло Лазарєв",
           link: "https://drive.google.com/drive/folders/1oyzNKDcBR2bCFnJpqI8uNy-6fLdEGI3k?usp=sharing",
+        },
+        {
+          name: this.props.t("Від Безпечного міста до Безпечної Країни."),
+          weight: "Антон Геращенко",
+          link: "https://drive.google.com/drive/folders/1BCvAmn7MLZptvgtKmdDj7fcRdvq5Yd4N?usp=sharing",
+        },
+        {
+          name: this.props.t("Digital Payments in Urban Mobility – from Contactless to MaaS"),
+          weight: "Anna Reiley",
+          link: "https://drive.google.com/drive/folders/1-dDhSyzEbNG54qAYYjfsoCaiMO40mk3Z?usp=sharing",
         },
         {
           name: this.props.t("Як ефективно приймати легітимні рішення в умовах карантину"),
@@ -49,11 +59,6 @@ class PresentationsList extends React.Component {
           link: "https://drive.google.com/drive/folders/10VkvgK53YMtyoNzYtFN2iDIXLTYAWsQO?usp=sharing",
         },
         {
-          name: this.props.t("Smart cities and future mobility. An insight to hydrogen mobility!"),
-          weight: "Сергій Бориславський",
-          link: "https://drive.google.com/drive/folders/1ElU8f3n2dhvnGl9K6iyyhnOwT5qOnDPP?usp=sharing",
-        },
-        {
           name: this.props.t("Big Data: реальні завдання – реальні рішення"),
           weight: "Dr. Peyman Khodabakhsh, Sebastian Martin",
           link: "https://drive.google.com/drive/folders/1SMmbm16fHgd7BjfNSyiDc17EOGHW2oMn?usp=sharing",
@@ -74,6 +79,11 @@ class PresentationsList extends React.Component {
           link: "https://drive.google.com/drive/folders/1teUDef6OkOFHQCk19zgkVPSvCyGlWJRh?usp=sharing",
         },
         {
+          name: this.props.t("Глобальні тренди у сфері нерухомості та їх інтерпретація в Україні"),
+          weight: "Ольга Соловей",
+          link: "https://drive.google.com/drive/folders/1f-ihix2pJrndjGZUL5m9tC3u40opIpG2?usp=sharing",
+        },
+        {
           name: this.props.t("Інклюзивність та універсальний дизайн у міському просторі, як запорука дотримання рівних прав для всіх громадян в смарт містах"),
           weight: "Олександр Ворона",
           link: "https://drive.google.com/drive/folders/1scuzoPNUJeTDvtqahWLZPOdJnRfyQ2hQ?usp=sharingg",
@@ -92,11 +102,6 @@ class PresentationsList extends React.Component {
           name: this.props.t("Сучасні компоненти комплексних рішень для Smart City"),
           weight: "Володимир Гук",
           link: "https://drive.google.com/drive/folders/1qnzwPL9WQ7SS4wwbqo8jllq4uL-0c5-z?usp=sharing",
-        },
-        {
-          name: this.props.t("Підключений уряд, розумне місто і розумний транспорт. Досвід Азербайджану."),
-          weight: "Володимир Орлов",
-          link: "https://drive.google.com/drive/folders/1H00plJskN2lOcbpIj8nDXTHs0zSGNA3L?usp=sharing",
         },
         {
           name: this.props.t("Quantela - Smart city platform & case studies"),
