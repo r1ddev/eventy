@@ -109,8 +109,7 @@ class ExposureLanding extends React.Component {
             <div className="segment right">
               <img src={partner.logo}/>
               <p className="text">
-              {partner.title_text}
-
+              {parse(partner.title_text)}
               </p>
             </div>
 

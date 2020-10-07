@@ -6,7 +6,7 @@ import Spinner from '../../spinner';
 import { isMobileSafari, isIOS } from "react-device-detect";
 import api from "./../../../js/api";
 import Translit from "../../../components/translit";
-import { ThemeConsumer } from 'styled-components';
+import Linkify from "react-linkify";
 
 class ScenesChatMobile extends React.Component {
 
@@ -246,7 +246,11 @@ class MessageItem extends React.Component {
         {(reply) && <div className="message-item replied">
           <div className='text'>
             <span><Translit value={reply.first_name + ' ' + reply.last_name} /></span>
-            <div className='mes-text'> {reply.message}</div>
+            <div className='mes-text'>
+            <Linkify> 
+              {reply.message}
+            </Linkify>  
+            </div>
 
           </div>
         </div >
@@ -255,7 +259,11 @@ class MessageItem extends React.Component {
           <img alt="" src={newAvatar} />
           <div className='text'>
             <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">Host</span>}
-            <div className='mes-text'> {message}</div>
+            <div className='mes-text'>
+            <Linkify> 
+              {message}
+            </Linkify> 
+            </div>
 
           </div>
           <div className="message-reply">

@@ -22,8 +22,7 @@ class MessagesMobile extends React.Component {
         <div className="container h-100">
           {users.length == 0 && (
             <div className="flex-center h-100 text-black-50 text-center">
-              {/* {t("Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться")} */}
-              Go to networking and select a person to start chatting with
+              {t("Перейдите в нетворкинг и выберите человека, чтобы начать с ним общаться")}
             </div>
           )}
           {users.map((user, index) => {
