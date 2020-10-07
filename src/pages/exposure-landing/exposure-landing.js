@@ -134,7 +134,7 @@ class ExposureLanding extends React.Component {
               </p>
             </div>
 
-            {(memberList.length >0)&&<h3>{t('Предcтавители')}</h3>}
+            {(memberList.length >0)&&<h3>{t('Представители')}</h3>}
 
             <div className="card-list">
             {memberList}
