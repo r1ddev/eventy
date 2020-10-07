@@ -40,7 +40,7 @@ class Menu extends React.Component {
 				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
 				<MenuItem icon={exposure} label={t("Экспозона")} link="/exposure"></MenuItem>
 				<MenuItem icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
-				<MenuItemOut icon={smart} label={t("Программа")} link="#"></MenuItemOut> 
+				<MenuItemOut icon={smart} label={t("Программа")} link="https://ngosmartcityhub.com/"></MenuItemOut> 
 
 			</div>
 		);
