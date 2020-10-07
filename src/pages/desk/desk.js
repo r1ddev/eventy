@@ -99,11 +99,11 @@ class Desk extends React.Component {
                             </div>
                            
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/l7.svg")} />
+                            <img alt="" src={require("../../images/icons/lobby/l8.svg")} />
                             </div>
                            
                             <div>
-                            <img alt="" src={require("../../images/icons/lobby/l8.svg")} />
+                            <img alt="" src={require("../../images/icons/lobby/l7.svg")} />
                             </div>
                            
                         
