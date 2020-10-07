@@ -254,7 +254,7 @@ class MessageItem extends React.Component {
         <div className={(reply) ? "message-item bordered" : (ad ? "message-item ad" : "message-item")}>
           <img alt="" src={newAvatar} />
           <div className='text'>
-            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">UMF</span>}
+            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">Host</span>}
             <div className='mes-text'> {message}</div>
 
           </div>
