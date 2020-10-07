@@ -122,7 +122,7 @@ class Messages extends React.Component {
                   <>
                     <div className="card flex-center p-4">
                       <div className="ava">
-                        <Link to={"/profile/" + activeUser.user_id}>
+                        <Link to={"/profile/" + activeUser.id}>
                           <img src={api.auth.getAvatarLocation() + activeUser.avatar} />
                         </Link>
                       </div>
