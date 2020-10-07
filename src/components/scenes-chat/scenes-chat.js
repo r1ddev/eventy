@@ -229,10 +229,11 @@ class MessageItem extends React.Component {
 								className="mes-info-status"
 								style={{
 									padding: `${sponsor ? "5px" : "0px"}`,
+									borderRadius: '4px',
 									backgroundColor: `${sponsor ? "#FCD128" : "white"
 										}`,
 								}}>
-								{sponsor ? "UMF" : ""}
+								{sponsor ? "Host" : ""}
 							</span>
 						</Link>
 						<div className="mes-info-content">
@@ -269,10 +270,11 @@ class MessageItem extends React.Component {
 								className="mes-info-status"
 								style={{
 									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${sponsor ? "#22D671" : "white"
+									borderRadius: '4px',
+									backgroundColor: `${sponsor ? "#FCD128" : "white"
 										}`,
 								}}>
-								{sponsor ? "UMF" : ""}
+								{sponsor ? "Host" : ""}
 							</span>
 						</Link>
 						<div className="mes-info-content">
