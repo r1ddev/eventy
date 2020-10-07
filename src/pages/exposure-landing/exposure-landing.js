@@ -9,10 +9,9 @@ import { isMobile } from "react-device-detect";
 import { Trans, withTranslation } from "react-i18next";
 
 import Spinner from "../../components/spinner";
-import LangChecker from "../../components/lang-checker";
 import Langs from "../../utils/lang";
 import parse from 'html-react-parser';
-
+import Linkify from "react-linkify";
 
 
 class ExposureLanding extends React.Component {
@@ -26,6 +25,8 @@ class ExposureLanding extends React.Component {
     const {partner} = this.props;
     console.log(partner)
     const members = partner.members || [];
+
+
 
     
 
@@ -43,7 +44,7 @@ class ExposureLanding extends React.Component {
         </div>
 
         <div className="contacts">
-          <p className="label">{t('Контакты')}</p>
+          {(partner.email || partner.phone)&&<p className="label">{t('Контакты')}</p>}
             {(partner.email)&&<div className="email">{partner.email}</div>}
             {(partner.phone)&&<div className="phone">{partner.phone}</div>}
         </div>
@@ -78,8 +79,22 @@ class ExposureLanding extends React.Component {
       )
     })
 
+    const materialList = partner.materials.map((item)=>{
+      return(
+        <>
+        <a  href = {item.link} className="segment">
+          <p className="text">{item.text}</p>
+        </a>
+        </>
+      )
+    })
+
     const contactList = partner.contacts.map((item)=>{
-    return(<p className="mb-1 mt-1" style={{marginLeft: '20px', overflowWrap: 'break-word'}}><span style={{fontWeight:'bold'}}>{item.label}</span>{': '+item.value}</p>)
+    return(
+      <Linkify> 
+           <p className="mb-1 mt-1" style={{marginLeft: '20px', overflowWrap: 'break-word'}}><span style={{fontWeight:'bold'}}>{item.label}</span>{': '+item.value}</p>
+      </Linkify>
+    )
     })
 
     return (
@@ -113,7 +128,7 @@ class ExposureLanding extends React.Component {
               </p>
             </div>
 
-            <h3>{t('Предcтавители')}</h3>
+            {(memberList.length >0)&&<h3>{t('Предcтавители')}</h3>}
 
             <div className="card-list">
             {memberList}
@@ -142,14 +157,11 @@ class ExposureLanding extends React.Component {
 
              
 
-            <h4> Дополнительные материалы</h4>
-            <a  href = "#" className="segment">
-              <p className="text">Презентация 1</p>
-            </a>
-            <a href="#" className="segment">
-              <p className="text">Презентация 2</p>
-            </a> 
-          
+            {(partner.materials.length>0)&&
+            <>
+            <h4>{t("Дополнительные материалы")}</h4> 
+              {materialList}
+            </>}
         </div>
       </div>
     );
