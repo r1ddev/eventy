@@ -106,7 +106,11 @@ class Login extends React.Component {
       <div id="login">
         <form onSubmit={this.onSubmit} className="login-form">
           <div className="login-form--wrapper">
+            <div className="logo-img" >
+              <img  src={require("../../images/icons/lobby/main-logo.svg")}></img>
+            </div>
             <div className="login-form--caption">{t("Авторизация")}</div>
+            
             <input
               required
               type="email"
@@ -132,10 +136,11 @@ class Login extends React.Component {
               {t("ВОЙТИ КАК ГОСТЬ")}
             </button> */}
 
-            <Link className="reg-link" to="/registration">
+            {/* <Link className="reg-link" to="/registration">
               {t("Зарегистрироваться")}
             </Link>
-            
+             */}
+
           </div>
           <Link className="passrec-link" to="/password-recovery">
             {t("Забыли пароль?")}
