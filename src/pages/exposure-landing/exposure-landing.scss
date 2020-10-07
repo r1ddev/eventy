@@ -162,7 +162,10 @@
 				.btns{
 					margin: 0 20px;
 
+				
+
 					button{
+
 						outline: none;
 						border: 1px solid #FCD128;
 						text-decoration: none;
@@ -171,9 +174,22 @@
 					}
 
 					.video-btn{
+						
 						margin: 10px 0 10px 0;
 						padding: 5px;
 						vertical-align: center;
+						margin: 0 0 5px 0;
+						padding: 5px 0;
+						width: 100%;
+						
+						
+							
+							
+						
+
+						&:first-child{
+							margin-right: 10px;
+						}
 
 						span{
 							display: inline-block;

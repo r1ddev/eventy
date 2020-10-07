@@ -31,6 +31,8 @@ class ExposureLanding extends React.Component {
     
 
     const memberList = members.map((item)=>{
+
+      console.log(item.link_chat);
       return(
         <div className="segment">
         <div className="header">
@@ -50,8 +52,12 @@ class ExposureLanding extends React.Component {
         </div>
 
         <div className="btns row">
-            <button className="video-btn col">{t('Видеозвонок')} <span> </span></button>
-            <button className="chat-btn col">{t('Чат')} <span></span></button>
+            <Link className="video-btn col" to={item.link_call}>
+               <button className="video-btn" >{t('Видеозвонок')} <span> </span></button>
+						</Link>
+            <Link className="video-btn col" to={`/messages/${item.link_chat}`}>
+							<button  className="video-btn">{t('Чат')} <span></span></button>
+						</Link>
         </div>
       </div>
       )

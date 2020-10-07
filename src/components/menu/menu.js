@@ -32,7 +32,7 @@ class Menu extends React.Component {
 					<img alt="" src={logo} />
 				</div>
 				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
-				<MenuItem icon={scenes} label={t("Сценa")} link="/scenes"></MenuItem>
+				<MenuItem icon={scenes} label={t("Сцена")} link="/scenes"></MenuItem>
 				{/* <MenuItemOut icon={program} label={t("Программа")} link="#"></MenuItemOut> */}
 				<MenuItem icon={program} label={t("Программа")} link="/program"></MenuItem>
 				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>

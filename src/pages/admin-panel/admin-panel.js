@@ -155,7 +155,7 @@ class AdminPanelContainer extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.user.user !== prevProps.user.user && this.props.user.user) {
-			if (this.props.user.user.range !== 8) {
+			if (this.props.user.user.range !== 5) {
 				this.props.history.push("/error");
 			}
 		}
@@ -164,7 +164,7 @@ class AdminPanelContainer extends React.Component {
 		const { loading, user, error } = this.props.user;
 		const { users } = this.props.adminusers;
 		let errorUserPermissions = false;
-		if (user) errorUserPermissions = error || user.range !== 8; //moderator
+		if (user) errorUserPermissions = error || user.range !== 5; //org
 		console.log(users);
 
 		return (
