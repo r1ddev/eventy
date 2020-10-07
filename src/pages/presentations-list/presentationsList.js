@@ -69,11 +69,6 @@ class PresentationsList extends React.Component {
           link: "https://drive.google.com/drive/folders/1ke-OTY1da4-jqlLfuTZC9XQ4vQTLKmRT?usp=sharing",
         },
         {
-          name: this.props.t("Підключений уряд, розумне місто і розумний транспорт. Досвід Азербайджану."),
-          weight: "Володимир Орлов",
-          link: "https://drive.google.com/drive/folders/1H00plJskN2lOcbpIj8nDXTHs0zSGNA3L?usp=sharing",
-        },
-        {
           name: this.props.t("Архітектура — атрактор якості ком'юніті"),
           weight: "Олександр Попов",
           link: "https://drive.google.com/drive/folders/1teUDef6OkOFHQCk19zgkVPSvCyGlWJRh?usp=sharing",
