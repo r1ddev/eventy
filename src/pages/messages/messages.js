@@ -309,7 +309,7 @@ class MessagesContainer extends React.Component {
     }
 
     api.account.messages
-      .sendMessages(this.state.activeUser.user_id, encMessage || message)
+      .sendMessages(this.state.activeUser.id, encMessage || message)
       .then((res) => { })
       .catch((e) => console.log(e));
 
