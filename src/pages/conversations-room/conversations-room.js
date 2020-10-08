@@ -25,6 +25,7 @@ import ScenesChat from "../../components/scenes-chat";
 import ErrorIndicator from "../../components/error-indicator";
 import Translit from "../../components/translit";
 import Rules from './../../utils/rules';
+import Langs from './../../utils/lang';
 
 const Modal = posed.div({
   enter: {
@@ -349,7 +350,7 @@ class СonversationsRoomContainer extends React.Component {
       this.props.conversationRoomsLoaded(rooms);
     }
 
-    let currentRoom = this.props.conversations.rooms.find((r) => r.room_id == this.props.match.params.room);
+    let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
 
     if (currentRoom) {
       this.setState({
