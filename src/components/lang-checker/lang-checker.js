@@ -6,12 +6,14 @@ import { compose } from "../../utils";
 import Select from "react-select";
 import i18n from "../../utils/i18n";
 
+import sassVars from "../../variables.scss"
+
 const colourStyles = {
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = "#22d671";
     return {
       ...styles,
-      backgroundColor: isDisabled ? null : isSelected ? "#22d6718a" : isFocused ? color : null,
+      backgroundColor: isDisabled ? null : isSelected ? sassVars.baseColor : isFocused ? color : null,
       color: isDisabled ? "#ccc" : isSelected ? (color ? "black" : "black") : data.color,
       cursor: isDisabled ? "not-allowed" : "default",
 

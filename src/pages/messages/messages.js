@@ -48,7 +48,8 @@ class Messages extends React.Component {
       activeUser.what_offer ||
       activeUser.what_looking ||
       false;
-
+    
+    // console.log(users);
 
     return (
       <div id="messages">
@@ -69,17 +70,17 @@ class Messages extends React.Component {
                     {users.map((user, index) => {
                       return (
                         <Link
-                          to={"/messages/" + user.user_id}
+                          to={"/messages/" + user.id}
                           className="user"
                           key={index}
                           onClick={() => {
-                            setUser(user.user_id);
+                            setUser(user.id);
                           }}>
                           <div>
                             <div className="row align-items-center">
                               <div className="col-auto">
                                 <div className="ava">
-                                  {!user.read && <div className="unread"></div>}
+                                  {!user.is_read && <div className="unread"></div>}
                                   <img src={api.auth.getAvatarLocation() + user.avatar} />
                                 </div>
                               </div>
@@ -121,7 +122,7 @@ class Messages extends React.Component {
                   <>
                     <div className="card flex-center p-4">
                       <div className="ava">
-                        <Link to={"/profile/" + activeUser.user_id}>
+                        <Link to={"/profile/" + activeUser.id}>
                           <img src={api.auth.getAvatarLocation() + activeUser.avatar} />
                         </Link>
                       </div>
@@ -174,12 +175,12 @@ class MessagesContainer extends React.Component {
     api.account.messages
       .getDialogs()
       .then((res) => {
-        res.dialogs = res.dialogs.filter((dialog) => {
+        res = res.filter((dialog) => {
           return dialog.range != 6;
         });
         this.setState(
           {
-            users: res.dialogs,
+            users: res,
           },
           () => {
             if (setUser) {
@@ -202,16 +203,16 @@ class MessagesContainer extends React.Component {
     this.setState({
       loading: true,
     });
-    let activeUser = this.state.users.find((u) => u.user_id == userId);
+    let activeUser = this.state.users.find((u) => u.id == userId);
 
-    let unreadCount = this.state.users.filter((u) => u.read == 0).length;
+    let unreadCount = this.state.users.filter((u) => u.is_read == 0).length;
 
     if (unreadCount > 0) {
       this.props.setMessagesNotifications(false);
     }
 
     if (activeUser !== undefined) {
-      activeUser.read = 1;
+      activeUser.is_read = 1;
       await this.asetState({
         activeUser: activeUser,
       });
@@ -222,14 +223,14 @@ class MessagesContainer extends React.Component {
         first_name: userData.user.first_name,
         last_name: userData.user.last_name,
         avatar: userData.user.avatar,
-        user_id: userId,
+        id: userId,
         company: userData.user.company,
         position: userData.user.position,
-        email: userData.user.email || "",
-        phone: userData.user.phone || "",
-        social_site: userData.user.social_site || "",
-        what_looking: userData.user.what_looking || "",
-        what_offer: userData.user.what_offer || "",
+        // email: userData.user.email || "",
+        // phone: userData.user.phone || "",
+        // social_site: userData.user.social_site || "",
+        // what_looking: userData.user.what_looking || "",
+        // what_offer: userData.user.what_offer || "",
       };
 
       await this.asetState({
@@ -241,7 +242,7 @@ class MessagesContainer extends React.Component {
       // }).length > 0
 
       this.setState({
-        newUser: { ...newUserData, read: 1 },
+        newUser: { ...newUserData, is_read: true },
       });
     }
 
@@ -308,7 +309,7 @@ class MessagesContainer extends React.Component {
     }
 
     api.account.messages
-      .sendMessages(this.state.activeUser.user_id, encMessage || message)
+      .sendMessages(this.state.activeUser.id, encMessage || message)
       .then((res) => { })
       .catch((e) => console.log(e));
 

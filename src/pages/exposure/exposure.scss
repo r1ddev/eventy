@@ -8,13 +8,13 @@
 		}
 
 		.card {
-			background: #ffffff;
+			background: #FCD128;
 			border-radius: 10px;
 			margin: 20px;
 			overflow: hidden;
 			border: none;
 			text-decoration: none;
-			min-height: 300px;
+			// min-height: 300px;
 
 			.head {
 				padding: 20px;
@@ -40,10 +40,10 @@
 			.desc {
 				padding: 15px 25px;
 				height: 100%;
-				font-family: "FuturaBookC";
-				font-size: 24px;
+				font-family: "Gilroy";
+				font-size: 20px;
 				line-height: 27px;
-				color: #ffffff;
+				color: #3F4545;
 			}
 		}
 	}

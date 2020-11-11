@@ -12,7 +12,7 @@ import Desk from "./pages/desk/desk";
 import Networking from "./pages/networking";
 import Quest from "./pages/quest/quest";
 import PresentationsList from './pages/presentations-list/index';
-import ConversationsRoom from "./pages/conversationsRoom";
+import ConversationsRoom from "./pages/conversations-room";
 import { connect } from 'react-redux';
 import { compose } from './utils';
 import api from './js/api';
@@ -25,7 +25,7 @@ class App extends React.Component {
 		if (window.localStorage.token !== undefined) {
 			if (this.props.user.data === undefined) {
 				api.account.getUserData().then(res => {
-					this.props.setUser(res.user)
+					this.props.setUser(res)
 				}).catch(e => console.log(e))
 			}
 		} else {

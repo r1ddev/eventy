@@ -39,7 +39,7 @@ const fetchUser = (apiService, dispatch) => () => {
 	dispatch(userRequested());
 	apiService.getUser()
 		.then((data) => {
-			dispatch(userLoaded(data.user))
+			dispatch(userLoaded(data))
 		})
 		.catch((err) => dispatch(userError(err)));
 };

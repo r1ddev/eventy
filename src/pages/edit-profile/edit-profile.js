@@ -13,6 +13,7 @@ import ErrorIndicator from "../../components/error-indicator";
 
 import { withTranslation } from "react-i18next";
 import LangChecker from "../../components/lang-checker";
+import sassVars from "../../variables.scss";
 
 class EditProfile extends React.Component {
   state = {
@@ -25,17 +26,19 @@ class EditProfile extends React.Component {
     email: "",
     shareContact: true,
     soc: "",
+    what_looking: "",
+    what_offer: "",
 
     isLoading: false,
   };
 
   submit = (e) => {
-    const { name, lastName, company, position, phone, email, shareContact, soc } = this.state;
+    const { name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer } = this.state;
 
     this.setLoading(true);
 
     api.auth
-      .registration(name, lastName, company, position, phone, email, shareContact, soc)
+      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer)
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
@@ -65,15 +68,17 @@ class EditProfile extends React.Component {
       .getUserData()
       .then((res) => {
         this.setState({
-          avatar: api.auth.getAvatarLocation() + res.user.avatar,
-          name: res.user.first_name || "",
-          lastName: res.user.last_name || "",
-          company: res.user.company || "",
-          position: res.user.position || "",
-          phone: res.user.phone || "",
-          email: res.user.email || "",
-          shareContact: !!res.user.view_contact,
-          soc: res.user.social_site || "",
+          avatar: api.auth.getAvatarLocation() + res.avatar,
+          name: res.first_name || "",
+          lastName: res.last_name || "",
+          company: res.company || "",
+          position: res.position || "",
+          phone: res.phone || "",
+          email: res.email || "",
+          shareContact: !!res.view_contact,
+          soc: res.social_site || "",
+          what_looking: res.what_looking || "",
+          what_offer: res.what_offer || "",
         });
 
         this.setLoading(false);
@@ -97,7 +102,7 @@ class EditProfile extends React.Component {
 
   render() {
     const t = this.props.t;
-    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc } = this.state;
+    const { avatar, name, lastName, company, position, phone, email, shareContact, isLoading, soc, what_looking, what_offer } = this.state;
 
     return (
       <LoadingOverlay active={isLoading} spinner text={t("Загрузка")} className="">
@@ -218,6 +223,36 @@ class EditProfile extends React.Component {
                       />
                     </div>
 
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что ищете?")}
+                        value={what_looking}
+                        onChange={(e) => {
+                          this.setState({
+                            what_looking: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
+                    </div>
+
+                    <div className="field mt-4">
+                      <textarea
+                        type="text"
+                        className="form-control r1-inp"
+                        placeholder={t("Что предлагаете?")}
+                        value={what_offer}
+                        onChange={(e) => {
+                          this.setState({
+                            what_offer: e.target.value,
+                          });
+                        }}
+                      >
+                      </textarea>
+                    </div>
+
                     <div className="field">
                       <div className="row">
                         <div className="col-lg d-flex align-items-center mt-4">{t("Хочу ли я делиться контактами?")}</div>
@@ -254,8 +289,8 @@ class EditProfile extends React.Component {
                     </div>
 
                     <div className="field mt-3 flex-center">
-                      <button type="submit" className="btn-submit mt-3" disabled={isLoading}>
-                        {t("Изменить профиль")}
+                      <button type="submit" className="btn btn-submit mt-3" disabled={isLoading}>
+                        {t("Сохранить")}
                       </button>
                     </div>
                   </div>

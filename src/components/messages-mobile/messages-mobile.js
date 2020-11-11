@@ -28,11 +28,11 @@ class MessagesMobile extends React.Component {
           {users.map((user, index) => {
             return (
               <Link
-                to={"/messages/" + user.user_id}
+                to={"/messages/" + user.id}
                 className="dialog-item row"
                 key={index}
                 onClick={() => {
-                  setUser(user.user_id);
+                  setUser(user.id);
                 }}>
                 <div className="col-auto p-0">
                   <div className="avatar">

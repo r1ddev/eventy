@@ -51,7 +51,9 @@
 	"scripts": {
 		"start": "cross-env PORT=3000 HTTPS=true react-scripts start",
 		"build": "PUBLIC_URL=/front/www react-scripts build",
-		"deploy": "PUBLIC_URL=/front/www npm run build && node ./deploy.js"
+		"build-win": "set PUBLIC_URL=/front/www&&react-scripts build",
+		"deploy": "PUBLIC_URL=/front/www npm run build && node ./deploy.js",
+		"deploy-win": "set PUBLIC_URL=/front/www&&npm run build-win && node ./deploy.js -win"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
