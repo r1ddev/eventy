@@ -10,6 +10,7 @@ import { Trans, withTranslation } from "react-i18next";
 import api from "../../js/api";
 import Langs from "../../utils/lang";
 import Spinner from './../../components/spinner';
+import parse from 'html-react-parser';
 
 class Exposure extends React.Component {
 
@@ -26,7 +27,9 @@ class Exposure extends React.Component {
               <img src={partner.logo} alt="" />
             </div>
           </div>
-          <div className="desc">{partner.title_text}</div>
+          <div className="desc">
+          {parse(partner.title_text)}
+          </div>
         </Link>
       );
     });
