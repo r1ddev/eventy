@@ -274,7 +274,7 @@ export default class IdeaFirstApiService {
                 .then(res => {
                     resolve(res.data);
                 })
-                .catch(error => { reject(error); console.log('Bll3'); }
+                .catch(error => { reject(error); }
 
                 )
         })
@@ -289,6 +289,20 @@ export default class IdeaFirstApiService {
                     resolve(res);
                 })
                 .catch(error => { reject(error) }
+                )
+        })
+    }
+
+    //экспо
+
+    getExpoPartnerInfo(id){
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/v3/exposures/${id}`, this.useAuth())
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(error => { reject(error); }
+
                 )
         })
     }

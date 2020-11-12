@@ -1,0 +1,258 @@
+@import "../../variables.scss";
+
+#exposure-landing {
+	font-family: "Gilroy";
+	color: #3F4545;
+	.expo-header2{
+			width: 100%;
+
+			img{
+				width: 100%;
+			}
+	}
+	.expo-header{
+		width: 100%;
+		height: 430px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		@media screen and (max-width: 1500px) {
+			height: 350px;
+		}
+
+		@media screen and (max-width: 700px) {
+			height: 200px;
+		}
+		.img-wrap{
+			width: 35%;
+			height: 55%;
+		
+			img{
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+
+			@media screen and (max-width: 700px) {
+				width: 70%;
+			}
+		}
+
+		
+
+
+	}
+	
+
+	.content{
+
+
+		.text{
+			margin: 20px;
+		}
+
+		
+		
+		.label{
+			
+			font-family: Gilroy;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 18px;
+
+			color: #F4004D;
+		}
+
+		h1,h2,h3,h4,h5,h6{
+			margin: 20px;
+		}
+
+		
+
+		.visual{
+			float: left;
+			width: 25%;
+			margin: 0 40px 0 20px;
+
+			iframe{
+				margin-bottom: 15px;
+			}
+
+			.description-visual{
+				width: 100%;
+				
+				img{
+					padding: 0px 0px 20px 0;
+					width: 100%;
+					border-radius: 2px;
+				}
+			
+			}
+
+		}
+
+		.visual-mob{
+			width: calc(100% - 40px);
+			margin: 20px;
+			iframe{
+				margin-bottom: 15px;
+			}
+
+			img{
+				padding: 0px 0px 20px 0;
+				width: 100%;
+				border-radius: 2px;
+			}
+		}
+
+		.card-list{
+			// display: flex;
+			// justify-content: stretch;
+			// margin: 20px;
+			// flex-wrap: wrap;
+
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+			grid-gap: 20px;
+			margin: 20px;
+
+			@media screen and (max-width: 700px) {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.segment{
+				margin: 0px;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				.header{
+					display: flex;
+					flex-direction: row;
+
+					img{
+						width: 100px;
+						height: 100px;
+						object-fit: cover;
+						border-radius: 4px;
+						margin: 20px;
+					}
+
+					.name{
+						margin: 20px;
+						margin-left: 15px;
+						font-size: 0.9rem;
+
+						.first-name, .last-name{
+							font-weight: 800;
+						}
+			
+					}
+				}
+
+				.contacts{
+					margin: 0px 20px;
+				}
+
+				.btns{
+					margin: 0 20px;
+
+				
+
+					button{
+
+						outline: none;
+						border: 1px solid #FCD128;
+						text-decoration: none;
+						background: transparent;
+						border-radius: 8px;
+					}
+
+					.video-btn{
+						
+						margin: 10px 0 10px 0;
+						padding: 5px;
+						vertical-align: center;
+						margin: 0 0 5px 0;
+						padding: 5px 0;
+						width: 100%;
+						
+						
+							
+							
+						
+
+						&:first-child{
+							margin-right: 10px;
+						}
+
+						span{
+							display: inline-block;
+							vertical-align: middle;
+							width: 15px;
+							height: 15px;
+							background-image: url(../../images/icons/video-call.svg);
+							background-size: contain;;
+						}
+					}
+
+					.chat-btn{
+						margin: 10px 0px 10px 10px ;
+						padding: 5px;
+
+						span{
+							display: inline-block;
+							vertical-align: middle;
+							width: 15px;
+							height: 15px;
+							background-image: url(../../images/icons/chat-call.svg);
+							background-size: contain;;
+						}
+					}
+
+				}
+			}
+		}
+
+
+		.segment{
+			display: block;
+			margin-top: 10px;
+			background-color: white;
+			box-shadow: 3px 3px 2px 0px #d9d9d9;
+			border-radius: 10px;
+			margin: 20px;
+			
+
+			&.right{
+				display: flex;
+				flex-direction: row;
+				margin: 20px;
+			
+
+				img{
+					width: 10%;
+					margin: 20px;
+					border-radius: 2px;
+					object-fit: contain;
+				}
+
+				@media screen and (max-width: 700px) {
+					flex-direction: column;
+
+					img{
+						width: calc(60% - 40px);
+						border-radius: 2px;
+					}
+				}
+			}
+		}
+	
+	
+	}
+}

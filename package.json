@@ -46,7 +46,8 @@
 		"react-virtualized": "^9.21.2",
 		"redux": "^4.0.1",
 		"ssh-deploy-release": "^3.0.4",
-		"styled-components": "^5.1.0"
+		"styled-components": "^5.1.0",
+		"html-react-parser": "^0.14.0"
 	},
 	"scripts": {
 		"start": "cross-env PORT=3000 HTTPS=true react-scripts start",
