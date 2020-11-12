@@ -14,6 +14,7 @@ class ScenesChatMobileContainer extends React.Component {
         survey: false,
         currentChatId: this.props.generalChatId,
         generalChatId: this.props.generalChatId,
+        sponsorChatId: this.props.sponsorChatId,
         spikerChatId: this.props.spikerChatId,
         timerId: null
     }
@@ -25,7 +26,7 @@ class ScenesChatMobileContainer extends React.Component {
         this.setState({
             activeChat: chat,
             survey: false,
-            currentChatId: (chat === 'general' ? this.state.generalChatId : this.state.spikerChatId)
+            currentChatId: (chat === 'general' ? this.state.generalChatId : (chat === 'sponsor') ? this.state.sponsorChatId : this.state.spikerChatId),
         }, () => {
             if (!cashChat) this.props.fetchMessages(this.state.currentChatId)
         })
@@ -34,7 +35,7 @@ class ScenesChatMobileContainer extends React.Component {
     sendMessage = (message, reply_id, replyAttachmentData) => {
         const { first_name, last_name, avatar, range } = this.props.user;
 
-        const date = new Date;
+        const date = new Date();
 
         const mes = {
             user_id: 1,
@@ -65,7 +66,9 @@ class ScenesChatMobileContainer extends React.Component {
         this.setState({
             activeChat: 'general',
             currentChatId: this.props.generalChatId,
-            spikerChatId: this.props.spikerChatId
+            spikerChatId: this.props.spikerChatId,
+            sponsorChatId: this.props.sponsorChatId,
+            generalChatId: this.props.generalChatId,
         },
             () => {
 
@@ -73,6 +76,24 @@ class ScenesChatMobileContainer extends React.Component {
                 this.updateMessages();
             }
         )
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.generalChatId !== prevProps.generalChatId) {
+            this.setState({
+                activeChat: 'general',
+                currentChatId: this.props.generalChatId,
+                spikerChatId: this.props.spikerChatId,
+                sponsorChatId: this.props.sponsorChatId,
+                generalChatId: this.props.generalChatId
+            },
+                () => {
+
+                    setTimeout(this.props.fetchMessages(this.state.currentChatId), 1000);
+                    this.updateMessages();
+                }
+            )
+        }
     }
 
     updateMessages = () => {
