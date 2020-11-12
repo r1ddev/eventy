@@ -1,0 +1,184 @@
+#stikers{
+	position: relative;
+	width: 100%;
+	/* height: 100%; */
+	display: flex;
+	flex-direction: column;
+	.wrapper-of-wrappers{
+		width: 100%;
+		/* height: 100%; */
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	.emoji-stikers-wrapper{
+		display: flex;
+		width: 50%;
+		flex-direction: column;
+		align-content: flex-start;
+		margin: 20px;
+	}
+	
+	.language-stikers-wrapper{
+		display: flex;
+		width: 20%;
+		flex-direction: column;
+		align-content: flex-start;
+		margin: 20px;
+	}
+	
+	
+	
+	.timetable-wrapper{
+		margin: 10px 20px;
+		width: 50%;
+		min-height: 70px;
+	}
+	.timetable {
+		width: 100%;
+	}
+	
+	.banner-wrapper{
+		margin: 10px 20px;
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+	
+	.banner{
+		width: 100%;
+		cursor: pointer;
+	}
+	
+	.emoji-stikers{
+		background: white;
+		box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.09);
+		border-radius: 40px;
+		display: flex;
+		height: 100%;
+		border: 1px solid white;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	
+	
+	.emoji-stikers-caption{
+		font-family: "FuturaBookC";
+		font-style: normal;
+		font-weight: normal;
+		font-size: 22px;
+		line-height: 22px;
+		padding: 10px;
+		text-align: center;
+		color: #FFFFFF;
+	}
+	
+	.emoji-stikers-list{
+		flex-grow: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin: 15px;
+	}
+	
+	.emoji-stikers-item{
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.emoji-stikers-item > img{
+		cursor: pointer;
+		width: 60%;
+		transition: 0.1s;
+	}
+	.emoji-stikers-item > img:hover{
+		transform:scale(1.1);
+		transition: 0.1s;
+	}
+
+	.stiker-reaction-float{
+		position: absolute;
+		top: -100%;
+		left: 100px;
+		width: 50px;
+		height: 50px;
+		z-index: 100;
+	
+		img{
+		  width: 100%;  
+		  height: 100%;
+		  // filter: hue-rotate(65deg);
+		}
+	  }
+	
+	
+	.language-stikers{
+		background: white;
+		box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.09);
+		border-radius: 10px;
+		display: flex;
+		border: 1px solid white;
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.language-stikers-caption{
+		font-family: "FuturaBookC";
+		font-style: normal;
+		font-weight: normal;
+		font-size: 24px;
+		line-height: 25px;
+		padding: 10px;
+		text-align: center;
+		color: black;
+	}
+	
+	.language-stikers-list{
+		flex-grow: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.language-stikers-item{
+		height: 80%;
+		width: 80%;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.language-stikers-item > img{
+		cursor: pointer;
+		max-height: 80%;
+		max-width: 100%;
+		/* transition: 0.s; */
+	}
+}
+
+
+
+@media screen and (max-width: 700px) {
+	// #stikers{
+	// 	flex-direction: column;
+	// }
+
+	.emoji-stikers-wrapper{
+		width: calc(100% - 40px);
+	}
+
+	.language-stikers-wrapper{
+		width:50%;
+		height: 80px;
+	}
+}

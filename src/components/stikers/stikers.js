@@ -1,5 +1,5 @@
 import React from 'react';
-import "./stikers.css"
+import "./stikers.scss"
 import IdeaFirstApiService from '../../services/idea-first-api-service';
 import posed from 'react-pose';
 import { fetchTimers } from '../../actions/timers-actions';
@@ -22,12 +22,31 @@ const Stiker = posed.div({
     }
 });
 
+
+const Box = posed.div({
+    visible: { 
+      opacity: 1,
+      scale: 1.3,
+      x: 20,
+      y: 20,
+      transition: { duration: 600 }
+    },
+    hidden: { 
+      opacity: 0,
+      scale: 0.8,
+      x: 0,
+      y: 0,
+      transition: { duration: 600 } }
+  });
+
+  
 class Stikers extends React.Component {
     state = {
         banner: null,
         bannerurl: null,
-        bannerTime: this.props.timers.bannerTime
-
+        bannerTime: this.props.timers.bannerTime,
+        isVisible: false,
+        current: null,
     }
     timerId = null;
     _ismounted = null;
@@ -37,38 +56,63 @@ class Stikers extends React.Component {
         api.postReaction(this.props.scene, id)
     }
 
+    
+    reactionUrls = [
+        require("../../images/stikers/heart.svg"),
+        require("../../images/stikers/fire.svg"),
+        require("../../images/stikers/normal.svg"),
+        require("../../images/stikers/sad.svg"),
+        require("../../images/stikers/robot.svg"),
+        require("../../images/stikers/arm.svg"),
+    ]
+
+
+    onPressReaction=(number)=>{
+        this.postReaction(number);
+        this.setState({
+        isVisible: true,
+        current: number, 
+        }, ()=>{
+        setTimeout(()=>{
+            this.setState({
+            isVisible: false
+            })
+        },1500)
+        })
+    }
+
     componentDidMount() {
         this._ismounted = true;
         this.getBanner();
     }
 
     getBanner = () => {
-        const api = new IdeaFirstApiService();
-        const idScene = this.props.scene
+        // const api = new IdeaFirstApiService();
+        // const idScene = this.props.scene
 
-        api.getBanner(idScene)
-            .then((res) => {
-                if (this._ismounted) {
-                    this.setState({ banner: res.data.image, bannerurl: res.data.url })
-                }
-            })
+        // api.getBanner(idScene)
+        //     .then((res) => {
+        //         if (this._ismounted) {
+        //             this.setState({ banner: res.data.image, bannerurl: res.data.url })
+        //         }
+        //     })
 
-        this.timerId = setTimeout(() => {
-            this.getBanner();
-        }, this.state.bannerTime)
+        // this.timerId = setTimeout(() => {
+        //     this.getBanner();
+        // }, this.state.bannerTime)
 
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.scene !== this.props.scene) {
-            const api = new IdeaFirstApiService();
-            const idScene = this.props.scene
-            api.getBanner(idScene)
-                .then((res) => {
-                    if (this._ismounted) {
-                        this.setState({ banner: res.data.image, bannerurl: res.data.url })
-                    }
-                })
+            // const api = new IdeaFirstApiService();
+            // const idScene = this.props.scene
+            // api.getBanner(idScene)
+            //     .then((res) => {
+            //         if (this._ismounted) {
+            //             this.setState({ banner: res.data.image, bannerurl: res.data.url })
+            //         }
+            //     })
         }
 
 
@@ -98,30 +142,41 @@ class Stikers extends React.Component {
 
         return (
             <div id="stikers">
+                 <Box
+                    className="stiker-reaction-float"
+                    pose={this.state.isVisible ? 'visible' : 'hidden'}>
+                    <img alt="" src={this.reactionUrls[this.state.current-1]}/>
+                </Box>
                 <div className="wrapper-of-wrappers">
 
                     {(!banner) && <div className="emoji-stikers-wrapper">
+                       
                         <div className="emoji-stikers">
                             {/* <div className="emoji-stikers-caption">
                                 ОЦЕНИТЕ ВЫСТУПЛЕНИЕ
                             </div> */}
                             <div className="emoji-stikers-list">
 
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(1)}>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(1)}>
                                     <img alt="" src={require("../../images/stikers/heart.svg")} />
                                 </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(2)}>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(2)}>
                                     <img alt="" src={require("../../images/stikers/fire.svg")} />
                                 </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(3)}>
-                                    <img alt="" src={require("../../images/stikers/happy.svg")} />
-                                </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(4)}>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(3)}>
                                     <img alt="" src={require("../../images/stikers/normal.svg")} />
                                 </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.postReaction(5)}>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(4)}>
                                     <img alt="" src={require("../../images/stikers/sad.svg")} />
                                 </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(5)}>
+                                    <img alt="" src={require("../../images/stikers/robot.svg")} />
+                                </Stiker>
+                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(6)}>
+                                    <img alt="" src={require("../../images/stikers/arm.svg")} />
+                                </Stiker>
+
+                                
                             </div>
                         </div>
                     </div>}
@@ -137,7 +192,7 @@ class Stikers extends React.Component {
                                 {t('язык трансляции')}
                             </div>
                             <div className="language-stikers-list">
-                                <div className="language-stikers-item" onClick={() => setLang('rus')}>
+                                <div className="language-stikers-item" onClick={() => setLang('ua')}>
                                     {(lang === 'rus') && <img alt="" src={require("../../images/stikers/RU-active.svg")} />}
                                     {(lang === 'eng') && <img alt="" src={require("../../images/stikers/RU.svg")} />}
 

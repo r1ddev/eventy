@@ -3,11 +3,38 @@ import './scenes-lang-checker.scss';
 
 class ScenesLangChecker extends React.Component {
 
+
+  langtext=(lang)=>{
+    
+    switch (lang) {
+      case 'rus':
+        return 'RU'
+  
+      case 'eng':
+        return 'ENG';
+
+      case 'ua':
+        return 'UKR';  
+  
+      default:
+        return lang;
+    }
+  }
+
   render() {
+    const {lang,setLang, langList} = this.props;
+
+    let engExists = langList.indexOf('eng')+1;
+
     return (
-      <div id="scenes-lang-checker">
-        RU
-      </div >
+      <>
+      {(!!engExists)&&<div id="scenes-lang-checker" onClick={()=>setLang(lang === 'rus'?'eng':'rus')}>
+      {this.langtext(lang)}
+      </div >}
+      {(!engExists)&&<div id="scenes-lang-checker" className="disabled">
+      {this.langtext(lang)}
+      </div >}
+      </>
     )
   }
 }

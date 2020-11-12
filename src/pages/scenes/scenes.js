@@ -92,22 +92,22 @@ class TranslationHeader extends React.Component {
         <div className="scene-item">
           <div>
             <div className={scene === 0 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(0)}>
-              {t('СЦЕНА') + ' 1'}
+              {t('СЦЕНА')}
             </div>
-            <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
+            {/* <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
               {t('Идет')}
-            </div>
+            </div> */}
           </div>
         </div>
 
         <div className="scene-item">
           <div>
             <div className={scene === 1 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(1)}>
-              {t('СЦЕНА') + ' 2'}
+              {t('СЦЕНА')}
             </div>
-            <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
+            {/* <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
               {t('Идет')}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -150,11 +150,13 @@ class ScenesContainer extends React.Component {
   };
 
   setLang = (lang) => {
+    const { scenes } = this.props.scenes;
     const { scene } = this.state;
 
     this.setState({
       lang: this.props.scenes.scenes[scene][lang] ? lang : "rus",
     });
+    this.props.setCurrentSceneUrl(scenes[scene][lang]);
   };
 
   componentDidMount() {
