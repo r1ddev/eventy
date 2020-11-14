@@ -10,10 +10,21 @@
 		box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
 		// overflow: hidden;
 
+		@media screen and (max-width: 766px) {
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
 		.left {
 			background-color: $base-color;
 			border-top-left-radius: 20px;
 			border-bottom-left-radius: 20px;
+
+			@media screen and (max-width: 766px) {
+				border-bottom-right-radius: 20px;
+				border-top-right-radius: 20px;
+				border-top-left-radius: 20px;
+			}
 
 			.ava {
 				img {
@@ -49,6 +60,10 @@
 				border-radius: 10px;
 				padding: 5px 20px;
 				text-align: center;
+
+				@media screen and (max-width: 766px) {
+					width: 100%;
+				}
 
 				&-selected {
 					color: #fff;
