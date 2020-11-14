@@ -18,6 +18,7 @@
 	.search {
 		width: 75%;
 		border: 1px solid $base-color;
+		border-radius: 4px;
 
 		@media screen and (max-width: 767px) {
 			margin-top: 15px !important;
@@ -36,6 +37,7 @@
 			.inp-search {
 				height: 35px;
 				vertical-align: top;
+				border: none;
 			}
 
 			.clear-search {
@@ -59,7 +61,7 @@
 			background: url(../../images/search.svg) center center no-repeat;
 			background-color: $base-color;
 			height: 35px;
-			width: 35px;
+			width: 45px;
 			vertical-align: top;
 		}
 	}
