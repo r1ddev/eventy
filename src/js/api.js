@@ -138,6 +138,18 @@ const api = {
 					})
 				})
 			},
+			async getRoomById(roomId) {
+				return new Promise((resolve, reject) => {
+					axios.get(
+						`${api.proxy}${api.host}/v3/conversations/${roomId}`,
+						api.useAuth()
+					).then(res => {
+						resolve(res.data)
+					}).catch(e => {
+						reject()
+					})
+				})
+			},
 			async updateRoomStatus(roomId) {
 				let response = await axios.put(
 					api.proxy + api.host + `/v3/conversations/${roomId}/busy`, {},

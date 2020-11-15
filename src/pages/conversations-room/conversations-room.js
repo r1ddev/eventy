@@ -106,7 +106,6 @@ class СonversationsRoom extends React.Component {
       isModer: isModer
     })
 
-    console.log(isModer);
   }
 
 	componentDidMount () {
@@ -157,7 +156,7 @@ class СonversationsRoom extends React.Component {
 
 	updateRoomStatus = () => {
 		api.account.conversations
-			.updateRoomStatus(this.props.room.room_id)
+			.updateRoomStatus(this.props.room.id)
 			.then((res) => {
 				this.setState({
 					onlineUsers: res,
@@ -207,7 +206,7 @@ class СonversationsRoom extends React.Component {
   kickUser = (e, userId) => {
     let res = window.confirm(this.props.t("Заблокировать пользователю доступ к разделу?"))
     if (res) {
-      api.account.rules.conversations.kickUser(this.props.room.room_id, userId).then(res => {
+      api.account.rules.conversations.kickUser(this.props.room.id, userId).then(res => {
         this.setState({
           onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
         })
@@ -345,27 +344,34 @@ class СonversationsRoomContainer extends React.Component {
   }
   
   loadRooms = async () => {
-    if (!this.props.conversations.isLoaded) {
-			let rooms = await api.account.conversations.getRooms()
-      this.props.conversationRoomsLoaded(rooms);
-    }
+    // if (!this.props.conversations.isLoaded) {
+		// 	let rooms = await api.account.conversations.getRooms()
+    //   this.props.conversationRoomsLoaded(rooms);
+    // }
 
-    let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
-
-    if (currentRoom) {
+    api.account.conversations.getRoomById(this.props.match.params.room).then(res => {
+      let room = res.filter(c => c.lang == Langs.getCurrentLang())
+      console.log("room", room[0]);
       this.setState({
-        room: currentRoom,
+        room: room[0],
       });
-    }
+    })
+
+    // let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
+
+    // if (currentRoom) {
+    //   this.setState({
+    //     room: currentRoom,
+    //   });
+    // }
   }
 
 	render() {
 		let loading = true;
-    const { isLoaded: roomsLoading } = this.props.conversations;
     const { loading: userLoading, data: userData  } = this.props.user;
     
     const room = this.state.room;
-    loading = !roomsLoading || !room || !userData;
+    loading = !room || !userData;
 
 		return (
 			<div style={{ height: "100%", width: "100%" }}>
