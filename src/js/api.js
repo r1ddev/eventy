@@ -134,7 +134,7 @@ const api = {
 					).then(res => {
 						resolve(res.data)
 					}).catch(e => {
-						reject()
+						reject(e)
 					})
 				})
 			},
@@ -146,7 +146,7 @@ const api = {
 					).then(res => {
 						resolve(res.data)
 					}).catch(e => {
-						reject()
+						reject(e)
 					})
 				})
 			},

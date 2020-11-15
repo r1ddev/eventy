@@ -165,7 +165,7 @@ class СonversationsRoom extends React.Component {
 			.catch((e) => {
 				api.errorHandler(e, {
 					access_denied: () => {
-            this.goBack();
+            this.props.goBack();
             ErrorIndicator(this.props.t("Комната недоступна"))
           },
 				});
@@ -176,9 +176,7 @@ class СonversationsRoom extends React.Component {
 		}, this.props.timers.conversationsTimer);
   };
 
-  goBack = () => {
-    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
-  };
+  
 
   toggleChat = () => {
     this.setState({
@@ -206,13 +204,15 @@ class СonversationsRoom extends React.Component {
   kickUser = (e, userId) => {
     let res = window.confirm(this.props.t("Заблокировать пользователю доступ к разделу?"))
     if (res) {
-      api.account.rules.conversations.kickUser(this.props.room.id, userId).then(res => {
-        this.setState({
-          onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
+      api.account.rules.conversations
+        .kickUser(this.props.room.id, userId)
+        .then(res => {
+          this.setState({
+            onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
+          })
+        }).catch(e => {
+          api.errorHandler(e, {})
         })
-      }).catch(e => {
-        api.errorHandler(e, {})
-      })
     }
     e.preventDefault();
   }
@@ -349,13 +349,23 @@ class СonversationsRoomContainer extends React.Component {
     //   this.props.conversationRoomsLoaded(rooms);
     // }
 
-    api.account.conversations.getRoomById(this.props.match.params.room).then(res => {
-      let room = res.filter(c => c.lang == Langs.getCurrentLang())
-      console.log("room", room[0]);
-      this.setState({
-        room: room[0],
-      });
-    })
+    api.account.conversations
+      .getRoomById(this.props.match.params.room)
+      .then(res => {
+        let room = res.filter(c => c.lang == Langs.getCurrentLang())
+
+        this.setState({
+          room: room[0],
+        });
+      })
+      .catch(e => {
+        api.errorHandler(e, {
+          access_denied: () => {
+            this.goBack();
+            ErrorIndicator(this.props.t("Комната недоступна"))
+          },
+        })
+      })
 
     // let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
 
@@ -366,6 +376,10 @@ class СonversationsRoomContainer extends React.Component {
     // }
   }
 
+  goBack = () => {
+    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
+  };
+
 	render() {
 		let loading = true;
     const { loading: userLoading, data: userData  } = this.props.user;
@@ -375,7 +389,7 @@ class СonversationsRoomContainer extends React.Component {
 
 		return (
 			<div style={{ height: "100%", width: "100%" }}>
-				{!loading && <СonversationsRoom {...this.props} room={room} />}
+				{!loading && <СonversationsRoom {...this.props} room={room} goBack={this.goBack} />}
 				{loading && <Spinner big={1} />}
 			</div>
 		);
