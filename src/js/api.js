@@ -86,7 +86,7 @@ const api = {
 		},
 		async getUserDataById(userId) {
 			let response = await axios.get(
-				api.proxy + api.host + "/users/public/get/" + userId,
+				api.proxy + api.host + "/v3/users/" + userId,
 				api.useAuth()
 			);
 			return response.data;
