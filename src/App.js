@@ -43,7 +43,8 @@ class App extends React.Component {
 			// window.location.href = "http://" + host + pathname
 		}
 
-		
+		let timeZoneOffset = new Date().getTimezoneOffset() / -60
+		api.account.updateUserData({ timezone: timeZoneOffset })
 	}
 
 	componentWillUnmount() {

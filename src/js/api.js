@@ -77,6 +77,14 @@ const api = {
 			);
 			return response.data;
 		},
+		async updateUserData(data) {
+			let response = await axios.put(
+				api.proxy + api.host + "/v3/users",
+				data,
+				api.useAuth()
+			);
+			return response.data;
+		},
 		async getUsers() {
 			let response = await axios.get(
 				api.proxy + api.host + "/v3/users",
