@@ -36,7 +36,7 @@ class MessagesMobile extends React.Component {
                 }}>
                 <div className="col-auto p-0">
                   <div className="avatar">
-                    {!user.read && <div className="unread"></div>}
+                    {!user.is_read && <div className="unread"></div>}
                     <img className="img-fluid" src={api.auth.getAvatarLocation() + user.avatar} alt="" srcSet="" />
                   </div>
                 </div>
