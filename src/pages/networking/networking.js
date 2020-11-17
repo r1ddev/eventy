@@ -148,11 +148,11 @@ class Networking extends React.Component {
 								</div>
 							</div>
 						</div>
-						{/* 
+
 						<div className="title">Что предлагаю:</div>
 						<div className="text">{user.what_offer}</div>
 						<div className="title mt-5">Что ищу:</div>
-						<div className="text">{user.what_looking}</div> */}
+						<div className="text">{user.what_looking}</div>
 					</Link>
 				</div>
 			);
@@ -166,8 +166,8 @@ class Networking extends React.Component {
 							type="text"
 							className="inp-search col"
 							placeholder="Search"
-              onChange={this.onSerchTextChange}
-              value={this.state.searchText}
+							onChange={this.onSerchTextChange}
+							value={this.state.searchText}
 						/>
 						{searchText && <span className="clear-search" onClick={this.onSerchTextClear}></span>}
 					</div>
