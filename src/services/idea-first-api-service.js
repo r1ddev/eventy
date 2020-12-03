@@ -265,6 +265,52 @@ export default class IdeaFirstApiService {
         })
     }
 
+
+    //-alley
+
+    getConversationsAlley() {
+
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/v3/conversations-alley`, this.useAuth())
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(error => { reject(error); }
+
+                )
+        })
+    }
+
+   
+
+    reserveAlleyRoom(room_id, slot)  {
+        return new Promise((resolve, reject) => {
+
+            axios.patch(this.host + `/v3/conversations-alley/${room_id}/chedule`, {
+                place_id: slot,
+            },this.useAuth())
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
+    cancelAlleyRoom(room_id, slot)  {
+        return new Promise((resolve, reject) => {
+
+            axios.patch(this.host + `/v3/conversations-alley/${room_id}/chedule`, {
+                place_id: slot,
+                type: "cancel"
+            },this.useAuth())
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(error => { reject(error) } )
+        })
+    }
+
     //--admin-panel
 
     getAdminUsers() {
