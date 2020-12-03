@@ -124,7 +124,7 @@ class Login extends React.Component {
             <LangChecker />
 
             <button disabled={email == "" || password == "" || disableForm} className="white-button login-btn">
-              {loading ? <Spinner /> : t("ВОЙТИ")}
+              {t("ВОЙТИ")}{loading ? <div className="login-btn-spinner"><Spinner /></div> : null}
             </button>
 
 

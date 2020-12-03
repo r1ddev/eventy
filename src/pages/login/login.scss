@@ -20,14 +20,25 @@
       flex-direction: column;
       align-items: center;
 
+      @media screen and (min-width: 630px) {
+        padding: 20px 0px;
+      }
+
+      @media screen and (min-width: 670px) {
+        padding: 40px 0px;
+      }
+
       .login-form--wrapper{
         flex-grow: 1;
         min-width: 50%;
-        font-family: "FuturaBookC";
 
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .logo {
+          // margin-top: 80px;
+        }
         
         .login-form--caption{
           margin-top: 80px;
@@ -41,7 +52,6 @@
           width: 100%;
           margin-top: 20px;
 
-          font-family: "FuturaBookC";
           display: block;
           width: 100%;
           margin-top: 20px;
@@ -60,12 +70,18 @@
 
         .login-btn{
           // margin-top: 50px;
-          font-family: "FuturaDemiC";
+          position: relative;
+
+          .login-btn-spinner {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            left: 20px;
+          }
         }
 
         .guest-btn{
           margin-top: 10px;
-          font-family: "FuturaDemiC";
         }
 
         .reg-link{
@@ -83,7 +99,7 @@
           color: white;
           font-size: 20px;
           text-align: center;
-          margin: 2rem;
+          margin: 2rem 0 0 0;
       }
     }
   
