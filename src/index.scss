@@ -24,13 +24,6 @@
 	font-weight: 400;
 }
 
-@font-face {
-    font-family: 'Core Sans C 45';
-    src: url(./fonts/CoreSansC-45Regular.ttf);
-    font-weight: 400;
-    font-style: normal;
-}
-
 body {
 	font-family: "Lato";
 }
@@ -83,45 +76,45 @@ code {
 }
 
 .white-button{
-  padding:8px;
-  background-color: $primary-btn-color;
-  color:  $primary-btn-text-color;
-  border-radius: 12px;
-  font-size: 23px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+	padding:8px;
+	background-color: $primary-btn-color;
+	color:  $primary-btn-text-color;
+	border-radius: 12px;
+	font-size: 23px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .white-button:hover{
-  background-color: rgb(221, 253, 223);
+	background-color: rgb(221, 253, 223);
 }
 
 .white-button:active{
-  background-color: rgb(179, 255, 189);
+	background-color: rgb(179, 255, 189);
 }
 
 button.white-button{
-  align-self: center;
-  width: 100%;
-  border: none;
-  text-align: center;
-  text-decoration: none;
+	align-self: center;
+	width: 100%;
+	border: none;
+	text-align: center;
+	text-decoration: none;
 
-  &:disabled {
-	cursor: auto;
-	background-color: #eaeaead9;
-	color: #a3bbad;
-  }
+	&:disabled {
+		cursor: auto;
+		background-color: #eaeaead9;
+		color: #a3bbad;
+	}
 }
 
 button.white-button:active, button:focus {
-  outline: none;
+	outline: none;
 }
 
 button.white-button::-moz-focus-inner {
-  border: 0;
+	border: 0;
 }
 
 button.white-button:disabled:hover {
