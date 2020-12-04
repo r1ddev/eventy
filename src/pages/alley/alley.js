@@ -95,7 +95,7 @@ class Alley extends React.Component {
     }
 
     openConfirmPopup = (roomId, placeId, name, time) => {
-        if (this.props.userSlots.length < 3) {
+        if (this.props.userSlots.length < this.props.maxReserveCount) {
             this.setState({
                 reserveConfirm: {
                     roomId: roomId,

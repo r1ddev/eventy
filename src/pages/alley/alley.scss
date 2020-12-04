@@ -173,10 +173,17 @@
                     margin-left: 10px;
                     margin-top: 10px;
                     padding: 5px 15px;
+                    outline: none;
+                    transition: .2s;
+                    user-select: none;
 
                     &:disabled {
                         background: #DECBFA;
                         cursor: not-allowed;
+                    }
+
+                    &:active {
+                        box-shadow: 0 0 2px 1px #A06EF4;
                     }
                 }
             }
