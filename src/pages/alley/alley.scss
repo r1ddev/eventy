@@ -104,7 +104,7 @@
 	.room-list{
         display: grid;
         grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-        grid-gap: 20px;
+        grid-gap: 40px;
 
         .ReactCollapse--collapse{
             transition: all 150ms ease 0s;
