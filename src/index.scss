@@ -117,3 +117,64 @@ button.white-button:disabled:hover {
 	background-color: #eaeaead9;
 	color: #a3bbad;
 }
+
+.e-button {
+	padding: 8px 25px;
+	border-radius: 20px;
+	text-decoration: none;
+	transition: .2s;
+	user-select: none;			
+	text-align: center;
+	cursor: pointer;
+
+	&.primary{
+		border: 2px solid #00aaff;
+		background-color: #00aaff;
+		color:  #fff;
+		
+		&:active:not(.disabled) {
+			background: #00a9fdef;
+			border: 2px solid #00a9fdef;
+		}
+	
+		&:active:not(.disabled) {
+			background: #008ed4;
+			border: 2px solid #008ed4;
+		}
+	
+		&:disabled {
+			cursor: not-allowed;
+			background-color: #eaeaead9;
+			color: #a3bbad;
+		}
+	}
+
+	&.bordered{
+		border: 2px solid #00aaff;
+		background-color: transparent;
+		color:  #000;
+	
+		&:active:not(.disabled) {
+			border: 2px solid #00a9fdef;
+			background-color: transparent;
+		}
+	
+		&:active:not(.disabled) {
+			border: 2px solid #008ed4;
+			background-color: transparent;
+		}
+	
+		&:disabled {
+			cursor: auto;
+			background-color: #eaeaead9;
+			color: #a3bbad;
+		}
+	}
+
+	&.expand {
+		width: 100%;
+	}
+}
+
+
+
