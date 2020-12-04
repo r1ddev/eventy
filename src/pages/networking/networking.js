@@ -29,8 +29,9 @@ class Networking extends React.Component {
 		this.setState({
 			searchFilter: this.state.searchText,
 		});
+		this.onPageChange(1)
     if (e)
-      e.preventDefault();
+		e.preventDefault();
 	};
 
 	componentDidMount() {
@@ -39,9 +40,9 @@ class Networking extends React.Component {
 
 	fetchData = async () => {
 		api.account
-			.getNetworking()
+			.getUsers()
 			.then((res) => {
-				res.users = res.users.map((user) => {
+				res = res.map((user) => {
 					user.avatar = user.avatar || "";
 					user.company = user.company || "";
 					user.first_name = user.first_name || "";
@@ -60,7 +61,7 @@ class Networking extends React.Component {
 				});
 
 				this.setState({
-					users: res.users,
+					users: res,
 				});
 			})
 			.catch((e) => console.log(e));
@@ -87,12 +88,12 @@ class Networking extends React.Component {
 
 	onSerchTextChange = (e) => {
 		this.setState({ searchText: e.target.value });
-  };
+	};
   
-  onSerchTextClear = (e) => {
-    this.setState({ searchText: "" }, () => {
-      this.searchSubmit()
-    });
+	onSerchTextClear = (e) => {
+		this.setState({ searchText: "" }, () => {
+			this.searchSubmit()
+		});
 	};
 
 	paginateUsers = () => {
@@ -120,7 +121,7 @@ class Networking extends React.Component {
 		const cards = this.paginateUsers().map((user, index) => {
 			return (
 				<div className="card" key={index}>
-					<Link className="card-link2" to={"/messages/" + user.id}>
+					<Link className="card-link2" to={"/profile/" + user.id}>
 						<div className="row">
 							<div className="col-4">
 								<div className="ava">
@@ -147,6 +148,12 @@ class Networking extends React.Component {
 									{user.position + " " + t("в") + " " + user.company}
 								</div>
 							</div>
+
+							<div className="col-auto d-flex justify-content-center flex-column">
+								<Link to={`/messages/${user.id}`}>
+									<img src={require("../../images/icons/message-icon.png")} className="message-icon"/>
+								</Link>
+							</div>
 						</div>
 
 						<div className="title">Что предлагаю:</div>
@@ -165,7 +172,7 @@ class Networking extends React.Component {
 						<input
 							type="text"
 							className="inp-search col"
-							placeholder="Search"
+							placeholder="Найти участника"
 							onChange={this.onSerchTextChange}
 							value={this.state.searchText}
 						/>
@@ -179,11 +186,10 @@ class Networking extends React.Component {
 
 		return (
 			<div id="networking">
-				{!isMobile && <Header data={data}>{search}</Header>}
-
-				{isMobile && <>{search}</>}
+				{!isMobile && <Header data={data}></Header>}
 
 				<div className="container">
+					{search}
 					<div className="card-list">{cards}</div>
 
 					<Pagination

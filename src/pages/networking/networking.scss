@@ -16,9 +16,10 @@
 		}
 	}
 	.search {
-		width: 75%;
-		border: 1px solid $base-color;
-		border-radius: 4px;
+		margin-top: 20px;
+		max-width: 400px;
+		border-radius: 10px;
+    	overflow: hidden;
 
 		@media screen and (max-width: 767px) {
 			margin-top: 15px !important;
@@ -38,6 +39,7 @@
 				height: 35px;
 				vertical-align: top;
 				border: none;
+				outline: none;
 			}
 
 			.clear-search {
@@ -68,6 +70,8 @@
 	.card-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-gap: 20px;
+		margin-top: 20px;
 
 		.card-link2 {
 			text-decoration: none;
@@ -77,12 +81,10 @@
 
 		.card {
 			background: #ffffff;
-			// box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-			// border-radius: 10px;
-			border-radius: 6px;
-
-			margin: 20px;
+			border-radius: 15px;
 			transition: transform .2s;
+			box-shadow: 2px 2px 9px 0px rgba(0, 0, 0, 0.13);
+			border: none;
 
 			&:hover {
 				// transform: translate(2px, 2px);
@@ -98,6 +100,15 @@
 					object-fit: cover;
 					height: 100%;
 					width: 100%;
+				}
+			}
+
+			.message-icon {
+				width: 20px;
+				transition: .2s;
+
+				&:hover {
+					transform: scale(1.1);
 				}
 			}
 
@@ -125,7 +136,7 @@
 				margin-top: 20px !important;
 				font-style: normal;
 				font-weight: 600;
-				font-size: 28px;
+				font-size: 23px;
 				line-height: 33px;
 
 				color: $base-color;
