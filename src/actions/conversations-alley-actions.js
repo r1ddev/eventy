@@ -11,10 +11,10 @@ const alleyRoomsError = (error) => {
     }
 };
 
-const alleyRoomsLoaded = (rooms, user) => {
+const alleyRoomsLoaded = (rooms, user, maxReserveCount) => {
     return {
         type: 'FETCH_ROOMS_ALLEY_SUCCESS',
-        payload: {rooms,user}
+        payload: {rooms,user,maxReserveCount}
     };
 };
 
@@ -30,17 +30,14 @@ const fetchAlleyRooms = (apiService, dispatch) => () => {
     dispatch(alleyRoomsRequested());
     apiService.getConversationsAlley()
         .then((data) => {
-            
-
             let rooms = data.rooms.map((item, index) => {
-
                 return {
                     ...item,
                     open: false,
                 }
             })
 
-            dispatch(alleyRoomsLoaded(rooms, data.user))
+            dispatch(alleyRoomsLoaded(rooms, data.user, data.maxReserveCount))
         })
         .catch((err) => dispatch(alleyRoomsError(err)));
 };

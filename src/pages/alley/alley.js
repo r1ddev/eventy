@@ -57,12 +57,9 @@ class Alley extends React.Component {
 
     ReserveAlleyRoom=(room, slot)=>{
 
-        new IdeaFirstApiService().reserveAlleyRoom(room, slot).then(
-            (res)=>{
-                // alert('ok');
-                this.props.getRooms();
-            }
-        ).catch(e => {
+        new IdeaFirstApiService().reserveAlleyRoom(room, slot).then(res => {
+            this.props.getRooms();
+        }).catch(e => {
             api.errorHandler(e, {
                 "limit_user_places": () => {
                     this.setState({
@@ -98,7 +95,7 @@ class Alley extends React.Component {
     }
 
     openConfirmPopup = (roomId, placeId, name, time) => {
-        if (this.props.userSlots.length < 6) {
+        if (this.props.userSlots.length < 3) {
             this.setState({
                 reserveConfirm: {
                     roomId: roomId,
@@ -161,15 +158,6 @@ class Alley extends React.Component {
         const { data } = this.props.user;
         const {rooms, userSlots} = this.props;
         const t = this.props.t;
-
-        const reserveList = (chedule, roomId, title) =>{
-
-            const list = chedule.map((item, index)=>{
-            return( 
-                <div key={index} onClick={()=>item.available ? this.openConfirmPopup(roomId, item.place_id, title, item.time) : null} className={item.available?"reserve-item available":"reserve-item busy"}>{item.time}</div>)
-            })
-            return list
-        }
 
         const roomlist = rooms.map((item)=>{
 
@@ -251,28 +239,9 @@ class Alley extends React.Component {
                     }
                         
                 </div>
-                // <div className={isReserved?"room-item reserved":"room-item"} key={item.id}> 
-                //     <div className="info-panel">
-                //         <div className="name">{item.title}</div>
-                //         { (isReserved && !isGo) &&
-                //             (<div className="info"> 
-                //                 Забронировано на {reservedData.time} <a href="#" onClick={(e) => this.openCancelPopup(e, reservedData.room.id, reservedData.id)}>Отмена</a>
-                //             </div>)
-                //         }
-                //         { (!isReserved) &&
-                //             (<div className="open-btn-wrap"><div className={item.open?"open-btn up":"open-btn down"} onClick={()=>this.props.openRooms(item.id)}></div></div>)
-                //         }
-                //         {((isReserved && isGo) || this.state.isModer || this.isModerOnRoom(`conversations/${item.id}`)) && <Link className={'link'} to={"/conversations/" + item.id}>Перейти в комнату</Link>}
-
-                //     </div>
-                //     <Collapse isOpened={item.open} className="reserve-wrapper">
-                //         <div className="reserve-list">
-                //             {reserveList(item.chedule, item.id, item.title)}
-                //         </div>
-                //     </Collapse>
-                // </div>
             )
         })
+
 
         return (
             <div id="alley">
@@ -283,13 +252,11 @@ class Alley extends React.Component {
                 )}
 
                 <div className="container">
-                    <div className="room-count">Количество оставшихся броней 3/3</div>
+                    <div className="room-count">Количество оставшихся броней {this.props.maxReserveCount - this.props.userSlots.length}/{this.props.maxReserveCount}</div>
                     <div className="room-list">
                         {roomlist}
                     </div>
 
-                    {/* <p>{t("Каждый посетитель может забронировать не больше 2 слотов на день")}</p> */}
-                    
                 </div>
 
                 <PoseGroup>
@@ -369,10 +336,12 @@ class AlleyContainer extends React.Component {
     render() {
         let loading = true;
 
-        const {user, rooms, loading: alleyLoading, error} = this.props.alley;
+        const {user, rooms, maxReserveCount, loading: alleyLoading, error} = this.props.alley;
         const { loading: userLoading, data: userData  } = this.props.user;
 
         loading = !rooms || !userData;
+
+        console.log(this.props.alley);
 
         return (
             <>
@@ -381,6 +350,7 @@ class AlleyContainer extends React.Component {
                     {...this.props} 
                     rooms={rooms} 
                     userSlots={user} 
+                    maxReserveCount={maxReserveCount} 
                     openRooms={this.props.openRooms} 
                     getRooms={this.props.fetchAlleyRooms}
                     reserveAlleyRoom={this.props.reserveAlleyRoom}

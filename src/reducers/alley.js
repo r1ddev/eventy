@@ -1,6 +1,7 @@
 export const initialState = {
-	rooms: [],
+	rooms: null,
 	user:null,
+	maxReserveCount: null,
 	loading: false,
 	error: false,
 }
@@ -28,6 +29,7 @@ const alley = (state, action) => {
 				error: false,
 				rooms: action.payload.rooms,
 				user: action.payload.user,
+				maxReserveCount: action.payload.maxReserveCount,
 			};
 
 		case 'FETCH_ROOMS_ALLEY_LOADING':
