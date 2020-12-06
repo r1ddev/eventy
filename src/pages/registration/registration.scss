@@ -13,7 +13,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-
+            width: 100%;
+            max-width: 600px;
+            @media screen and (max-width: 660px){
+                padding: 50px 35px;
+                margin: 10px;
+            }
                 
             .registration-form--caption{
                 font-size: 30px;
@@ -33,7 +38,7 @@
                 }
                 
 
-                label {
+                &>label {
                     margin: 0;
                     flex-basis: 25%;
                     max-width: 25%;
@@ -45,7 +50,7 @@
                     }
                 }
 
-                input{
+                &>input{
                     flex-basis: 75%;
                     max-width: 75%;
                     width: 100%;
@@ -66,20 +71,13 @@
 
                 .form-link {
                     font-size: 18px;
+                    color: #00aaff;
                 }
 
                 .e-button {
                     font-size: 18px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    position: relative;
 
                     .my-spinner {
-                        position: absolute;
-                        top: 0;
-                        left: 10px;
-
                         .text-success {
                             color: #fff !important;
                         }
@@ -102,25 +100,6 @@
                 color: #818486;
             }
 
-            .login-btn{
-                margin-top: 50px;
-            }
-
-            .reg-link{
-                text-decoration: none;
-                color: white;
-                font-size: 26px;
-                margin: 10px;
-            }
-        
-            
-            .passrec-link{
-                text-decoration: none;
-                color: white;
-                font-size: 26px;
-                margin: 20px;
-                text-align: center;
-            }
         }
 }
 

@@ -6,18 +6,11 @@ import { compose } from "../../utils";
 import "./registration.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from "../../components/error-indicator";
-import Select from "react-select";
 
 import { withTranslation } from "react-i18next";
 import posed from 'react-pose';
 import api from './../../js/api';
-import Spinner from "../../components/spinner";
 import SpinnerButton from "../../components/spinner-button/spinner-button";
-
-const Box = posed.div({
-    open: { height: 'auto', opacity: 1, marginRight: '20px' },
-    closed: { height: 0, opacity: 0, marginRight: 0 },
-});
 
 const Fade = posed.div({
     hidden: {
@@ -138,10 +131,9 @@ class Registration extends React.Component {
             !isLoading &&
             termsAgree
 
-            console.log(isLoading);
         return (
             <div id="registration" className="flex-center min-vh-100">
-                <Fade initialPose="hidden" pose="visible">
+                <Fade initialPose="hidden" pose="visible" className="flex-center w-100 h-100">
                     <form onSubmit={this.onSubmit} className="registration-form">
                         <div className="registration-form--caption">{t("Регистрация")}</div>
 
@@ -222,18 +214,20 @@ class Registration extends React.Component {
                                 placeholder={t("Город")} />
                         </div>
 
-                        <div className="custom-control custom-checkbox mt-4">
-                            <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                id="terms-agree"
-                                checked={termsAgree}
-                                onChange={this.onChangeTermsAgree}
-                                required
-                            />
-                            <label className="custom-control-label" htmlFor="terms-agree">
-                                {t("Я согласен с условиями обработки персональных данных")}
-                            </label>
+                        <div className="form-item">
+                            <div className="custom-control custom-checkbox mt-4">
+                                <input
+                                    type="checkbox"
+                                    className="custom-control-input"
+                                    id="terms-agree"
+                                    checked={termsAgree}
+                                    onChange={this.onChangeTermsAgree}
+                                    required
+                                />
+                                <label className="custom-control-label" htmlFor="terms-agree">
+                                    {t("Я согласен с условиями обработки персональных данных")}
+                                </label>
+                            </div>
                         </div>
 
                         <div className="form-item flex-center">
