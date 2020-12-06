@@ -1,52 +1,55 @@
 @import "../../variables.scss";
 
 #registration-acception {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color:  #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color:  #F5F5F5;
 
-    .registration-acception-form{
-      width: 550px;
-      height: 660px;
-      max-height: 100vh;
-      background: $base-color;
-      border-radius: 45px;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .registration-acception-form--wrapper{
-        flex-grow: 1;
-        min-width: 50%;
-        max-width: 80%;
-
+    .registration-acception-container{
+        padding: 50px 70px;
+        background: #ffffff;
+        border-radius: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        
-        .registration-acception-form--caption{
-          margin-top: 80px;
-          font-size: 36px;
-          line-height: 47px;
-          text-align: center;
-          color: #FFFFFF;
-          text-align: left;
+        width: 100%;
+        max-width: 400px;
+        @media screen and (max-width: 660px){
+            padding: 50px 35px;
+            margin: 10px;
         }
 
+        .registration-acception-container--caption {
+            font-size: 19px;
+        }
 
-      }
-      
-        .login-btn{
-          min-width: 50%;
-          max-width: 80%;
-          margin: 30px;
-          font-weight: 600;
-        }  
+        .form-item {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .e-button {
+            font-size: 18px;
+            max-width: 250px;
+            width: 100%;
+
+            .my-spinner {
+                .text-success {
+                    color: #fff !important;
+                }
+            }
+        }
     }
 }
 
-	
+    
