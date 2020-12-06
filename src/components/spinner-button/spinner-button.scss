@@ -1,0 +1,16 @@
+#spinner-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	.my-spinner {
+		position: absolute;
+		top: 0;
+		left: 10px;
+
+		.text-success {
+			color: #fff !important;
+		}
+	}
+}
