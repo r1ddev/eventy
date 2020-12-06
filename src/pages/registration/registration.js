@@ -12,6 +12,7 @@ import { withTranslation } from "react-i18next";
 import posed from 'react-pose';
 import api from './../../js/api';
 import Spinner from "../../components/spinner";
+import SpinnerButton from "../../components/spinner-button/spinner-button";
 
 const Box = posed.div({
     open: { height: 'auto', opacity: 1, marginRight: '20px' },
@@ -236,16 +237,9 @@ class Registration extends React.Component {
                         </div>
 
                         <div className="form-item flex-center">
-                            <button
-                                disabled={!validationPassed}
-                                className="e-button primary">
-
-                                <Box pose={isLoading ? "open" : "closed"}>
-                                    <Spinner />
-                                </Box>                                
-                                
+                            <SpinnerButton className="e-button primary" disabled={!validationPassed} spinner={isLoading}>
                                 {t("Зарегистрироваться")}
-                            </button>
+                            </SpinnerButton>
                         </div>
                         
                         <div className="form-item flex-center">
