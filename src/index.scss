@@ -172,6 +172,10 @@ button.white-button:disabled:hover {
 	&.expand {
 		width: 100%;
 	}
+
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 
