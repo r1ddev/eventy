@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:  #F5F5F5;
+    background-color:  #EAE5DB;
 
     .registration-form{
         padding: 50px 70px;
@@ -15,7 +15,8 @@
         align-items: center;
         width: 100%;
         max-width: 600px;
-        
+        box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+
         @media screen and (max-width: 660px){
             padding: 50px 35px;
             margin: 10px;
@@ -62,11 +63,16 @@
                 font-size: 18px;
                 color: black;
                 outline: none;
+                transition: .2s;
 
                 @media screen and (max-width: 660px) {
                     flex-basis: 1;
                     max-width: unset;
                     width: 100%;
+                }
+
+                &:focus {
+                    border: 1px solid #00aaff;
                 }
             }
 

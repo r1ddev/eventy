@@ -10,6 +10,17 @@ import ErrorIndicator from "../../components/error-indicator";
 import { withTranslation } from "react-i18next";
 import SpinnerButton from './../../components/spinner-button/index';
 
+import posed from 'react-pose';
+
+const Fade = posed.div({
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1
+    }
+})
+
 class PasswordRecovery extends React.Component {
     state = {
         email: "",
@@ -52,27 +63,29 @@ class PasswordRecovery extends React.Component {
 
         return (
             <div id="password-recovery">
-                <form onSubmit={this.onSubmit} className="password-recovery-form">
-                    
-                    <div className="password-recovery-form--caption">{t("Восстановление пароля")}</div>
-                    
-                    <div className="form-item">
-                        <label htmlFor="">{t("Email")}*</label>
-                        <input
-                            required
-                            type="email"
-                            value={email}
-                            onChange={this.onChangeEmail}
-                            className="email-input"
-                            placeholder="E-mail" />
-                    </div>
+                <Fade initialPose="hidden" pose="visible" className="flex-center w-100 h-100">
+                    <form onSubmit={this.onSubmit} className="password-recovery-form">
+                        
+                        <div className="password-recovery-form--caption">{t("Восстановление пароля")}</div>
+                        
+                        <div className="form-item">
+                            <label htmlFor="">{t("Email")}*</label>
+                            <input
+                                required
+                                type="email"
+                                value={email}
+                                onChange={this.onChangeEmail}
+                                className="email-input"
+                                placeholder="E-mail" />
+                        </div>
 
-                    <div className="form-item flex-center">
-                        <SpinnerButton className="e-button primary" disabled={!validationPassed} spinner={isLoading}>
-                            {t("ВОССТАНОВИТЬ")}
-                        </SpinnerButton>
-                    </div>
-                </form>
+                        <div className="form-item flex-center">
+                            <SpinnerButton className="e-button primary" disabled={!validationPassed} spinner={isLoading}>
+                                {t("ВОССТАНОВИТЬ")}
+                            </SpinnerButton>
+                        </div>
+                    </form>
+                </Fade>
             </div>
         );
     }
