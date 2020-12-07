@@ -79,7 +79,8 @@ class Login extends React.Component {
             })
             .catch((err) => {
                 api.errorHandler(err, {
-                    "user_not_found": () => ErrorIndicator(t("Пользователя с этими данными не существует"))
+                    "user_not_found": () => ErrorIndicator(t("Пользователя с этими данными не существует")),
+                    "email_not_confirmed": () => ErrorIndicator(t("Для входа в аккаунт подтвердите указанную электронную почту"))
                 })
 
                 this.onLoading(false);

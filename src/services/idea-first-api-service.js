@@ -56,33 +56,25 @@ export default class IdeaFirstApiService {
 
     autorizate(user) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/v2/users/login", this.toFormData(user), this.useAuth())
+            axios.post(this.host + "/v3/users/login", user, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
                 .catch(error => {
                     reject(error)
-                }
-                )
+                })
         })
     }
 
     recoverPassword(email) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/v2/users/restore", this.toFormData({ email }), this.useAuth())
+            axios.post(this.host + "/v3/users/restore", { email }, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 

@@ -6,101 +6,102 @@
     align-items: center;
     background-color:  #F5F5F5;
 
-        .registration-form{
-            padding: 50px 70px;
-            background: #ffffff;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 600px;
-            @media screen and (max-width: 660px){
-                padding: 50px 35px;
-                margin: 10px;
-            }
-                
-            .registration-form--caption{
-                font-size: 30px;
-                text-align: center;
-                color: #222629;
-                font-weight: bold;
-            }
-
-            .form-item {
-                display: flex;
-                width: 100%;
-                margin-top: 20px;
-                align-items: center;
-                flex-wrap: wrap;
-                @media screen and (max-width: 660px) {
-                    flex-direction: column;
-                }
-                
-
-                &>label {
-                    margin: 0;
-                    flex-basis: 25%;
-                    max-width: 25%;
-                    
-                    @media screen and (max-width: 660px) {
-                        flex-basis: 1;
-                        max-width: unset;
-                        width: 100%;
-                    }
-                }
-
-                &>input{
-                    flex-basis: 75%;
-                    max-width: 75%;
-                    width: 100%;
-                    display: block;
-                    border-radius: 20px;
-                    padding: 5px 15px;
-                    border: 1px solid #CED0D3;
-                    font-size: 18px;
-                    color: black;
-                    outline: none;
-
-                    @media screen and (max-width: 660px) {
-                        flex-basis: 1;
-                        max-width: unset;
-                        width: 100%;
-                    }
-                }
-
-                .form-link {
-                    font-size: 18px;
-                    color: #00aaff;
-                }
-
-                .e-button {
-                    font-size: 18px;
-
-                    .my-spinner {
-                        .text-success {
-                            color: #fff !important;
-                        }
-                    }
-                }
-            }
-
-            input.error-input{
-                color:#FF6D00;
-                border: 2px solid #FF6D00;
-            }
-
-            .error-message{
-                margin: 5px;
-                font-size: 17px;
-                color: #fff2cc;
-            }
-
-            .custom-control-label {
-                color: #818486;
-            }
-
+    .registration-form{
+        padding: 50px 70px;
+        background: #ffffff;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        
+        @media screen and (max-width: 660px){
+            padding: 50px 35px;
+            margin: 10px;
         }
+            
+        .registration-form--caption{
+            font-size: 30px;
+            text-align: center;
+            color: #222629;
+            font-weight: bold;
+        }
+
+        .form-item {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            @media screen and (max-width: 660px) {
+                flex-direction: column;
+            }
+            
+
+            &>label {
+                margin: 0;
+                flex-basis: 25%;
+                max-width: 25%;
+                
+                @media screen and (max-width: 660px) {
+                    flex-basis: 1;
+                    max-width: unset;
+                    width: 100%;
+                }
+            }
+
+            &>input{
+                flex-basis: 75%;
+                max-width: 75%;
+                width: 100%;
+                display: block;
+                border-radius: 20px;
+                padding: 5px 15px;
+                border: 1px solid #CED0D3;
+                font-size: 18px;
+                color: black;
+                outline: none;
+
+                @media screen and (max-width: 660px) {
+                    flex-basis: 1;
+                    max-width: unset;
+                    width: 100%;
+                }
+            }
+
+            .form-link {
+                font-size: 18px;
+                color: #00aaff;
+            }
+
+            .e-button {
+                font-size: 18px;
+
+                .my-spinner {
+                    .text-success {
+                        color: #fff !important;
+                    }
+                }
+            }
+        }
+
+        input.error-input{
+            color:#FF6D00;
+            border: 2px solid #FF6D00;
+        }
+
+        .error-message{
+            margin: 5px;
+            font-size: 17px;
+            color: #fff2cc;
+        }
+
+        .custom-control-label {
+            color: #818486;
+        }
+
+    }
 }
 
     
