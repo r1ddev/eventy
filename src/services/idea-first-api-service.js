@@ -80,31 +80,25 @@ export default class IdeaFirstApiService {
 
     getMessages(chatId) {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/group/messages?chat_id=${chatId}`, this.useAuth())
+            axios.get(this.host + `/v3/chat/${chatId}`, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
     getVipMessages(userId) {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/personal/messages/from/${userId}`, this.useAuth())
+            axios.get(this.host + `/v3/messages/${userId}`, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
@@ -122,16 +116,13 @@ export default class IdeaFirstApiService {
 
     getScenes() {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/stream/all`, this.useAuth())
+            axios.get(this.host + `/v3/streams`, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
@@ -152,77 +143,68 @@ export default class IdeaFirstApiService {
 
     getNotify() {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/personal/notify`, this.useAuth())
+            axios.get(this.host + `/v3/notify`, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
     updateMessages(chatId, id) {
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/group/messages/from/${id}?chat_id=${chatId}`, this.useAuth())
-                .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
+            axios.get(this.host + `/v3/chat/${chatId}`, {
+                    ...this.useAuth(),
+                    params: {
+                        from: id
                     }
                 })
-                .catch(error => { reject(error) }
-                )
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
 
     postMessage(chatId, text, reply_id = null) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/group/messages", this.toFormData({
-                chat_id: chatId,
+            axios.post(this.host + `/v3/chat/${chatId}`, {
                 text: text,
                 reply_id: reply_id
-            }), this.useAuth())
+            }, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
     postUrl(url) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/statistics/url", this.toFormData({
+            axios.post(this.host + "/v3/metrics", {
                 url: url
-            }), this.useAuth())
+            }, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
     postVipMessage(userId, text) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/personal/messages", this.toFormData({
-                user_id: userId,
+            axios.post(this.host + `/v3/messages/${userId}`, {
                 text: text
-            }), this.useAuth())
+            }, this.useAuth())
                 .then(res => {
                     if (res.data.status) {
                         resolve(res.data);
@@ -238,19 +220,15 @@ export default class IdeaFirstApiService {
 
     postReaction(scene_id, reaction_id) {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/stream/reaction", this.toFormData({
-                scene_id: scene_id,
+            axios.post(this.host + `/v3/streams/${scene_id}/reactions`, this.toFormData({
                 reaction_id: reaction_id
             }), this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
@@ -323,8 +301,9 @@ export default class IdeaFirstApiService {
                 .then(res => {
                     resolve(res);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 

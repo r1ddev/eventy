@@ -116,18 +116,16 @@ const api = {
 			},
 			async getMessages(userId) {
 				let response = await axios.get(
-					api.proxy + api.host + "/personal/messages/from/" + userId,
+					api.proxy + api.host + `/v3/messages/${userId}`,
 					api.useAuth()
 				);
 				return response.data;
 			},
 			async sendMessages(userId, text) {
 				let response = await axios.post(
-					api.proxy + api.host + "/personal/messages",
-					api.toFormData({
-						user_id: userId,
+					api.proxy + api.host + `/v3/messages/${userId}`, {
 						text: text,
-					}),
+					},
 					api.useAuth()
 				);
 				return response.data;

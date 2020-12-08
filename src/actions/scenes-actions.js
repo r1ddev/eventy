@@ -23,7 +23,7 @@ const fetchScenes = (apiService, dispatch) => () => {
     apiService.getScenes()
         .then((data) => {
 
-            data = data.streams.map((item, index) => {
+            data = data.map((item, index) => {
 
                 return {
                     ...item,

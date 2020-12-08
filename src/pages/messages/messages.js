@@ -264,8 +264,8 @@ class MessagesContainer extends React.Component {
         let messages = await api.account.messages.getMessages(userId);
         let isEncrypted = false;
 
-        messages.messages = messages.messages.map((message) => {
-            if (message.text.substr(0, 10) == "U2FsdGVkX1" && window.localStorage.ckey != undefined) {
+        messages = messages.map((message) => {
+            if (message.text.substr(0, 10) === 'U2FsdGVkX1' && window.localStorage.ckey != undefined) {
                 isEncrypted = true;
                 try {
                     let dec = AES.decrypt(message.text, window.localStorage.ckey || "");
@@ -276,7 +276,7 @@ class MessagesContainer extends React.Component {
         });
 
         await this.asetState({
-            messages: messages.messages,
+            messages: messages,
         });
         this.isEncrypted = isEncrypted;
 
