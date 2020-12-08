@@ -126,20 +126,18 @@ button.white-button:disabled:hover {
 	user-select: none;			
 	text-align: center;
 	cursor: pointer;
+	outline: none;
 
 	&.primary{
 		border: 2px solid #00aaff;
 		background-color: #00aaff;
 		color:  #fff;
-		
-		&:active:not(.disabled) {
-			background: #00a9fdef;
-			border: 2px solid #00a9fdef;
-		}
+		outline: none;
 	
 		&:active:not(.disabled) {
 			background: #008ed4;
 			border: 2px solid #008ed4;
+			outline: none;
 		}
 	
 		&:disabled {
@@ -154,13 +152,9 @@ button.white-button:disabled:hover {
 		color:  #000;
 	
 		&:active:not(.disabled) {
-			border: 2px solid #00a9fdef;
-			background-color: transparent;
-		}
-	
-		&:active:not(.disabled) {
 			border: 2px solid #008ed4;
 			background-color: transparent;
+			outline: none;
 		}
 	
 		&:disabled {
