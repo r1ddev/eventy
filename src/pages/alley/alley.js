@@ -167,9 +167,9 @@ class Alley extends React.Component {
             return(
                 <div className="room-item">
                     <div className="room-content">
-                        <img src={require("../../images/default-avatar.svg")} alt="" className="avatar"/>
+                        <img src={item.image} alt="" className="avatar"/>
                         <div className="title">{item.title}</div>
-                        <div className="desc">Описание ментора и почему с ним должны хотеть говорить с (развёрнутым списком для брони)</div>
+                        <div className="desc">{item.desc}</div>
                     </div>
                     
                 
