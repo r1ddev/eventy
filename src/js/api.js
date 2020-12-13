@@ -37,32 +37,10 @@ const api = {
 		getAvatarLocation() {
 			return `${api.imagesHost}/avatar/`;
 		},
-		editProfile: async (
-			name,
-			lastName,
-			company,
-			position,
-			phone,
-			email,
-			shareContact,
-			soc,
-			what_looking,
-			what_offer
-		) => {
+		editProfile: async (user) => {
 			let response = await axios.put(
 				api.proxy + api.host + "/v3/users",
-				{
-					first_name: name,
-					last_name: lastName,
-					company: company,
-					position: position,
-					phone: phone,
-					email: email,
-					social_site: soc,
-					what_looking: what_looking,
-					what_offer: what_offer,
-					view_contact: shareContact - 0,
-				},
+				user,
 				api.useAuth()
 			);
 

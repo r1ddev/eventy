@@ -38,7 +38,9 @@ class EditProfile extends React.Component {
     this.setLoading(true);
 
     api.auth
-      .editProfile(name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer)
+      .editProfile({
+        name, lastName, company, position, phone, email, shareContact, soc, what_looking, what_offer
+      })
       .then((res) => {
         this.setLoading(false);
         this.props.history.push("/desk");
