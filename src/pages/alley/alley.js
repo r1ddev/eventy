@@ -106,7 +106,7 @@ class Alley extends React.Component {
             })
         } else {
             this.setState({
-                reserveError: "Можно забронировать только 2 слота"
+                reserveError: "Можно забронировать только 3 слота"
             })
         }
         
@@ -161,15 +161,8 @@ class Alley extends React.Component {
 
         const roomlist = rooms.map((item)=>{
 
-            let filteredData = this.props.userSlots.filter(s => s.room.id == item.id)
-            let isReserved = filteredData.length > 0
-            let reservedData = null;
-            let isGo = false;
-
-            if (isReserved) {
-                    reservedData = filteredData[0];
-                    isGo = reservedData.flazhok;
-            }
+            let reservedData = this.props.userSlots.filter(s => s.room.id == item.id)
+            let isReserved = reservedData.length > 0
 
             return(
                 <div className="room-item">
@@ -181,8 +174,34 @@ class Alley extends React.Component {
                     
                 
                     {
+                        reservedData.map(reserve => {
+                            if (reserve.flazhok) {
+                                return (
+                                    <div className="reserve-info">
+                                        <Link className="reserve-time" to="/desc">Перейти в гостиную</Link>
+                                    </div>
+                                )
+                            } else {
+                                return (
+                                    <div className="reserve-info">
+                                        <a className="reserve-time disabled">Забронировано на {reserve.time}</a>
+                                        <a
+                                            className="reserve-cancel"
+                                            href="#"
+                                            onClick={
+                                                (e) => this.openCancelPopup(e, reserve.room.id, reserve.id)
+                                            }
+                                        >Отменить</a>
+                                    </div>
+                                )
+                                
+                            }
+                        })
+                    }
+                    
+                    {/* {
                         !isReserved &&
-                        (   
+                        (    */}
                             <div className="select-time">
                                 <div
                                     className={"select-time-title" + (item.open ? " open" : "")}
@@ -210,33 +229,8 @@ class Alley extends React.Component {
                                     </div>
                                 </Collapse>
                             </div>
-                        )
-                    }
-
-                    {
-                        isReserved && !isGo &&
-                        (
-                            <div className="reserve-info">
-                                <a className="reserve-time disabled">Забронировано на {reservedData.time}</a>
-                                <a
-                                    className="reserve-cancel"
-                                    href="#"
-                                    onClick={
-                                        (e) => this.openCancelPopup(e, reservedData.room.id, reservedData.id)
-                                    }
-                                >Отменить</a>
-                            </div> 
-                        )
-                    }
-
-                    {
-                        isReserved && isGo &&
-                        (
-                            <div className="reserve-info">
-                                <Link className="reserve-time" to="/desc">Перейти в гостиную</Link>
-                            </div> 
-                        )
-                    }
+                        {/* )
+                    } */}
                         
                 </div>
             )
@@ -308,9 +302,9 @@ class Alley extends React.Component {
                             <div className="alley-modal">
                                 <div className="alley-modal-container">
                                     <div className="confirm-title">Отменить бронирование</div>
-                                    <div className="confirm-buttons">
-                                        <button className="white-button" onClick={this.cancel}>Отменить</button>
-                                        <button className="white-button cancel" onClick={this.closeCancelPopup}>Закрыть</button>
+                                        <div className="confirm-buttons">
+                                        <button className="e-button primary expand" onClick={this.cancel}>Отменить</button>
+                                        <button className="e-button expand bordered cancel" onClick={this.closeCancelPopup}>Закрыть</button>
                                     </div>
                                 </div>
                                 
