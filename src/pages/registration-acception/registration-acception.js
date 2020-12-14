@@ -29,7 +29,7 @@ class RegistrationAcception extends React.Component {
                     <div className="registration-acception-container">
 
                         <div className="form-item flex-center mt-0 mb-4">
-                            <img className="logo" src={require("../../images/avito_logo_rgb__work.png")} alt=""/>
+                            {/* <img className="logo" src={require("../../images/avito_logo_rgb__work.png")} alt=""/> */}
                         </div>
 
                         <div className="registration-acception-container--caption">
