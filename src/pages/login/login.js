@@ -117,10 +117,11 @@ class Login extends React.Component {
                         <div className="form-item">
                             <input
                                 required
+                                name="email"
                                 type="email"
                                 value={email}
                                 onChange={this.onChangeEmail}
-                                placeholder="E-mail"></input>
+                                placeholder="E-mail" />
                         </div>
                         
                         <div className="form-item">
@@ -129,7 +130,7 @@ class Login extends React.Component {
                                 type="password"
                                 value={password}
                                 onChange={this.onChangePassword}
-                                placeholder={t("Пароль")}></input>
+                                placeholder={t("Пароль")} />
                         </div>
 
                         {/* <LangChecker /> */}
@@ -146,10 +147,12 @@ class Login extends React.Component {
                             </Link>
                         </div>
                         
-                        {/* <button type="button" className="white-button guest-btn" onClick={this.onLoginGuest}>
-                            {t("ВОЙТИ КАК ГОСТЬ")}
-                        </button> */}
-                        
+                        <div className="form-item flex-center">
+                            <button type="button" className="e-button bordered" onClick={this.onLoginGuest}>
+                                {t("Войти как гость")}
+                            </button>
+                        </div>
+
                         <div className="form-item flex-center">
                             <Link className="form-link" to="/password-recovery">
                                 {t("Забыли пароль?")}
