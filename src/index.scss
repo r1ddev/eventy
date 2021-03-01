@@ -1,27 +1,9 @@
 @import "./variables.scss";
 
-body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
 @font-face {
 	font-family: "Gilroy";
 	src: url(./fonts/Gilroy-Regular.ttf);
 	font-weight: normal;
-}
-
-@font-face {
-	font-family: "IBM Plex Mono";
-	src: url(./fonts/IBMPlexMono-Bold.ttf);
-	font-weight: bold;
 }
 
 @font-face {
@@ -36,9 +18,24 @@ code {
 	font-weight: normal;
 }
 
-body {
-	font-family: "Gilroy";
+@font-face {
+	font-family: "Lato";
+	src: url(./fonts/lato/Lato-Medium.ttf);
+	font-weight: 400;
 }
+
+body {
+	margin: 0;
+	font-family: "Lato", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 
 ::-webkit-scrollbar {
 	width: 3px;
@@ -75,48 +72,107 @@ body {
 }
 
 .white-button{
-  padding:8px;
-  background-color: $primary-btn-color;
-  color:  $primary-btn-text-color;
-  border-radius: 12px;
-  font-size: 23px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+	padding:8px;
+	background-color: $primary-btn-color;
+	color:  $primary-btn-text-color;
+	border-radius: 12px;
+	font-size: 23px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .white-button:hover{
-  background-color: rgb(221, 253, 223);
+	background-color: rgb(221, 253, 223);
 }
 
 .white-button:active{
-  background-color: rgb(179, 255, 189);
+	background-color: rgb(179, 255, 189);
 }
 
 button.white-button{
-  align-self: center;
-  width: 100%;
-  border: none;
-  text-align: center;
-  text-decoration: none;
+	align-self: center;
+	width: 100%;
+	border: none;
+	text-align: center;
+	text-decoration: none;
 
-  &:disabled {
-	cursor: auto;
-	background-color: #eaeaead9;
-	color: #a3bbad;
-  }
+	&:disabled {
+		cursor: auto;
+		background-color: #eaeaead9;
+		color: #a3bbad;
+	}
 }
 
 button.white-button:active, button:focus {
-  outline: none;
+	outline: none;
 }
 
 button.white-button::-moz-focus-inner {
-  border: 0;
+	border: 0;
 }
 
 button.white-button:disabled:hover {
 	background-color: #eaeaead9;
 	color: #a3bbad;
 }
+
+.e-button {
+	padding: 8px 25px;
+	border-radius: 50px;
+	text-decoration: none;
+	transition: .2s;
+	user-select: none;			
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	display: inline-block;
+
+	&.primary{
+		border: 2px solid #00aaff;
+		background-color: #00aaff;
+		color:  #fff;
+		outline: none;
+	
+		&:active:not(.disabled) {
+			background: #008ed4;
+			border: 2px solid #008ed4;
+			outline: none;
+		}
+	
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.4;
+		}
+	}
+
+	&.bordered{
+		border: 2px solid #00aaff;
+		background-color: transparent;
+		color:  #000;
+		outline: none;
+	
+		&:active:not(.disabled) {
+			border: 2px solid #008ed4;
+			background-color: transparent;
+			outline: none;
+		}
+	
+		&:disabled {
+			cursor: auto;
+			opacity: 0.4;
+		}
+	}
+
+	&.expand {
+		width: 100%;
+	}
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+
+

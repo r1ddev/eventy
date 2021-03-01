@@ -45,20 +45,18 @@
 			justify-content: center;
 
 			.title {
-				font-family: FuturaDemiC;
 				font-weight: 600;
 				font-size: 36px;
 			}
 
 			.text {
-				font-family: FuturaBookC;
 				font-weight: normal;
 				font-size: 30px;
 			}
 
 			.btn-submit {
 				color: $secondary-btn-text-color;
-				font-family: IBM Plex Mono;
+				// font-family: IBM Plex Mono;
 				font-weight: bold;
 				font-size: 30px;
 				background: $secondary-btn-color;

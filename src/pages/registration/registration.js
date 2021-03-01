@@ -6,226 +6,274 @@ import { compose } from "../../utils";
 import "./registration.scss";
 import { Link } from "react-router-dom";
 import ErrorIndicator from "../../components/error-indicator";
-import Select from "react-select";
 
 import { withTranslation } from "react-i18next";
+import posed from 'react-pose';
+import api from './../../js/api';
+import SpinnerButton from "../../components/spinner-button/spinner-button";
+
+const Fade = posed.div({
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1
+    }
+})
 
 class Registration extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    passwordRepeated: "",
-    company: "",
-    regTag: [this.props.t("Компания")],
-    passwordRepeatedError: false,
-    disableForm: false,
-    termsAgree: false,
-  };
+    state = {
+        first_name: "",
+        last_name: "",
+        company: "",
+        position: "",
+        phone: "",
+        email: "",
+        city: "",
+        termsAgree: false,
+        isLoading: false
+    };
 
-  regOptions = [
-    { value: this.props.t("Компания"), label: this.props.t("Компания") },
-    { value: this.props.t("Агентство"), label: this.props.t("Агентство") },
-  ];
 
-  //   constructor() {
-  //     super();
-  //     console.log("regOptions", this.regOptions);
-  //   }
+    onSubmit = (e) => {
+        e.preventDefault();
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    if (this.validate()) {
-      this.setState({
-        disableForm: true,
-      });
+        let user = {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            company: this.state.company,
+            position: this.state.position,
+            phone: this.state.phone,
+            email: this.state.email,
+            city: this.state.city,
+        };
 
-      let user = {
-        email: this.state.email,
-        password: this.state.password,
-        re_password: this.state.passwordRepeated,
-        company: this.state.company,
-        tag: JSON.stringify(this.state.regTag),
-      };
-
-      // console.log(user);
-      this.setState({
-        disableForm: false,
-      });
-
-      localStorage.removeItem("token");
-
-      this.props
-        .addUser(user)
-        .then((res) => {
-          this.props.history.push("/registration-acception");
-        })
-        .catch((err) => {
-          // console.log(err.message);
-          this.setState({
-            disableForm: false,
-          });
+        this.setState({
+            isLoading: true,
         });
+
+        localStorage.removeItem("token");
+
+        this.props
+            .addUser(user)
+            .then((res) => {
+                this.props.history.push("/registration-acception");
+            })
+            .catch((err) => {
+                api.errorHandler(err, {
+                    'email_already_exists': () => ErrorIndicator("Указанный почтовый адрес уже зарегистрирован")
+                })
+                this.setState({
+                    isLoading: false,
+                });
+            });
+    };
+
+    onChangeFirstName = (e) => {
+        this.setState({
+            first_name: e.target.value,
+        });
+    };
+
+    onChangeLastName = (e) => {
+        this.setState({
+            last_name: e.target.value,
+        });
+    };
+
+    onChangeCompany = (e) => {
+        this.setState({
+            company: e.target.value,
+        });
+    };
+
+    onChangePosition = (e) => {
+        this.setState({
+            position: e.target.value,
+        });
+    };
+
+    onChangePhone = (e) => {
+        this.setState({
+            phone: e.target.value,
+        });
+    };
+
+    onChangeEmail = (e) => {
+        this.setState({
+            email: e.target.value,
+        });
+    };
+
+    onChangeCity = (e) => {
+        this.setState({
+            city: e.target.value,
+        });
+    };
+
+    onChangeTermsAgree = (e) => {
+        this.setState({
+            termsAgree: e.target.checked
+        })
     }
-  };
-  validate = () => {
-    this.setState({
-      passwordRepeatedError: !this.validatePasswords(),
-    });
-    if (this.validatePasswords()) return 1;
-    return 0;
-  };
 
-  validatePasswords = () => {
-    const { password, passwordRepeated } = this.state;
-    if (password === passwordRepeated) return 1; //все ок
-    return 0; //ошибка
-  };
+    render() {
+        const t = this.props.t;
+        const { first_name, last_name, company, position, phone, email, city, termsAgree, isLoading } = this.state;
 
-  onChangeEmail = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
-  };
+        const validationPassed = first_name.length > 0 &&
+            last_name.length > 0 &&
+            company.length > 0 &&
+            position.length > 0 &&
+            phone.length > 0 &&
+            email.length > 0 &&
+            city.length > 0 &&
+            !isLoading &&
+            termsAgree
 
-  onChangePassword = (e) => {
-    this.setState({
-      password: e.target.value,
-      passwordRepeatedError: false,
-    });
-  };
+        return (
+            <div id="registration" className="flex-center min-vh-100">
+                <Fade initialPose="hidden" pose="visible" className="flex-center w-100 h-100">
+                    <form onSubmit={this.onSubmit} className="registration-form">
+                        <div className="registration-form--caption">{t("Регистрация")}</div>
 
-  onChangePasswordRepeated = (e) => {
-    this.setState({
-      passwordRepeated: e.target.value,
-      passwordRepeatedError: false,
-    });
-  };
+                        <div className="form-item">
+                            <label htmlFor="">{t("Имя")}*</label>
 
-  onChangeCompany = (e) => {
-    this.setState({
-      company: e.target.value,
-    });
-  };
+                            <input
+                                required
+                                type="text"
+                                value={first_name}
+                                onChange={this.onChangeFirstName}
+                                placeholder={t("Имя")} />
+                        </div>
+                        
+                        <div className="form-item">
+                            <label htmlFor="">{t("Фамилия")}*</label>
 
-  onChangeRegTag = (e) => {
-    this.setState({ regTag: e.value.split(" ") || [] });
-  };
+                            <input
+                                required
+                                type="text"
+                                value={last_name}
+                                onChange={this.onChangeLastName}
+                                placeholder={t("Фамилия")} />
+                        </div>
 
-  onTermsAgreeChange = (e) => {
-    this.setState({
-      termsAgree: e.target.checked
-    })
-  }
+                        <div className="form-item">
+                            <label htmlFor="">{t("Компания")}*</label>
 
-  render() {
-    const t = this.props.t;
-    const { email, password, passwordRepeated, company, regTag, disableForm, passwordRepeatedError, termsAgree } = this.state;
+                            <input
+                                required
+                                type="text"
+                                value={company}
+                                onChange={this.onChangeCompany}
+                                placeholder={t("Компания")} />
+                        </div>
 
-    return (
-      <div id="registration">
-        <form onSubmit={this.onSubmit} className="registration-form">
-          <div className="registration-form--wrapper">
-            <div className="registration-form--caption">{t("Регистрация")}</div>
+                        <div className="form-item row">
+                            <label htmlFor="">{t("Должность")}*</label>
 
-            <input
-              required
-              type="email"
-              value={email}
-              onChange={this.onChangeEmail}
-              className="email-input"
-              placeholder="e-mail"></input>
+                            <input
+                                required
+                                type="text"
+                                value={position}
+                                onChange={this.onChangePosition}
+                                placeholder={t("Должность")} />
+                        </div>
 
-            <input
-              required
-              type="password"
-              value={password}
-              onChange={this.onChangePassword}
-              className="password-input"
-              placeholder={t("Пароль")}></input>
+                        <div className="form-item">
+                            <label htmlFor="">{t("Телефон")}*</label>
 
-            <input
-              required
-              type="password"
-              value={passwordRepeated}
-              onChange={this.onChangePasswordRepeated}
-              className={!passwordRepeatedError ? "password-input" : "password-input error-input"}
-              placeholder={t("Подтверждение пароля")}></input>
+                            <input
+                                required
+                                type="text"
+                                value={phone}
+                                onChange={this.onChangePhone}
+                                placeholder={t("+7")} />
+                        </div>
 
-            {passwordRepeatedError && <p className="error-message">{t("Пароли должны быть одинаковыми")}</p>}
+                        <div className="form-item">
+                            <label htmlFor="">{t("Email")}*</label>
 
-            <input
-              required
-              type="text"
-              value={company}
-              onChange={this.onChangeCompany}
-              className="company-input"
-              placeholder={t("Название компании")}></input>
+                            <input
+                                required
+                                type="email"
+                                value={email}
+                                onChange={this.onChangeEmail}
+                                placeholder={t("Email")} />
+                        </div>
 
-            <Select
-              isSearchable={false}
-              defaultValue={this.regOptions[0]}
-              options={this.regOptions}
-              onChange={this.onChangeRegTag}
-              className="reg-select"
-            />
+                        <div className="form-item">
+                            <label htmlFor="">{t("Город")}*</label>
 
-            <div className="custom-control custom-checkbox my-3">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="terms-agree"
-                checked={this.state.termsAgree}
-                onChange={this.onTermsAgreeChange}
-                required
-              />
-              <label className="custom-control-label" htmlFor="terms-agree">
-                {t("Я согласен с условиями обработки персональных данных")}
-              </label>
+                            <input
+                                required
+                                type="text"
+                                value={city}
+                                onChange={this.onChangeCity}
+                                placeholder={t("Город")} />
+                        </div>
+
+                        <div className="form-item">
+                            <div className="custom-control custom-checkbox mt-4">
+                                <input
+                                    type="checkbox"
+                                    className="custom-control-input"
+                                    id="terms-agree"
+                                    checked={termsAgree}
+                                    onChange={this.onChangeTermsAgree}
+                                    required
+                                />
+                                <label className="custom-control-label" htmlFor="terms-agree">
+                                    {t("Я согласен с условиями обработки персональных данных")}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="form-item flex-center">
+                            <SpinnerButton className="e-button primary" disabled={!validationPassed} spinner={isLoading}>
+                                {t("Зарегистрироваться")}
+                            </SpinnerButton>
+                        </div>
+                        
+                        <div className="form-item flex-center">
+                            <Link className="form-link" to="/password-recovery">
+                                {t("Забыли пароль?")}
+                            </Link>
+                        </div>
+                        
+                        <div className="form-item flex-center">
+                            <Link className="form-link" to="/login">
+                                {t("Уже зарегистрированы?")}
+                            </Link>
+                        </div>
+                    </form>
+                </Fade>
             </div>
-
-            <button
-              disabled={
-                passwordRepeatedError ||
-                email == "" ||
-                password == "" ||
-                passwordRepeated == "" ||
-                company == "" ||
-                termsAgree == "" ||
-                disableForm
-              }
-              className="white-button login-btn">
-              {t("РЕГИСТРАЦИЯ")}
-            </button>
-          </div>
-          <Link className="passrec-link" to="/password-recovery">
-            {t("забыли пароль?")}
-          </Link>
-        </form>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 class RegistrationContainer extends React.Component {
-  render() {
-    return <Registration {...this.props} />;
-  }
+    render() {
+        return <Registration {...this.props} />;
+    }
 }
 
 const mapStateToProps = ({ user }) => {
-  return {
-    user,
-  };
+    return {
+        user,
+    };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-  return {
-    addUser: (user) => apiService.addUser(user),
-  };
+    return {
+        addUser: (user) => apiService.addUser(user),
+    };
 };
 
 export default compose(
-  withTranslation(),
-  withApiService(),
-  connect(mapStateToProps, mapDispatchToProps)
+    withTranslation(),
+    withApiService(),
+    connect(mapStateToProps, mapDispatchToProps)
 )(RegistrationContainer);

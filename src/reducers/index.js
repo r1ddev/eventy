@@ -8,6 +8,7 @@ import notifications from './notifications';
 import timers from './timers';
 import floatvideo from './floatvideo';
 import adminusers from './adminusers';
+import alley from './alley';
 
 
 export default combineReducers({
@@ -20,4 +21,5 @@ export default combineReducers({
     timers,
     floatvideo,
     adminusers,
+    alley,
 })

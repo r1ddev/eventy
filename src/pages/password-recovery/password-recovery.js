@@ -8,85 +8,109 @@ import { Link } from "react-router-dom";
 import ErrorIndicator from "../../components/error-indicator";
 
 import { withTranslation } from "react-i18next";
+import SpinnerButton from './../../components/spinner-button/index';
+
+import posed from 'react-pose';
+
+const Fade = posed.div({
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1
+    }
+})
 
 class PasswordRecovery extends React.Component {
-  state = {
-    email: "",
-    disableForm: false,
-  };
+    state = {
+        email: "",
+        isLoading: false
+    };
 
-  onChangeEmail = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
-  };
-
-  onSubmit = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      disableForm: false,
-    });
-
-    this.props
-      .recoverPassword(this.state.email)
-      .then((res) => {
-        this.props.history.push("/login");
-      })
-      .catch((err) => {
-        // console.log(err.message);
+    onChangeEmail = (e) => {
         this.setState({
-          disableForm: false,
+            email: e.target.value,
         });
-      });
-  };
+    };
 
-  render() {
-    const t = this.props.t;
-    const { email, disableForm } = this.state;
+    onSubmit = (e) => {
+        e.preventDefault();
 
-    return (
-      <div id="password-recovery">
-        <form onSubmit={this.onSubmit} className="password-recovery-form">
-          <div className="password-recovery-form--wrapper">
-            <div className="password-recovery-form--caption">{t("Восстановление пароля")}</div>
-            <input
-              required
-              type="email"
-              value={email}
-              onChange={this.onChangeEmail}
-              className="email-input"
-              placeholder="e-mail"></input>
-          </div>
-          <button disabled={email == "" || disableForm} className="white-button login-btn">
-            {t("ВОССТАНОВИТЬ")}
-          </button>
-        </form>
-      </div>
-    );
-  }
+        this.setState({
+            isLoading: true,
+        });
+
+        this.props
+            .recoverPassword(this.state.email)
+            .then((res) => {
+                ErrorIndicator("Новый пароль отправлен на указанную почту")
+                this.props.history.push("/login");
+            })
+            .catch((err) => {
+                // console.log(err.message);
+                this.setState({
+                    isLoading: false,
+                });
+            });
+    };
+
+    render() {
+        const t = this.props.t;
+        const { email, isLoading } = this.state;
+
+        const validationPassed = email.length > 0 &&
+            !isLoading
+
+        return (
+            <div id="password-recovery">
+                <Fade initialPose="hidden" pose="visible" className="flex-center w-100 h-100">
+                    <form onSubmit={this.onSubmit} className="password-recovery-form">
+                        
+                        <div className="password-recovery-form--caption">{t("Восстановление пароля")}</div>
+                        
+                        <div className="form-item">
+                            <label htmlFor="">{t("Email")}*</label>
+                            <input
+                                required
+                                type="email"
+                                value={email}
+                                onChange={this.onChangeEmail}
+                                className="email-input"
+                                placeholder="E-mail" />
+                        </div>
+
+                        <div className="form-item flex-center">
+                            <SpinnerButton className="e-button primary" disabled={!validationPassed} spinner={isLoading}>
+                                {t("ВОССТАНОВИТЬ")}
+                            </SpinnerButton>
+                        </div>
+                    </form>
+                </Fade>
+            </div>
+        );
+    }
 }
 
 class PasswordRecoveryContainer extends React.Component {
-  render() {
-    return <PasswordRecovery {...this.props} />;
-  }
+    render() {
+        return <PasswordRecovery {...this.props} />;
+    }
 }
 
 const mapStateToProps = ({ user }) => {
-  return {
-    user,
-  };
+    return {
+        user,
+    };
 };
 
 const mapDispatchToProps = (dispatch, { apiService }) => {
-  return {
-    recoverPassword: (email) => apiService.recoverPassword(email),
-  };
+    return {
+        recoverPassword: (email) => apiService.recoverPassword(email),
+    };
 };
 
 export default compose(
-  withTranslation(),
-  withApiService(),
-  connect(mapStateToProps, mapDispatchToProps)
+    withTranslation(),
+    withApiService(),
+    connect(mapStateToProps, mapDispatchToProps)
 )(PasswordRecoveryContainer);

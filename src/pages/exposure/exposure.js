@@ -20,8 +20,7 @@ class Exposure extends React.Component {
         <Link
           key={partner.id}
           to={`exposure/${partner.id}`}
-          className="card"
-          onClick={() => this.props.postUrl(partner.link)}>
+          className="card">
           <div className="row head m-0">
             <div className="col-sm-4 logo flex-center">
               <img src={partner.logo} alt="" />

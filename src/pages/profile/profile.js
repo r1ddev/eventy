@@ -52,21 +52,21 @@ class Registration extends React.Component {
           .getUserDataById(this.props.match.params.id)
           .then((res) => {
             this.setState({
-              avatar: res.user.avatar,
-              name: res.user.first_name,
-              lastName: res.user.last_name,
-              company: res.user.company,
-              position: res.user.position,
-              phone: res.user.phone,
-              email: res.user.email,
-              soc: res.user.social_site,
-              what_looking: res.user.what_looking,
-              what_offer: res.user.what_offer,
+              avatar: res.avatar,
+              firstName: res.first_name,
+              lastName: res.last_name,
+              company: res.company,
+              phone: res.phone,
+              email: res.email,
+              site: res.site,
+              facebook: res.facebook,
+              what_looking: res.what_looking,
             });
 
             this.setLoading(false);
           })
           .catch((e) => {
+            console.log(e);
             api.errorHandler(e, {
               public_user_not_found: () => {
                 this.setLoading(false);

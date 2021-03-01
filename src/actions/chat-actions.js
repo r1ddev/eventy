@@ -43,14 +43,14 @@ const addMessage = (message) => {
 const fetchMessages = (apiService, dispatch) => (chatId) => {
     dispatch(chatRequested());
     apiService.getMessages(chatId)
-        .then((data) => dispatch(chatLoaded(data.messages)))
+        .then((data) => dispatch(chatLoaded(data)))
         .catch((err) => dispatch(chatError(err)));
 };
 
 const updateMessages = (apiService, dispatch) => (chatId, id) => {
     dispatch(chatUpdateRequested())
     apiService.updateMessages(chatId, id)
-        .then((data) => { dispatch(chatUpdated(data.messages)) })
+        .then((data) => { dispatch(chatUpdated(data)) })
         .catch((err) => { dispatch(chatError(err)) });
 };
 

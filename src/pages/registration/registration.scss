@@ -1,118 +1,113 @@
 @import "../../variables.scss";
 
 #registration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color:  #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  #EAE5DB;
 
     .registration-form{
-      width: 550px;
-      // height: 660px;
-      max-height: 100vh;
-      background: $base-color;
-      border-radius: 45px;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .registration-form--wrapper{
-        width: 75%;
-        flex-grow: 1;
-        min-width: 50%;
-        font-family: "FuturaBookC";
-
+        padding: 50px 70px;
+        background: #ffffff;
+        border-radius: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+
+        @media screen and (max-width: 660px){
+            padding: 50px 35px;
+            margin: 10px;
+        }
+            
         .registration-form--caption{
-          margin-top: 10vh;
-          font-size: 36px;
-          line-height: 47px;
-          text-align: center;
-          color: #FFFFFF;
+            font-size: 30px;
+            text-align: center;
+            color: #222629;
+            font-weight: bold;
         }
 
+        .form-item {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            @media screen and (max-width: 660px) {
+                flex-direction: column;
+            }
+            
 
+            &>label {
+                margin: 0;
+                flex-basis: 25%;
+                max-width: 25%;
+                
+                @media screen and (max-width: 660px) {
+                    flex-basis: 1;
+                    max-width: unset;
+                    width: 100%;
+                }
+            }
 
-        &>input{
-          width: 100%;
-          margin-top: 20px;
+            &>input{
+                flex-basis: 75%;
+                max-width: 75%;
+                width: 100%;
+                display: block;
+                border-radius: 20px;
+                padding: 5px 15px;
+                border: 1px solid #CED0D3;
+                font-size: 18px;
+                color: black;
+                outline: none;
+                transition: .2s;
 
-          font-family: "FuturaBookC";
-          display: block;
-          width: 100%;
-          margin-top: 20px;
-          border-radius: 8px;
-          height: 37px;
-          padding: 0 10px 0 10px;
-          border: 0px;
-          font-size: 20px;
-          box-sizing: border-box;
-          color: black;
-        }
+                @media screen and (max-width: 660px) {
+                    flex-basis: 1;
+                    max-width: unset;
+                    width: 100%;
+                }
 
-        input:focus{
-            outline: none;
+                &:focus {
+                    border: 1px solid #00aaff;
+                }
+            }
+
+            .form-link {
+                font-size: 18px;
+                color: #00aaff;
+            }
+
+            .e-button {
+                font-size: 18px;
+
+                .my-spinner {
+                    .text-success {
+                        color: #fff !important;
+                    }
+                }
+            }
         }
 
         input.error-input{
-          color:#FF6D00;
-          border: 2px solid #FF6D00;
+            color:#FF6D00;
+            border: 2px solid #FF6D00;
         }
 
         .error-message{
-          margin: 5px;
-          font-size: 17px;
-          color: #fff2cc;
-        }
-
-        .reg-select{
-          font-family: "FuturaBookC";
-          font-size: 20px;
-          width: 100%;
-          margin-top: 20px;
-
-          .css-yk16xz-control{
-            border-radius: 8px;
-          }
-
-          .css-g1d714-ValueContainer{
-            padding: 0 8px;
-
-          }
+            margin: 5px;
+            font-size: 17px;
+            color: #fff2cc;
         }
 
         .custom-control-label {
-          color: #F5F5F5;
+            color: #818486;
         }
 
-        .login-btn{
-          margin-top: 50px;
-          font-family: "FuturaDemiC";
-        }
-
-        .reg-link{
-          text-decoration: none;
-          color: white;
-          font-size: 26px;
-          margin: 10px;
-        }
-      }
-      
-      .passrec-link{
-          text-decoration: none;
-          color: white;
-          font-size: 26px;
-          margin: 20px;
-          text-align: center;
-      }
     }
-  
 }
 
-	
+    

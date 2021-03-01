@@ -14,6 +14,7 @@ import Networking from "./pages/networking";
 import Quest from "./pages/quest/quest";
 import PresentationsList from './pages/presentations-list/index';
 import ConversationsRoom from "./pages/conversations-room";
+import Alley from './pages/alley';
 import { connect } from 'react-redux';
 import { compose } from './utils';
 import api from './js/api';
@@ -43,7 +44,8 @@ class App extends React.Component {
 			// window.location.href = "http://" + host + pathname
 		}
 
-		
+		let timeZoneOffset = new Date().getTimezoneOffset() / -60
+		api.account.updateUserData({ timezone: timeZoneOffset })
 	}
 
 	componentWillUnmount() {
@@ -67,6 +69,7 @@ class App extends React.Component {
 						<Route exact path="/presentations" component={Presentations} />
 						<Route exact path="/presentations/:folder" component={PresentationsList} />
 						<Route exact path="/scenes" component={Scenes} />
+						<Route exact path="/alley" component={Alley} />
 						<Route exact path="/messages" component={Messages} />
 						<Route exact path="/messages/:id" component={Messages} />
 						<Route exact path="/exposure" component={Exposure} />

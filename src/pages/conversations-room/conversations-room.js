@@ -106,7 +106,6 @@ class СonversationsRoom extends React.Component {
       isModer: isModer
     })
 
-    console.log(isModer);
   }
 
 	componentDidMount () {
@@ -157,7 +156,7 @@ class СonversationsRoom extends React.Component {
 
 	updateRoomStatus = () => {
 		api.account.conversations
-			.updateRoomStatus(this.props.room.room_id)
+			.updateRoomStatus(this.props.room.id)
 			.then((res) => {
 				this.setState({
 					onlineUsers: res,
@@ -166,7 +165,7 @@ class СonversationsRoom extends React.Component {
 			.catch((e) => {
 				api.errorHandler(e, {
 					access_denied: () => {
-            this.goBack();
+            this.props.goBack();
             ErrorIndicator(this.props.t("Комната недоступна"))
           },
 				});
@@ -177,9 +176,7 @@ class СonversationsRoom extends React.Component {
 		}, this.props.timers.conversationsTimer);
   };
 
-  goBack = () => {
-    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
-  };
+  
 
   toggleChat = () => {
     this.setState({
@@ -207,13 +204,15 @@ class СonversationsRoom extends React.Component {
   kickUser = (e, userId) => {
     let res = window.confirm(this.props.t("Заблокировать пользователю доступ к разделу?"))
     if (res) {
-      api.account.rules.conversations.kickUser(this.props.room.room_id, userId).then(res => {
-        this.setState({
-          onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
+      api.account.rules.conversations
+        .kickUser(this.props.room.id, userId)
+        .then(res => {
+          this.setState({
+            onlineUsers: this.state.onlineUsers.filter(u => u.id != userId)
+          })
+        }).catch(e => {
+          api.errorHandler(e, {})
         })
-      }).catch(e => {
-        api.errorHandler(e, {})
-      })
     }
     e.preventDefault();
   }
@@ -345,31 +344,52 @@ class СonversationsRoomContainer extends React.Component {
   }
   
   loadRooms = async () => {
-    if (!this.props.conversations.isLoaded) {
-			let rooms = await api.account.conversations.getRooms()
-      this.props.conversationRoomsLoaded(rooms);
-    }
+    // if (!this.props.conversations.isLoaded) {
+		// 	let rooms = await api.account.conversations.getRooms()
+    //   this.props.conversationRoomsLoaded(rooms);
+    // }
 
-    let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
+    api.account.conversations
+      .getRoomById(this.props.match.params.room)
+      .then(res => {
+        let room = res.filter(c => c.lang == Langs.getCurrentLang())
 
-    if (currentRoom) {
-      this.setState({
-        room: currentRoom,
-      });
-    }
+        this.setState({
+          room: room[0],
+        });
+      })
+      .catch(e => {
+        api.errorHandler(e, {
+          access_denied: () => {
+            this.goBack();
+            ErrorIndicator(this.props.t("Комната недоступна"))
+          },
+        })
+      })
+
+    // let currentRoom = this.props.conversations.rooms.filter(c => c.lang == Langs.getCurrentLang()).find((r) => r.room_id == this.props.match.params.room);
+
+    // if (currentRoom) {
+    //   this.setState({
+    //     room: currentRoom,
+    //   });
+    // }
   }
+
+  goBack = () => {
+    this.props.history.length == 1 ? window.close() : this.props.history.goBack();
+  };
 
 	render() {
 		let loading = true;
-    const { isLoaded: roomsLoading } = this.props.conversations;
     const { loading: userLoading, data: userData  } = this.props.user;
     
     const room = this.state.room;
-    loading = !roomsLoading || !room || !userData;
+    loading = !room || !userData;
 
 		return (
 			<div style={{ height: "100%", width: "100%" }}>
-				{!loading && <СonversationsRoom {...this.props} room={room} />}
+				{!loading && <СonversationsRoom {...this.props} room={room} goBack={this.goBack} />}
 				{loading && <Spinner big={1} />}
 			</div>
 		);

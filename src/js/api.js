@@ -37,32 +37,10 @@ const api = {
 		getAvatarLocation() {
 			return `${api.imagesHost}/avatar/`;
 		},
-		editProfile: async (
-			name,
-			lastName,
-			company,
-			position,
-			phone,
-			email,
-			shareContact,
-			soc,
-			what_looking,
-			what_offer
-		) => {
+		editProfile: async (user) => {
 			let response = await axios.put(
 				api.proxy + api.host + "/v3/users",
-				{
-					first_name: name,
-					last_name: lastName,
-					company: company,
-					position: position,
-					phone: phone,
-					email: email,
-					social_site: soc,
-					what_looking: what_looking,
-					what_offer: what_offer,
-					view_contact: shareContact - 0,
-				},
+				user,
 				api.useAuth()
 			);
 
@@ -77,9 +55,24 @@ const api = {
 			);
 			return response.data;
 		},
+		async updateUserData(data) {
+			let response = await axios.put(
+				api.proxy + api.host + "/v3/users",
+				data,
+				api.useAuth()
+			);
+			return response.data;
+		},
+		async getUsers() {
+			let response = await axios.get(
+				api.proxy + api.host + "/v3/users",
+				api.useAuth()
+			);
+			return response.data;
+		},
 		async getUserDataById(userId) {
 			let response = await axios.get(
-				api.proxy + api.host + "/users/public/get/" + userId,
+				api.proxy + api.host + "/v3/users/" + userId,
 				api.useAuth()
 			);
 			return response.data;
@@ -101,18 +94,16 @@ const api = {
 			},
 			async getMessages(userId) {
 				let response = await axios.get(
-					api.proxy + api.host + "/personal/messages/from/" + userId,
+					api.proxy + api.host + `/v3/messages/${userId}`,
 					api.useAuth()
 				);
 				return response.data;
 			},
 			async sendMessages(userId, text) {
 				let response = await axios.post(
-					api.proxy + api.host + "/personal/messages",
-					api.toFormData({
-						user_id: userId,
+					api.proxy + api.host + `/v3/messages/${userId}`, {
 						text: text,
-					}),
+					},
 					api.useAuth()
 				);
 				return response.data;
@@ -127,7 +118,19 @@ const api = {
 					).then(res => {
 						resolve(res.data)
 					}).catch(e => {
-						reject()
+						reject(e)
+					})
+				})
+			},
+			async getRoomById(roomId) {
+				return new Promise((resolve, reject) => {
+					axios.get(
+						`${api.proxy}${api.host}/v3/conversations/${roomId}`,
+						api.useAuth()
+					).then(res => {
+						resolve(res.data)
+					}).catch(e => {
+						reject(e)
 					})
 				})
 			},
