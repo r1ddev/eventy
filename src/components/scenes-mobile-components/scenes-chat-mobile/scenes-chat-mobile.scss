@@ -1,3 +1,4 @@
+@import "../../../variables.scss"; 
 
 #scenes-chat-mobile{
   
@@ -29,6 +30,11 @@
   overflow: hidden;
   transition: height 200ms;
 
+  font-family: "Lato";
+  // font-weight: 400;
+   font-size: 15px;
+  // text-align: left;
+
   &.hidden{
     height: 0px;
     min-height: 0px;
@@ -37,7 +43,9 @@
   }
 
   .item{
+    // flex-grow: 1; для одного
     width: 33.3%;
+
     background-color: #e4e4e4;
     line-height: 1;
     display: flex;
@@ -58,14 +66,14 @@
   }
 
   .arrow-btn{
-    width: 65px;
+    width: 50px;
     border-radius: 2px;
     background-image: url(../../../images/menu/arrow-white-btn.svg);
     background-position: center center;
     background-repeat: no-repeat;
     transform: rotate(180deg);
     transition: 400ms;
-    background-color: #c9d0cc;
+    background-color: $base-color;
     z-index: -0;
 
 
@@ -129,6 +137,13 @@
       border-radius: 2px;
     }
 
+    .umf{
+      color: white;
+      background: $base-color;
+      border-radius: 8px;
+      padding: 0 10px;
+    }
+
     &.replied{
 
       border-left: 4px solid #ccc9c9;
@@ -144,7 +159,6 @@
         padding-left: 10px;
         background-color: #e4e4e4;
         border-radius: 4px;
-        
       }
     }
 
@@ -165,7 +179,7 @@
       .message-reply-btn{
         cursor: pointer;
         padding-left: 2px;
-      line-height: 1.2;
+        line-height: 1.2;
       }
     }
 
@@ -173,7 +187,7 @@
 }
 .message-input{
   display: flex;
-  height: 55px;
+  height: 50px;
   flex-direction: row;
   align-items: center;
   overflow: hidden;
@@ -194,12 +208,13 @@
   }
 
   &>input{
-    font-family: "FuturaBookC";
+    font-family: "Lato";
+	  font-weight: 400;
     display: block;
     width: calc(100% - 10px);
-    margin: 5px;
+    margin: 0px;
     border-radius: 2px;
-    height: 45px;
+    height: 100%;
     padding: 0 10px 0 10px;
     border: 0px;
     font-size: 20px;
@@ -212,14 +227,13 @@
   }
 
   .send-btn{
-    width: 65px;
-    height: 45px;
-    border-radius: 2px;
-    background-color: #c9d0cc;
+    width: 55px;
+    height: 100%;
+    background-color: $base-color;
     background-image: url(../../../images/icons/send-btn.svg);
     background-position: center center;
     background-repeat: no-repeat;
-    margin-right: 5px;
+    background-size: 20px;
     border: 0px;
     outline: none;
   }

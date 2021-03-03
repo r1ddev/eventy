@@ -7,6 +7,15 @@ export default class Rules {
 		return range == 7;
 	}
 
+	static isSponsor (range) {
+		return range == 5;
+	}
+
+	static isAdvert (range) {
+		return range == 4;
+	}
+
+
 	getCurrentRoute () {
 		return window.location.pathname.substring(1)
 	}
@@ -14,8 +23,16 @@ export default class Rules {
 	getCurrentPageRules (userRule) {
 		let currentRoute = this.getCurrentRoute();
 
+		return this.getOnPageRules(currentRoute, userRule)
+	}
+
+	getOnPageRules (route, userRule) {
 		return userRule.filter(rule => {
-			return new RegExp(`^${rule.route}$`).test(currentRoute)
+			if (rule.is_regex) {
+				return new RegExp(rule.route.slice(1,-1)).test(route)
+			} else {
+				return new RegExp(`^${rule.route}$`).test(route)
+			}
 		})
 	}
 
@@ -23,4 +40,9 @@ export default class Rules {
 		let rules = this.getCurrentPageRules(userRule)
 		return rules.filter(rule => Rules.isModerator(rule.range_type)).length > 0
 	}
-}
+
+	isModeratorOn (page, userRule) {
+		let rules = this.getOnPageRules(page, userRule)
+		return rules.filter(rule => Rules.isModerator(rule.range_type)).length > 0
+	}
+} 
