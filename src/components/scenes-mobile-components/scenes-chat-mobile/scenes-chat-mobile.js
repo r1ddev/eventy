@@ -62,7 +62,7 @@ class ScenesChatMobile extends React.Component {
   render() {
 
     const { isOpen, activeInput, replyAttachment, replyAttachmentData } = this.state;
-    const { loading, messages, setItem, sendMessage, survey, t, userbanned } = this.props;
+    const { loading, messages, setItem, sendMessage, survey, t, userbanned, chatname } = this.props;
 
     let chatMobileClasses = '';
     if (isOpen) chatMobileClasses = 'isOpen';
@@ -73,6 +73,7 @@ class ScenesChatMobile extends React.Component {
         {(!isMobileSafari && !isIOS) &&
           <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
             <CheckChatPanel
+              chatname={chatname}
               onOpen={this.onOpen}
               onClose={this.onClose}
               isVisible={!activeInput}
@@ -110,6 +111,7 @@ class ScenesChatMobile extends React.Component {
         {(isMobileSafari || isIOS) &&
           <div id="scenes-chat-mobile" className={chatMobileClasses}> {/* isOpen - Чаты открыты*/}
             <CheckChatPanel
+              chatname={chatname}
               onOpen={this.onOpen}
               onClose={this.onClose}
               isVisible={true}
@@ -234,7 +236,7 @@ class MessageItem extends React.Component {
 
   render() {
 
-    const { id, first_name, last_name, range, message, avatar, time, reply } = this.props.item;
+    const { id, user_id, first_name, last_name, range, message, avatar, time, reply } = this.props.item;
     const { onSetReplyAttachment, t } = this.props;
     let origin = api.origin;
     let newAvatar = api.auth.getAvatarLocation() + avatar;
@@ -257,8 +259,9 @@ class MessageItem extends React.Component {
         }
         <div className={(reply) ? "message-item bordered" : (ad ? "message-item ad" : "message-item")}>
           <img alt="" src={newAvatar} />
+       
           <div className='text'>
-            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">Host</span>}
+            <span><Translit value={first_name + ' ' + last_name + ' '} /></span>{(sponsor) && <span className="umf">Организатор</span>}
             <div className='mes-text'>
             <Linkify> 
               {message}
@@ -436,7 +439,7 @@ class CheckChatPanel extends React.Component {
           {t('Общий чат')}
         </div>
         
-        <div
+         <div
           className={(activeItem === itemList[3]) ? 'item active' : 'item'}
           onClick={() => this.onChangeItem(itemList[3])}
         >
@@ -448,7 +451,7 @@ class CheckChatPanel extends React.Component {
           onClick={() => this.onChangeItem(itemList[1])}
         >
           {t('Вопросы спикеру')}
-        </div>
+        </div> 
 
 
         <div

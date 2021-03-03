@@ -97,10 +97,6 @@ class AdminPanelCancelalleyTab extends React.Component {
 		let userlist = null;
 		let roomlist = null;
 
-		let origin = api.origin;
-
-		
-
 		roomlist=(rooms)=>{
 			return rooms.map((room)=>{
 				return(
@@ -200,11 +196,13 @@ class AdminPanelCancelalleyTabContainer extends React.Component {
 		let errorUserPermissions = false;
 		if (user) errorUserPermissions = error || (!new Rules().isModeratorHere(this.props.user.user.rules)); //moderator
 
+		console.log(this.props.adminalleyusers)
+
 
 		return (
 			<>
 				{!loading && !errorUserPermissions && <AdminPanelCancelalleyTab {...this.props} loading={loading} />}
-				{loading || errorUserPermissions && <Spinner big={1} />}
+				{(loading || errorUserPermissions) && <Spinner big={1} />}
 			</>
 		);
 	}
@@ -225,7 +223,7 @@ const mapDispatchToProps = (dispatch, { apiService }) => {
 	};
 };
 
-export default compose(
+  export default compose(
 	withTranslation(),
 	withApiService(),
 	connect(mapStateToProps, mapDispatchToProps)

@@ -100,7 +100,7 @@
     // justify-content: center;
     align-items: center;
     // cursor: pointer;
-    background: whitesmoke;
+    background: white;
 }
 
 #scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(1) {
@@ -108,19 +108,21 @@
 }
 
 #scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(2) {
-	border-top: 4px solid #f4004d;
+	// border-top: 4px solid #f4004d;
 }
 
 #scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(3) {
-	border-top: 4px solid #ffe800;
+	// border-top: 4px solid #ffe800;
 }
 
 #scenes-chat .tab-label {
-	font-size: 21px;
+	font-size: 15px;
 	font-family: "Lato";
 	font-weight: 400;
 	line-height: 23px;
 	padding-left: 10px;
+	text-align: center;
+	cursor: pointer;
 }
 
 #scenes-chat .button.send-mes-btn {

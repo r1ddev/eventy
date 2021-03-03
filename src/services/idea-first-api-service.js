@@ -307,6 +307,34 @@ export default class IdeaFirstApiService {
         })
     }
 
+    getAlleyUsers() {
+
+        return new Promise((resolve, reject) => {
+            axios.get(this.host + `/v3/conversations/chedule`, this.useAuth())
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(error => { reject(error); }
+
+                )
+        })
+    }
+
+    adminCancelAlley(room_id, slot) {
+        return new Promise((resolve, reject) => {
+
+            axios.patch(this.host + `/v3/conversations-alley/${room_id}/chedule`, {
+                place_id: slot,
+                type:'cancel'
+            },this.useAuth())
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(error => { reject(error) }
+                )
+        })
+    }
+
     //экспо
 
     getExpoPartnerInfo(id){

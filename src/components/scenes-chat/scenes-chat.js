@@ -7,7 +7,7 @@ import Linkify from "react-linkify";
 import { Link } from "react-router-dom";
 import api from "./../../js/api";
 import Translit from "../../components/translit";
-
+import Rules from "../../utils/rules";
 
 class ScenesChat extends React.Component {
 	state = {
@@ -82,6 +82,7 @@ class ScenesChat extends React.Component {
 			loading,
 			isPrivate,
 			userbanned,
+			chatname,
 			t = (val) => val //перевод
 		} = this.props;
 
@@ -228,11 +229,12 @@ class MessageItem extends React.Component {
 							<span
 								className="mes-info-status"
 								style={{
-									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${sponsor ? "#22D671" : "white"
-										}`,
+									padding: `${Rules.isSponsor(reply.range) ? "3px 10px" : "0px"}`,
+									backgroundColor: `${Rules.isSponsor(reply.range) ? "#1dacfc" : "white"}`,
+									color: 'white',
+									borderRadius: '5px'
 								}}>
-								{sponsor ? "UMF" : ""}
+								{Rules.isSponsor(reply.range) ? "Организатор" : ""}
 							</span>
 						</Link>
 						<div className="mes-info-content">
@@ -256,6 +258,7 @@ class MessageItem extends React.Component {
 										: {}
 								}></div>
 						</Link>
+							
 					</div>
 
 					<div className="mes-info">
@@ -268,11 +271,12 @@ class MessageItem extends React.Component {
 							<span
 								className="mes-info-status"
 								style={{
-									padding: `${sponsor ? "5px" : "0px"}`,
-									backgroundColor: `${sponsor ? "#22D671" : "white"
-										}`,
+									padding: `${sponsor ? "3px 10px" : "0px"}`,
+									backgroundColor: `${sponsor ? "#1dacfc" : "white"}`,
+									color: 'white',
+									borderRadius: '5px',
 								}}>
-								{sponsor ? "UMF" : ""}
+								{sponsor ? "Организатор" : ""}
 							</span>
 						</Link>
 						<div className="mes-info-content">
