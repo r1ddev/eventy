@@ -1,7 +1,7 @@
-#admin-panel {
+#admin-panel-cancelalley-tab {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex-grow: 1;
 
   font-size: 1.2rem; 
   color: gray;
@@ -34,21 +34,6 @@
   .header{
     background-color: white;
     min-height: 50px;
-    display: flex;
-    flex-direction: row;
-
-    .tab-item{
-      padding: 15px;
-      background-color: #888;
-      color: white;
-      cursor: pointer;
-
-      &.active{
-        background-color: #eee;
-        color: black;
-      }
-    }
-
     p{
       padding: 15px;
     }
@@ -67,13 +52,48 @@
       overflow: auto;
 
       .user-item{
-        display: grid;
-        grid-template-columns: 100px 30px 1fr 1fr 200px;
-        grid-template-rows: 30px;
+        display: flex;
+        flex-direction: column;
         width: 100%;
+        
+
 
         &.blocked{
           background-color: rgb(245, 210, 245);
+        }
+
+        .user-info{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+
+          &>div{
+          margin-right: 15px; 
+          }
+        }
+
+        .room-list{
+          display: flex;
+          flex-direction: row;
+
+          .room-item{
+            background-color: white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 4px;
+
+            .room-name{
+              font-size: 17px;
+            }
+
+            .time{
+              font-size: 17px;
+              padding: 3px;
+              border-radius: 4px;
+              color: white;
+              background-color: cornflowerblue;
+            }
+          }
         }
 
         div{

@@ -4,7 +4,15 @@
 	width: 100%;
 	height: 100%;
 	display: flex;
+	flex-direction: column;
+}
+
+#scenes .content-wrapper{
+	width: 100%;
+	flex-grow: 1;
+	display: flex;
 	flex-direction: row;
+	overflow: hidden;
 }
 
 #scenes .scenes-translation {
@@ -15,7 +23,7 @@
 	flex-direction: column;
 	overflow: auto;
 	flex-grow: 1;
-	overflow: hidden;
+	overflow: auto;
 }
 
 #scenes .translation-header {
@@ -26,15 +34,17 @@
 	flex-direction: row;
 	justify-content: space-between;
 	min-height: 74px;
+	background: white;
 }
 
 #scenes .translation-content {
 	width: 100%;
+	max-width: 900px;
 }
 
 #scenes .translation-footer {
 	flex-grow: 1;
-	overflow: auto;
+	// overflow: auto;
 }
 
 #scenes .scenes-chat {
@@ -44,6 +54,37 @@
 	background-color: white;
 	display: flex;
 	flex-direction: column;
+	position: relative;
+
+
+	.pull{
+		background-color: #ffffff;
+		border-radius: 2px;
+		position: absolute;
+		top: 70px;
+		width: 100%;
+		z-index: 10;
+		border: 1px solid #cccccc;
+
+		height: 380px;
+
+		#scenes-video{
+			height: 100% !important;
+
+			.translation-content{
+				height: 100% !important;
+
+				.video-container{
+					height: 100% !important;
+					padding-top: 0% !important;
+
+					iframe{
+						height: 100% !important;
+					}
+				}
+			}
+		}
+	}
 }
 
 .translation-header > .scene-item {
@@ -65,29 +106,28 @@
 
 .scene-item .scene-btn,
 .scene-item .scene-btn-active {
-	font-family: "Gilroy";
-	font-weight: bold;
-	color: black;
-	width: 40%;
-	min-width: 100px;
-	height: 100%;
-	background-color: white;
-	font-size: 20px;
-	line-height: 1.3vw;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	transition: 0.2s;
-	box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.09);
-	border-radius: 10px;
-	text-align: center;
+	font-family: "Lato";
+    font-weight: 400;
+    color: black;
+    width: 70%;
+    min-width: 100px;
+    height: 100%;
+    background-color: white;
+    font-size: 21px;
+    line-height: 1.3vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.09); */
+    /* border-radius: 10px; */
+    text-align: center;
 }
 
 .scene-item .scene-btn-active {
-	background-color: $base-color;
-	color: white;
+	color:  #1dacfc;
+	border-bottom: 3px solid #1dacfc;
 }
 
 .scene-item .scene-status {
@@ -136,7 +176,8 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	border: 1px solid rgb(199, 199, 199);
+	border: 1px solid #e8e8e8;
+	border-top: none;
 	background: #fff;
 }
 
@@ -145,7 +186,7 @@
 }
 
 @media screen and (max-width: 900px) {
-	#scenes {
+	#scenes .content-wrapper {
 		flex-direction: column;
 	}
 	#scenes .scenes-translation {

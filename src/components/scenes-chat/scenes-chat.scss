@@ -86,25 +86,25 @@
 	background-color: #f1f2f5;
 	overflow: hidden;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	cursor: pointer;
-	border-right: 1px solid #d1d1d1;
+	// cursor: pointer;
+	// border-right: 1px solid #d1d1d1;
 	transition: 100ms;
 
 }
 #scenes-chat .chat-tabs .chat-tab-item-active {
+	
 	flex-grow: 1;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    // cursor: pointer;
+    background: whitesmoke;
 }
 
 #scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(1) {
-	border-top: 4px solid #c3d600;
+	// border-top: 4px solid #c3d600;
 }
 
 #scenes-chat .chat-tabs > .chat-tab-item-active:nth-child(2) {
@@ -116,13 +116,11 @@
 }
 
 #scenes-chat .tab-label {
-	text-align: center;
-	font-family: "FuturaBookC";
-	font-style: normal;
-	font-weight: normal;
-	font-size: 16px;
-	line-height: 18px;
-	text-align: center;
+	font-size: 21px;
+	font-family: "Lato";
+	font-weight: 400;
+	line-height: 23px;
+	padding-left: 10px;
 }
 
 #scenes-chat .button.send-mes-btn {
@@ -138,7 +136,7 @@
 }
 
 #scenes-chat button.send-mes-btn:active,
-button:focus {
+#scenes-chat button:focus {
 	outline: none;
 	border: 0;
 }
@@ -225,7 +223,7 @@ button:focus {
 	flex-grow: 1;
 	height: 40px;
 	width: 40px;
-	background-image: url(../../images/default-avatar.svg);
+	// background-image: url(../../images/default-avatar.svg);
 	background-position: center;
 	background-size: cover;
 	border-radius: 15px;
@@ -250,9 +248,9 @@ button:focus {
 	margin: 10px 0px;
 }
 .mes-info-name {
-	font-family: "FuturaBookC";
+	font-family: "Lato";
+	font-weight: 400;
 	font-style: normal;
-	font-weight: normal;
 	font-size: 15px;
 	line-height: 16px;
 	color: black;
@@ -265,17 +263,17 @@ a.mes-info-name{
 }
 
 .mes-info-content {
-	font-family: "FuturaBookC";
+	font-family: "Lato";
+	font-weight: 400;
 	font-style: normal;
-	font-weight: normal;
 	font-size: 15px;
-	line-height: 16px;
+	line-height: 19px;
 }
 
 .mes-info-status {
-	font-family: "FuturaBookC";
+	font-family: "Lato";
+	font-weight: 400;
 	font-style: normal;
-	font-weight: normal;
 	font-size: 15px;
 	line-height: 16px;
 	color: #000000;
@@ -293,9 +291,9 @@ a.mes-info-name{
 
 .mes-options .mes-time,
 .mes-options .mes-reply-btn{
-	font-family: "FuturaBookC";
+	font-family: "Lato";
 	font-style: normal;
-	font-weight: normal;
+	font-weight: 400;
 	font-size: 15px;
 	line-height: 16px;
 	color: rgb(100, 100, 100);
@@ -316,7 +314,8 @@ a.mes-info-name{
 	width: calc(100% - 70px);
 	padding:10px 25px; 
 	background-color: whitesmoke;
-	font-family: "FuturaBookC";
+	font-family: "Lato";
+	font-weight: 400;
 
 }
 

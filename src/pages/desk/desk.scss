@@ -1,14 +1,299 @@
+@import "../../variables.scss";
+
+
 #desk {
-	background-color: #1f1e1e;
+	// background-color: #ffffff;
 	position: relative;
+	// background-image: url(../../images/drist.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+
+	.action-link{
+		// display: none;
+	}
+
+	.desk-title{
+		font-family: "Lato";
+		font-size: 30px;
+		color: white;
+		margin: 0;
+		padding-left: 35px;
+	}
 
 	.first-section {
 		position: relative;
-    width: 100%;
-			height: 100vh;
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: cover;
+		flex-grow: 1;
+		width: 100%;
+
+		.wrapper-of-wrapper{
+
+			display: flex;
+			flex-direction: column;
+			// flex-flow: wrap;
+			min-height: 100%;
+
+			.wrapper{
+				display: flex;
+				flex-direction: row;
+			
+				width: 100%;
+
+				@media screen and (max-width: 900px) {
+					flex-direction: column;
+				}
+			}
+
+			.time-panel{
+
+				// margin: 10px 12vw;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				@media screen and (max-width: 500px) {
+					margin: 0;
+				}
+
+				
+
+				.title{
+					font-family: "Lato";
+					font-weight: bold;
+					font-size: 36px;
+					line-height: 300%;
+				}
+	
+				.checker{
+					width: 100%;
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+	
+					.check-item{
+						width: 200px;
+						padding: 15px 0 25px;
+						text-align: center;
+						cursor: pointer;
+						color: black;
+						font-family: "Lato";
+						font-size: 22px;
+
+						@media screen and (max-width: 500px) {
+							font-size: 16px;
+						}
+	
+						&.active{
+							color: $base-color;
+							border-bottom: 3px solid $base-color;
+							// color: #0F4C81;
+						}	
+					}
+				}
+	
+			}
+
+			
+			
+			.timetable{
+				flex-grow: 1;
+				// background: linear-gradient(#ffffff00, #000000 100px, #000000 100%);
+				
+
+				display: flex;
+				flex-direction: column;
+				padding: 2vw;
+				margin:  0 10vw 30px 10vw;
+
+				background: #FFFFFF;
+				box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+				border-radius: 10px;
+				
+				@media screen and (max-width: 500px) {
+					margin: 0;
+				}
+				.stream-title{
+					padding: 10px 15px;
+					font-weight: 400;
+
+					@media screen and (max-width: 500px) {
+						font-size: 17px;
+					}
+				}
+
+
+				.time-list{
+
+					display: flex;
+					flex-direction: column;
+
+					
+
+					.time-item{
+						padding: 15px;
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+
+						// &:first-child{
+						// 	background-color: rgba(15, 76, 129, 0.2);
+						// }
+
+						.time{
+							font-family: "Lato";
+							font-size: 22px;
+							width: 5%;
+
+							@media screen and (max-width: 900px) {
+								font-size: 17px;
+								width: 14%;
+							}
+							@media screen and (max-width: 420px) {
+								font-size: 15px;
+							}
+							@media screen and (max-width: 321px) {
+								font-size: 10px;
+							}
+
+						}
+
+						.desc{
+							font-family: "Lato";
+							font-size: 16px;
+							// flex-grow: 1;
+							padding-left: 40px;
+							width: 80%;
+
+							@media screen and (max-width: 900px) {
+								font-size: 11px;
+							}
+
+							@media screen and (max-width: 800px) {
+								padding-left: 20px;
+							}
+
+							@media screen and (max-width: 321px) {
+								padding-left: 10px;
+							}
+
+							p{
+								font-size: 22px;
+								margin-bottom: 3px;
+
+								@media screen and (max-width: 900px) {
+									font-size: 17px;
+								}
+
+								@media screen and (max-width: 420px) {
+									font-size: 14px;
+								}
+								@media screen and (max-width: 321px) {
+									font-size: 10px;
+								}
+
+								&.first-name{
+									font-size: 14px;
+									font-weight: bold;
+								}
+							}
+
+						
+
+						}
+
+						.name{
+							font-family: "Lato";
+							font-size: 22px;
+							width: 15%;
+
+							p{
+								font-size: 16px;
+								margin-bottom: 3px;
+
+								@media screen and (max-width: 900px) {
+									font-size: 11px;
+								}
+							}
+
+							@media screen and (max-width: 900px) {
+								font-size: 17px;
+							}
+							@media screen and (max-width: 420px) {
+								font-size: 15px;
+							}
+							@media screen and (max-width: 321px) {
+								font-size: 13px;
+							}
+						}
+					}
+				}
+			
+			}
+
+			.title-header{
+				background-color: #EAE5DB;
+				height: 300px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				font-family: "Lato";
+				font-weight: bold;
+				
+				.image{
+					text-align: right;
+
+
+				}
+				img{
+					height: 100%;
+					width: auto;
+				}
+
+				.title{
+					min-width: 400px;
+					padding: 70px 0 0 50px;
+
+				}
+
+
+				.title h1{
+					font-weight: bold;
+					font-size: 60px;
+				}
+
+				.title p{
+					color: #7E7975;
+					font-weight: normal;
+				}
+
+			}
+			
+
+
+		}
+
+		
+
+		.lobby-text{
+			flex-grow: 1;
+		}
+
+		.logo-list-wrap{
+			padding: 40px 3vw;
+				
+			.logo-list{
+				flex-grow: 4;
+				// margin: 40px 3vw;
+				min-width: 60%;
+				object-fit: contain;
+			}
+		}
+		
+		
 
 		img {
 			width: 100%;
@@ -16,25 +301,14 @@
 		}
 	}
 
-	.lobby-text{
-		position: absolute;
-    top: 10px;
-    left: 10px;
-    color: white;
-    z-index: 2;
-    font-family: "FuturaBookC";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 4vw;
-    line-height: 1.5;
-		margin: 10vmin 5vmin;
 		
 		.lobby-lang-checker{
-			margin-top:40px;
+			margin:40px 40px 0 40px;
 			font-size: 20px;
 			color: black;
+
 		}
-	}
+	
 
 	
 
@@ -68,15 +342,7 @@
 	}
 
 	.transparented{
-		background-color: rgba(0, 0, 0, 0.5);
-    border-bottom: 1px solid #403f3f;
+		// background-color: rgba(0, 0, 0, 0.5);
 	}
 }
 
-@media screen and (max-width: 900px) {
-	#desk .lobby-text {
-		font-size: 6vw;
-    line-height: 1.5;
-    margin: 20vmin 5vmin;
-	}
-}

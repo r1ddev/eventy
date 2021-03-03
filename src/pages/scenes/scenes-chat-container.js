@@ -28,6 +28,7 @@ class ScenesChatContainer extends React.Component {
     }
 
 
+
     getCurrentChatId = (sponsor, general, spiker) => {
         if (this.state.activeChat === 'general') return general;
         if (this.state.activeChat === 'spiker') return spiker;
@@ -37,13 +38,13 @@ class ScenesChatContainer extends React.Component {
     sendMessage = (message, reply_id, replyAttachmentData) => {
 
 
-        const { first_name, last_name, avatar, range } = this.props.user;
+        const { id, first_name, last_name, avatar, range } = this.props.user;
 
         const date = new Date;
 
 
         const mes = {
-            user_id: 1,
+            user_id: id,
             first_name: first_name,
             last_name: last_name,
             avatar: avatar,
@@ -149,6 +150,7 @@ class ScenesChatContainer extends React.Component {
                 ref="scenesChat"
                 t={this.props.t}
                 userbanned={userbanned} 
+                chatname={this.props.chatname}
             />
         )
     }

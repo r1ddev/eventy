@@ -58,12 +58,12 @@ class Stikers extends React.Component {
 
     
     reactionUrls = [
-        require("../../images/stikers/heart.svg"),
-        require("../../images/stikers/fire.svg"),
-        require("../../images/stikers/normal.svg"),
-        require("../../images/stikers/sad.svg"),
-        require("../../images/stikers/robot.svg"),
-        require("../../images/stikers/arm.svg"),
+        require("../../images/stikers/1.png"),
+        require("../../images/stikers/1.png"),
+        require("../../images/stikers/3.png"),
+        require("../../images/stikers/4.png"),
+        require("../../images/stikers/5.png"),
+        require("../../images/stikers/6.png"),
     ]
 
 
@@ -158,34 +158,32 @@ class Stikers extends React.Component {
                             <div className="emoji-stikers-list">
 
                                 <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(1)}>
-                                    <img alt="" src={require("../../images/stikers/heart.svg")} />
+                                    <img alt="" src={require("../../images/stikers/1.png")} />
                                 </Stiker>
                                 <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(2)}>
-                                    <img alt="" src={require("../../images/stikers/fire.svg")} />
+                                    <img alt="" src={require("../../images/stikers/2.png")} />
                                 </Stiker>
                                 <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(3)}>
-                                    <img alt="" src={require("../../images/stikers/normal.svg")} />
+                                    <img alt="" src={require("../../images/stikers/3.png")} />
                                 </Stiker>
                                 <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(4)}>
-                                    <img alt="" src={require("../../images/stikers/sad.svg")} />
+                                    <img alt="" src={require("../../images/stikers/4.png")} />
                                 </Stiker>
                                 <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(5)}>
-                                    <img alt="" src={require("../../images/stikers/robot.svg")} />
+                                    <img alt="" src={require("../../images/stikers/5.png")} />
                                 </Stiker>
-                                <Stiker className="emoji-stikers-item" onClick={() => this.onPressReaction(6)}>
-                                    <img alt="" src={require("../../images/stikers/arm.svg")} />
-                                </Stiker>
+                               
 
                                 
                             </div>
                         </div>
                     </div>}
 
-                    {(banner) && <div className="banner-wrapper">
+                    {/* {(banner) && <div className="banner-wrapper">
                         <a onClick={() => api.postUrl(bannerurl)} target="_blank" href={bannerurl} style={{ display: 'block', width: '100%', height: '100%', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundImage: `url(${banner})` }}></a>
                     </div>
-                    }
-
+                    } */}
+{/* 
                     <div className="language-stikers-wrapper" style={{ visibility: (engExists ? 'visible' : 'hidden') }}>
                         <div className="language-stikers">
                             <div className="language-stikers-caption">
@@ -203,7 +201,7 @@ class Stikers extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* <div className="timetable-wrapper">

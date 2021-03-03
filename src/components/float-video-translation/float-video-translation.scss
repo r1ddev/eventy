@@ -7,11 +7,15 @@
   overflow: hidden;
   pointer-events: none;
 
+  #scenes-video{
+    background-color: black;
+  }
+
   .video{
     position: relative;
     pointer-events: none;
-    top: 74px;
-    left:0px;
+    top: 144px;
+    left: 0px;
     height: min-content;
     width: 65%;
     z-index: 10;

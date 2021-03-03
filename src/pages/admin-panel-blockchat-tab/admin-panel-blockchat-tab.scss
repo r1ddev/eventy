@@ -1,7 +1,7 @@
-#admin-panel {
+#admin-panel-blockchat-tab {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex-grow: 1;
 
   font-size: 1.2rem; 
   color: gray;
@@ -34,21 +34,6 @@
   .header{
     background-color: white;
     min-height: 50px;
-    display: flex;
-    flex-direction: row;
-
-    .tab-item{
-      padding: 15px;
-      background-color: #888;
-      color: white;
-      cursor: pointer;
-
-      &.active{
-        background-color: #eee;
-        color: black;
-      }
-    }
-
     p{
       padding: 15px;
     }

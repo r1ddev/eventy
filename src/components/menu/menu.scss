@@ -11,9 +11,8 @@
 	/* align-items: center; */
 	/* justify-content: space-around; */
 
-	display: grid;
 	overflow-y: auto;
-	min-width: 150px;
+	max-width: 130px;
 	border-right: 1px solid #cecece;
 }
 
@@ -25,36 +24,44 @@
 	background-color: #c3d600;
 	transition: background-color 200ms;
 	flex-grow: 1; */
-	color: black;
-	text-decoration: none;
-	font-family: "Gilroy";
-	font-size: 17px;
-	padding: 0px 10px;
-	flex-direction: column;
-	text-align: center;
-	border-left: 0px solid $base-color;
-	transition: 100ms;
-	background-color: white;
+	color: $base-color;
+    text-decoration: none;
+	font-family: "Lato";
+	font-weight: 400;
+    font-size: 15px;
+    padding: 20px 10px;
+    flex-direction: column;
+    text-align: center;
+    border-left: 3px solid white;
+    transition: 100ms;
+    background-color: white;
 
 }
 
 .menu-item:hover {
-	background-color:#e3ffef;
+	background-color:white;
 	border-left: 3px solid $base-color;
 	transition:100ms;
 	text-decoration: none;
-	color: black;
 }
 
-.menu-item > a {
-	/* color: black;
+.menu-item{
 	text-decoration: none;
 	background-color: transparent;
+	color: $base-color;
+
+	/* 
+	color: black;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
 	height: 100%; */
+
+	&:hover{
+		text-decoration: none;
+		color: $base-color;
+	}
 }
 
 .menu-item-icon {
@@ -74,11 +81,13 @@
 	right: -5px;
 	width: 10px;
 	height: 10px;
-	background-color: #F4004D;
+	background-color: #ff0000;
+	
 	border-radius: 50%;
 }
 
 .menu-item-label {
+	line-height: 1;
 	/* text-align: center;
 	font-size: 2vh;
 	line-height: 1.2;

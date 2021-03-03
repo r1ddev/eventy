@@ -19,11 +19,36 @@ import api from "./../../js/api";
 import Header from "../../components/header/header";
 import { isMobile } from "react-device-detect";
 import ScenesMobile from "../scenes-mobile";
+import ScenesVideo from "../../components/scenes-mobile-components/scenes-video";
 
+import posed from 'react-pose';
+
+const Box = posed.div({
+  visible: { 
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 400 }
+  },
+  hidden: { 
+    opacity: 0,
+    scale: 0.6,
+    x: 0,
+    y: -50,
+    transition: { duration: 400 } }
+});
 
 class Scenes extends React.Component {
   componentDidMount() {
     this.props.setCurrentSceneUrl(this.props.sceneUrl);
+  }
+
+  getChatName = () =>{
+    if (this.props.scene === 0) return "Про дела";
+    if (this.props.scene === 1) return "Про карьеру";
+    if (this.props.scene === 2) return "Про себя";
+
   }
 
   render() {
@@ -42,42 +67,59 @@ class Scenes extends React.Component {
 
     return (
       <div id="scenes">
-        <div className="scenes-translation">
-          <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} t={t} />
-          <div className="translation-content">
-            <div className="video-container">
-              {/* <iframe
-                                title="translation"
-                                src={sceneUrl}
-                                width="640"
-                                height="382"
-                                frameBorder="0"
-                                webkitallowfullscreen="1"
-                                mozallowfullscreen="1"
-                                allowFullScreen="1">
-                            </iframe> */}
-            </div>
-          </div>
-          <div className="translation-footer">
-            <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
-          </div>
-        </div>
-        <div className="scenes-chat">
-          <div className="chat-header">
-            <Header data={user} >
+         <div className="chat-header">
+            <Header data={user} expand>
               <></>
             </Header>
             {/* <Link to='/profile'><div style={{ backgroundImage: `url(${newAvatar})` }}></div></Link> */}
           </div>
-          <div className="chat-content">
-            <ScenesChat
-              sponsorChatId={sponsorChatId}
-              generalChatId={generalChatId}
-              spikerChatId={spikerChatId}
-              user={user}
-            />
+
+        <div className="content-wrapper">
+          <div className="scenes-translation">
+            <TranslationHeader scene={scene} setScene={setScene} scenes={scenes} t={t} />
+            <div className="translation-content">
+              <div className="video-container">
+                {/* <iframe
+                                  title="translation"
+                                  src={sceneUrl}
+                                  width="640"
+                                  height="382"
+                                  frameBorder="0"
+                                  webkitallowfullscreen="1"
+                                  mozallowfullscreen="1"
+                                  allowFullScreen="1">
+                              </iframe> */}
+              </div>
+            </div>
+            <div className="translation-footer">
+              <Stikers lang={lang} setLang={setLang} scenes={scenes} scene={scene} />
+            </div>
+            
+            
           </div>
-        </div>
+          <div className="scenes-chat">
+            {/* {scenes[scene]['frame_url']!==null&&<div className={'pull'}>
+              <ScenesVideo sceneUrl={scenes[scene]['frame_url']}/>
+            </div>} */}
+
+            <Box
+              className="pull"
+              pose={scenes[scene]['frame_url']!==null? 'visible' : 'hidden'}>
+                 <ScenesVideo sceneUrl={scenes[scene]['frame_url']}/>
+            </Box>
+
+            <div className="chat-content">
+              <ScenesChat
+                sponsorChatId={sponsorChatId}
+                generalChatId={generalChatId}
+                spikerChatId={spikerChatId}
+                user={user}
+                chatname={this.getChatName()}
+              />
+            </div>
+          </div>
+          
+          </div> 
       </div>
     );
   }
@@ -92,7 +134,7 @@ class TranslationHeader extends React.Component {
         <div className="scene-item">
           <div>
             <div className={scene === 0 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(0)}>
-              {t('СЦЕНА')}
+              {t('Про дела')}
             </div>
             {/* <div className="scene-status" style={{ visibility: scenes[0].status ? "visible" : "hidden" }}>
               {t('Идет')}
@@ -103,7 +145,18 @@ class TranslationHeader extends React.Component {
         <div className="scene-item">
           <div>
             <div className={scene === 1 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(1)}>
-              {t('СЦЕНА')}
+              {t('Про карьеру')}
+            </div>
+            {/* <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
+              {t('Идет')}
+            </div> */}
+          </div>
+        </div>
+
+        <div className="scene-item">
+          <div>
+            <div className={scene === 2 ? "scene-btn-active" : "scene-btn"} onClick={() => setScene(2)}>
+              {t('Про себя')}
             </div>
             {/* <div className="scene-status" style={{ visibility: scenes[1].status ? "visible" : "hidden" }}>
               {t('Идет')}
@@ -160,6 +213,17 @@ class ScenesContainer extends React.Component {
   };
 
   componentDidMount() {
+    const search = this.props.location.search;
+    const params = new URLSearchParams(search);
+    const scene = params.get('scene');
+    console.log(scene)
+
+    if (scene){
+      this.setState({
+        scene: +scene
+      })
+    }
+
     this.getScenes();
     this.props.fetchUser();
     this.props.setVideoFrameVisible();

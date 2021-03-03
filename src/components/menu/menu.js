@@ -24,6 +24,7 @@ class Menu extends React.Component {
 		const party = require("../../images/icons/party.svg");
 		const quest = require("../../images/icons/quest.svg");
 		const vipassistent = require("../../images/icons/vipassistent.svg");
+		const telescope = require("../../images/icons/telescope.png");
 
 		const { range, notifications } = this.props;
 
@@ -35,18 +36,14 @@ class Menu extends React.Component {
 
 		return (
 			<div id="menu">
-				<div className="flex-center" style={{ padding: "20px" }}>
-					<img alt="" src={logo} />
-				</div>
-				<MenuItem icon={desk} label={t("Лобби")} link="/desk"></MenuItem>
-				<MenuItem icon={scenes} label={t("Сцены")} link="/scenes"></MenuItem>
-				<MenuItem icon={networking} label={t("Нетворкинг")} link="/networking"></MenuItem>
+				<MenuItem icon={desk} label={t("Программа")} link="/desk"></MenuItem>
+				<MenuItem icon={scenes} label={t("Трансляция")} link="/scenes"></MenuItem>
+				<MenuItem icon={telescope} label={t("Менторские гостиные")} link="/alley"></MenuItem>
+				<MenuItem icon={networking} label={t("Участники")} link="/networking"></MenuItem>
 				<MenuItem icon={messages} label={t("Сообщения")} link="/messages" notifications={newMessages}></MenuItem>
-				<MenuItem icon={conversations} label={t("Переговорки")} link="/conversations"></MenuItem>
-				<MenuItem icon={exposure} label={t("Партнеры")} link="/exposure"></MenuItem>
-				<MenuItem icon={presentations} label={t("Презентации")} link="/presentations/day1"></MenuItem>
-
-
+				<MenuItem icon={networking} label={t("Переговорки")} link="/conversations"></MenuItem>
+				<MenuItem icon={networking} label={t("Партнеры")} link="/exposure"></MenuItem>
+				<MenuItem icon={networking} label={t("Презентации")} link="/presentations/day1"></MenuItem>
 			</div>
 		);
 	}
@@ -63,8 +60,8 @@ class MenuItem extends React.Component {
 			<NavLink
 				to={link}
 				activeStyle={{
-					background: '#e3ffef',
-					borderLeft: '3px solid #22D671',
+					background: 'white',
+					borderLeft: '3px solid #1dacfc',
 
 				}}
 				className="menu-item flex-center"

@@ -25,16 +25,22 @@ class Header extends React.Component {
       <div className={className + " header profile-header"}>
         <div className={this.props.expand ? "container-fluid" : "container"}>
           <div className="row">
-            <div className="col d-flex align-items-center">{this.props.children}</div>
+            <div className="col d-flex align-items-center">
+              <div>
+                {/* <img src={require('../../images/avito-logo.svg')}/> */}
+              </div>
+              {this.props.children}
+              
+              </div>
 
             <div className="col-md-auto profile row m-0">
               <div className="col d-flex align-items-center p-0">
                 <Link to="/messages/5" className="action-link">
-                  <Trans t={t}>Связь с организаторами</Trans>
+                  <Trans t={t}>Написать организаторам</Trans>
                 </Link>
               </div>
               <div className="col-auto ava">
-                <Link to="/profile">
+              <Link to="/profile">
                   <img src={userAvatar} alt="" />
                 </Link>
               </div>
