@@ -83,12 +83,12 @@
 			background: #ffffff;
 			border-radius: 15px;
 			transition: transform .2s;
-			box-shadow: 2px 2px 9px 0px rgba(0, 0, 0, 0.13);
+			box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.13);
 			border: none;
 
 			&:hover {
-				// transform: translate(2px, 2px);
-				transform: scale(1.02);
+				// transform: translate(0px, 2px);
+				transform: scale(1.01);
 			}
 
 			.ava {

@@ -35,7 +35,7 @@ class Header extends React.Component {
 
             <div className="col-md-auto profile row m-0">
               <div className="col d-flex align-items-center p-0">
-                <Link to="/messages/5" className="action-link">
+                <Link to="/messages/5" className="action-link e-button primary">
                   <Trans t={t}>Написать организаторам</Trans>
                 </Link>
               </div>

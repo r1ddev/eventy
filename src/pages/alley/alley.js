@@ -63,7 +63,7 @@ class Alley extends React.Component {
             api.errorHandler(e, {
                 "limit_user_places": () => {
                     this.setState({
-                        reserveError: "Можно забронировать только 6 слотов"
+                        reserveError: `Можно забронировать только ${this.props.maxReserveCount} слотов`
                     })
                 },
                 "limit_user_in_room": () => {
@@ -106,7 +106,7 @@ class Alley extends React.Component {
             })
         } else {
             this.setState({
-                reserveError: "Можно забронировать только 3 слота"
+                reserveError: `Можно забронировать только ${this.props.maxReserveCount} слота`
             })
         }
         
@@ -167,7 +167,7 @@ class Alley extends React.Component {
             return(
                 <div className="room-item">
                     <div className="room-content">
-                        <img src={item.image} alt="" className="avatar"/>
+                        {/* <img src={item.image} alt="" className="avatar"/> */}
                         <div className="title">{item.title}</div>
                         <div className="desc">{item.desc}</div>
                     </div>
@@ -178,7 +178,7 @@ class Alley extends React.Component {
                             if (reserve.flazhok) {
                                 return (
                                     <div className="reserve-info">
-                                        <Link className="reserve-time" to="/desc">Перейти в гостиную</Link>
+                                        <Link className="reserve-time" to={"/conversations/" + reserve.room.id}>Перейти в гостиную</Link>
                                     </div>
                                 )
                             } else {

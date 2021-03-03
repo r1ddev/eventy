@@ -238,13 +238,13 @@ export default class IdeaFirstApiService {
     getConversationsAlley() {
 
         return new Promise((resolve, reject) => {
-            axios.get(this.host + `/v3/conversations-alley`, this.useAuth())
+            axios.get(this.host + `/v3/conversations-reserve`, this.useAuth())
                 .then(res => {
                     resolve(res.data);
                 })
-                .catch(error => { reject(error); }
-
-                )
+                .catch(error => {
+                    reject(error);
+                })
         })
     }
 
@@ -253,28 +253,31 @@ export default class IdeaFirstApiService {
     reserveAlleyRoom(room_id, slot)  {
         return new Promise((resolve, reject) => {
 
-            axios.patch(this.host + `/v3/conversations-alley/${room_id}/chedule`, {
+            axios.patch(this.host + `/v3/conversations-reserve/${room_id}/chedule`, {
                 place_id: slot,
             },this.useAuth())
                 .then(res => {
                     resolve(res);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
     cancelAlleyRoom(room_id, slot)  {
         return new Promise((resolve, reject) => {
 
-            axios.patch(this.host + `/v3/conversations-alley/${room_id}/chedule`, {
+            axios.patch(this.host + `/v3/conversations-reserve/${room_id}/chedule`, {
                 place_id: slot,
                 type: "cancel"
-            },this.useAuth())
+            }, this.useAuth())
                 .then(res => {
                     resolve(res);
                 })
-                .catch(error => { reject(error) } )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 
