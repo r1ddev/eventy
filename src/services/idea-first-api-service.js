@@ -40,16 +40,13 @@ export default class IdeaFirstApiService {
 
     addGuestUser() {
         return new Promise((resolve, reject) => {
-            axios.post(this.host + "/v2/users/login/guest", {}, this.useAuth())
+            axios.post(this.host + "/v3/users/login/guest", {}, this.useAuth())
                 .then(res => {
-                    if (res.data.status) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.error)
-                    }
+                    resolve(res.data);
                 })
-                .catch(error => { reject(error) }
-                )
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 

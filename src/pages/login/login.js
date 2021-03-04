@@ -92,10 +92,12 @@ class Login extends React.Component {
         this.props
             .addGuestUser()
             .then((res) => {
+                console.log(res);
                 this.saveToken(res.token);
                 this.props.history.push("/desk");
             })
             .catch((err) => {
+                console.log(err);
                 ErrorIndicator(t("Пользователя с этими данными не существует"));
             });
     };
